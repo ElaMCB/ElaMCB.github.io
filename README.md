@@ -81,7 +81,7 @@ Can you spot the difference between code written by AI and code written by human
 - **AI Frameworks**: RAG, MCP, LLM testing, safety validation
 
 ## Star History
-[![Star History Chart](https://api.star-history.com/svg?repos=ElaMCB/ElaMCB.github.io&type=Date)](https://star-history.com/#ElaMCB/ElaMCB.github.io&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=ElaMCB/ElaMCB.github.io&type=Date&t=20251102)](https://star-history.com/#ElaMCB/ElaMCB.github.io&Date)
 
 ## Contributing
 
