@@ -135,7 +135,7 @@ graph TB
 
 ---
 
-## 🎯 QA Leadership: AI Transformation Strategy
+## QA Leadership: AI Transformation Strategy
 
 ### [Complete QA-to-AI Transformation Roadmap](./docs/QA-AI-TRANSFORMATION-ROADMAP.md)
 
