@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Search Dashboard - Test Your Resume</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0a0a0f;
+            --secondary: #00d4ff;
+            --accent: #7c3aed;
+            --success: #51cf66;
+            --warning: #ff6b6b;
+            --light: #e4e4e7;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            background-attachment: fixed;
+            color: var(--light);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        
+        .upload-section {
+            background: rgba(15, 15, 23, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 2px dashed var(--secondary);
+        }
+        
+        .upload-area {
+            text-align: center;
+            padding: 3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-area:hover {
+            background: rgba(0, 212, 255, 0.05);
+        }
+        
+        .upload-area input[type="file"] {
+            display: none;
+        }
+        
+        .upload-label {
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .upload-label i {
+            font-size: 3rem;
+            color: var(--secondary);
+            display: block;
+            margin-bottom: 1rem;
+        }
+        
+        .search-section {
+            background: rgba(15, 15, 23, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 10px;
+            color: var(--light);
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .results-section {
+            background: rgba(15, 15, 23, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .job-card {
+            background: rgba(0, 0, 0, 0.5);
+            border-left: 4px solid var(--success);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .job-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+        
+        .job-title {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .job-company {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .match-score {
+            display: inline-block;
+            background: var(--success);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .match-reasons {
+            background: rgba(81, 207, 102, 0.1);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+        
+        .match-reasons li {
+            margin: 0.3rem 0;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            font-size: 1.2rem;
+            color: var(--secondary);
+        }
+        
+        .loading i {
+            font-size: 3rem;
+            animation: spin 2s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .status-message {
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        
+        .status-success {
+            background: rgba(81, 207, 102, 0.2);
+            border: 2px solid var(--success);
+            color: var(--success);
+        }
+        
+        .status-error {
+            background: rgba(255, 107, 107, 0.2);
+            border: 2px solid var(--warning);
+            color: var(--warning);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-briefcase"></i> Job Search Automation Dashboard</h1>
+            <p style="color: rgba(228, 228, 231, 0.7); font-size: 1.1rem;">Upload your resume and find perfectly matched jobs using AI</p>
+        </div>
+        
+        <!-- Upload Resume Section -->
+        <div class="upload-section">
+            <h2 style="color: var(--secondary); margin-bottom: 1.5rem;"><i class="fas fa-file-upload"></i> Step 1: Upload Your Resume</h2>
+            <div class="upload-area" onclick="document.getElementById('resume-file').click()">
+                <label class="upload-label">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <div>Click to upload your resume</div>
+                    <div style="font-size: 0.9rem; color: rgba(228, 228, 231, 0.6); margin-top: 0.5rem;">
+                        Supports PDF, DOCX, TXT
+                    </div>
+                </label>
+                <input type="file" id="resume-file" accept=".pdf,.docx,.txt" onchange="uploadResume(this)">
+            </div>
+            <div id="upload-status"></div>
+        </div>
+        
+        <!-- Profile Preview -->
+        <div id="profile-section" class="search-section" style="display: none;">
+            <h2 style="color: var(--secondary); margin-bottom: 1.5rem;"><i class="fas fa-user-check"></i> Your Profile</h2>
+            <div id="profile-display"></div>
+        </div>
+        
+        <!-- Job Search Section -->
+        <div class="search-section">
+            <h2 style="color: var(--secondary); margin-bottom: 1.5rem;"><i class="fas fa-search"></i> Step 2: Search & Match Jobs</h2>
+            
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Keywords</label>
+                    <input type="text" id="keywords" placeholder="e.g., QA automation python" value="QA automation python">
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="location" placeholder="e.g., Remote, San Francisco" value="Remote">
+                </div>
+                <div class="form-group">
+                    <label>Max Results</label>
+                    <input type="number" id="max-results" value="20" min="5" max="100">
+                </div>
+            </div>
+            
+            <button class="btn" onclick="searchAndMatchJobs()" id="search-btn">
+                <i class="fas fa-magic"></i> Find Matching Jobs
+            </button>
+        </div>
+        
+        <!-- Results Section -->
+        <div id="results-section" class="results-section" style="display: none;">
+            <h2 style="color: var(--secondary); margin-bottom: 1.5rem;"><i class="fas fa-list-check"></i> Matched Jobs</h2>
+            <div id="results-container"></div>
+        </div>
+    </div>
+    
+    <script>
+        const API_URL = 'http://localhost:8000';
+        let userProfile = null;
+        
+        async function uploadResume(input) {
+            const file = input.files[0];
+            if (!file) return;
+            
+            const statusDiv = document.getElementById('upload-status');
+            statusDiv.innerHTML = '<div class="status-message status-success"><i class="fas fa-spinner fa-spin"></i> Parsing your resume...</div>';
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            try {
+                const response = await fetch(`${API_URL}/upload-resume`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    userProfile = data.profile;
+                    statusDiv.innerHTML = `<div class="status-message status-success">
+                        <i class="fas fa-check-circle"></i> ${data.message}
+                    </div>`;
+                    
+                    displayProfile(data.profile);
+                } else {
+                    throw new Error(data.message || 'Upload failed');
+                }
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="status-message status-error">
+                    <i class="fas fa-exclamation-circle"></i> Error: ${error.message}
+                    <br><small>Make sure the API server is running: python backend/main.py</small>
+                </div>`;
+            }
+        }
+        
+        function displayProfile(profile) {
+            const profileSection = document.getElementById('profile-section');
+            const profileDisplay = document.getElementById('profile-display');
+            
+            profileDisplay.innerHTML = `
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <div>
+                        <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Skills Found (${profile.skills.length})</h4>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            ${profile.skills.map(skill => `<span style="background: var(--accent); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem;">${skill}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Experience</h4>
+                        <p>${profile.experience_years} years</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Target Roles</h4>
+                        <p>${profile.preferred_roles.join(', ')}</p>
+                    </div>
+                </div>
+            `;
+            
+            profileSection.style.display = 'block';
+        }
+        
+        async function searchAndMatchJobs() {
+            const keywords = document.getElementById('keywords').value;
+            const location = document.getElementById('location').value;
+            const maxResults = document.getElementById('max-results').value;
+            const searchBtn = document.getElementById('search-btn');
+            const resultsSection = document.getElementById('results-section');
+            const resultsContainer = document.getElementById('results-container');
+            
+            // Show loading
+            resultsSection.style.display = 'block';
+            resultsContainer.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><br>Searching and analyzing jobs...</div>';
+            searchBtn.disabled = true;
+            
+            try {
+                // If we have a profile, use match-jobs endpoint
+                if (userProfile) {
+                    const response = await fetch(`${API_URL}/match-jobs`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            skills: userProfile.skills,
+                            experience_years: userProfile.experience_years,
+                            preferred_roles: userProfile.preferred_roles,
+                            preferred_locations: [location]
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        displayResults(data.matches);
+                    }
+                } else {
+                    // No profile, just search
+                    const response = await fetch(`${API_URL}/search-jobs`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            keywords,
+                            location,
+                            experience_level: 'senior',
+                            remote: location.toLowerCase().includes('remote'),
+                            max_results: parseInt(maxResults)
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        displayResults(data.jobs);
+                    }
+                }
+                
+            } catch (error) {
+                resultsContainer.innerHTML = `<div class="status-message status-error">
+                    <i class="fas fa-exclamation-circle"></i> Error: ${error.message}
+                    <br><small>Make sure the API server is running on localhost:8000</small>
+                </div>`;
+            } finally {
+                searchBtn.disabled = false;
+            }
+        }
+        
+        function displayResults(jobs) {
+            const resultsContainer = document.getElementById('results-container');
+            
+            if (!jobs || jobs.length === 0) {
+                resultsContainer.innerHTML = '<p style="text-align: center; color: rgba(228, 228, 231, 0.6);">No jobs found. Try different keywords.</p>';
+                return;
+            }
+            
+            resultsContainer.innerHTML = `
+                <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">
+                    <i class="fas fa-check-circle" style="color: var(--success);"></i> 
+                    Found <strong>${jobs.length} matching jobs</strong>
+                </p>
+                ${jobs.map((job, index) => createJobCard(job, index + 1)).join('')}
+            `;
+        }
+        
+        function createJobCard(job, index) {
+            const matchScore = job.match_score ? (job.match_score * 100).toFixed(0) : 50;
+            const matchColor = matchScore > 70 ? 'var(--success)' : matchScore > 50 ? 'var(--secondary)' : 'var(--warning)';
+            
+            return `
+                <div class="job-card">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <div style="flex: 1;">
+                            <h3 class="job-title">${index}. ${job.title}</h3>
+                            <div class="job-company"><i class="fas fa-building"></i> ${job.company}</div>
+                            <div style="color: rgba(228, 228, 231, 0.7); margin-top: 0.5rem;">
+                                <i class="fas fa-map-marker-alt"></i> ${job.location} • 
+                                ${job.salary_range || 'Salary not specified'} • 
+                                ${job.posted_date || 'Recently posted'}
+                            </div>
+                        </div>
+                        <div class="match-score" style="background: ${matchColor};">
+                            ${matchScore}% Match
+                        </div>
+                    </div>
+                    
+                    ${job.match_reasons ? `
+                        <div class="match-reasons">
+                            <strong style="color: var(--success);"><i class="fas fa-check"></i> Why this matches:</strong>
+                            <ul style="margin: 0.5rem 0 0 1.5rem;">
+                                ${job.match_reasons.map(reason => `<li>${reason}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : ''}
+                    
+                    <div style="margin-top: 1rem;">
+                        <a href="${job.url}" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: bold;">
+                            <i class="fas fa-external-link-alt"></i> View Job Posting
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Initialize
+        console.log('Job Search Dashboard Ready');
+        console.log('Make sure API is running: python backend/main.py');
+    </script>
+</body>
+</html>
+

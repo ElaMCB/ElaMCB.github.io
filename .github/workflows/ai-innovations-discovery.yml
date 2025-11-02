@@ -1,0 +1,138 @@
+name: Weekly AI Innovations Discovery for QA Testing
+
+on:
+  schedule:
+    # Run every Monday at 10 AM UTC (after IDE discovery)
+    - cron: '0 10 * * 1'
+  workflow_dispatch: # Allow manual trigger
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Run AI innovations discovery script
+        run: |
+          node research/ai-innovations-discover.js
+        continue-on-error: true
+      
+      - name: Check if discoveries were made
+        id: check_discoveries
+        run: |
+          cd research/discoveries
+          if ls innovations-*.json 1> /dev/null 2>&1; then
+            echo "has_discoveries=true" >> $GITHUB_OUTPUT
+            # Get the most recent discovery file
+            latest_file=$(ls -t innovations-*-simple.json | head -n1)
+            count=$(jq 'length' "$latest_file")
+            echo "discovery_count=$count" >> $GITHUB_OUTPUT
+          else
+            echo "has_discoveries=false" >> $GITHUB_OUTPUT
+            echo "No new AI innovations discovered this week"
+          fi
+      
+      - name: Commit discoveries directly to main
+        if: steps.check_discoveries.outputs.has_discoveries == 'true'
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          # Pull latest changes to avoid conflicts
+          git fetch origin main
+          git rebase origin/main || git merge origin/main
+          # Add discovery files
+          cd research/discoveries
+          git add innovations-*.json innovations-*.md
+          cd ../..
+          # Get the latest discovery file to count properly
+          latest_file=$(ls -t research/discoveries/innovations-*-simple.json | head -n1)
+          count=$(jq 'length' "$latest_file")
+          git commit -m "research: Weekly AI innovations discovery - $count innovations found for QA testing" || echo "No changes to commit"
+          git push origin main
+      
+      - name: Create summary comment
+        if: steps.check_discoveries.outputs.has_discoveries == 'false'
+        run: |
+          echo "✅ Innovation discovery scan completed successfully"
+          echo "📊 Result: No new AI innovations found"
+          echo "🔍 All recent AI innovations are already tracked"
+          echo "⏰ Next scan: Next Monday at 10 AM UTC"
+      
+      - name: Create issue for discoveries
+        if: steps.check_discoveries.outputs.has_discoveries == 'true'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            const directory = 'research/discoveries';
+            const files = fs.readdirSync(directory)
+              .filter(f => f.startsWith('innovations-') && f.endsWith('-simple.json'))
+              .map(f => ({ name: f, time: fs.statSync(path.join(directory, f)).mtime }))
+              .sort((a, b) => b.time - a.time);
+            
+            if (files.length > 0) {
+              const filename = files[0].name;
+              const data = JSON.parse(fs.readFileSync(`research/discoveries/${filename}`, 'utf8'));
+              
+              // Ensure data is an array
+              const count = Array.isArray(data) ? data.length : 0;
+              
+              // Group by category
+              const byCategory = {};
+              data.forEach(item => {
+                const cat = item.category || 'general';
+                if (!byCategory[cat]) byCategory[cat] = [];
+                byCategory[cat].push(item);
+              });
+              
+              let body = `## Automated AI Innovations Discovery for QA Testing\n\n`;
+              body += `**Discoveries:** ${count} new AI innovations found\n\n`;
+              
+              body += `**By Category:**\n`;
+              for (const [category, items] of Object.entries(byCategory)) {
+                body += `- **${category.replace('-', ' ')}**: ${items.length} innovations\n`;
+              }
+              
+              body += `\n**Review the discoveries:**\n`;
+              body += `- Check \`research/discoveries/${filename}\` for the full data\n`;
+              body += `- Check \`research/discoveries/${filename.replace('-simple.json', '.md')}\` for the report\n`;
+              body += `- View on the [research page](https://elamcb.github.io/research/)\n\n`;
+              
+              body += `**Top Discoveries:**\n`;
+              data.slice(0, 5).forEach((item, index) => {
+                body += `${index + 1}. [${item.name}](${item.url}) (${item.source})\n`;
+              });
+              
+              body += `\n**Next Steps:**\n`;
+              body += `1. Review each innovation for QA testing applicability\n`;
+              body += `2. Evaluate potential integration with existing workflows\n`;
+              body += `3. Test promising innovations in proof-of-concept\n`;
+              body += `4. Document learnings and best practices\n`;
+              body += `5. Close this issue when review complete`;
+              
+              github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: `🔬 ${count} New AI Innovations Discovered for QA Testing - Weekly Scan`,
+                body: body,
+                labels: ['research', 'ai-innovations', 'qa-testing', 'needs-review']
+              });
+            }
+

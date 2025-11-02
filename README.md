@@ -16,6 +16,125 @@
 ![AI/ML](https://img.shields.io/badge/AI/ML-FF6B6B?style=flat-square&logo=tensorflow&logoColor=white)
 ![RAG](https://img.shields.io/badge/RAG-4ECDC4?style=flat-square&logo=openai&logoColor=white)
 
+## AI Research Notebooks
+
+### Research Map
+
+**15 Research Notebooks Organized in 3 Categories:**
+
+🟢 **Practical Applications** - Databricks Testing, AutoTriage Assessment, Healthcare AI Agents, CI/CD Optimization, RAG Testing, MCP Testing  
+🔵 **Academic Research** - I QA Workforce Transformation, AutoTriage Research, Multi-Agent Orchestration, Monte Carlo Testing, Model Evaluation, LLM Testing  
+🟡 **Frameworks & Tools** - Agentic Testing, Automated Patterns, AI Safety
+
+```mermaid
+graph TB
+    Research[AI Testing Research Portfolio]
+    
+    Research --> Practical[Practical Applications]
+    Research --> Academic[Academic Research]
+    Research --> Tools[Frameworks & Tools]
+    
+    Practical --> Databricks[Databricks Testing<br/>64% Time Reduction]
+    Practical --> AutoTriage[AutoTriage Assessment<br/>3.2x ROI]
+    Practical --> Healthcare[Healthcare AI Agents<br/>487% ROI]
+    Practical --> CICD[CI/CD Optimization<br/>40% Time Saved]
+    Practical --> RAG[RAG Testing<br/>Applications]
+    Practical --> MCP[MCP in Testing<br/>Context-Aware]
+    
+    Academic --> IQA[I QA Transformation<br/>Workforce Forecasting]
+    Academic --> AutoTriageResearch[AutoTriage Research<br/>85% Accuracy]
+    Academic --> MultiAgent[Multi-Agent Orchestration<br/>80.2% Detection]
+    Academic --> MonteCarlo[Monte Carlo Testing<br/>POFOD Estimation]
+    Academic --> Evaluation[Model Evaluation<br/>GPT-4 vs Claude]
+    Academic --> LLMTest[LLM Testing<br/>Methodologies]
+    
+    Tools --> Agentic[Agentic Testing<br/>Integration]
+    Tools --> Patterns[Automated Testing<br/>Patterns]
+    Tools --> Safety[AI Safety<br/>Metrics]
+    
+    style Databricks fill:#51cf66,stroke:#2f9e44,color:#000
+    style AutoTriage fill:#51cf66,stroke:#2f9e44,color:#000
+    style Healthcare fill:#51cf66,stroke:#2f9e44,color:#000
+    style CICD fill:#51cf66,stroke:#2f9e44,color:#000
+    style IQA fill:#74c0fc,stroke:#1971c2,color:#000
+    style AutoTriageResearch fill:#74c0fc,stroke:#1971c2,color:#000
+    style MultiAgent fill:#51cf66,stroke:#2f9e44,color:#000
+    style MonteCarlo fill:#74c0fc,stroke:#1971c2,color:#000
+    style Evaluation fill:#74c0fc,stroke:#1971c2,color:#000
+```
+
+### Quick Reference Table
+
+| Research Paper | Type | Key Results | Primary Focus | Tech Stack |
+|----------------|------|-------------|---------------|------------|
+| [I, QA: Workforce Transformation](./research/notebooks/llm-qa-workforce-transformation.html) | Academic | 70-85% automation by 2028 | QA profession forecasting | Bass Diffusion, Monte Carlo |
+| [Databricks Testing Framework](./research/notebooks/databricks-testing-framework.html) | Practical | 64% time ↓, $1.2M savings | Unified testing platform | Databricks, Delta Lake, MLflow |
+| [Healthcare AI Agents](./research/notebooks/ai-agents-qa-healthcare.html) | Case Study | 487% ROI, 92% coverage | Why use AI agents? | LangChain, Playwright |
+| [AutoTriage Research Paper](./research/notebooks/autotriage-research-paper.html) | Academic | 85% accuracy, 3.2x ROI | Test automation triage | Ensemble AI Framework |
+| [AutoTriage Assessment Tool](./research/notebooks/autotriage-manual-test-assessment.html) | Tool | 4-tier prioritization | Manual test assessment | Business Value Analysis |
+| [CI/CD Test Optimization](./research/notebooks/ci-test-optimization-monte-carlo.html) | Tool | 40% time reduction | Optimize pipeline | Monte Carlo, Python |
+| [Multi-Agent Orchestration](./research/notebooks/multi-agent-orchestration-framework.html) | Academic | 80.2% detection, 31% cost ↓ | Optimal architecture | ATAO Framework |
+| [Monte Carlo Testing](./research/notebooks/monte-carlo-testing-framework.html) | Research | POFOD estimation | Statistical testing | Monte Carlo, scipy |
+| [Model Evaluation](./research/notebooks/model-evaluation-software-testing.html) | Framework | GPT-4 vs Claude vs Gemini | Which AI model? | Python, pandas |
+| [Agentic Testing](./research/notebooks/agentic-testing-integration.html) | Integration | Multi-agent systems | Implementation guide | AutoGPT, LangChain |
+| [MCP Testing](./research/notebooks/mcp-software-testing.html) | Framework | Context-aware testing | Dynamic adaptation | MCP Protocol |
+| [RAG Testing](./research/notebooks/rag-testing-applications.html) | Applications | Test generation from docs | Knowledge retrieval | RAG, Vector DBs |
+| [LLM Methodologies](./research/notebooks/llm-testing-analysis.html) | Analysis | Hallucination detection | Testing LLMs | Safety frameworks |
+| [AI Safety Metrics](./research/notebooks/ai-safety-metrics.html) | Metrics | Prompt injection detection | Security validation | Safety evaluators |
+| [Testing Patterns](./research/notebooks/automated-testing-patterns.html) | Patterns | AI-augmented automation | Best practices | Pytest, CI/CD |
+
+### Featured Research
+
+<details>
+<summary><b>CI/CD Test Optimization Tool</b> (Production-Ready)</summary>
+
+**Impact:** 40% time reduction • 80% risk coverage  
+**Focus:** Ingests test history, runs 10,000 Monte Carlo simulations, outputs optimized suite  
+**Exports:** JSON, pytest, GitHub Actions  
+`CI-CD` `monte-carlo` `test-optimization` `DevOps`  
+**[View](./research/notebooks/ci-test-optimization-monte-carlo.html)** | **[Download](./research/notebooks/ci-test-optimization-monte-carlo.ipynb)**
+</details>
+
+<details>
+<summary><b>Healthcare AI Agents Case Study</b> (Practical)</summary>
+
+**Impact:** 487% ROI • 92% coverage • 88% faster tests  
+**Focus:** Why QA pros use AI agents - 7 agent types with HIPAA compliance  
+`AI-agents` `healthcare-QA` `HIPAA-compliance` `autonomous-testing`  
+**[View](./research/notebooks/ai-agents-qa-healthcare.html)** | **[Download](./research/notebooks/ai-agents-qa-healthcare.ipynb)**
+</details>
+
+<details>
+<summary><b>Multi-Agent Orchestration Framework</b> (Academic)</summary>
+
+**Impact:** 80.2% detection • 31% cost reduction • ANOVA validated  
+**Focus:** 4 architectures, 50 trials, statistical validation  
+`multi-agent-systems` `test-orchestration` `manager-worker`  
+**[View](./research/notebooks/multi-agent-orchestration-framework.html)** | **[Download](./research/notebooks/multi-agent-orchestration-framework.ipynb)**
+</details>
+
+<details>
+<summary><b>Monte Carlo Testing Framework</b> (Research)</summary>
+
+**Impact:** POFOD estimation • Statistical reliability assessment  
+**Focus:** Risk-based testing, fuzzing, chaos engineering  
+`monte-carlo` `statistical-testing` `POFOD`  
+**[View](./research/notebooks/monte-carlo-testing-framework.html)** | **[Download](./research/notebooks/monte-carlo-testing-framework.ipynb)**
+</details>
+
+<details>
+<summary><b>AI Model Evaluation Framework</b> (Comparative)</summary>
+
+**Impact:** Comprehensive model comparison  
+**Focus:** GPT-4 • Claude 3.5 • Gemini Pro • CodeLlama  
+`AI-model-evaluation` `LLM-benchmarking` `GPT-4`  
+**[View](./research/notebooks/model-evaluation-software-testing.html)** | **[Download](./research/notebooks/model-evaluation-software-testing.ipynb)**
+</details>
+
+**[View All 15 Research Notebooks →](./research/)** | **[Complete Research Index](./research/notebooks/README.md)**
+
+---
+
 ## Featured Projects
 
 ### LLMGuardian - Production AI Testing Framework
@@ -23,6 +142,7 @@
 
 **Impact:** 23% accuracy improvement • 60% faster testing • 3 critical safety violations prevented  
 **Tech:** JavaScript/Node.js, AI APIs, RAG, MCP  
+`LLM-testing` `AI-safety` `RAG` `MCP` `production-AI`  
 **[Live Demo](./llm-guardian/demo.html)** | **[Documentation](./llm-guardian/)** | **[Case Studies](./llm-guardian/case-studies/)**
 
 ### Legacy-AI Bridge Framework  
@@ -37,7 +157,15 @@
 
 **Impact:** 60% time reduction • 85% job matching accuracy • Improved application quality  
 **Tech:** Python, Playwright, AI/ML, React/TypeScript  
-**[Project Details](./job-search-automation/)** | **[Demo Screenshots](./job-search-automation/demo-screenshots.md)**
+**[Quick Start](./job-search-automation/quick-start.html)** | **[Try Dashboard](./job-search-automation/app.html)** | **[Documentation](./job-search-automation/)**
+
+### AI IDE Collection - Gotta Code 'Em All
+*Interactive comparison of 10 AI-powered development environments*
+
+**Analysis:** 100+ hours testing • S-Tier through B-Tier rankings • Real-world performance insights  
+**IDEs:** Cursor, Windsurf, Void, Continue.dev, GitHub Copilot, Zed, Replit AI, CodeWhisperer, Tabnine  
+`developer-tools` `AI-assistants` `IDE-comparison` `code-editors`  
+**[View Comparison](./ai-ide-comparison/)** | **[Source Code](https://github.com/ElaMCB/ElaMCB.github.io/tree/main/ai-ide-comparison)**
 
 ### Algorithmic Trading System
 *Systematic quantitative trading with risk management*
@@ -116,43 +244,103 @@ Found this useful? Here's how you can help:
 ├── llm-guardian/                 # LLM Testing Framework (Flagship Project)
 │   ├── README.md                 # Framework documentation
 │   ├── demo.html                 # Interactive demonstrations
+│   ├── index.html                # Main entry point
 │   ├── src/                      # Core framework code
+│   │   ├── evaluators/           # Testing evaluators
+│   │   ├── llm-tester.js         # Main testing interface
+│   │   ├── rag-evaluator.js      # RAG system evaluation
+│   │   ├── safety-evaluator.js   # Safety validation
+│   │   └── mcp-server.js         # MCP integration
 │   ├── examples/                 # Usage examples
-│   └── case-studies/             # Real-world implementations
+│   │   └── demo.js               # Demo implementations
+│   ├── case-studies/             # Real-world implementations
+│   │   ├── README.md
+│   │   ├── financial-services-chatbot.md
+│   │   └── ecommerce-recommendations.md
+│   └── reasoning-examples/       # Extended thinking examples
+│       └── test-planning-reasoning.md
 ├── legacy-ai-bridge/             # Enterprise AI integration framework
 │   ├── README.md                 # Framework overview
-│   ├── assessment-template.md    # Legacy system evaluation
-│   └── implementation-guide.md   # Step-by-step technical guide
+│   └── assessment-template.md    # Legacy system evaluation
 ├── job-search-automation/        # AI automation project
 │   ├── README.md                 # Project documentation
-│   └── demo-screenshots.md       # Visual demonstrations
+│   ├── quick-start.html          # Interactive setup guide
+│   ├── app.html                  # Production dashboard
+│   ├── backend/                  # FastAPI backend
+│   │   ├── main.py               # API server
+│   │   ├── job_scraper.py        # Job board integration
+│   │   ├── resume_parser.py      # Resume parsing
+│   │   └── job_matcher.py        # AI matching engine
+│   └── ethical-automation-guide.md
+├── ai-ide-comparison/            # AI IDE comparison project
+│   ├── index.html                # Interactive comparison tool
+│   └── README.md                 # Project documentation
 ├── algorithmic-trading/          # Quantitative trading project
 │   ├── README.md                 # Strategy overview and results
 │   └── strategy-implementation.md # Technical implementation
 ├── qa-prompts/                   # AI prompt library for QA/SDET
 │   ├── README.md                 # Library overview
-│   └── prompts/                  # Categorized prompt collections
+│   ├── prompts/                  # Categorized prompt collections
+│   │   ├── test-generation.md
+│   │   ├── api-testing.md
+│   │   ├── code-generation.md
+│   │   └── mobile-testing.md
+│   └── examples/
+│       └── sample-outputs.md
 ├── research/                     # AI Research & Jupyter Notebooks
 │   ├── index.html                # Research landing page
-│   └── notebooks/                # Jupyter notebook collection
-│       ├── llm-testing-analysis.ipynb          # LLM testing research
-│       ├── llm-testing-analysis.html           # HTML viewer
-│       ├── ai-safety-metrics.ipynb             # AI safety research
-│       ├── ai-safety-metrics.html              # HTML viewer
-│       ├── automated-testing-patterns.ipynb    # Testing patterns research
-│       └── automated-testing-patterns.html     # HTML viewer
+│   ├── notebooks/                # Jupyter notebook collection
+│   │   ├── README.md             # Complete notebook index with tags
+│   │   ├── ai-agents-qa-healthcare.ipynb       # Healthcare AI agents case study
+│   │   ├── ai-agents-qa-healthcare.html        # HTML viewer
+│   │   ├── model-evaluation-software-testing.ipynb # AI model evaluation framework
+│   │   ├── model-evaluation-software-testing.html  # HTML viewer
+│   │   ├── agentic-testing-integration.ipynb   # Agentic testing research
+│   │   ├── agentic-testing-integration.html    # HTML viewer
+│   │   ├── mcp-software-testing.ipynb          # MCP applications
+│   │   ├── mcp-software-testing.html           # HTML viewer
+│   │   ├── rag-testing-applications.ipynb      # RAG for testing
+│   │   ├── rag-testing-applications.html       # HTML viewer
+│   │   ├── llm-testing-analysis.ipynb          # LLM testing methodologies
+│   │   ├── llm-testing-analysis.html           # HTML viewer
+│   │   ├── ai-safety-metrics.ipynb             # AI safety metrics
+│   │   ├── ai-safety-metrics.html              # HTML viewer
+│   │   ├── automated-testing-patterns.ipynb    # Testing patterns
+│   │   └── automated-testing-patterns.html     # HTML viewer
+│   └── papers/                   # Research papers
+│       ├── automated-testing-patterns.md
+│       └── automated-testing-patterns.html
 ├── docs/                         # Learning resources and guides
 │   ├── PROMPT-ENGINEERING-GUIDE.md
 │   ├── AI-WORKFLOW-INTEGRATION.md
 │   ├── AI-FIRST-MANIFESTO.md
+│   ├── AI-FIRST-PRINCIPLES.md
 │   ├── AI-ADOPTION-ROADMAP.md
 │   ├── START-HERE.md
-│   └── CUSTOMIZATION.md
+│   ├── CUSTOMIZATION.md
+│   ├── ARCHITECTURE.md
+│   ├── FEATURES.md
+│   ├── DEVELOPMENT-TIMELINE.md
+│   └── SEO-AND-DISCOVERABILITY-GUIDE.md
 ├── learn/                        # Interactive learning hub
-│   └── index.html                # Learning portal
+│   ├── index.html                # Learning portal
+│   └── README.md
+├── screenshots/                  # Project screenshots
+│   └── README.md
 ├── .github/                      # GitHub configuration
 │   └── workflows/                # CI/CD pipelines
-└── images/                       # Assets and media
+├── images/                       # Assets and media
+│   ├── profile.jpg
+│   ├── ela-mcb-metallic.jpg
+│   ├── favicon.svg
+│   └── site.webmanifest
+├── index.html                    # Main portfolio page
+├── analytics.html                # Analytics dashboard
+├── ANALYTICS-README.md           # Analytics documentation
+├── PROJECTS.md                   # Complete project list
+├── CONTRIBUTING.md               # Contribution guidelines
+├── LICENSE                       # MIT License
+└── README.md                     # This file
 ```
 
 ### Development Approach
@@ -168,8 +356,10 @@ This portfolio demonstrates **AI-First development practices** using advanced AI
 ### AI Contributors
 This project was built using AI-First development practices with:
 - **[Cursor AI Agentic Mode](https://cursor.sh)** - Advanced code generation and pair programming
+- **[Void IDE](https://voideditor.com)** - AI-powered development environment and workflow automation
 - **[Claude 4 Sonnet](https://claude.ai)** - Architecture planning, documentation, and complex reasoning
 - **[DeepSeek AI](https://deepseek.com)** - Rapid iteration and optimization support
+- **[DeepSeek Coder](https://deepseek.com)** - Specialized code generation and technical implementation
 
 ### Real-World Examples
 Every technique in our guides was used to build this portfolio:

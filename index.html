@@ -175,11 +175,33 @@
         
         function getBrowserInfo() {
             const ua = navigator.userAgent;
-            if (ua.includes('Chrome')) return 'Chrome';
-            if (ua.includes('Firefox')) return 'Firefox';
-            if (ua.includes('Safari')) return 'Safari';
-            if (ua.includes('Edge')) return 'Edge';
-            return 'Other';
+            const isMobile = /Mobile|Android|iPhone|iPad|iPod/i.test(ua);
+            
+            // Check in specific order (Chrome/Edge contain "Safari" in UA, so check them first)
+            if (ua.includes('Edg')) {
+                return isMobile ? 'Edge Mobile' : 'Edge';
+            }
+            if (ua.includes('Chrome') && !ua.includes('Edg')) {
+                return isMobile ? 'Chrome Mobile' : 'Chrome';
+            }
+            if (ua.includes('Firefox')) {
+                return isMobile ? 'Firefox Mobile' : 'Firefox';
+            }
+            if (ua.includes('Safari') && !ua.includes('Chrome')) {
+                // iOS detection
+                if (ua.includes('iPhone') || ua.includes('iPad')) {
+                    return 'Safari iOS';
+                }
+                return isMobile ? 'Safari Mobile' : 'Safari';
+            }
+            if (ua.includes('Opera') || ua.includes('OPR')) {
+                return isMobile ? 'Opera Mobile' : 'Opera';
+            }
+            if (ua.includes('Samsung')) {
+                return 'Samsung Internet';
+            }
+            
+            return isMobile ? 'Mobile Other' : 'Other';
         }
         
         function updateVisitorDisplay() {
@@ -218,7 +240,7 @@
             const tractionSources = {
                 linkedin: referrer.includes('linkedin.com'),
                 github: referrer.includes('github.com'),
-                twitter: referrer.includes('twitter.com') || referrer.includes('t.co'),
+                x: referrer.includes('twitter.com') || referrer.includes('t.co') || referrer.includes('x.com'),
                 reddit: referrer.includes('reddit.com'),
                 devto: referrer.includes('dev.to'),
                 medium: referrer.includes('medium.com'),
@@ -229,7 +251,7 @@
             // Initialize traction tracking if not exists
             if (!analytics.tractionMetrics) {
                 analytics.tractionMetrics = {
-                    socialMedia: { linkedin: 0, twitter: 0, reddit: 0 },
+                    socialMedia: { linkedin: 0, x: 0, reddit: 0 },
                     professional: { github: 0, devto: 0, medium: 0 },
                     search: { google: 0, bing: 0, other: 0 },
                     direct: 0,
@@ -243,7 +265,7 @@
             // Track traction sources
             Object.keys(tractionSources).forEach(source => {
                 if (tractionSources[source]) {
-                    if (source === 'linkedin' || source === 'twitter' || source === 'reddit') {
+                    if (source === 'linkedin' || source === 'x' || source === 'reddit') {
                         analytics.tractionMetrics.socialMedia[source]++;
                     } else if (source === 'github' || source === 'devto' || source === 'medium') {
                         analytics.tractionMetrics.professional[source]++;
@@ -391,17 +413,17 @@
             window.open(linkedinUrl, '_blank', 'width=600,height=400');
         }
 
-        function shareOnTwitter() {
+        function shareOnX() {
             const url = encodeURIComponent(window.location.href);
             const text = encodeURIComponent("🚀 Impressive AI-First Quality Engineering portfolio by @ElaMCB\n\n✨ Cutting-edge MCP + testing research\n🔬 LLM validation frameworks\n🤖 AI-augmented testing methodologies\n\nBridging the gap between AI capabilities and software quality!");
             const hashtags = encodeURIComponent("AITesting,QualityEngineering,MCP,LLMValidation,TestAutomation");
             
-            const twitterUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}&hashtags=${hashtags}`;
+            const xUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}&hashtags=${hashtags}`;
             
             // Track the share event
-            trackSocialShare('twitter');
+            trackSocialShare('x');
             
-            window.open(twitterUrl, '_blank', 'width=600,height=400');
+            window.open(xUrl, '_blank', 'width=600,height=400');
         }
 
         function copyPortfolioLink() {
@@ -477,7 +499,7 @@
             if (!analytics.socialShares) {
                 analytics.socialShares = {
                     linkedin: 0,
-                    twitter: 0,
+                    x: 0,
                     copy_link: 0,
                     total: 0
                 };
@@ -1554,9 +1576,9 @@ Data is stored locally and not shared with any third parties.
             border-color: #0077b5;
         }
 
-        .twitter-share:hover {
-            background: rgba(29, 161, 242, 0.2);
-            border-color: #1da1f2;
+        .x-share:hover {
+            background: rgba(0, 0, 0, 0.2);
+            border-color: #000000;
         }
 
         .copy-link:hover {
@@ -2189,13 +2211,12 @@ Data is stored locally and not shared with any third parties.
 
                 <!-- Social Sharing Buttons -->
                 <div class="share-portfolio">
-                    <p>Share this portfolio:</p>
                     <div class="share-buttons">
                         <button type="button" onclick="shareOnLinkedIn()" class="share-btn linkedin-share" aria-label="Share on LinkedIn">
                             <i class="fab fa-linkedin"></i> LinkedIn
                         </button>
-                        <button type="button" onclick="shareOnTwitter()" class="share-btn twitter-share" aria-label="Share on Twitter">
-                            <i class="fab fa-twitter"></i> Twitter
+                        <button type="button" onclick="shareOnX()" class="share-btn x-share" aria-label="Share on X">
+                            <i class="fab fa-x-twitter"></i> X
                         </button>
                         <button type="button" onclick="copyPortfolioLink()" class="share-btn copy-link" aria-label="Copy Portfolio Link">
                             <i class="fas fa-link"></i> Copy Link
@@ -2292,7 +2313,7 @@ Data is stored locally and not shared with any third parties.
                         </div>
                         <div class="project-links">
                             <a href="./learn/" aria-label="Learn AI-First Development">Learning Hub</a>
-                            <a href="./docs/PROMPT-ENGINEERING-GUIDE.md" aria-label="Prompt Engineering Guide">Guide</a>
+                            <a href="./docs/PROMPT-ENGINEERING-GUIDE.html" aria-label="Prompt Engineering Guide">Guide</a>
                         </div>
                     </div>
                 </div>
@@ -2419,6 +2440,98 @@ Data is stored locally and not shared with any third parties.
                         </div>
                     </div>
                 </div>
+
+                <div class="demo-card">
+                    <div class="demo-header">
+                        <i class="fas fa-robot"></i>
+                        <h3>Agentic Testing Integration</h3>
+                    </div>
+                    <div class="demo-content">
+                        <p><strong>Research Focus:</strong> Investigating autonomous AI agents for software testing, from existing platform integration to specialized testing agent development and multi-agent orchestration systems.</p>
+                        <div class="demo-example">
+                            <h4>Key Innovations:</h4>
+                            <ul>
+                                <li><strong>Multi-Agent Systems:</strong> Coordinated autonomous testing workflows</li>
+                                <li><strong>Specialized Agents:</strong> Explorer, Executor, Analyzer, and Orchestrator agents</li>
+                                <li><strong>Platform Integration:</strong> Leveraging AutoGPT, LangChain, and Semantic Kernel</li>
+                                <li><strong>Autonomous QA:</strong> Self-improving testing systems with minimal human oversight</li>
+                            </ul>
+                        </div>
+                        <div class="project-links">
+                            <a href="research/notebooks/agentic-testing-integration.html" aria-label="View Agentic Testing Research Notebook"><i class="fas fa-book"></i> View Notebook</a>
+                            <a href="research/" aria-label="All Research"><i class="fas fa-flask"></i> All Research</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-header">
+                        <i class="fas fa-balance-scale"></i>
+                        <h3>Evaluating AI Models for Testing</h3>
+                    </div>
+                    <div class="demo-content">
+                        <p><strong>Research Focus:</strong> Comprehensive framework for evaluating AI models in software testing contexts, including benchmarking methodologies, performance metrics, ROI analysis, and production deployment strategies.</p>
+                        <div class="demo-example">
+                            <h4>Key Contributions:</h4>
+                            <ul>
+                                <li><strong>Evaluation Framework:</strong> Systematic approach to model assessment across 6 key dimensions</li>
+                                <li><strong>Benchmark Suite:</strong> Test generation, bug detection, and adversarial testing scenarios</li>
+                                <li><strong>Model Comparisons:</strong> Side-by-side analysis of GPT-4, Claude 3.5, CodeLlama, and Gemini</li>
+                                <li><strong>ROI Calculator:</strong> Production metrics and cost-benefit analysis for deployment decisions</li>
+                            </ul>
+                        </div>
+                        <div class="project-links">
+                            <a href="research/notebooks/model-evaluation-software-testing.html" aria-label="View Model Evaluation Notebook"><i class="fas fa-book"></i> View Notebook</a>
+                            <a href="research/" aria-label="All Research"><i class="fas fa-flask"></i> All Research</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-header">
+                        <i class="fas fa-hospital-user"></i>
+                        <h3>Why Use AI Agents for Testing?</h3>
+                    </div>
+                    <div class="demo-content">
+                        <p><strong>Research Focus:</strong> Practical healthcare case study answering why QA professionals should use AI agentic flows for software testing, demonstrating autonomous agents for test generation, security scanning, and compliance validation.</p>
+                        <div class="demo-example">
+                            <h4>Key Insights:</h4>
+                            <ul>
+                                <li><strong>Healthcare EHR Example:</strong> Patient portal with HIPAA compliance requirements</li>
+                                <li><strong>7 Agent Types:</strong> Explorer, Generator, Security, Compliance, Orchestrator agents</li>
+                                <li><strong>Proven Results:</strong> 92% coverage, 88% faster tests, 487% ROI</li>
+                                <li><strong>Practical Implementation:</strong> Tech stack, adoption roadmap, code examples</li>
+                            </ul>
+                        </div>
+                        <div class="project-links">
+                            <a href="research/notebooks/ai-agents-qa-healthcare.html" aria-label="View AI Agents Healthcare Notebook"><i class="fas fa-book"></i> View Notebook</a>
+                            <a href="research/" aria-label="All Research"><i class="fas fa-flask"></i> All Research</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-header">
+                        <i class="fas fa-project-diagram"></i>
+                        <h3>Multi-Agent Orchestration Framework</h3>
+                    </div>
+                    <div class="demo-content">
+                        <p><strong>Research Focus:</strong> Academic research comparing Manager-Worker, Collaborative Swarm, and Sequential Pipeline architectures for AI testing systems, with empirical results from 50 trials demonstrating optimal task decomposition strategies.</p>
+                        <div class="demo-example">
+                            <h4>Key Findings:</h4>
+                            <ul>
+                                <li><strong>Manager-Worker Architecture:</strong> 80.2% defect detection, 31% cost reduction</li>
+                                <li><strong>Comparative Analysis:</strong> 4 architectures across 5 specialized agent roles</li>
+                                <li><strong>ATAO Framework:</strong> Context-aware architecture selection system</li>
+                                <li><strong>Statistical Validation:</strong> ANOVA, Tukey HSD, effect size analysis</li>
+                            </ul>
+                        </div>
+                        <div class="project-links">
+                            <a href="research/notebooks/multi-agent-orchestration-framework.html" aria-label="View Multi-Agent Orchestration Research"><i class="fas fa-book"></i> View Research</a>
+                            <a href="research/" aria-label="All Research"><i class="fas fa-flask"></i> All Research</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -2486,8 +2599,38 @@ Data is stored locally and not shared with any third parties.
                             </ul>
                         </div>
                         <div class="project-links">
-                            <a href="./job-search-automation/"><i class="fab fa-github"></i> Project Details</a>
-                            <a href="./job-search-automation/demo-screenshots.md"><i class="fas fa-images"></i> Screenshots</a>
+                            <a href="./job-search-automation/quick-start.html"><i class="fas fa-rocket"></i> Quick Start</a>
+                            <a href="./job-search-automation/app.html"><i class="fas fa-play-circle"></i> Try Dashboard</a>
+                            <a href="./job-search-automation/"><i class="fab fa-github"></i> Documentation</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>AI IDE Collection - Gotta Code 'Em All</h3>
+                        <p>Interactive comparison of 10 AI-powered development environments tested over 100+ hours. S-Tier through B-Tier rankings with detailed pros, cons, and real-world performance insights.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Developer Tools</span>
+                            <span class="tech-tag">AI Assistants</span>
+                            <span class="tech-tag">Comparative Analysis</span>
+                            <span class="tech-tag">Interactive UI</span>
+                        </div>
+                        <div class="use-case-demo">
+                            <h4>IDEs Tested:</h4>
+                            <ul>
+                                <li>S-Tier: Cursor (My Favorite), Windsurf</li>
+                                <li>A-Tier: GitHub Copilot, Zed, Void, Continue.dev, Trae</li>
+                                <li>B-Tier: Replit AI, CodeWhisperer, Tabnine</li>
+                                <li>11 IDEs tested over 100+ hours</li>
+                            </ul>
+                        </div>
+                        <div class="project-links">
+                            <a href="./ai-ide-comparison/"><i class="fas fa-laptop-code"></i> View Comparison</a>
+                            <a href="https://github.com/ElaMCB/ElaMCB.github.io/tree/main/ai-ide-comparison" target="_blank"><i class="fab fa-github"></i> Source</a>
                         </div>
                     </div>
                 </div>
@@ -2546,6 +2689,65 @@ Data is stored locally and not shared with any third parties.
                         <div class="project-links">
                             <a href="./algorithmic-trading/"><i class="fab fa-github"></i> Strategy Details</a>
                             <a href="./algorithmic-trading/strategy-implementation.md"><i class="fas fa-code"></i> Implementation</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-dna"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Bio-AI Analogies: Educational Content Generator</h3>
+                        <p>An innovative educational tool that explains complex AI concepts through biological analogies. Demonstrates interdisciplinary thinking connecting AI with biological systems, making advanced concepts accessible through familiar natural processes.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Educational AI</span>
+                            <span class="tech-tag">BDH Model</span>
+                            <span class="tech-tag">Content Generation</span>
+                        </div>
+                        <div class="use-case-demo">
+                            <h4>Key Features:</h4>
+                            <ul>
+                                <li>✅ Explains neural networks through synaptic plasticity</li>
+                                <li>✅ Makes attention mechanisms accessible via selective vision</li>
+                                <li>✅ Compares reinforcement learning to animal training</li>
+                                <li>✅ Bridges AI and biological systems thinking</li>
+                            </ul>
+                        </div>
+                        <div class="project-links">
+                            <a href="./bio-ai-analogies/"><i class="fas fa-book"></i> Documentation</a>
+                            <a href="https://github.com/ElaMCB/bdh" target="_blank"><i class="fab fa-github"></i> Source Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>AI Innovations Discovery for QA Testing</h3>
+                        <p>Weekly automated discovery system that scans GitHub, Hacker News, and research sources to find cutting-edge AI tools, frameworks, and methodologies applicable to quality assurance and testing. Stay ahead of the latest innovations in AI testing.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Automated Discovery</span>
+                            <span class="tech-tag">GitHub Actions</span>
+                            <span class="tech-tag">Weekly Updates</span>
+                            <span class="tech-tag">QA Innovation</span>
+                        </div>
+                        <div class="use-case-demo">
+                            <h4>Discovery Features:</h4>
+                            <ul>
+                                <li>✅ Automatic weekly scans (every Monday)</li>
+                                <li>✅ 15+ targeted search keywords for QA/testing</li>
+                                <li>✅ Categorization by innovation type (test generation, execution, maintenance, etc.)</li>
+                                <li>✅ Filters duplicates and existing tools</li>
+                                <li>✅ Generates detailed reports with QA applications</li>
+                            </ul>
+                        </div>
+                        <div class="project-links">
+                            <a href="./research/ai-innovations.html"><i class="fas fa-flask"></i> View Discoveries</a>
+                            <a href="https://github.com/ElaMCB/ElaMCB.github.io/tree/main/research/discoveries" target="_blank"><i class="fab fa-github"></i> Discovery Data</a>
                         </div>
                     </div>
                 </div>

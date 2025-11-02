@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Search Automation Suite - Elena Mereanu</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Ethical automation system demonstrating intelligent job matching with 85% accuracy, application tracking, and interview preparation using AI and test automation principles.">
+    <meta name="keywords" content="job search automation, AI job matching, application tracking, interview preparation, ethical automation, Playwright automation, NLP, machine learning">
+    <meta name="author" content="Elena Mereanu - AI-First Quality Engineer">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0a0a0f;
+            --secondary: #00d4ff;
+            --accent: #7c3aed;
+            --light: #e4e4e7;
+            --dark: #09090b;
+            --card-bg: rgba(15, 15, 23, 0.95);
+            --success: #51cf66;
+            --warning: #ff6b6b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            background-attachment: fixed;
+            color: var(--light);
+            line-height: 1.8;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
+        }
+        
+        .hero {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: var(--light);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(228, 228, 231, 0.8);
+            margin-bottom: 2rem;
+        }
+        
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .metric-card {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 2px solid var(--accent);
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--light);
+        }
+        
+        .section {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin: 2rem 0 1rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--secondary);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.3);
+        }
+        
+        .feature-card h4 {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+        
+        .tech-badge {
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+        
+        .ethics-box {
+            background: rgba(81, 207, 102, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+        
+        .ethics-box h4 {
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
+        }
+        
+        .btn-secondary {
+            background: rgba(0, 212, 255, 0.2);
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+        
+        ul {
+            margin-left: 2rem;
+        }
+        
+        li {
+            margin: 0.5rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .features-grid, .metrics {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Portfolio
+        </a>
+        
+        <div class="hero">
+            <h1>Job Search Automation Suite</h1>
+            <p class="subtitle">Ethical automation demonstrating intelligent job matching, application tracking, and interview preparation using AI and test automation principles</p>
+            
+            <div class="metrics">
+                <div class="metric-card">
+                    <div class="metric-value">60%</div>
+                    <div class="metric-label">Time Reduction</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">85%</div>
+                    <div class="metric-label">Match Accuracy</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">40%</div>
+                    <div class="metric-label">Quality Improvement</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">3x</div>
+                    <div class="metric-label">Faster Prep</div>
+                </div>
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="./quick-start.html" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i> Try It Yourself!
+                </a>
+                <a href="./app.html" class="btn btn-primary">
+                    <i class="fas fa-play-circle"></i> Launch Dashboard
+                </a>
+                <a href="./README.md" class="btn btn-secondary">
+                    <i class="fab fa-github"></i> Full Documentation
+                </a>
+                <a href="./REAL-API-INTEGRATION.md" class="btn btn-secondary">
+                    <i class="fas fa-plug"></i> Get Real Jobs
+                </a>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-rocket"></i> Core Features</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-brain"></i>
+                    <h4>Intelligent Job Matching</h4>
+                    <p>AI-powered skill matching using NLP and machine learning with 85% accuracy. Automated job discovery across multiple platforms with relevance scoring based on experience and preferences.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-tasks"></i>
+                    <h4>Application Status Tracking</h4>
+                    <p>Real-time status monitoring across job boards. Automated follow-up reminders and scheduling. Application analytics and success rate tracking.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>Interview Analytics Dashboard</h4>
+                    <p>Performance tracking and improvement suggestions. Question pattern analysis and preparation recommendations. Scheduling optimization and conflict management.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-file-alt"></i>
+                    <h4>Resume Optimization</h4>
+                    <p>AI-driven keyword optimization for ATS systems. Industry-specific formatting and content recommendations. A/B testing for different resume versions.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-code"></i> Technology Stack</h2>
+            
+            <h3>Backend</h3>
+            <div class="tech-stack">
+                <span class="tech-badge">Python/FastAPI</span>
+                <span class="tech-badge">scikit-learn</span>
+                <span class="tech-badge">PostgreSQL</span>
+                <span class="tech-badge">Redis</span>
+            </div>
+            
+            <h3>Automation & Testing</h3>
+            <div class="tech-stack">
+                <span class="tech-badge">Playwright</span>
+                <span class="tech-badge">Selenium</span>
+                <span class="tech-badge">pytest</span>
+                <span class="tech-badge">GitHub Actions</span>
+            </div>
+            
+            <h3>Frontend</h3>
+            <div class="tech-stack">
+                <span class="tech-badge">React/TypeScript</span>
+                <span class="tech-badge">Chart.js</span>
+                <span class="tech-badge">Material-UI</span>
+            </div>
+            
+            <h3>AI/ML Components</h3>
+            <div class="tech-stack">
+                <span class="tech-badge">Natural Language Processing</span>
+                <span class="tech-badge">Recommendation Engine</span>
+                <span class="tech-badge">Data Analytics</span>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-balance-scale"></i> Ethical Automation Principles</h2>
+            
+            <div class="ethics-box">
+                <h4>Respectful Platform Interaction</h4>
+                <ul>
+                    <li>Adheres to platform terms of service and rate limits</li>
+                    <li>Implements respectful scraping with appropriate delays</li>
+                    <li>Uses official APIs when available</li>
+                </ul>
+            </div>
+            
+            <div class="ethics-box">
+                <h4>Value-Added Approach</h4>
+                <ul>
+                    <li>Enhances rather than replaces human decision-making</li>
+                    <li>Focuses on quality over quantity in applications</li>
+                    <li>Maintains personalization and authenticity</li>
+                </ul>
+            </div>
+            
+            <div class="ethics-box">
+                <h4>Professional Boundaries</h4>
+                <ul>
+                    <li>Appropriate automation levels with human oversight</li>
+                    <li>Transparent about automated vs. manual processes</li>
+                    <li>Respects privacy and data protection requirements</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-trophy"></i> Results & Impact</h2>
+            
+            <ul style="font-size: 1.1rem;">
+                <li><strong>60% reduction</strong> in job search time</li>
+                <li><strong>85% accuracy</strong> in job relevance matching</li>
+                <li><strong>40% improvement</strong> in application quality and targeting</li>
+                <li><strong>3x faster</strong> interview preparation efficiency</li>
+                <li><strong>Better insights</strong> into personal job market performance</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-lightbulb"></i> Key Learnings</h2>
+            
+            <h3>Technical Insights</h3>
+            <ul>
+                <li>Balancing automation efficiency with ethical considerations</li>
+                <li>Implementing robust error handling for web scraping</li>
+                <li>Designing scalable ML pipelines for real-time recommendations</li>
+                <li>Creating maintainable test automation for complex workflows</li>
+            </ul>
+            
+            <h3>Professional Development</h3>
+            <ul>
+                <li>Understanding job market dynamics through data analysis</li>
+                <li>Improving personal branding and application strategies</li>
+                <li>Developing systematic approaches to career advancement</li>
+                <li>Building tools that solve real problems while maintaining integrity</li>
+            </ul>
+        </div>
+        
+        <hr style="border: none; height: 1px; background: linear-gradient(to right, transparent, var(--accent), transparent); margin: 3rem 0;">
+        
+        <div style="text-align: center; padding: 2rem 0;">
+            <p style="font-style: italic; color: rgba(228, 228, 231, 0.7);">This project demonstrates the practical application of AI and automation technologies to solve real-world challenges while maintaining ethical standards and professional integrity.</p>
+            <div class="cta-buttons" style="margin-top: 2rem;">
+                <a href="../" class="btn btn-primary">
+                    <i class="fas fa-arrow-left"></i> Back to Portfolio
+                </a>
+                <a href="./README.md" class="btn btn-secondary">
+                    <i class="fas fa-book"></i> Technical Documentation
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

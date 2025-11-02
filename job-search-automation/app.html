@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Search Pro - Find Your Next Role</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0a0a0f;
+            --secondary: #00d4ff;
+            --accent: #7c3aed;
+            --success: #51cf66;
+            --warning: #ff6b6b;
+            --light: #e4e4e7;
+            --card: rgba(15, 15, 23, 0.95);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            background-attachment: fixed;
+            color: var(--light);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .back-to-portfolio {
+            background: rgba(0, 212, 255, 0.2);
+            color: var(--secondary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--secondary);
+        }
+        
+        .back-to-portfolio:hover {
+            background: var(--secondary);
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+        
+        .header-stats {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: rgba(228, 228, 231, 0.7);
+        }
+        
+        /* Main Layout */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 2rem;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+        
+        .filter-card {
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .filter-card h3 {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .upload-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            border: 2px dashed var(--secondary);
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .upload-btn:hover {
+            background: var(--secondary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: rgba(228, 228, 231, 0.9);
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 8px;
+            color: var(--light);
+            font-size: 0.95rem;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+        
+        .search-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--success);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-btn:hover:not(:disabled) {
+            background: #45b359;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(81, 207, 102, 0.4);
+        }
+        
+        .search-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .skills-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .skill-badge {
+            background: var(--accent);
+            padding: 0.3rem 0.7rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        /* Results Area */
+        .results-header {
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .results-count {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .sort-controls {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        
+        .sort-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 20px;
+            color: var(--light);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+        
+        .sort-btn.active {
+            background: var(--secondary);
+            color: var(--primary);
+            border-color: var(--secondary);
+        }
+        
+        .sort-btn:hover {
+            border-color: var(--secondary);
+        }
+        
+        /* Job Cards */
+        .job-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .job-card {
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            position: relative;
+        }
+        
+        .job-card.viewed {
+            opacity: 0.7;
+            border-left-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .job-card.applied {
+            border-left-color: var(--success);
+        }
+        
+        .job-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+            border-left-color: var(--secondary);
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+        
+        .job-title {
+            font-size: 1.4rem;
+            color: var(--light);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .job-company {
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-bottom: 0.3rem;
+        }
+        
+        .job-meta {
+            display: flex;
+            gap: 1.5rem;
+            color: rgba(228, 228, 231, 0.7);
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+        
+        .job-meta i {
+            color: var(--secondary);
+            margin-right: 0.3rem;
+        }
+        
+        .match-badge {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: var(--success);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        
+        .match-badge.medium {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+        
+        .match-badge.low {
+            background: var(--warning);
+        }
+        
+        .job-description {
+            margin: 1rem 0;
+            color: rgba(228, 228, 231, 0.8);
+            line-height: 1.7;
+        }
+        
+        .match-highlights {
+            background: rgba(81, 207, 102, 0.1);
+            border-left: 3px solid var(--success);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+        
+        .match-highlights strong {
+            color: var(--success);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .match-highlights ul {
+            margin-left: 1.5rem;
+        }
+        
+        .match-highlights li {
+            margin: 0.3rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .job-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .apply-btn {
+            flex: 1;
+            padding: 0.8rem 1.5rem;
+            background: var(--success);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .apply-btn:hover {
+            background: #45b359;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(81, 207, 102, 0.4);
+        }
+        
+        .save-btn {
+            padding: 0.8rem 1.5rem;
+            background: rgba(0, 212, 255, 0.2);
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .save-btn:hover {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+        
+        .mark-applied-btn {
+            padding: 0.8rem 1.5rem;
+            background: rgba(124, 58, 237, 0.2);
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .mark-applied-btn.applied {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .status-tags {
+            display: flex;
+            gap: 0.5rem;
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+        }
+        
+        .status-tag {
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        
+        .status-tag.new {
+            background: var(--success);
+            color: white;
+        }
+        
+        .status-tag.viewed {
+            background: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .status-tag.applied {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 4rem;
+        }
+        
+        .loading i {
+            font-size: 3rem;
+            color: var(--secondary);
+            animation: spin 2s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 4rem;
+            color: rgba(228, 228, 231, 0.6);
+        }
+        
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: rgba(0, 212, 255, 0.3);
+        }
+        
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div style="display: flex; align-items: center; gap: 2rem;">
+                <a href="../" class="back-to-portfolio">
+                    <i class="fas fa-arrow-left"></i> Back to Portfolio
+                </a>
+                <div class="logo">
+                    <i class="fas fa-briefcase"></i> Job Search Pro
+                </div>
+            </div>
+            <div class="header-stats">
+                <div class="stat">
+                    <div class="stat-value" id="total-jobs">0</div>
+                    <div class="stat-label">Jobs Found</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="viewed-count">0</div>
+                    <div class="stat-label">Viewed</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="applied-count">0</div>
+                    <div class="stat-label">Applied</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Sidebar Filters -->
+        <aside class="sidebar">
+            <!-- Resume Upload -->
+            <div class="filter-card">
+                <h3><i class="fas fa-file-upload"></i> Your Resume</h3>
+                <input type="file" id="resume-upload" accept=".pdf,.docx,.txt" style="display: none;" onchange="uploadResume(this)">
+                <button class="upload-btn" onclick="document.getElementById('resume-upload').click()">
+                    <i class="fas fa-cloud-upload-alt"></i> Upload Resume
+                </button>
+                <div id="skills-display" style="margin-top: 1rem;"></div>
+            </div>
+            
+            <!-- Search Filters -->
+            <div class="filter-card">
+                <h3><i class="fas fa-filter"></i> Search Filters</h3>
+                
+                <div class="form-group">
+                    <label>Keywords</label>
+                    <input type="text" id="keywords" placeholder="e.g., QA automation" value="software test engineer">
+                </div>
+                
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="location" placeholder="Leave blank for all" value="">
+                </div>
+                
+                <div class="form-group">
+                    <label>Max Results</label>
+                    <select id="max-results">
+                        <option value="10">10 jobs</option>
+                        <option value="20" selected>20 jobs</option>
+                        <option value="50">50 jobs</option>
+                    </select>
+                </div>
+                
+                <button class="search-btn" onclick="searchJobs()" id="search-btn">
+                    <i class="fas fa-search"></i> Search Jobs
+                </button>
+            </div>
+            
+            <!-- Application Tracker -->
+            <div class="filter-card">
+                <h3><i class="fas fa-tasks"></i> Quick Filters</h3>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <button class="sort-btn" onclick="filterJobs('all')" id="filter-all">
+                        All Jobs
+                    </button>
+                    <button class="sort-btn" onclick="filterJobs('new')" id="filter-new">
+                        New (Unviewed)
+                    </button>
+                    <button class="sort-btn" onclick="filterJobs('applied')" id="filter-applied">
+                        Applied
+                    </button>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Results Area -->
+        <main class="results-area">
+            <!-- Results Header -->
+            <div class="results-header">
+                <div class="results-count" id="results-count">0 jobs found</div>
+                <div class="sort-controls">
+                    <span style="font-size: 0.9rem; margin-right: 0.5rem; color: rgba(228, 228, 231, 0.7);">Sort by:</span>
+                    <button class="sort-btn active" onclick="sortJobs('match')" id="sort-match">Match</button>
+                    <button class="sort-btn" onclick="sortJobs('date')" id="sort-date">Date Posted</button>
+                    <button class="sort-btn" onclick="sortJobs('salary')" id="sort-salary">Salary</button>
+                </div>
+            </div>
+            
+            <!-- Job List -->
+            <div class="job-list" id="job-list">
+                <div class="empty-state">
+                    <i class="fas fa-search"></i>
+                    <h3>Find Your Perfect Job</h3>
+                    <p>Upload your resume and search to get AI-powered job matches</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        const API_URL = 'http://localhost:8000';
+        let allJobs = [];
+        let userProfile = null;
+        let currentFilter = 'all';
+        let currentSort = 'match';
+        
+        // Load application tracking from localStorage
+        let jobTracking = JSON.parse(localStorage.getItem('jobTracking') || '{"viewed": [], "applied": []}');
+        
+        function saveTracking() {
+            localStorage.setItem('jobTracking', JSON.stringify(jobTracking));
+            updateStats();
+        }
+        
+        function updateStats() {
+            document.getElementById('total-jobs').textContent = allJobs.length;
+            document.getElementById('viewed-count').textContent = jobTracking.viewed.length;
+            document.getElementById('applied-count').textContent = jobTracking.applied.length;
+        }
+        
+        async function uploadResume(input) {
+            const file = input.files[0];
+            if (!file) return;
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            try {
+                const response = await fetch(`${API_URL}/upload-resume`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    userProfile = data.profile;
+                    displaySkills(data.profile.skills);
+                    showNotification('Resume parsed successfully!', 'success');
+                }
+            } catch (error) {
+                showNotification('Failed to parse resume. Is the API running?', 'error');
+            }
+        }
+        
+        function displaySkills(skills) {
+            const display = document.getElementById('skills-display');
+            display.innerHTML = `
+                <div style="margin-bottom: 0.5rem; font-size: 0.85rem; color: rgba(228, 228, 231, 0.7);">
+                    ${skills.length} skills detected
+                </div>
+                <div class="skills-preview">
+                    ${skills.slice(0, 8).map(s => `<span class="skill-badge">${s}</span>`).join('')}
+                    ${skills.length > 8 ? `<span class="skill-badge">+${skills.length - 8} more</span>` : ''}
+                </div>
+            `;
+        }
+        
+        async function searchJobs() {
+            const keywords = document.getElementById('keywords').value;
+            const location = document.getElementById('location').value;
+            const maxResults = document.getElementById('max-results').value;
+            const searchBtn = document.getElementById('search-btn');
+            const jobList = document.getElementById('job-list');
+            
+            searchBtn.disabled = true;
+            jobList.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><br>Searching and analyzing jobs...</div>';
+            
+            try {
+                let endpoint, body;
+                
+                if (userProfile) {
+                    endpoint = '/match-jobs';
+                    body = {
+                        skills: userProfile.skills,
+                        experience_years: userProfile.experience_years,
+                        preferred_roles: userProfile.preferred_roles,
+                        preferred_locations: [location || 'all']
+                    };
+                } else {
+                    endpoint = '/search-jobs';
+                    body = {
+                        keywords,
+                        location,
+                        experience_level: 'senior',
+                        remote: true,
+                        max_results: parseInt(maxResults)
+                    };
+                }
+                
+                const response = await fetch(`${API_URL}${endpoint}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    allJobs = endpoint === '/match-jobs' ? data.matches : data.jobs;
+                    displayJobs(allJobs);
+                    showNotification(`Found ${allJobs.length} jobs!`, 'success');
+                }
+            } catch (error) {
+                jobList.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-circle"></i><h3>Error</h3><p>Failed to fetch jobs. Make sure API is running.</p></div>';
+            } finally {
+                searchBtn.disabled = false;
+            }
+        }
+        
+        function sortJobs(sortType) {
+            currentSort = sortType;
+            
+            // Update active button
+            document.querySelectorAll('[id^="sort-"]').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`sort-${sortType}`).classList.add('active');
+            
+            let sorted = [...allJobs];
+            
+            if (sortType === 'match') {
+                sorted.sort((a, b) => (b.match_score || 0.5) - (a.match_score || 0.5));
+            } else if (sortType === 'date') {
+                sorted.sort((a, b) => parseDateWeight(a.posted_date) - parseDateWeight(b.posted_date));
+            } else if (sortType === 'salary') {
+                sorted.sort((a, b) => extractMaxSalary(b.salary_range) - extractMaxSalary(a.salary_range));
+            }
+            
+            displayJobs(sorted);
+        }
+        
+        function parseDateWeight(dateStr) {
+            if (!dateStr) return 999;
+            const match = dateStr.match(/(\d+)\s*day/i);
+            return match ? parseInt(match[1]) : 999;
+        }
+        
+        function extractMaxSalary(salaryStr) {
+            if (!salaryStr) return 0;
+            const match = salaryStr.match(/(\d+)K/g);
+            return match ? parseInt(match[match.length - 1]) : 0;
+        }
+        
+        function filterJobs(filterType) {
+            currentFilter = filterType;
+            
+            // Update active button
+            document.querySelectorAll('[id^="filter-"]').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`filter-${filterType}`).classList.add('active');
+            
+            let filtered = allJobs;
+            
+            if (filterType === 'new') {
+                filtered = allJobs.filter(job => !jobTracking.viewed.includes(job.url));
+            } else if (filterType === 'applied') {
+                filtered = allJobs.filter(job => jobTracking.applied.includes(job.url));
+            }
+            
+            displayJobs(filtered);
+        }
+        
+        function displayJobs(jobs) {
+            const jobList = document.getElementById('job-list');
+            const resultsCount = document.getElementById('results-count');
+            
+            if (!jobs || jobs.length === 0) {
+                jobList.innerHTML = '<div class="empty-state"><i class="fas fa-search"></i><h3>No jobs found</h3><p>Try different keywords or filters</p></div>';
+                resultsCount.textContent = '0 jobs found';
+                return;
+            }
+            
+            resultsCount.textContent = `${jobs.length} job${jobs.length !== 1 ? 's' : ''} found`;
+            
+            jobList.innerHTML = jobs.map((job, index) => createJobCard(job, index)).join('');
+            updateStats();
+        }
+        
+        function createJobCard(job, index) {
+            const jobId = job.url;
+            const isViewed = jobTracking.viewed.includes(jobId);
+            const isApplied = jobTracking.applied.includes(jobId);
+            const matchScore = job.match_score ? Math.round(job.match_score * 100) : 50;
+            const matchClass = matchScore >= 70 ? '' : matchScore >= 50 ? 'medium' : 'low';
+            
+            return `
+                <div class="job-card ${isViewed ? 'viewed' : ''} ${isApplied ? 'applied' : ''}" data-job-id="${jobId}">
+                    <div class="status-tags">
+                        ${!isViewed && !isApplied ? '<span class="status-tag new">NEW</span>' : ''}
+                        ${isViewed && !isApplied ? '<span class="status-tag viewed">VIEWED</span>' : ''}
+                        ${isApplied ? '<span class="status-tag applied">APPLIED</span>' : ''}
+                    </div>
+                    
+                    <div class="match-badge ${matchClass}">${matchScore}%</div>
+                    
+                    <div class="job-header">
+                        <div>
+                            <h2 class="job-title">${job.title}</h2>
+                            <div class="job-company">
+                                <i class="fas fa-building"></i> ${job.company}
+                            </div>
+                            <div class="job-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> ${job.location}</span>
+                                ${job.salary_range ? `<span><i class="fas fa-dollar-sign"></i> ${job.salary_range}</span>` : ''}
+                                <span><i class="fas fa-clock"></i> ${job.posted_date || 'Recently posted'}</span>
+                                ${job.job_type ? `<span><i class="fas fa-briefcase"></i> ${job.job_type}</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${job.match_reasons && job.match_reasons.length > 0 ? `
+                        <div class="match-highlights">
+                            <strong><i class="fas fa-check-circle"></i> Why this matches you:</strong>
+                            <ul>
+                                ${job.match_reasons.map(reason => `<li>${reason}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : ''}
+                    
+                    <div class="job-description">
+                        ${job.description ? job.description.substring(0, 300) + '...' : 'No description available'}
+                    </div>
+                    
+                    <div class="job-actions">
+                        <button class="apply-btn" onclick="applyToJob('${jobId}', '${job.url}')">
+                            <i class="fas fa-paper-plane"></i> Apply Now
+                        </button>
+                        <button class="mark-applied-btn ${isApplied ? 'applied' : ''}" onclick="markAsApplied('${jobId}')">
+                            <i class="fas fa-check"></i> ${isApplied ? 'Applied' : 'Mark Applied'}
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function applyToJob(jobId, url) {
+            // Mark as viewed
+            if (!jobTracking.viewed.includes(jobId)) {
+                jobTracking.viewed.push(jobId);
+                saveTracking();
+            }
+            
+            // Open job in new tab
+            window.open(url, '_blank');
+            
+            // Ask if they applied
+            setTimeout(() => {
+                if (confirm('Did you submit an application?')) {
+                    markAsApplied(jobId);
+                }
+            }, 1000);
+        }
+        
+        function markAsApplied(jobId) {
+            if (!jobTracking.applied.includes(jobId)) {
+                jobTracking.applied.push(jobId);
+            }
+            if (!jobTracking.viewed.includes(jobId)) {
+                jobTracking.viewed.push(jobId);
+            }
+            saveTracking();
+            
+            // Refresh display
+            filterJobs(currentFilter);
+            showNotification('Marked as applied!', 'success');
+        }
+        
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: ${type === 'success' ? 'var(--success)' : 'var(--warning)'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+        
+        // Initialize
+        updateStats();
+    </script>
+    
+    <style>
+        @keyframes slideIn {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(400px); opacity: 0; }
+        }
+    </style>
+</body>
+</html>
+

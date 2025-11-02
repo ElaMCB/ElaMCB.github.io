@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bio-AI Analogies: Educational Content Generator</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0a0a0f;
+            --secondary: #00d4ff;
+            --accent: #7c3aed;
+            --success: #51cf66;
+            --warning: #ff6b6b;
+            --gold: #ffd700;
+            --light: #e4e4e7;
+            --card: rgba(15, 15, 23, 0.95);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            background-attachment: fixed;
+            color: var(--light);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.5);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: rgba(228, 228, 231, 0.8);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        .content-section {
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        h2 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        
+        h3 {
+            color: var(--accent);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .feature-card {
+            background: rgba(124, 58, 237, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+        }
+        
+        .feature-card i {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        code {
+            background: #2d2b55;
+            color: var(--secondary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        pre {
+            background: #2d2b55;
+            padding: 1rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        
+        .concept-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .concept-list li {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 4px solid var(--secondary);
+            padding: 0.8rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .concept-list li:hover {
+            background: rgba(0, 212, 255, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .sample-box {
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 4px solid var(--gold);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+        }
+        
+        .sample-box h4 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(228, 228, 231, 0.6);
+        }
+        
+        .author {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <a href="../" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Portfolio
+    </a>
+    
+    <div class="header">
+        <h1><i class="fas fa-dna"></i> Bio-AI Analogies</h1>
+        <p class="subtitle">Educational Content Generator</p>
+    </div>
+    
+    <div class="container">
+        <div class="content-section">
+            <h2>Overview</h2>
+            <p>The Bio-AI Analogies tool bridges the gap between artificial intelligence and biological systems by creating educational content that explains complex AI concepts through familiar biological analogies. This approach makes AI concepts more accessible and intuitive for learners.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Biological Analogies</h3>
+                    <p>Explains AI concepts like neural networks, attention mechanisms, and reinforcement learning using biological systems.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-dragon"></i>
+                    <h3>BDH Model Integration</h3>
+                    <p>Enhanced with the Baby Dragon Hatchling model for unique insights into AI concepts.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-book"></i>
+                    <h3>Educational Content</h3>
+                    <p>Creates well-structured, markdown-formatted educational content for learners.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-terminal"></i>
+                    <h3>Command-line Interface</h3>
+                    <p>Easy to use with various options for customization and content generation.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Usage</h2>
+            
+            <h3>Basic Usage</h3>
+            <pre><code># Generate content for a specific AI concept
+python bdh_bio_inference.py --concept neural_networks
+
+# List all available concepts
+python bdh_bio_inference.py --list
+
+# Generate content based on a text prompt
+python bdh_bio_inference.py --prompt "How do neural networks learn?"
+
+# Save output to a file
+python bdh_bio_inference.py --concept reinforcement_learning --output reinforcement_learning.md</code></pre>
+            
+            <h3>Available Concepts</h3>
+            <ul class="concept-list">
+                <li><i class="fas fa-network-wired"></i> Neural Networks</li>
+                <li><i class="fas fa-eye"></i> Attention Mechanisms</li>
+                <li><i class="fas fa-repeat"></i> Reinforcement Learning</li>
+                <li><i class="fas fa-magic"></i> Generative Models</li>
+                <li><i class="fas fa-layer-group"></i> Bounded Depth Hierarchy (BDH)</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Sample Output</h2>
+            
+            <div class="sample-box">
+                <h4><i class="fas fa-lightbulb"></i> Neural Networks: Learning as Synaptic Plasticity</h4>
+                <h4>The Biological Analogy</h4>
+                <p>The brain learns by adjusting the strength of connections (synapses) between neurons, a process called synaptic plasticity. Neural networks learn by adjusting weights between artificial neurons through backpropagation, which is analogous to how synaptic connections strengthen or weaken based on experience.</p>
+                
+                <h4>Real-World Example</h4>
+                <p>When you practice playing piano, the neural connections involved in that skill strengthen. Similarly, when a neural network is trained to recognize cats, the connections that lead to correct cat identification are strengthened.</p>
+                
+                <h4>BDH Model Insight</h4>
+                <p>The connection between Neural Networks and biological systems reveals fundamental patterns that emerge in both natural and artificial intelligence. This parallel demonstrates how AI development often mirrors evolutionary processes, where efficient solutions converge despite different origins.</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Portfolio Integration</h2>
+            <p>This tool showcases several key skills:</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <h3>Educational Content Creation</h3>
+                    <p>Demonstrates ability to create clear, accessible educational content that makes complex topics approachable.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI Concept Explanation</h3>
+                    <p>Shows deep understanding of AI concepts and ability to explain them through creative analogies.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-code-branch"></i>
+                    <h3>Model Integration</h3>
+                    <p>Illustrates how to integrate language models into educational tools effectively.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-atom"></i>
+                    <h3>Interdisciplinary Thinking</h3>
+                    <p>Highlights the connection between AI and biological systems, showing interdisciplinary expertise.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Future Enhancements</h2>
+            <ul class="concept-list">
+                <li><i class="fas fa-check-circle"></i> Integration with actual BDH model inference once dependencies are resolved</li>
+                <li><i class="fas fa-check-circle"></i> Web interface for interactive learning</li>
+                <li><i class="fas fa-check-circle"></i> Expanded concept database with more AI topics and biological analogies</li>
+                <li><i class="fas fa-check-circle"></i> Visualization of the analogies to enhance understanding</li>
+            </ul>
+        </div>
+        
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="https://github.com/ElaMCB/bdh" target="_blank" class="btn">
+                <i class="fab fa-github"></i> View Source Code
+            </a>
+            <a href="../" class="btn">
+                <i class="fas fa-home"></i> Back to Portfolio
+            </a>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>Created by <span class="author">Ela Mereanu</span> as part of the BDH model exploration project</p>
+        <p style="margin-top: 0.5rem;">© 2025 Ela MCB. All rights reserved.</p>
+    </footer>
+</body>
+</html>

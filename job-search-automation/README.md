@@ -2,6 +2,51 @@
 
 An ethical automation system that demonstrates intelligent job matching, application tracking, and interview preparation using AI and test automation principles.
 
+## 🚀 Try It Yourself!
+
+**Want to use this to find YOUR next job?** Follow these steps:
+
+### Quick Setup (10 Minutes)
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/ElaMCB/ElaMCB.github.io.git
+   cd ElaMCB.github.io/job-search-automation/backend
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Get FREE API access** (no approval wait!):
+   - Sign up at https://developer.adzuna.com/signup
+   - Get your App ID and App Key instantly
+   - Create `.env` file in `backend/` folder:
+     ```
+     ADZUNA_APP_ID=your_app_id_here
+     ADZUNA_APP_KEY=your_app_key_here
+     ```
+
+4. **Start the system:**
+   ```bash
+   # Terminal 1: Start API
+   python main.py
+   
+   # Terminal 2: Start web server (new terminal window)
+   cd ..
+   python -m http.server 8080
+   ```
+
+5. **Open dashboard:**
+   - Visit `http://localhost:8080/app.html`
+   - Upload your resume
+   - Get AI-powered job matches!
+
+📖 **Detailed guide:** [QUICK-START.md](./QUICK-START.md)
+
+---
+
 ## Overview
 
 This project showcases the application of AI and automation technologies to solve real-world problems while maintaining ethical standards and professional boundaries.

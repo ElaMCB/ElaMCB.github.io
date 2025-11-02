@@ -1,0 +1,767 @@
+[
+  {
+    "name": "aider",
+    "description": "aider is AI pair programming in your terminal",
+    "url": "https://github.com/Aider-AI/aider",
+    "stars": 38054,
+    "points": null,
+    "language": "Python",
+    "source": "GitHub"
+  },
+  {
+    "name": "context7",
+    "description": "Context7 MCP Server -- Up-to-date code documentation for LLMs and AI code editors",
+    "url": "https://github.com/upstash/context7",
+    "stars": 34778,
+    "points": null,
+    "language": "JavaScript",
+    "source": "GitHub"
+  },
+  {
+    "name": "tabby",
+    "description": "Self-hosted AI coding assistant",
+    "url": "https://github.com/TabbyML/tabby",
+    "stars": 32296,
+    "points": null,
+    "language": "Rust",
+    "source": "GitHub"
+  },
+  {
+    "name": "continue",
+    "description": "⏩ Ship faster with Continuous AI. Build and run custom agents across your IDE, terminal, and CI",
+    "url": "https://github.com/continuedev/continue",
+    "stars": 29433,
+    "points": null,
+    "language": "TypeScript",
+    "source": "GitHub"
+  },
+  {
+    "name": "Archon",
+    "description": "Beta release of Archon OS - the knowledge and task management backbone for AI coding assistants.",
+    "url": "https://github.com/coleam00/Archon",
+    "stars": 12974,
+    "points": null,
+    "language": "Python",
+    "source": "GitHub"
+  },
+  {
+    "name": "kilocode",
+    "description": "Open Source AI coding assistant for planning, building, and fixing code. We frequently merge features from open-source projects while building our own vision. Follow us: kilocode.ai/social",
+    "url": "https://github.com/Kilo-Org/kilocode",
+    "stars": 11394,
+    "points": null,
+    "language": "TypeScript",
+    "source": "GitHub"
+  },
+  {
+    "name": "context-engineering-intro",
+    "description": "Context engineering is the new vibe coding - it's the way to actually make AI coding assistants work. Claude Code is the best for this so that's what this repo is centered around, but you can apply this strategy with any AI coding assistant!",
+    "url": "https://github.com/coleam00/context-engineering-intro",
+    "stars": 11102,
+    "points": null,
+    "language": "Python",
+    "source": "GitHub"
+  },
+  {
+    "name": "sweep",
+    "description": "Sweep: AI coding assistant for JetBrains",
+    "url": "https://github.com/sweepai/sweep",
+    "stars": 7600,
+    "points": null,
+    "language": "Jupyter Notebook",
+    "source": "GitHub"
+  },
+  {
+    "name": "yn",
+    "description": "A highly extensible Markdown editor. Version control, AI Copilot, mind map, documents encryption, code snippet running, integrated terminal, chart embedding, HTML applets, Reveal.js, plug-in, and macro replacement.",
+    "url": "https://github.com/purocean/yn",
+    "stars": 6390,
+    "points": null,
+    "language": "TypeScript",
+    "source": "GitHub"
+  },
+  {
+    "name": "AidLearning-FrameWork",
+    "description": "🔥🔥🔥AidLearning is a powerful AIOT development platform, AidLearning builds a linux env supporting GUI, deep learning and visual IDE on Android...Now Aid supports CPU+GPU+NPU for inference with high performance acceleration...Linux on Android or HarmonyOS ",
+    "url": "https://github.com/aidlearning/AidLearning-FrameWork",
+    "stars": 5715,
+    "points": null,
+    "language": "Python",
+    "source": "GitHub"
+  },
+  {
+    "name": "OpenSpec",
+    "description": "Spec-driven development for AI coding assistants.",
+    "url": "https://github.com/Fission-AI/OpenSpec",
+    "stars": 4948,
+    "points": null,
+    "language": "TypeScript",
+    "source": "GitHub"
+  },
+  {
+    "name": "aci",
+    "description": "ACI.dev is the open source tool-calling platform that hooks up 600+ tools into any agentic IDE or custom AI agent through direct function calling or a unified MCP server. The birthplace of VibeOps.",
+    "url": "https://github.com/aipotheosis-labs/aci",
+    "stars": 4669,
+    "points": null,
+    "language": "Python",
+    "source": "GitHub"
+  },
+  {
+    "name": "auto-dev",
+    "description": "🧙‍AutoDev: The AI-powered coding wizard（AI  驱动编程助手）with multilingual support 🌐, auto code generation 🏗️, and a helpful bug-slaying assistant 🐞! Customizable prompts 🎨 and a magic Auto Dev/Testing/Document/Agent  feature 🧪 included! 🚀",
+    "url": "https://github.com/unit-mesh/auto-dev",
+    "stars": 4101,
+    "points": null,
+    "language": "Kotlin",
+    "source": "GitHub"
+  },
+  {
+    "name": "cody-public-snapshot",
+    "description": "Type less, code more: Cody is an AI code assistant that uses advanced search and codebase context to help you write and fix code.",
+    "url": "https://github.com/sourcegraph/cody-public-snapshot",
+    "stars": 3797,
+    "points": null,
+    "language": "TypeScript",
+    "source": "GitHub"
+  },
+  {
+    "name": "core",
+    "description": "A framework helps you quickly build AI Native IDE products. MCP Client, supports Model Context Protocol (MCP) tools via MCP server.",
+    "url": "https://github.com/opensumi/core",
+    "stars": 3517,
+    "points": null,
+    "language": "TypeScript",
+    "source": "GitHub"
+  },
+  {
+    "name": "lsp-ai",
+    "description": "LSP-AI is an open-source language server that serves as a backend for AI-powered functionality, designed to assist and empower software engineers, not replace them.",
+    "url": "https://github.com/SilasMarvin/lsp-ai",
+    "stars": 3011,
+    "points": null,
+    "language": "Rust",
+    "source": "GitHub"
+  },
+  {
+    "name": "codel",
+    "description": "✨ Fully autonomous AI Agent that can perform complicated tasks and projects using terminal, browser, and editor.",
+    "url": "https://github.com/semanser/codel",
+    "stars": 2395,
+    "points": null,
+    "language": "TypeScript",
+    "source": "GitHub"
+  },
+  {
+    "name": "crystal",
+    "description": "Run multiple Codex and Claude Code AI sessions in parallel git worktrees. Test, compare approaches & manage AI-assisted development workflows in one desktop app.",
+    "url": "https://github.com/stravu/crystal",
+    "stars": 2298,
+    "points": null,
+    "language": "TypeScript",
+    "source": "GitHub"
+  },
+  {
+    "name": "sketch",
+    "description": "AI code-writing assistant that understands data content",
+    "url": "https://github.com/approximatelabs/sketch",
+    "stars": 2288,
+    "points": null,
+    "language": "Python",
+    "source": "GitHub"
+  },
+  {
+    "name": "APIAuto",
+    "description": "☔ 敏捷开发最强大易用的接口工具，机器学习零代码测试与 AI 问答、生成代码与静态检查、生成文档与光标悬浮注释，腾讯、华为、SHEIN、传音、工行等使用 ☔ The most advanced tool for HTTP API. Machine learning no-code testing and AI assistant, generating codes and static analysis, generating comments and floating hints. Used by Tencent, Huawei, SHEIN, TRANSSION, ICBC, etc.",
+    "url": "https://github.com/TommyLemon/APIAuto",
+    "stars": 2123,
+    "points": null,
+    "language": "JavaScript",
+    "source": "GitHub"
+  },
+  {
+    "name": "WebLaTex",
+    "description": "A complete alternative for Overleaf with VSCode + Web + Git Integration + Copilot + Grammar & Spell Checker + Live Collaboration Support. Based on GitHub Codespace and Dev container.",
+    "url": "https://github.com/sanjib-sen/WebLaTex",
+    "stars": 1328,
+    "points": null,
+    "language": "TeX",
+    "source": "GitHub"
+  },
+  {
+    "name": "we0",
+    "description": "we0 is an AI code editor for development programmers and product managers. same v0, bolt.new,lovable",
+    "url": "https://github.com/we0-dev/we0",
+    "stars": 892,
+    "points": null,
+    "language": "TypeScript",
+    "source": "GitHub"
+  },
+  {
+    "name": "aidermacs",
+    "description": "AI Pair Programming in Emacs with Aider",
+    "url": "https://github.com/MatthewZMD/aidermacs",
+    "stars": 810,
+    "points": null,
+    "language": "Emacs Lisp",
+    "source": "GitHub"
+  },
+  {
+    "name": "Visual-Code-Space",
+    "description": "A Modern Code Editor for Android",
+    "url": "https://github.com/Visual-Code-Space/Visual-Code-Space",
+    "stars": 461,
+    "points": null,
+    "language": "Kotlin",
+    "source": "GitHub"
+  },
+  {
+    "name": "airflow-code-editor",
+    "description": "A plugin for Apache Airflow that allows you to edit DAGs in browser",
+    "url": "https://github.com/andreax79/airflow-code-editor",
+    "stars": 450,
+    "points": null,
+    "language": "Vue",
+    "source": "GitHub"
+  },
+  {
+    "name": "shai",
+    "description": "shai is a coding agent, your pair programming buddy that lives in the terminal. Written in rust with love <3",
+    "url": "https://github.com/ovh/shai",
+    "stars": 440,
+    "points": null,
+    "language": "Rust",
+    "source": "GitHub"
+  },
+  {
+    "name": "eca",
+    "description": "Editor Code Assistant (ECA) - AI pair programming capabilities agnostic of editor",
+    "url": "https://github.com/editor-code-assistant/eca",
+    "stars": 438,
+    "points": null,
+    "language": "Clojure",
+    "source": "GitHub"
+  },
+  {
+    "name": "ClipboardConqueror",
+    "description": "Clipboard Conqueror is a novel copy and paste copilot alternative designed to bring your very own LLM AI assistant to any text field.  ",
+    "url": "https://github.com/aseichter2007/ClipboardConqueror",
+    "stars": 426,
+    "points": null,
+    "language": "JavaScript",
+    "source": "GitHub"
+  },
+  {
+    "name": "claude.vim",
+    "description": "Claude vim plugin for AI pair programming - a hacker's gateway to LLMs",
+    "url": "https://github.com/pasky/claude.vim",
+    "stars": 414,
+    "points": null,
+    "language": "Vim Script",
+    "source": "GitHub"
+  },
+  {
+    "name": "cannoli",
+    "description": "Cannoli allows you to build and run no-code LLM scripts using the Obsidian Canvas editor.",
+    "url": "https://github.com/DeabLabs/cannoli",
+    "stars": 390,
+    "points": null,
+    "language": "TypeScript",
+    "source": "GitHub"
+  },
+  {
+    "name": "Tabby: Self-hosted AI coding assistant",
+    "description": "Tabby: Self-hosted AI coding assistant",
+    "url": "https://github.com/TabbyML/tabby",
+    "stars": null,
+    "points": 366,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "am-i-vibing",
+    "description": "Detect agentic coding environments and AI editors",
+    "url": "https://github.com/ascorbic/am-i-vibing",
+    "stars": 326,
+    "points": null,
+    "language": "TypeScript",
+    "source": "GitHub"
+  },
+  {
+    "name": "vim_codex",
+    "description": "Supercharge your Vim editor with AI-powered code completion using OpenAI Codex. Boost productivity and save time with intelligent suggestions.",
+    "url": "https://github.com/tom-doerr/vim_codex",
+    "stars": 282,
+    "points": null,
+    "language": "Python",
+    "source": "GitHub"
+  },
+  {
+    "name": "Show HN: Aide, an open-source AI native IDE",
+    "description": "Show HN: Aide, an open-source AI native IDE",
+    "url": "https://aide.dev/",
+    "stars": null,
+    "points": 253,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "HN Slop: AI startup ideas generated from Hacker News",
+    "description": "HN Slop: AI startup ideas generated from Hacker News",
+    "url": "https://www.josh.ing/hn-slop",
+    "stars": null,
+    "points": 249,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "hey",
+    "description": "💬 AI-Powered Pair Programming Friend!",
+    "url": "https://github.com/lnxpy/hey",
+    "stars": 236,
+    "points": null,
+    "language": "Python",
+    "source": "GitHub"
+  },
+  {
+    "name": "Research shows we can only accurately identify AI writers about 50% of the time",
+    "description": "Research shows we can only accurately identify AI writers about 50% of the time",
+    "url": "https://hai.stanford.edu/news/was-written-human-or-ai-tsu",
+    "stars": null,
+    "points": 228,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "curse",
+    "description": "CURSE is an SSH certificate signing server, built as an alternative to Netflix's BLESS tool, but without a dependency on AWS.",
+    "url": "https://github.com/mikesmitty/curse",
+    "stars": 222,
+    "points": null,
+    "language": "Go",
+    "source": "GitHub"
+  },
+  {
+    "name": "duet-gpt",
+    "description": "A conversational semi-autonomous developer assistant. AI pair programming without the copypasta.",
+    "url": "https://github.com/kristoferlund/duet-gpt",
+    "stars": 167,
+    "points": null,
+    "language": "TypeScript",
+    "source": "GitHub"
+  },
+  {
+    "name": "AlphaQubit: AI to identify errors in Quantum Computers",
+    "description": "AlphaQubit: AI to identify errors in Quantum Computers",
+    "url": "https://blog.google/technology/google-deepmind/alphaqubit-quantum-error-correction/",
+    "stars": null,
+    "points": 161,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "2015 AIIDE Starcraft AI Competition – Report and Results",
+    "description": "2015 AIIDE Starcraft AI Competition – Report and Results",
+    "url": "http://webdocs.cs.ualberta.ca/~cdavid/starcraftaicomp/report2015.shtml",
+    "stars": null,
+    "points": 156,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Margaret Mead, technocracy, and the origins of AI's ideological divide",
+    "description": "Margaret Mead, technocracy, and the origins of AI's ideological divide",
+    "url": "https://resobscura.substack.com/p/margaret-mead-technocracy-and-the",
+    "stars": null,
+    "points": 149,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Israel used AI to identify 37,000 Hamas targets",
+    "description": "Israel used AI to identify 37,000 Hamas targets",
+    "url": "https://www.theguardian.com/world/2024/apr/03/israel-gaza-ai-database-hamas-airstrikes",
+    "stars": null,
+    "points": 145,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Ask HN: How much better are AI IDEs vs. copy pasting into chat apps?",
+    "description": "Ask HN: How much better are AI IDEs vs. copy pasting into chat apps?",
+    "url": "https://news.ycombinator.com/item?id=43922759",
+    "stars": null,
+    "points": 139,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "godot-ai-assistant-hub",
+    "description": "Embed AI assistants in Godot with the ability to read and write code in Godot's Code Editor.",
+    "url": "https://github.com/FlamxGames/godot-ai-assistant-hub",
+    "stars": 138,
+    "points": null,
+    "language": "GDScript",
+    "source": "GitHub"
+  },
+  {
+    "name": "CodingIT",
+    "description": "Open-source, local AI app builder ✨ A fresh alternative to Lovable & Bolt 🌟 Star to support the project!",
+    "url": "https://github.com/Gerome-Elassaad/CodingIT",
+    "stars": 118,
+    "points": null,
+    "language": "TypeScript",
+    "source": "GitHub"
+  },
+  {
+    "name": "claudemacs",
+    "description": "AI Pair Programming with Claude Code in Emacs",
+    "url": "https://github.com/cpoile/claudemacs",
+    "stars": 117,
+    "points": null,
+    "language": "Emacs Lisp",
+    "source": "GitHub"
+  },
+  {
+    "name": "Show HN: Superblocks AI – AI coding assistant for internal apps",
+    "description": "Show HN: Superblocks AI – AI coding assistant for internal apps",
+    "url": "https://www.superblocks.com/blog/introducing-superblocks-ai",
+    "stars": null,
+    "points": 114,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "I stopped using AI code editors",
+    "description": "I stopped using AI code editors",
+    "url": "https://lucianonooijen.com/blog/why-i-stopped-using-ai-code-editors",
+    "stars": null,
+    "points": 109,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Hacking Your Own AI Coding Assistant with Claude Pro and MCP",
+    "description": "Hacking Your Own AI Coding Assistant with Claude Pro and MCP",
+    "url": "https://www.zbeegnew.dev/tech/build_your_own_ai_coding_assistant_a_cost-effective_alternative_to_cursor/",
+    "stars": null,
+    "points": 106,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "AI Coding assistants provide little value because a programmer's job is to think",
+    "description": "AI Coding assistants provide little value because a programmer's job is to think",
+    "url": "https://www.doliver.org/articles/programming-is-a-thinkers-game",
+    "stars": null,
+    "points": 100,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Eca: Editor Code Assistant – AI pair programming capabilities agnostic of editor",
+    "description": "Eca: Editor Code Assistant – AI pair programming capabilities agnostic of editor",
+    "url": "https://github.com/editor-code-assistant/eca",
+    "stars": null,
+    "points": 81,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "I am uninstalling AI coding assistants from my personal computer",
+    "description": "I am uninstalling AI coding assistants from my personal computer",
+    "url": "https://sam.sutch.net/posts/uninstailling-ai-coding-from-personal-computer",
+    "stars": null,
+    "points": 75,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Hacker slips malicious 'wiping' command into Amazon's Q AI coding assistant",
+    "description": "Hacker slips malicious 'wiping' command into Amazon's Q AI coding assistant",
+    "url": "https://www.zdnet.com/article/hacker-slips-malicious-wiping-command-into-amazons-q-ai-coding-assistant-and-devs-are-worried/",
+    "stars": null,
+    "points": 75,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Show HN: MutableAI (YC W22) – Copilot Alternative for VS Code",
+    "description": "Show HN: MutableAI (YC W22) – Copilot Alternative for VS Code",
+    "url": "https://marketplace.visualstudio.com/items?itemName=mutable-ai.mutable-ai",
+    "stars": null,
+    "points": 75,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "blueprints",
+    "description": "Blueprints is an open-source tool that integrates with your text editor to help you generate code with an LLM based on patterns you already have in your codebase. Download one of our official editor plugins to get started.",
+    "url": "https://github.com/sublayerapp/blueprints",
+    "stars": 60,
+    "points": null,
+    "language": "Ruby",
+    "source": "GitHub"
+  },
+  {
+    "name": "llm-bash",
+    "description": "LLM-Bash - A Bash Wrapper around llm and Ollama for your code editor.",
+    "url": "https://github.com/wearedevx/llm-bash",
+    "stars": 52,
+    "points": null,
+    "language": "Shell",
+    "source": "GitHub"
+  },
+  {
+    "name": "deepagent-releases",
+    "description": "A powerful desktop AI assistant with agentic browsing, listening, coding CLI and editor",
+    "url": "https://github.com/abacusai/deepagent-releases",
+    "stars": 45,
+    "points": null,
+    "language": null,
+    "source": "GitHub"
+  },
+  {
+    "name": "Google gifts a Free AI Coding Assistant to the developer community",
+    "description": "Google gifts a Free AI Coding Assistant to the developer community",
+    "url": "https://techcrunch.com/2025/02/25/google-launches-a-free-ai-coding-assistant-with-very-high-usage-caps/",
+    "stars": null,
+    "points": 41,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "ragmate",
+    "description": "Local RAG server for code editors. Scans your codebase, builds a local context index, and connects to any external LLM for context-aware completions and assistance.",
+    "url": "https://github.com/ragmate/ragmate",
+    "stars": 38,
+    "points": null,
+    "language": "Python",
+    "source": "GitHub"
+  },
+  {
+    "name": "Show HN: I built local copilot alternative using Codellama",
+    "description": "Show HN: I built local copilot alternative using Codellama",
+    "url": "https://marketplace.visualstudio.com/items?itemName=ex3ndr.llama-coder",
+    "stars": null,
+    "points": 38,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "The AI-First Code Editor",
+    "description": "The AI-First Code Editor",
+    "url": "https://www.cursor.so/",
+    "stars": null,
+    "points": 37,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "LLM_Transformer_Queue",
+    "description": "Rules In our version, of 100DaysOfCode, you need to do anything that helps you enhance your tech stack i.e. competitive coding, try learning a new language, read technical articles/ books, make open source contributions, add features to a personal project, etc.  It's okay if you are not able to submit a pull request someday, you can resume it the next day, you will still be in the competition. Remember, life is not a sprint but a marathon, so is the path to learning and growning.  Keep defining your short term goals (measurable) and strive hard to achieve them. (Eg. Getting better at competitive coding is not a measurable goal but achiving 2000 rating in Codechef is measurable)  Update everyday progress and submit a pull request.  (Optional) Follow 100DaysOfCode Twitter Bot that retweets the tweets that contain the #100DaysOfCode hashtag and timely tweet your progress with #100DaysOfCode hashtag.  Try to add detailed description of what you did, add corresponding links, if you solve questions, you can add your codes in the same folder and provid a link in the README (not for active contests).  We start the marathon on January 1, 2020. feel free to add your goals beforehand (they can also be added later).  Benefits Coding will become a daily habit for you.  Every day that you consistently code, you’ll build momentum. That momentum will make it easier for you to learn more advanced topics.  The projects that you’ll build will be small in scope, so by the time you finish, you’ll have completed several of them — and gained a wide range of experience.  Your GitHub profile will look extremely active. And yes, hiring managers and recruiters do look at these.  You’ll get more comfortable contributing in open soruce. It will become a natural, ordinary thing to do.  You’ll have a pretty good reason to stop procrastinating and start coding every day.  Increase your efficiency by checking your daily progress and analysing it.  Compare your progress with others and surpass your limits in learning each day.  Recognition You will be provided with certificates on successful completiton of 100DaysOfCode. At the end of each month, goodies will be given to the top performers. A big surprise for the overall top performers in 100DaysOfCode. Note: Only the students in MNIT/ IIIT Kota/ NIT UK are elligible for prizes/ certificates.  Pre-requisites Markdown: You need to update your README in Markdown (a lightweight markup language with plain text formatting syntax). No need to learn it you can always refer to the guide or use an online markdown editor.  Basic git Basic knowledge of git and its workflow is a must. If you are not comfortable, feel free to ask for help.  How to participate Fork the repository. In your fork, make a folder by the name of your github account. In your folder, make a file with the name README.md We have also provided a template which you can follow to set up README.md Update the progress in your README and submit a pull request. If you need more clarification, feel free to reach us at telegram.",
+    "url": "https://github.com/vatsalcode/LLM_Transformer_Queue",
+    "stars": 37,
+    "points": null,
+    "language": "C++",
+    "source": "GitHub"
+  },
+  {
+    "name": "How We Optimize LLM Inference for AI Coding Assistant",
+    "description": "How We Optimize LLM Inference for AI Coding Assistant",
+    "url": "https://www.augmentcode.com/blog/rethinking-llm-inference-why-developer-ai-needs-a-different-approach?",
+    "stars": null,
+    "points": 30,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Ask HN: Are new AI code editors adding superficial value?",
+    "description": "Ask HN: Are new AI code editors adding superficial value?",
+    "url": "https://news.ycombinator.com/item?id=41691622",
+    "stars": null,
+    "points": 26,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "unSwear",
+    "description": "Curing toxicity by replacing curse words by harmless alternatives <3",
+    "url": "https://github.com/mhavelka77/unSwear",
+    "stars": 21,
+    "points": null,
+    "language": "Python",
+    "source": "GitHub"
+  },
+  {
+    "name": "rcurses",
+    "description": "An alternative curses library written in pure Ruby",
+    "url": "https://github.com/isene/rcurses",
+    "stars": 21,
+    "points": null,
+    "language": "Ruby",
+    "source": "GitHub"
+  },
+  {
+    "name": "Amazon offers free access to its AI coding assistant to undercut Microsoft",
+    "description": "Amazon offers free access to its AI coding assistant to undercut Microsoft",
+    "url": "https://www.theverge.com/2023/4/13/23681796/amazon-ai-coding-assistant-codewhisperer-microsoft",
+    "stars": null,
+    "points": 19,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Claudemacs: AI Pair Programming with Claude Code in Emacs",
+    "description": "Claudemacs: AI Pair Programming with Claude Code in Emacs",
+    "url": "https://github.com/cpoile/claudemacs",
+    "stars": null,
+    "points": 19,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Show HN: SHAI – a (yet another) open-source, terminal-native AI coding assistant",
+    "description": "Show HN: SHAI – a (yet another) open-source, terminal-native AI coding assistant",
+    "url": "https://github.com/ovh/shai",
+    "stars": null,
+    "points": 16,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Show HN: Claude.vim – a different take on AI pair programming",
+    "description": "Show HN: Claude.vim – a different take on AI pair programming",
+    "url": "https://github.com/pasky/claude.vim",
+    "stars": null,
+    "points": 11,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Show HN: KAEditor – AI Code Editor",
+    "description": "Show HN: KAEditor – AI Code Editor",
+    "url": "https://www.kaeditor.com/",
+    "stars": null,
+    "points": 9,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Free Copilot alternative that works on arbitrary websites",
+    "description": "Free Copilot alternative that works on arbitrary websites",
+    "url": "https://www.codeium.com/blog/codeium-chrome-extension-launch",
+    "stars": null,
+    "points": 9,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "GitHub suspends AI code editor. >500k of users locked out of their projects",
+    "description": "GitHub suspends AI code editor. >500k of users locked out of their projects",
+    "url": "https://twitter.com/lovable_dev/status/1875091208181309540",
+    "stars": null,
+    "points": 8,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Ask HN: What are your favourite free Copilot alternatives?",
+    "description": "Ask HN: What are your favourite free Copilot alternatives?",
+    "url": "https://news.ycombinator.com/item?id=31827002",
+    "stars": null,
+    "points": 8,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "AI disruption – code editors are up for grabs",
+    "description": "AI disruption – code editors are up for grabs",
+    "url": "https://redmonk.com/jgovernor/2025/02/21/ai-disruption-code-editors-are-up-for-grabs/",
+    "stars": null,
+    "points": 7,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Ask HN: Current best in-editor tools for LLM Code Generation, aside from CoPilot",
+    "description": "Ask HN: Current best in-editor tools for LLM Code Generation, aside from CoPilot",
+    "url": "https://news.ycombinator.com/item?id=37279065",
+    "stars": null,
+    "points": 4,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Aider: AI pair programming in your terminal",
+    "description": "Aider: AI pair programming in your terminal",
+    "url": "https://aider.chat/",
+    "stars": null,
+    "points": 4,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Context7 MCP Server: Up-to-date documentation for LLMs and AI code editors",
+    "description": "Context7 MCP Server: Up-to-date documentation for LLMs and AI code editors",
+    "url": "https://github.com/upstash/context7",
+    "stars": null,
+    "points": 3,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Show HN: Tdycoder – Local AI code editor using Ollama LLM",
+    "description": "Show HN: Tdycoder – Local AI code editor using Ollama LLM",
+    "url": "https://github.com/TDYSKY/TDYCODER",
+    "stars": null,
+    "points": 3,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Documentation as single-txt-file for LLMs and AI code editors",
+    "description": "Documentation as single-txt-file for LLMs and AI code editors",
+    "url": "https://context7.com/",
+    "stars": null,
+    "points": 2,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "What are the tools that impacted your teams the most when introduced?",
+    "description": "What are the tools that impacted your teams the most when introduced?",
+    "url": "https://news.ycombinator.com/item?id=44975948",
+    "stars": null,
+    "points": 2,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "The LLM code editor with DeepSeek-R1 support",
+    "description": "The LLM code editor with DeepSeek-R1 support",
+    "url": "https://github.com/soheil/tron",
+    "stars": null,
+    "points": 1,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Context7: Up-to-date documentation for LLMs and AI code editors",
+    "description": "Context7: Up-to-date documentation for LLMs and AI code editors",
+    "url": "https://context7.com/",
+    "stars": null,
+    "points": 1,
+    "language": null,
+    "source": "Hacker News"
+  },
+  {
+    "name": "Context7 – Up-to-date documentation for LLMs and AI code editors",
+    "description": "Context7 – Up-to-date documentation for LLMs and AI code editors",
+    "url": "https://context7.com",
+    "stars": null,
+    "points": 1,
+    "language": null,
+    "source": "Hacker News"
+  }
+]

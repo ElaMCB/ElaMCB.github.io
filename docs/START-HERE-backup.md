@@ -1,6 +1,18 @@
 # Start Here: Your First Steps into AI-Assisted Development
 
+> **📋 Note:** For the best visual experience with enhanced styling, [view this page as HTML](./START-HERE.html)
+
 **New to AI development? Feeling overwhelmed?** You're in the right place. This guide will ease you into AI-assisted development step by step.
+
+## Table of Contents
+- [Why This Matters for You](#why-this-matters-for-you)
+- [Your 5-Minute Quick Start](#your-5-minute-quick-start)
+- [What You'll Discover](#what-youll-discover)
+- [Common Concerns](#common-concerns-honest-answers)
+- [Your Learning Path](#your-learning-path-choose-your-own-adventure)
+- [Simple First Experiments](#simple-first-experiments)
+- [What Success Looks Like](#what-success-looks-like)
+- [Ready for More?](#ready-for-more)
 
 ## Why This Matters for You
 

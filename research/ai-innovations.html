@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Innovations for QA Testing - Ela MCB</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0a0a0f;
+            --secondary: #00d4ff;
+            --accent: #7c3aed;
+            --neon-blue: #00f5ff;
+            --neon-purple: #bf00ff;
+            --neon-green: #39ff14;
+            --gold: #fbbf24;
+            --light: #e4e4e7;
+            --dark: #09090b;
+            --card-bg: rgba(15, 15, 23, 0.9);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            background-attachment: fixed;
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: rgba(15, 15, 23, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 2px solid var(--neon-blue);
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.2);
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: var(--light);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+        
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 0.8rem 1.2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
+        }
+        
+        .stats-bar {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 1px solid rgba(120, 58, 237, 0.3);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--gold);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--light);
+            opacity: 0.8;
+        }
+        
+        .filters {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(120, 58, 237, 0.3);
+        }
+        
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .filter-btn {
+            background: rgba(139, 233, 253, 0.2);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .innovations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .innovation-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(120, 58, 237, 0.3);
+            position: relative;
+        }
+        
+        .innovation-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border-color: var(--neon-blue);
+        }
+        
+        .innovation-header {
+            background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 50%, #2a2a2a 100%);
+            padding: 1.5rem;
+            position: relative;
+        }
+        
+        .innovation-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+        
+        .innovation-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+        
+        .meta-badge {
+            background: rgba(139, 233, 253, 0.2);
+            color: var(--accent);
+            padding: 0.3rem 0.7rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .category-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--gold);
+            color: var(--dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .innovation-content {
+            padding: 1.5rem;
+        }
+        
+        .innovation-description {
+            margin-bottom: 1rem;
+            color: var(--light);
+            opacity: 0.9;
+        }
+        
+        .qa-application {
+            background: rgba(57, 255, 20, 0.1);
+            border-left: 3px solid var(--neon-green);
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        
+        .qa-application strong {
+            color: var(--neon-green);
+        }
+        
+        .innovation-footer {
+            padding: 1rem 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .innovation-link {
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .innovation-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(120, 58, 237, 0.4);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--light);
+            opacity: 0.7;
+        }
+        
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        @media (max-width: 768px) {
+            .innovations-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .back-btn {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 1rem;
+                display: inline-block;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Research
+    </a>
+    
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-flask"></i> AI Innovations for QA Testing</h1>
+            <p class="subtitle">Weekly discoveries of AI innovations applicable to quality assurance and testing</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="stats-bar" id="statsBar">
+            <div class="stat-item">
+                <div class="stat-value" id="totalCount">-</div>
+                <div class="stat-label">Total Innovations</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="lastScan">-</div>
+                <div class="stat-label">Last Scan</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="categoryCount">-</div>
+                <div class="stat-label">Categories</div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <h3 style="margin-bottom: 1rem; color: var(--light);">Filter by Category:</h3>
+            <div class="filter-buttons" id="filterButtons">
+                <!-- Filters will be generated dynamically -->
+            </div>
+        </div>
+
+        <div class="innovations-grid" id="innovationsGrid">
+            <div class="empty-state">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading AI innovations...</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let allInnovations = [];
+        let filteredInnovations = [];
+        let currentFilter = 'all';
+
+        // Category display names
+        const categoryNames = {
+            'test-generation': 'Test Generation',
+            'test-execution': 'Test Execution',
+            'test-maintenance': 'Test Maintenance',
+            'test-debugging': 'Test Debugging',
+            'test-coverage': 'Test Coverage',
+            'ai-agents': 'AI Agents',
+            'mcp-integration': 'MCP Integration',
+            'llm-testing': 'LLM Testing',
+            'general': 'General'
+        };
+
+        // QA application descriptions
+        const qaApplications = {
+            'test-generation': 'Automated test case generation, test synthesis, and scenario creation',
+            'test-execution': 'Intelligent test execution, parallel testing, and execution optimization',
+            'test-maintenance': 'Self-healing tests, automated test repair, and maintenance automation',
+            'test-debugging': 'AI-powered debugging, failure root cause analysis, and issue diagnosis',
+            'test-coverage': 'Coverage analysis, gap identification, and coverage optimization',
+            'ai-agents': 'Autonomous testing agents, multi-agent orchestration, and agentic workflows',
+            'mcp-integration': 'Model Context Protocol integration for tool connectivity',
+            'llm-testing': 'LLM validation, prompt testing, and model evaluation frameworks',
+            'general': 'General AI/ML innovations with potential QA testing applications'
+        };
+
+        async function loadInnovations() {
+            try {
+                // Find the most recent discovery file
+                const response = await fetch('../research/discoveries/');
+                if (!response.ok) {
+                    // Try to find the latest file manually
+                    const files = await getLatestDiscoveryFile();
+                    if (!files || files.length === 0) {
+                        showEmptyState('No discoveries found. Check back after the next weekly scan!');
+                        return;
+                    }
+                    
+                    // Load the most recent JSON file
+                    const latestFile = files[files.length - 1];
+                    const data = await fetch(`discoveries/${latestFile}`);
+                    const json = await data.json();
+                    allInnovations = Array.isArray(json) ? json : json.discoveries || [];
+                } else {
+                    // If we can list directory, find latest file
+                    const text = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(text, 'text/html');
+                    const links = Array.from(doc.querySelectorAll('a'))
+                        .map(a => a.href)
+                        .filter(href => href.includes('innovations-') && href.includes('-simple.json'))
+                        .sort()
+                        .reverse();
+                    
+                    if (links.length > 0) {
+                        const latestFile = links[0].split('/').pop();
+                        const data = await fetch(`discoveries/${latestFile}`);
+                        const json = await data.json();
+                        allInnovations = Array.isArray(json) ? json : json.discoveries || [];
+                    } else {
+                        showEmptyState('No discovery files found. The weekly scan will create them automatically.');
+                        return;
+                    }
+                }
+
+                if (allInnovations.length === 0) {
+                    showEmptyState('No innovations found yet. Check back after the next weekly scan!');
+                    return;
+                }
+
+                // Update stats
+                updateStats();
+
+                // Setup filters
+                setupFilters();
+
+                // Display innovations
+                filteredInnovations = [...allInnovations];
+                displayInnovations();
+            } catch (error) {
+                console.error('Error loading innovations:', error);
+                showEmptyState('Error loading innovations. Please try again later.');
+            }
+        }
+
+        async function getLatestDiscoveryFile() {
+            // Since we can't easily list directory in browser, try common patterns
+            const today = new Date();
+            const dates = [];
+            
+            // Try last 4 weeks
+            for (let i = 0; i < 28; i++) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
+                dates.push(`innovations-${dateStr}-simple.json`);
+            }
+            
+            // Try loading them
+            for (const file of dates) {
+                try {
+                    const response = await fetch(`discoveries/${file}`);
+                    if (response.ok) {
+                        return [file];
+                    }
+                } catch (e) {
+                    // Continue
+                }
+            }
+            
+            return [];
+        }
+
+        function updateStats() {
+            const categories = new Set(allInnovations.map(i => i.category || 'general'));
+            
+            document.getElementById('totalCount').textContent = allInnovations.length;
+            document.getElementById('categoryCount').textContent = categories.size;
+            
+            // Get scan date from first innovation (they should all have the same scan date)
+            if (allInnovations.length > 0 && allInnovations[0].scanDate) {
+                document.getElementById('lastScan').textContent = new Date(allInnovations[0].scanDate).toLocaleDateString();
+            } else {
+                // Try to extract from filename or use today
+                document.getElementById('lastScan').textContent = 'Recent';
+            }
+        }
+
+        function setupFilters() {
+            const categories = new Set(allInnovations.map(i => i.category || 'general'));
+            const filterContainer = document.getElementById('filterButtons');
+            
+            // Add "All" filter
+            const allBtn = document.createElement('button');
+            allBtn.className = 'filter-btn active';
+            allBtn.textContent = 'All';
+            allBtn.onclick = () => filterByCategory('all');
+            filterContainer.appendChild(allBtn);
+            
+            // Add category filters
+            Array.from(categories).sort().forEach(category => {
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn';
+                btn.textContent = categoryNames[category] || category;
+                btn.onclick = () => filterByCategory(category);
+                filterContainer.appendChild(btn);
+            });
+        }
+
+        function filterByCategory(category) {
+            currentFilter = category;
+            
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Filter innovations
+            if (category === 'all') {
+                filteredInnovations = [...allInnovations];
+            } else {
+                filteredInnovations = allInnovations.filter(i => (i.category || 'general') === category);
+            }
+            
+            displayInnovations();
+        }
+
+        function displayInnovations() {
+            const grid = document.getElementById('innovationsGrid');
+            
+            if (filteredInnovations.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <i class="fas fa-filter"></i>
+                        <p>No innovations found in this category.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            grid.innerHTML = filteredInnovations.map(innovation => {
+                const category = innovation.category || 'general';
+                const categoryDisplay = categoryNames[category] || category;
+                const qaApp = qaApplications[category] || qaApplications['general'];
+                
+                return `
+                    <div class="innovation-card">
+                        <div class="innovation-header">
+                            <div class="category-badge">${categoryDisplay}</div>
+                            <h3 class="innovation-title">${escapeHtml(innovation.name)}</h3>
+                            <div class="innovation-meta">
+                                <span class="meta-badge">
+                                    <i class="fas fa-${innovation.source === 'GitHub' ? 'code-branch' : 'newspaper'}"></i>
+                                    ${innovation.source}
+                                </span>
+                                ${innovation.stars ? `<span class="meta-badge"><i class="fas fa-star"></i> ${innovation.stars}</span>` : ''}
+                                ${innovation.points ? `<span class="meta-badge"><i class="fas fa-fire"></i> ${innovation.points} pts</span>` : ''}
+                                ${innovation.language ? `<span class="meta-badge">${innovation.language}</span>` : ''}
+                            </div>
+                        </div>
+                        <div class="innovation-content">
+                            <p class="innovation-description">${escapeHtml(innovation.description || 'No description available')}</p>
+                            <div class="qa-application">
+                                <strong>QA Testing Application:</strong><br>
+                                ${qaApp}
+                            </div>
+                        </div>
+                        <div class="innovation-footer">
+                            <a href="${innovation.url}" target="_blank" class="innovation-link">
+                                <i class="fas fa-external-link-alt"></i> Explore Innovation
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function showEmptyState(message) {
+            const grid = document.getElementById('innovationsGrid');
+            grid.innerHTML = `
+                <div class="empty-state" style="grid-column: 1 / -1;">
+                    <i class="fas fa-flask"></i>
+                    <p>${message}</p>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.6;">
+                        This page is automatically updated every Monday at 10 AM UTC.
+                    </p>
+                </div>
+            `;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Load innovations on page load
+        loadInnovations();
+    </script>
+</body>
+</html>
+

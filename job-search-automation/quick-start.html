@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Start Guide - Job Search Automation</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0a0a0f;
+            --secondary: #00d4ff;
+            --accent: #7c3aed;
+            --success: #51cf66;
+            --warning: #ff6b6b;
+            --light: #e4e4e7;
+            --card: rgba(15, 15, 23, 0.95);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            background-attachment: fixed;
+            color: var(--light);
+            line-height: 1.8;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin: 2.5rem 0 1rem;
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin: 1.5rem 0 1rem;
+        }
+        
+        .step {
+            background: rgba(0, 0, 0, 0.5);
+            border-left: 4px solid var(--success);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 2rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        pre {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        code {
+            color: var(--success);
+            font-family: 'Courier New', monospace;
+        }
+        
+        .warning-box {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+        }
+        
+        .success-box {
+            background: rgba(81, 207, 102, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 1rem 1rem 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
+        }
+        
+        ul {
+            margin-left: 2rem;
+        }
+        
+        li {
+            margin: 0.5rem 0;
+        }
+        
+        strong {
+            color: var(--secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="./" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Project
+        </a>
+        
+        <h1><i class="fas fa-rocket"></i> Quick Start Guide</h1>
+        <p style="font-size: 1.2rem; color: rgba(228, 228, 231, 0.8);">Test the job search automation with your own resume in 10 minutes!</p>
+        
+        <h2>Prerequisites</h2>
+        <ul>
+            <li>Python 3.8+ installed</li>
+            <li>Your resume in PDF, DOCX, or TXT format</li>
+            <li>10 minutes of time</li>
+        </ul>
+        
+        <h2>Step-by-Step Setup</h2>
+        
+        <div class="step">
+            <h3><span class="step-number">1</span> Clone the Repository</h3>
+            <pre><code>git clone https://github.com/ElaMCB/ElaMCB.github.io.git
+cd ElaMCB.github.io/job-search-automation/backend</code></pre>
+        </div>
+        
+        <div class="step">
+            <h3><span class="step-number">2</span> Install Dependencies</h3>
+            <pre><code>pip install -r requirements.txt</code></pre>
+            <p style="margin-top: 0.5rem; color: rgba(228, 228, 231, 0.7);">This installs FastAPI, scikit-learn, pandas, and resume parsers.</p>
+        </div>
+        
+        <div class="step">
+            <h3><span class="step-number">3</span> Get FREE Adzuna API Key (2 minutes)</h3>
+            <p>Sign up for instant free access:</p>
+            <a href="https://developer.adzuna.com/signup" class="cta-button" target="_blank">
+                <i class="fas fa-key"></i> Sign Up for Adzuna API
+            </a>
+            
+            <p style="margin-top: 1rem;">After signup, create <code>backend/.env</code> file:</p>
+            <pre><code>ADZUNA_APP_ID=your_app_id_here
+ADZUNA_APP_KEY=your_app_key_here</code></pre>
+        </div>
+        
+        <div class="step">
+            <h3><span class="step-number">4</span> Start the API Server</h3>
+            <pre><code>python main.py</code></pre>
+            
+            <div class="success-box">
+                <strong>✅ You should see:</strong>
+                <pre style="background: rgba(0, 0, 0, 0.5); margin-top: 0.5rem;"><code>🚀 Starting Job Search Automation API...
+📍 API will be available at: http://localhost:8000
+📚 Documentation: http://localhost:8000/docs
+INFO:     Application startup complete.</code></pre>
+            </div>
+            
+            <p style="color: var(--warning);"><strong>Keep this terminal running!</strong></p>
+        </div>
+        
+        <div class="step">
+            <h3><span class="step-number">5</span> Start Web Server (New Terminal)</h3>
+            <p>Open a <strong>new terminal/PowerShell window</strong> and run:</p>
+            <pre><code>cd ElaMCB.github.io/job-search-automation
+python -m http.server 8080</code></pre>
+            <p style="color: var(--warning);"><strong>Keep this terminal running too!</strong></p>
+        </div>
+        
+        <div class="step">
+            <h3><span class="step-number">6</span> Open Dashboard & Find Jobs!</h3>
+            <p>Visit in your browser:</p>
+            <pre><code>http://localhost:8080/app.html</code></pre>
+            
+            <ol style="margin-top: 1rem;">
+                <li>Click "Upload Resume" and select your resume file</li>
+                <li>Wait for AI to extract your skills</li>
+                <li>Click "Find Matching Jobs"</li>
+                <li>See REAL jobs ranked by how well they match YOUR profile!</li>
+            </ol>
+        </div>
+        
+        <h2>What You'll Get</h2>
+        
+        <div class="success-box">
+            <ul>
+                <li><strong>Match Scores:</strong> 0-100% how well each job fits your profile</li>
+                <li><strong>Match Reasons:</strong> Why the AI thinks it's a good fit ("Strong skill match: Python, Playwright")</li>
+                <li><strong>Job Details:</strong> Title, company, location, salary, posting date</li>
+                <li><strong>Direct Apply Links:</strong> Click to open job posting in new tab</li>
+                <li><strong>Application Tracking:</strong> Mark jobs as viewed/applied</li>
+                <li><strong>Smart Sorting:</strong> By match score, date posted, or salary</li>
+            </ul>
+        </div>
+        
+        <h2>Troubleshooting</h2>
+        
+        <div class="warning-box">
+            <strong>Issue:</strong> "Connection refused" or "Failed to fetch"<br>
+            <strong>Fix:</strong> Make sure BOTH servers are running (API on 8000, web on 8080)
+        </div>
+        
+        <div class="warning-box">
+            <strong>Issue:</strong> "Resume parsing failed"<br>
+            <strong>Fix:</strong> Check that your resume is a valid PDF/DOCX file
+        </div>
+        
+        <div class="warning-box">
+            <strong>Issue:</strong> "No jobs found" or "0 total jobs"<br>
+            <strong>Fix:</strong> 
+            <ul style="margin-top: 0.5rem;">
+                <li>Check your Adzuna API credentials in .env file</li>
+                <li>Try broader keywords like "software engineer" or "QA"</li>
+                <li>Leave location blank to search everywhere</li>
+            </ul>
+        </div>
+        
+        <h2>Next Steps</h2>
+        
+        <p>Once you have it running:</p>
+        <ul>
+            <li>Upload different versions of your resume to test which gets better matches</li>
+            <li>Experiment with different keywords and locations</li>
+            <li>Use the application tracker to manage your job search</li>
+            <li>Check out <a href="./REAL-API-INTEGRATION.md" style="color: var(--secondary);">REAL-API-INTEGRATION.md</a> to add more job sources</li>
+        </ul>
+        
+        <hr style="border: none; height: 1px; background: linear-gradient(to right, transparent, var(--accent), transparent); margin: 3rem 0;">
+        
+        <div style="text-align: center;">
+            <a href="./app.html" class="cta-button">
+                <i class="fas fa-play-circle"></i> Launch Dashboard
+            </a>
+            <a href="./" class="cta-button" style="background: rgba(0, 212, 255, 0.2); color: var(--secondary);">
+                <i class="fas fa-home"></i> Back to Project Home
+            </a>
+        </div>
+    </div>
+</body>
+</html>
+

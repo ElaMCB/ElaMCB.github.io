@@ -274,8 +274,8 @@
         </div>
 
         <div class="chart-container">
-            <h3 class="chart-title">Visitor Trend (Last 7 Days)</h3>
-            <canvas id="visitor-trend-chart" width="400" height="200"></canvas>
+            <h3 class="chart-title">Visitor Trend (Last 30 Days)</h3>
+            <canvas id="visitor-trend-chart" style="width: 100%; height: 300px;"></canvas>
         </div>
 
         <div style="text-align: center; margin: 2rem 0;">
@@ -489,11 +489,20 @@ Raw Data Length: ${rawData ? rawData.length : 'No data'} characters
             const canvas = document.getElementById('visitor-trend-chart');
             const ctx = canvas.getContext('2d');
             
+            // Set canvas to actual display size for high DPI
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * window.devicePixelRatio;
+            canvas.height = 300 * window.devicePixelRatio;
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+            
+            const canvasWidth = rect.width;
+            const canvasHeight = 300;
+            
             // Clear canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
             
             // Use real daily data if available
-            const days = 7;
+            const days = 30;
             const data = [];
             const labels = [];
             
@@ -501,7 +510,7 @@ Raw Data Length: ${rawData ? rawData.length : 'No data'} characters
                 const date = new Date();
                 date.setDate(date.getDate() - i);
                 const dateStr = date.toISOString().split('T')[0];
-                labels.push(date.toLocaleDateString('en-US', { weekday: 'short' }));
+                labels.push(date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
                 
                 // Use actual daily visits if available, otherwise 0
                 const dailyVisits = analytics.dailyVisits && analytics.dailyVisits[dateStr] ? analytics.dailyVisits[dateStr] : 0;
@@ -509,9 +518,9 @@ Raw Data Length: ${rawData ? rawData.length : 'No data'} characters
             }
             
             // Chart dimensions
-            const padding = 40;
-            const chartWidth = canvas.width - (padding * 2);
-            const chartHeight = canvas.height - (padding * 2);
+            const padding = 50;
+            const chartWidth = canvasWidth - (padding * 2);
+            const chartHeight = canvasHeight - (padding * 2);
             
             // Find max value for scaling
             const maxValue = Math.max(...data, 1);
@@ -527,43 +536,82 @@ Raw Data Length: ${rawData ? rawData.length : 'No data'} characters
             // Draw axes
             ctx.beginPath();
             ctx.moveTo(padding, padding);
-            ctx.lineTo(padding, canvas.height - padding);
-            ctx.lineTo(canvas.width - padding, canvas.height - padding);
+            ctx.lineTo(padding, canvasHeight - padding);
+            ctx.lineTo(canvasWidth - padding, canvasHeight - padding);
             ctx.strokeStyle = 'rgba(228, 228, 231, 0.3)';
+            ctx.lineWidth = 2;
             ctx.stroke();
             
-            // Draw data points and lines
-            ctx.strokeStyle = '#00d4ff';
-            ctx.fillStyle = '#00d4ff';
+            // Draw horizontal grid lines
+            ctx.strokeStyle = 'rgba(228, 228, 231, 0.1)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 5; i++) {
+                const y = padding + (chartHeight / 5) * i;
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(canvasWidth - padding, y);
+                ctx.stroke();
+            }
+            
+            // Draw data line and points
             ctx.beginPath();
+            ctx.strokeStyle = '#00d4ff';
+            ctx.lineWidth = 3;
             
             data.forEach((value, index) => {
                 const x = padding + (index * (chartWidth / (days - 1)));
-                const y = canvas.height - padding - ((value / maxValue) * chartHeight);
+                const y = canvasHeight - padding - ((value / maxValue) * chartHeight);
                 
                 if (index === 0) {
                     ctx.moveTo(x, y);
                 } else {
                     ctx.lineTo(x, y);
                 }
+            });
+            
+            ctx.stroke();
+            
+            // Draw points and labels
+            ctx.fillStyle = '#00d4ff';
+            ctx.font = '11px Segoe UI';
+            ctx.textAlign = 'center';
+            
+            data.forEach((value, index) => {
+                const x = padding + (index * (chartWidth / (days - 1)));
+                const y = canvasHeight - padding - ((value / maxValue) * chartHeight);
                 
                 // Draw point
                 ctx.beginPath();
-                ctx.arc(x, y, 4, 0, 2 * Math.PI);
+                ctx.arc(x, y, 5, 0, 2 * Math.PI);
                 ctx.fill();
-                ctx.beginPath();
                 
-                // Draw label
-                ctx.fillStyle = '#e4e4e7';
-                ctx.fillText(labels[index], x, canvas.height - padding + 20);
-                ctx.fillText(value.toString(), x, y - 10);
-                ctx.fillStyle = '#00d4ff';
+                // Draw value label above point (only if value > 0)
+                if (value > 0) {
+                    ctx.fillStyle = '#e4e4e7';
+                    ctx.fillText(value.toString(), x, y - 12);
+                    ctx.fillStyle = '#00d4ff';
+                }
+                
+                // Draw date labels (show every 3rd label to avoid crowding)
+                if (index % 3 === 0 || index === days - 1) {
+                    ctx.fillStyle = '#e4e4e7';
+                    ctx.save();
+                    ctx.translate(x, canvasHeight - padding + 25);
+                    ctx.rotate(-Math.PI / 6);
+                    ctx.fillText(labels[index], 0, 0);
+                    ctx.restore();
+                    ctx.fillStyle = '#00d4ff';
+                }
             });
             
-            // Draw the line
-            ctx.strokeStyle = '#00d4ff';
-            ctx.lineWidth = 2;
-            ctx.stroke();
+            // Draw Y-axis labels
+            ctx.fillStyle = '#e4e4e7';
+            ctx.textAlign = 'right';
+            for (let i = 0; i <= 5; i++) {
+                const value = Math.round((maxValue / 5) * (5 - i));
+                const y = padding + (chartHeight / 5) * i;
+                ctx.fillText(value.toString(), padding - 10, y + 5);
+            }
         }
         
         function generatePrivateReport() {
@@ -619,9 +667,45 @@ Raw Data Length: ${rawData ? rawData.length : 'No data'} characters
         }
         
         function generateEmailReport(report) {
+            const analytics = loadAnalytics();
+            
+            // Analyze visitor patterns to identify unique vs returning
+            const visitorDetails = analytics.visitors || [];
+            const visitorSessions = {};
+            
+            // Group visits by fingerprint
+            visitorDetails.forEach(visitor => {
+                const fp = visitor.fingerprint || 'unknown';
+                if (!visitorSessions[fp]) {
+                    visitorSessions[fp] = {
+                        visits: [],
+                        browser: visitor.browser,
+                        firstSeen: visitor.timestamp,
+                        lastSeen: visitor.timestamp
+                    };
+                }
+                visitorSessions[fp].visits.push(visitor.timestamp);
+                if (new Date(visitor.timestamp) > new Date(visitorSessions[fp].lastSeen)) {
+                    visitorSessions[fp].lastSeen = visitor.timestamp;
+                }
+            });
+            
+            // Identify likely self-visits (frequent, short intervals)
+            let likelySelfVisits = 0;
+            let likelyOrganicVisits = 0;
+            
+            Object.values(visitorSessions).forEach(session => {
+                if (session.visits.length > 5) {
+                    likelySelfVisits += session.visits.length;
+                } else {
+                    likelyOrganicVisits += session.visits.length;
+                }
+            });
+            
             return `
 PORTFOLIO ANALYTICS REPORT
 Generated: ${new Date(report.timestamp).toLocaleString()}
+=============================================================
 
 KEY METRICS:
 - Unique Visitors: ${report.metrics.uniqueVisitors}
@@ -629,6 +713,23 @@ KEY METRICS:
 - Sessions: ${report.metrics.sessions}
 - Tracking Duration: ${report.metrics.trackingDuration}
 - Last Visit: ${report.metrics.lastVisit ? new Date(report.metrics.lastVisit).toLocaleString() : 'Never'}
+
+VISITOR BREAKDOWN (Identify Self vs Organic):
+- Total Unique Fingerprints: ${Object.keys(visitorSessions).length}
+- Likely Self-Checks (5+ visits): ${likelySelfVisits} visits
+- Likely Organic Visitors (1-4 visits): ${likelyOrganicVisits} visits
+- New vs Returning: ${report.metrics.uniqueVisitors} new, ${report.metrics.sessions - report.metrics.uniqueVisitors} returning
+
+DETAILED VISITOR SESSIONS:
+${Object.entries(visitorSessions).map(([fp, session], idx) => `
+Visitor ${idx + 1} (${session.visits.length > 5 ? 'LIKELY YOU' : 'Likely Organic'}):
+  - Visit Count: ${session.visits.length}
+  - Browser: ${session.browser}
+  - First Seen: ${new Date(session.firstSeen).toLocaleString()}
+  - Last Seen: ${new Date(session.lastSeen).toLocaleString()}
+  - Visit Pattern: ${session.visits.length > 5 ? 'Frequent (testing/deploying)' : 'Infrequent (exploring)'}
+  - Fingerprint ID: ${fp.substring(0, 12)}...
+`).join('\n')}
 
 BROWSER BREAKDOWN:
 ${Object.entries(report.browserBreakdown).map(([browser, count]) => 
@@ -638,9 +739,11 @@ TRAFFIC SOURCES:
 ${Object.entries(report.trafficSources).map(([source, count]) => 
     `- ${source || 'Direct Traffic'}: ${count} visits`).join('\n')}
 
-DAILY VISITS:
-${Object.entries(report.dailyVisits).map(([date, count]) => 
-    `- ${date}: ${count} visits`).join('\n')}
+DAILY VISITS (Last 30 Days):
+${Object.entries(report.dailyVisits)
+    .sort(([a], [b]) => new Date(b) - new Date(a))
+    .slice(0, 30)
+    .map(([date, count]) => `- ${date}: ${count} visits`).join('\n')}
 
 RECRUITER INSIGHTS:
 - Peak activity days: ${getPeakActivityDays(report.dailyVisits)}
@@ -651,6 +754,13 @@ ENGAGEMENT ANALYSIS:
 - Average visits per visitor: ${(report.metrics.totalVisits / Math.max(report.metrics.uniqueVisitors, 1)).toFixed(1)}
 - Return visitor rate: ${((report.metrics.sessions - report.metrics.uniqueVisitors) / Math.max(report.metrics.sessions, 1) * 100).toFixed(1)}%
 - Daily engagement: ${(report.metrics.totalVisits / Math.max(Object.keys(report.dailyVisits).length, 1)).toFixed(1)} visits/day
+
+IDENTIFYING YOUR OWN VISITS:
+Look for visitors with:
+  - 5+ visits (likely you testing/deploying)
+  - Visits clustered around deployment times
+  - Same browser you use for development
+  - Multiple visits on same day
 
 This report is generated automatically by your portfolio analytics system.
 Data is stored locally and not shared with any third parties.

@@ -1,0 +1,1383 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI IDE Collection - Gotta Code 'Em All</title>
+    
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0a0a0f;
+            --secondary: #5b9bd5;
+            --accent: #6366f1;
+            --success: #4ade80;
+            --warning: #fb923c;
+            --gold: #fbbf24;
+            --light: #d1d5db;
+            --card: rgba(15, 15, 23, 0.8);
+            --border: rgba(100, 116, 139, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1625 50%, #0f1419 100%);
+            background-attachment: fixed;
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(91, 155, 213, 0.2);
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(91, 155, 213, 0.3);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--secondary), var(--accent), var(--gold));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: rgba(228, 228, 231, 0.8);
+            margin-bottom: 1rem;
+        }
+        
+        .collection-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--gold);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(228, 228, 231, 0.7);
+        }
+        
+        .personal-favorite {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(251, 191, 36, 0.05));
+            border: 2px solid var(--gold) !important;
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.15) !important;
+        }
+        
+        .favorite-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--gold);
+            color: #000;
+            padding: 0.4rem 1rem;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .filter-bar {
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .filter-btn {
+            padding: 0.6rem 1.2rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(91, 155, 213, 0.2);
+            border-radius: 20px;
+            color: var(--light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .filter-btn.active {
+            background: var(--secondary);
+            color: var(--primary);
+            border-color: var(--secondary);
+        }
+        
+        .filter-btn:hover {
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .ide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .ide-card {
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ide-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(91, 155, 213, 0.08), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .ide-card:hover::before {
+            left: 100%;
+        }
+        
+        .ide-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(91, 155, 213, 0.2);
+            border-color: var(--secondary);
+        }
+        
+        .ide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .ide-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            filter: grayscale(0);
+        }
+        
+        .ide-name {
+            font-size: 1.8rem;
+            color: var(--light);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .ide-tagline {
+            color: var(--accent);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        
+        .rating {
+            display: flex;
+            gap: 0.3rem;
+            font-size: 1.2rem;
+        }
+        
+        .star {
+            color: var(--gold);
+        }
+        
+        .star.empty {
+            color: rgba(255, 215, 0, 0.2);
+        }
+        
+        .tier-badge {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            padding: 0.4rem 1rem;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+        
+        .tier-s {
+            background: linear-gradient(135deg, #fbbf24, #fcd34d);
+            color: #000;
+        }
+        
+        .tier-a {
+            background: linear-gradient(135deg, #9ca3af, #d1d5db);
+            color: #000;
+        }
+        
+        .tier-b {
+            background: linear-gradient(135deg, #b45309, #d97706);
+            color: #fff;
+        }
+        
+        .features-list {
+            margin: 1rem 0;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .feature-item i {
+            color: var(--success);
+            font-size: 0.8rem;
+        }
+        
+        .pricing {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .pros, .cons {
+            padding: 1rem;
+            border-radius: 10px;
+        }
+        
+        .pros {
+            background: rgba(74, 222, 128, 0.08);
+            border-left: 3px solid var(--success);
+        }
+        
+        .cons {
+            background: rgba(251, 146, 60, 0.08);
+            border-left: 3px solid var(--warning);
+        }
+        
+        .pros h4, .cons h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pros h4 {
+            color: var(--success);
+        }
+        
+        .cons h4 {
+            color: var(--warning);
+        }
+        
+        .pros ul, .cons ul {
+            font-size: 0.85rem;
+            margin-left: 1.2rem;
+        }
+        
+        .pros li, .cons li {
+            margin: 0.3rem 0;
+        }
+        
+        .ide-links {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .ide-btn {
+            flex: 1;
+            padding: 0.8rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .ide-btn:hover {
+            background: var(--secondary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .comparison-table {
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        th {
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--secondary);
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+        
+        .check {
+            color: var(--success);
+            font-size: 1.2rem;
+        }
+        
+        .cross {
+            color: var(--warning);
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .ide-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="../" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Portfolio
+    </a>
+    
+    <div class="header">
+        <h1><i class="fas fa-laptop-code"></i> AI IDE Collection</h1>
+        <p class="subtitle">Gotta Code 'Em All! A comprehensive comparison of AI-powered development environments</p>
+        
+        <div class="collection-stats">
+            <div class="stat">
+                <div class="stat-value">12</div>
+                <div class="stat-label">AI IDEs Tested</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value"><i class="fas fa-trophy" style="color: var(--gold);"></i> Cursor & Codespaces</div>
+                <div class="stat-label">My Personal Favorites</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">100+</div>
+                <div class="stat-label">Hours Tested</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- GitHub Services Explanation -->
+        <div style="background: rgba(91, 155, 213, 0.08); border-left: 4px solid var(--secondary); padding: 1.5rem; border-radius: 15px; margin-bottom: 2rem;">
+            <h3 style="color: var(--secondary); margin-top: 0; margin-bottom: 1rem;">
+                <i class="fab fa-github"></i> GitHub AI Offerings - What's the Difference?
+            </h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                <div>
+                    <strong style="color: var(--accent);">GitHub Copilot</strong> - AI Assistant
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: rgba(228, 228, 231, 0.8);">AI coding assistant that provides autocomplete and chat. Install in your IDE.</p>
+                </div>
+                <div>
+                    <strong style="color: var(--accent);">GitHub Codespaces</strong> - Cloud IDE
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: rgba(228, 228, 231, 0.8);">Full VS Code environment in the cloud with compute + integrated Copilot.</p>
+                </div>
+                <div>
+                    <strong style="color: rgba(228, 228, 231, 0.6);">GitHub.dev</strong> - Not Included
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: rgba(228, 228, 231, 0.5);">Lightweight browser editor (no AI, no compute). Too minimal for comparison.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <span style="font-weight: bold; margin-right: 1rem;">Filter by:</span>
+            <button class="filter-btn active" onclick="filterIDEs('all')">All IDEs</button>
+            <button class="filter-btn" onclick="filterIDEs('free')">Free Tier</button>
+            <button class="filter-btn" onclick="filterIDEs('paid')">Paid Only</button>
+            <button class="filter-btn" onclick="filterIDEs('s-tier')">S-Tier</button>
+            <button class="filter-btn" onclick="filterIDEs('local')">Runs Locally</button>
+        </div>
+        
+        <!-- IDE Cards Grid -->
+        <div class="ide-grid" id="ide-grid">
+            <!-- Cursor -->
+            <div class="ide-card personal-favorite" data-tier="s" data-pricing="paid" data-local="true">
+                <div class="favorite-badge"><i class="fas fa-star"></i> MY FAVORITE</div>
+                <div class="tier-badge tier-s">S-TIER</div>
+                <div class="ide-icon"><i class="fas fa-mouse-pointer"></i></div>
+                <div class="ide-name">Cursor</div>
+                <div class="ide-tagline">The AI-first code editor built for pair programming</div>
+                
+                <div class="rating">
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                </div>
+                
+                <div class="pricing">
+                    <div class="price">$20/month</div>
+                    <div style="font-size: 0.85rem; margin-top: 0.3rem;">Free tier available</div>
+                </div>
+                
+                <div class="features-list">
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Chat with your codebase</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Inline AI editing (Cmd+K)</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Composer for multi-file edits</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> VS Code fork with AI built-in</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> GPT-4, Claude, Gemini support</div>
+                </div>
+                
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4><i class="fas fa-thumbs-up"></i> Pros</h4>
+                        <ul>
+                            <li>Best AI integration</li>
+                            <li>Codebase understanding</li>
+                            <li>Multi-model support</li>
+                            <li>Fast & responsive</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4><i class="fas fa-thumbs-down"></i> Cons</h4>
+                        <ul>
+                            <li>Subscription required</li>
+                            <li>Can be expensive</li>
+                            <li>Less stable than VS Code</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="ide-links">
+                    <a href="https://cursor.sh" target="_blank" class="ide-btn">
+                        <i class="fas fa-external-link-alt"></i> Visit Site
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Windsurf (Codeium) -->
+            <div class="ide-card" data-tier="s" data-pricing="free" data-local="true">
+                <div class="tier-badge tier-s">S-TIER</div>
+                <div class="ide-icon"><i class="fas fa-wind"></i></div>
+                <div class="ide-name">Windsurf (Codeium)</div>
+                <div class="ide-tagline">Agentic IDE with cascade flows - completely free</div>
+                
+                <div class="rating">
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                </div>
+                
+                <div class="pricing">
+                    <div class="price">FREE</div>
+                    <div style="font-size: 0.85rem; margin-top: 0.3rem;">Unlimited usage</div>
+                </div>
+                
+                <div class="features-list">
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Cascade agentic flows</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Multi-file AI edits</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Supercomplete (context-aware)</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> 100% free, no limits</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> VS Code fork</div>
+                </div>
+                
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4><i class="fas fa-thumbs-up"></i> Pros</h4>
+                        <ul>
+                            <li>Completely free</li>
+                            <li>Agentic workflows</li>
+                            <li>Fast autocomplete</li>
+                            <li>Great for beginners</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4><i class="fas fa-thumbs-down"></i> Cons</h4>
+                        <ul>
+                            <li>Newer, less mature</li>
+                            <li>Smaller community</li>
+                            <li>Limited model choices</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="ide-links">
+                    <a href="https://codeium.com/windsurf" target="_blank" class="ide-btn">
+                        <i class="fas fa-external-link-alt"></i> Visit Site
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Void -->
+            <div class="ide-card" data-tier="a" data-pricing="free" data-local="true">
+                <div class="tier-badge tier-a">A-TIER</div>
+                <div class="ide-icon"><i class="fas fa-circle-notch"></i></div>
+                <div class="ide-name">Void</div>
+                <div class="ide-tagline">Open-source Cursor alternative with local-first AI</div>
+                
+                <div class="rating">
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star empty"></i>
+                </div>
+                
+                <div class="pricing">
+                    <div class="price">FREE</div>
+                    <div style="font-size: 0.85rem; margin-top: 0.3rem;">Open source</div>
+                </div>
+                
+                <div class="features-list">
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Run models locally (Ollama)</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Privacy-first design</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> VS Code extension</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Copilot-like autocomplete</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> DeepSeek Coder support</div>
+                </div>
+                
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4><i class="fas fa-thumbs-up"></i> Pros</h4>
+                        <ul>
+                            <li>100% free & open source</li>
+                            <li>Privacy (local models)</li>
+                            <li>No data sent to cloud</li>
+                            <li>Customizable</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4><i class="fas fa-thumbs-down"></i> Cons</h4>
+                        <ul>
+                            <li>Requires GPU for best performance</li>
+                            <li>Setup complexity</li>
+                            <li>Less powerful than cloud models</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="ide-links">
+                    <a href="https://voideditor.com" target="_blank" class="ide-btn">
+                        <i class="fas fa-external-link-alt"></i> Visit Site
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Continue.dev -->
+            <div class="ide-card" data-tier="a" data-pricing="free" data-local="true">
+                <div class="tier-badge tier-a">A-TIER</div>
+                <div class="ide-icon"><i class="fas fa-arrow-right"></i></div>
+                <div class="ide-name">Continue.dev</div>
+                <div class="ide-tagline">Open-source AI code assistant for VS Code & JetBrains</div>
+                
+                <div class="rating">
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star empty"></i>
+                </div>
+                
+                <div class="pricing">
+                    <div class="price">FREE</div>
+                    <div style="font-size: 0.85rem; margin-top: 0.3rem;">BYOK (Bring Your Own Key)</div>
+                </div>
+                
+                <div class="features-list">
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Works with any LLM API</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> VS Code + JetBrains support</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Local & cloud models</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Customizable prompts</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Open source (Apache 2.0)</div>
+                </div>
+                
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4><i class="fas fa-thumbs-up"></i> Pros</h4>
+                        <ul>
+                            <li>Fully open source</li>
+                            <li>Use any AI model</li>
+                            <li>Great customization</li>
+                            <li>Active community</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4><i class="fas fa-thumbs-down"></i> Cons</h4>
+                        <ul>
+                            <li>Need own API keys</li>
+                            <li>Setup required</li>
+                            <li>Less polished UI</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="ide-links">
+                    <a href="https://continue.dev" target="_blank" class="ide-btn">
+                        <i class="fas fa-external-link-alt"></i> Visit Site
+                    </a>
+                </div>
+            </div>
+            
+            <!-- GitHub Copilot -->
+            <div class="ide-card" data-tier="a" data-pricing="paid" data-local="true">
+                <div class="tier-badge tier-a">A-TIER</div>
+                <div class="ide-icon"><i class="fab fa-github"></i></div>
+                <div class="ide-name">GitHub Copilot</div>
+                <div class="ide-tagline">The OG AI pair programmer from GitHub</div>
+                
+                <div class="rating">
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star empty"></i>
+                </div>
+                
+                <div class="pricing">
+                    <div class="price">$10/month</div>
+                    <div style="font-size: 0.85rem; margin-top: 0.3rem;">Free for students/open source</div>
+                </div>
+                
+                <div class="features-list">
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Inline code suggestions</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Works in VS Code, JetBrains, Neovim</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Chat interface</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> GitHub integration</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Most widely adopted</div>
+                </div>
+                
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4><i class="fas fa-thumbs-up"></i> Pros</h4>
+                        <ul>
+                            <li>Most mature</li>
+                            <li>Reliable autocomplete</li>
+                            <li>Huge training data</li>
+                            <li>Enterprise support</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4><i class="fas fa-thumbs-down"></i> Cons</h4>
+                        <ul>
+                            <li>Limited to autocomplete</li>
+                            <li>No codebase understanding</li>
+                            <li>Can't edit multiple files</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="ide-links">
+                    <a href="https://github.com/features/copilot" target="_blank" class="ide-btn">
+                        <i class="fas fa-external-link-alt"></i> Visit Site
+                    </a>
+                </div>
+            </div>
+            
+            <!-- GitHub Codespaces -->
+            <div class="ide-card personal-favorite" data-tier="a" data-pricing="paid" data-local="false">
+                <div class="favorite-badge"><i class="fas fa-star"></i> MY FAVORITE</div>
+                <div class="tier-badge tier-a">A-TIER</div>
+                <div class="ide-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                <div class="ide-name">GitHub Codespaces</div>
+                <div class="ide-tagline">VS Code in the cloud with AI superpowers</div>
+                
+                <div class="rating">
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star empty"></i>
+                </div>
+                
+                <div class="pricing">
+                    <div class="price">Limited free tier</div>
+                    <div style="font-size: 0.85rem; margin-top: 0.3rem;">~$0.18/hour after</div>
+                </div>
+                
+                <div class="features-list">
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Full VS Code in browser/desktop</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Integrated GitHub Copilot</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Linux compute environment</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Prebuilt dev containers</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Starts in seconds</div>
+                </div>
+                
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4><i class="fas fa-thumbs-up"></i> Pros</h4>
+                        <ul>
+                            <li>Zero local setup</li>
+                            <li>Full Linux environment</li>
+                            <li>Seamless GitHub integration</li>
+                            <li>Pre-configured dev environments</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4><i class="fas fa-thumbs-down"></i> Cons</h4>
+                        <ul>
+                            <li>Very limited free tier</li>
+                            <li>Can get expensive quickly</li>
+                            <li>Requires constant internet</li>
+                            <li>Cloud latency</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="ide-links">
+                    <a href="https://github.com/features/codespaces" target="_blank" class="ide-btn">
+                        <i class="fas fa-external-link-alt"></i> Visit Site
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Zed -->
+            <div class="ide-card" data-tier="a" data-pricing="free" data-local="true">
+                <div class="tier-badge tier-a">A-TIER</div>
+                <div class="ide-icon"><i class="fas fa-bolt"></i></div>
+                <div class="ide-name">Zed</div>
+                <div class="ide-tagline">Blazing fast multiplayer code editor with AI</div>
+                
+                <div class="rating">
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star empty"></i>
+                </div>
+                
+                <div class="pricing">
+                    <div class="price">FREE</div>
+                    <div style="font-size: 0.85rem; margin-top: 0.3rem;">Open source</div>
+                </div>
+                
+                <div class="features-list">
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Built in Rust (insanely fast)</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Real-time collaboration</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> AI assistant integrated</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Native performance</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Vim mode</div>
+                </div>
+                
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4><i class="fas fa-thumbs-up"></i> Pros</h4>
+                        <ul>
+                            <li>Fastest editor (Rust)</li>
+                            <li>Collaborative coding</li>
+                            <li>Modern architecture</li>
+                            <li>Beautiful UI</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4><i class="fas fa-thumbs-down"></i> Cons</h4>
+                        <ul>
+                            <li>AI features basic</li>
+                            <li>Limited extensions</li>
+                            <li>Still maturing</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="ide-links">
+                    <a href="https://zed.dev" target="_blank" class="ide-btn">
+                        <i class="fas fa-external-link-alt"></i> Visit Site
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Replit AI -->
+            <div class="ide-card" data-tier="b" data-pricing="paid" data-local="false">
+                <div class="tier-badge tier-b">B-TIER</div>
+                <div class="ide-icon"><i class="fas fa-play-circle"></i></div>
+                <div class="ide-name">Replit AI</div>
+                <div class="ide-tagline">Browser-based coding with AI agent</div>
+                
+                <div class="rating">
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star empty"></i>
+                </div>
+                
+                <div class="pricing">
+                    <div class="price">$25/month</div>
+                    <div style="font-size: 0.85rem; margin-top: 0.3rem;">Free tier limited</div>
+                </div>
+                
+                <div class="features-list">
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Browser-based (no install)</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> AI agent for coding</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Instant deployment</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Collaborative workspaces</div>
+                </div>
+                
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4><i class="fas fa-thumbs-up"></i> Pros</h4>
+                        <ul>
+                            <li>Zero setup</li>
+                            <li>Deploy instantly</li>
+                            <li>Great for learning</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4><i class="fas fa-thumbs-down"></i> Cons</h4>
+                        <ul>
+                            <li>Requires internet</li>
+                            <li>Expensive for teams</li>
+                            <li>Less powerful locally</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="ide-links">
+                    <a href="https://replit.com" target="_blank" class="ide-btn">
+                        <i class="fas fa-external-link-alt"></i> Visit Site
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Amazon CodeWhisperer -->
+            <div class="ide-card" data-tier="b" data-pricing="free" data-local="true">
+                <div class="tier-badge tier-b">B-TIER</div>
+                <div class="ide-icon"><i class="fab fa-aws"></i></div>
+                <div class="ide-name">Amazon CodeWhisperer</div>
+                <div class="ide-tagline">AWS-powered AI coding companion</div>
+                
+                <div class="rating">
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star empty"></i>
+                </div>
+                
+                <div class="pricing">
+                    <div class="price">FREE</div>
+                    <div style="font-size: 0.85rem; margin-top: 0.3rem;">Professional: $19/month</div>
+                </div>
+                
+                <div class="features-list">
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Security scanning built-in</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> AWS SDK optimized</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> VS Code, JetBrains support</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Enterprise features</div>
+                </div>
+                
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4><i class="fas fa-thumbs-up"></i> Pros</h4>
+                        <ul>
+                            <li>Free tier generous</li>
+                            <li>Security scanning</li>
+                            <li>Great for AWS</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4><i class="fas fa-thumbs-down"></i> Cons</h4>
+                        <ul>
+                            <li>Not as smart as GPT-4</li>
+                            <li>AWS-focused</li>
+                            <li>Basic features</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="ide-links">
+                    <a href="https://aws.amazon.com/codewhisperer/" target="_blank" class="ide-btn">
+                        <i class="fas fa-external-link-alt"></i> Visit Site
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Tabnine -->
+            <div class="ide-card" data-tier="b" data-pricing="paid" data-local="true">
+                <div class="tier-badge tier-b">B-TIER</div>
+                <div class="ide-icon"><i class="fas fa-keyboard"></i></div>
+                <div class="ide-name">Tabnine</div>
+                <div class="ide-tagline">AI code completion trained on your codebase</div>
+                
+                <div class="rating">
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star empty"></i>
+                </div>
+                
+                <div class="pricing">
+                    <div class="price">$12/month</div>
+                    <div style="font-size: 0.85rem; margin-top: 0.3rem;">Free tier available</div>
+                </div>
+                
+                <div class="features-list">
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Learns your code style</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Works offline</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Privacy-focused (local option)</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Team training</div>
+                </div>
+                
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4><i class="fas fa-thumbs-up"></i> Pros</h4>
+                        <ul>
+                            <li>Privacy options</li>
+                            <li>Learns your patterns</li>
+                            <li>Offline mode</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4><i class="fas fa-thumbs-down"></i> Cons</h4>
+                        <ul>
+                            <li>Just autocomplete</li>
+                            <li>No chat/composer</li>
+                            <li>Pricey for features</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="ide-links">
+                    <a href="https://www.tabnine.com" target="_blank" class="ide-btn">
+                        <i class="fas fa-external-link-alt"></i> Visit Site
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Trae -->
+            <div class="ide-card" data-tier="a" data-pricing="free" data-local="true">
+                <div class="tier-badge tier-a">A-TIER</div>
+                <div class="ide-icon"><i class="fas fa-robot"></i></div>
+                <div class="ide-name">Trae</div>
+                <div class="ide-tagline">AI-powered VS Code extension with chat and code generation</div>
+                
+                <div class="rating">
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star empty"></i>
+                </div>
+                
+                <div class="pricing">
+                    <div class="price">FREE</div>
+                    <div style="font-size: 0.85rem; margin-top: 0.3rem;">Pro: $10/month</div>
+                </div>
+                
+                <div class="features-list">
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> VS Code extension</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Multiple AI models</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Code explanation & refactoring</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Context-aware suggestions</div>
+                    <div class="feature-item"><i class="fas fa-check-circle"></i> Bug detection</div>
+                </div>
+                
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4><i class="fas fa-thumbs-up"></i> Pros</h4>
+                        <ul>
+                            <li>Generous free tier</li>
+                            <li>Good VS Code integration</li>
+                            <li>Multiple AI models</li>
+                            <li>Lightweight</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4><i class="fas fa-thumbs-down"></i> Cons</h4>
+                        <ul>
+                            <li>Less known/smaller community</li>
+                            <li>Limited multi-file editing</li>
+                            <li>Newer product</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="ide-links">
+                    <a href="https://trae.ai" target="_blank" class="ide-btn">
+                        <i class="fas fa-external-link-alt"></i> Visit Site
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Comparison Table -->
+        <div class="comparison-table">
+            <h2 style="text-align: center; margin-bottom: 2rem;">
+                <i class="fas fa-table"></i> Feature Comparison Matrix
+            </h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>IDE</th>
+                        <th>Price</th>
+                        <th>Autocomplete</th>
+                        <th>Chat</th>
+                        <th>Multi-file Edit</th>
+                        <th>Codebase Context</th>
+                        <th>Local Models</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Cursor</strong></td>
+                        <td>$20/mo</td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Windsurf</strong></td>
+                        <td>Free</td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Void</strong></td>
+                        <td>Free</td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Continue.dev</strong></td>
+                        <td>Free (BYOK)</td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                    </tr>
+                    <tr>
+                        <td><strong>GitHub Copilot</strong></td>
+                        <td>$10/mo</td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tabnine</strong></td>
+                        <td>$12/mo</td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Trae</strong></td>
+                        <td>Free ($10 Pro)</td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Recommendation -->
+        <div style="background: rgba(81, 207, 102, 0.05); border-left: 4px solid var(--success); padding: 2rem; border-radius: 15px; margin: 3rem 0;">
+            <h2 style="color: var(--success); margin-top: 0;">
+                <i class="fas fa-trophy"></i> My Recommendations
+            </h2>
+            <h3 style="color: var(--light); margin: 1rem 0;">For Serious Local Development: Cursor</h3>
+            <p>If you code professionally and can afford it, Cursor is unmatched. The Composer feature alone is worth it for complex refactoring. Best for when you need powerful AI on your local machine.</p>
+            
+            <h3 style="color: var(--light); margin: 1rem 0;">For Cloud-Based Development: GitHub Codespaces</h3>
+            <p>Zero setup, full Linux environment, and seamless GitHub integration. Perfect when you need a pre-configured environment or working from different devices. The free tier is enough for hobby projects.</p>
+            
+            <h3 style="color: var(--light); margin: 1rem 0;">Best Free Option: Windsurf</h3>
+            <p>Incredible that it's free. Agentic flows are powerful, and Supercomplete is faster than Cursor's autocomplete.</p>
+            
+            <h3 style="color: var(--light); margin: 1rem 0;">For Privacy: Void + Continue.dev</h3>
+            <p>Run models locally with Ollama. Your code never leaves your machine.</p>
+        </div>
+        
+        <hr style="border: none; height: 1px; background: linear-gradient(to right, transparent, var(--accent), transparent); margin: 3rem 0;">
+        
+        <!-- Latest Discoveries Section -->
+        <div class="comparison-table" id="discoveries-section">
+            <h2 style="text-align: center; margin-bottom: 1rem;">
+                <i class="fas fa-radar"></i> Latest AI IDE Discoveries
+            </h2>
+            <p style="text-align: center; color: rgba(228, 228, 231, 0.7); margin-bottom: 2rem;">
+                Automated weekly scans to keep this comparison up-to-date
+            </p>
+            
+            <div id="discoveries-content">
+                <div style="text-align: center; padding: 2rem;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--accent);"></i>
+                    <p style="margin-top: 1rem; color: rgba(228, 228, 231, 0.7);">Loading latest discoveries...</p>
+                </div>
+            </div>
+        </div>
+        
+        <hr style="border: none; height: 1px; background: linear-gradient(to right, transparent, var(--accent), transparent); margin: 3rem 0;">
+        
+        <!-- Tier System Legend -->
+        <div style="background: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.2); padding: 1rem; border-radius: 10px; margin-bottom: 2rem;">
+            <p style="text-align: center; color: rgba(228, 228, 231, 0.7); font-size: 0.9rem; margin-bottom: 0.8rem;">Tier System</p>
+            <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <span style="background: linear-gradient(135deg, #fbbf24, #fcd34d); color: #000; padding: 0.3rem 0.8rem; border-radius: 10px; font-weight: bold; font-size: 0.85rem;">S-TIER</span>
+                    <p style="margin: 0.3rem 0 0 0; font-size: 0.85rem; color: rgba(228, 228, 231, 0.6);">Best-in-class</p>
+                </div>
+                <div style="text-align: center;">
+                    <span style="background: linear-gradient(135deg, #9ca3af, #d1d5db); color: #000; padding: 0.3rem 0.8rem; border-radius: 10px; font-weight: bold; font-size: 0.85rem;">A-TIER</span>
+                    <p style="margin: 0.3rem 0 0 0; font-size: 0.85rem; color: rgba(228, 228, 231, 0.6);">Excellent</p>
+                </div>
+                <div style="text-align: center;">
+                    <span style="background: linear-gradient(135deg, #b45309, #d97706); color: #fff; padding: 0.3rem 0.8rem; border-radius: 10px; font-weight: bold; font-size: 0.85rem;">B-TIER</span>
+                    <p style="margin: 0.3rem 0 0 0; font-size: 0.85rem; color: rgba(228, 228, 231, 0.6);">Good</p>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center;">
+            <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Ready to level up your coding with AI?</p>
+            <a href="../" style="background: var(--secondary); color: var(--primary); padding: 1rem 2rem; border-radius: 25px; text-decoration: none; font-weight: bold;">
+                <i class="fas fa-arrow-left"></i> Back to Portfolio
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        function filterIDEs(filterType) {
+            const cards = document.querySelectorAll('.ide-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // Update active button
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter cards
+            cards.forEach(card => {
+                let show = false;
+                
+                if (filterType === 'all') {
+                    show = true;
+                } else if (filterType === 'free') {
+                    show = card.dataset.pricing === 'free';
+                } else if (filterType === 'paid') {
+                    show = card.dataset.pricing === 'paid';
+                } else if (filterType === 's-tier') {
+                    show = card.dataset.tier === 's';
+                } else if (filterType === 'local') {
+                    show = card.dataset.local === 'true';
+                }
+                
+                card.style.display = show ? 'block' : 'none';
+            });
+        }
+        
+        // Load latest discoveries
+        async function loadDiscoveries() {
+            try {
+                // Try to fetch the latest discoveries from GitHub
+                const response = await fetch('https://api.github.com/repos/ElaMCB/ElaMCB.github.io/contents/ai-ide-comparison');
+                const files = await response.json();
+                
+                // Find the most recent discoveries JSON file
+                const discoveryFiles = files
+                    .filter(f => f.name.startsWith('discoveries-') && f.name.endsWith('.json'))
+                    .sort((a, b) => b.name.localeCompare(a.name));
+                
+                if (discoveryFiles.length === 0) {
+                    showNoDiscoveries();
+                    return;
+                }
+                
+                // Fetch the latest discovery file
+                const latestFile = discoveryFiles[0];
+                const dataResponse = await fetch(latestFile.download_url);
+                const discoveries = await dataResponse.json();
+                
+                // Extract date from filename
+                const dateMatch = latestFile.name.match(/discoveries-(\d{4}-\d{2}-\d{2})/);
+                const scanDate = dateMatch ? dateMatch[1] : 'Unknown';
+                
+                displayDiscoveries(discoveries, scanDate);
+            } catch (error) {
+                console.error('Error loading discoveries:', error);
+                showNoDiscoveries();
+            }
+        }
+        
+        function displayDiscoveries(discoveries, scanDate) {
+            const content = document.getElementById('discoveries-content');
+            
+            if (!discoveries || discoveries.length === 0) {
+                content.innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <i class="fas fa-check-circle" style="font-size: 2rem; color: var(--success);"></i>
+                        <p style="margin-top: 1rem; color: rgba(228, 228, 231, 0.9); font-weight: bold;">All Clear!</p>
+                        <p style="color: rgba(228, 228, 231, 0.7);">No new AI IDEs discovered in the latest scan (${scanDate})</p>
+                        <p style="color: rgba(228, 228, 231, 0.6); font-size: 0.9rem; margin-top: 0.5rem;">The comparison is up-to-date with all major AI IDEs</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = `
+                <div style="background: rgba(91, 155, 213, 0.08); padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem; text-align: center;">
+                    <i class="fas fa-clock" style="color: var(--secondary);"></i>
+                    <strong>Last Scan:</strong> ${scanDate}
+                    <span style="margin: 0 1rem;">•</span>
+                    <i class="fas fa-lightbulb" style="color: var(--gold);"></i>
+                    <strong>${discoveries.length} New IDEs Found</strong>
+                </div>
+                
+                <div style="display: grid; gap: 1.5rem;">
+            `;
+            
+            discoveries.slice(0, 5).forEach((ide, index) => {
+                html += `
+                    <div style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 15px; border-left: 4px solid var(--accent);">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                            <h3 style="margin: 0; color: var(--light);">${index + 1}. ${ide.name || ide.title || 'Unknown IDE'}</h3>
+                            <span style="background: rgba(99, 102, 241, 0.2); padding: 0.3rem 0.8rem; border-radius: 10px; font-size: 0.85rem; white-space: nowrap;">
+                                ${ide.source || 'Unknown'}
+                            </span>
+                        </div>
+                        <p style="color: rgba(228, 228, 231, 0.8); margin: 0.5rem 0;">${ide.description || 'No description available'}</p>
+                        <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; align-items: center;">
+                            <a href="${ide.url}" target="_blank" style="color: var(--secondary); text-decoration: none;">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                            ${ide.stars ? `<span style="color: var(--gold);"><i class="fas fa-star"></i> ${ide.stars.toLocaleString()} stars</span>` : ''}
+                            ${ide.points ? `<span style="color: var(--warning);"><i class="fas fa-arrow-up"></i> ${ide.points} points</span>` : ''}
+                            ${ide.language ? `<span style="color: rgba(228, 228, 231, 0.6);"><i class="fas fa-code"></i> ${ide.language}</span>` : ''}
+                        </div>
+                        <div style="background: rgba(251, 191, 36, 0.1); padding: 0.8rem; border-radius: 8px; margin-top: 1rem; font-size: 0.85rem; color: rgba(228, 228, 231, 0.7);">
+                            <i class="fas fa-info-circle" style="color: var(--gold);"></i>
+                            <strong>Status:</strong> Under review - not yet tested or ranked
+                        </div>
+                    </div>
+                `;
+            });
+            
+            if (discoveries.length > 5) {
+                html += `
+                    <div style="text-align: center; padding: 1rem; color: rgba(228, 228, 231, 0.7);">
+                        <i class="fas fa-plus-circle"></i> ${discoveries.length - 5} more discoveries available in the full report
+                    </div>
+                `;
+            }
+            
+            html += '</div>';
+            content.innerHTML = html;
+        }
+        
+        function showNoDiscoveries() {
+            const content = document.getElementById('discoveries-content');
+            content.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <i class="fas fa-search" style="font-size: 2rem; color: var(--accent);"></i>
+                    <p style="margin-top: 1rem; color: rgba(228, 228, 231, 0.9); font-weight: bold;">No Discovery Data Available Yet</p>
+                    <p style="color: rgba(228, 228, 231, 0.7);">The automated discovery system will run every Monday at 9 AM UTC</p>
+                    <p style="color: rgba(228, 228, 231, 0.6); font-size: 0.9rem; margin-top: 0.5rem;">Check back next week for updates</p>
+                </div>
+            `;
+        }
+        
+        // Load discoveries when page loads
+        window.addEventListener('DOMContentLoaded', loadDiscoveries);
+    </script>
+</body>
+</html>
+

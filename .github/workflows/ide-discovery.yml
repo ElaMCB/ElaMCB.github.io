@@ -1,0 +1,98 @@
+name: Weekly AI IDE Discovery
+
+on:
+  schedule:
+    # Run every Monday at 9 AM EST (2 PM UTC in winter, 1 PM UTC in summer)
+    - cron: '0 14 * * 1'
+  workflow_dispatch: # Allow manual trigger
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Run IDE discovery script
+        run: |
+          cd ai-ide-comparison
+          node auto-discover.js
+        continue-on-error: true
+      
+      - name: Check if discoveries were made
+        id: check_discoveries
+        run: |
+          cd ai-ide-comparison
+          if ls discoveries-*.json 1> /dev/null 2>&1; then
+            echo "has_discoveries=true" >> $GITHUB_OUTPUT
+            # Get the most recent discovery file
+            latest_file=$(ls -t discoveries-*.json | head -n1)
+            count=$(jq 'length' "$latest_file")
+            echo "discovery_count=$count" >> $GITHUB_OUTPUT
+          else
+            echo "has_discoveries=false" >> $GITHUB_OUTPUT
+            echo "No new AI IDEs discovered this week"
+          fi
+      
+      - name: Commit discoveries directly to main
+        if: steps.check_discoveries.outputs.has_discoveries == 'true'
+        run: |
+          cd ai-ide-comparison
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add discoveries-*.json discoveries-*.md
+          # Get the latest discovery file to count properly
+          latest_file=$(ls -t discoveries-*.json | head -n1)
+          count=$(jq 'length' "$latest_file")
+          git commit -m "feat: Weekly AI IDE discovery results - $count new IDEs found"
+          git push origin main
+      
+      - name: Create summary comment
+        if: steps.check_discoveries.outputs.has_discoveries == 'false'
+        run: |
+          echo "✅ Discovery scan completed successfully"
+          echo "📊 Result: No new AI IDEs found"
+          echo "🔍 All major AI IDEs are already tracked in the comparison"
+          echo "⏰ Next scan: Next Monday at 9 AM UTC"
+      
+      - name: Create issue for discoveries
+        if: steps.check_discoveries.outputs.has_discoveries == 'true'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            const directory = 'ai-ide-comparison';
+            const files = fs.readdirSync(directory)
+              .filter(f => f.startsWith('discoveries-') && f.endsWith('.json'))
+              .map(f => ({ name: f, time: fs.statSync(path.join(directory, f)).mtime }))
+              .sort((a, b) => b.time - a.time);
+            
+            if (files.length > 0) {
+              const filename = files[0].name;
+              const data = JSON.parse(fs.readFileSync(`ai-ide-comparison/${filename}`, 'utf8'));
+              
+              // Ensure data is an array
+              const count = Array.isArray(data) ? data.length : 0;
+              
+              github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: `🔍 ${count} New AI IDEs Discovered - Weekly Scan`,
+                body: `## Automated AI IDE Discovery\n\n**Discoveries:** ${count} new AI IDEs found\n\n**Review the discoveries:**\n- Check \`ai-ide-comparison/${filename}\` for the full data\n- Check \`ai-ide-comparison/${filename.replace('.json', '.md')}\` for the report\n- The discoveries are now live on the [comparison page](https://elamcb.github.io/ai-ide-comparison/)\n\n**Next Steps:**\n1. Review each discovery\n2. Test viable candidates (2-4 hours each)\n3. Assign tier (S/A/B)\n4. Update comparison page if warranted\n5. Close this issue when done`,
+                labels: ['ai-ides', 'automated-discovery', 'needs-review']
+              });
+            }
+
