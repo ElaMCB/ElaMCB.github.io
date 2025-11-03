@@ -135,13 +135,13 @@ graph TB
 
 ---
 
-## 🎯 QA-to-AI Transformation Roadmap 🔒
+## QA-to-AI Transformation Roadmap - Premium Feature
 
 **Transform your QA team in 6-12 months:** 487% ROI • 40-70% efficiency gains • 85%+ automation coverage
 
 32-week phased strategy for QA Directors and Engineering Leaders ready to lead the AI transformation.
 
-**[Preview Framework →](./docs/QA-AI-TRANSFORMATION-ROADMAP.md)** | **[Get Full Access →](https://linkedin.com/in/elenamereanu)** (Premium)
+**[Preview Framework →](./docs/qa-transformation-roadmap.html)** | **[Request Full Access →](mailto:elena.mereanu@example.com?subject=QA%20Transformation%20Roadmap%20-%20Premium%20Access%20Request&body=Hi%20Elena%2C%0A%0AI%27m%20interested%20in%20the%20complete%20QA-to-AI%20Transformation%20Roadmap%20package.%0A%0APlease%20send%20me%3A%0A-%20Pricing%20details%0A-%20Available%20packages%20%28Individual%20vs%20Enterprise%29%0A-%20Implementation%20timeline%0A-%20Consultation%20options%0A%0AAbout%20my%20organization%3A%0ACompany%3A%20%0ATeam%20Size%3A%20%0ACurrent%20QA%20Maturity%3A%20%0A%0AThank%20you%21)** (Premium)
 
 ---
 
