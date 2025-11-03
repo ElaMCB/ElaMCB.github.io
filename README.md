@@ -135,7 +135,7 @@ graph TB
 
 ---
 
-## 🎯 QA Leadership: AI Transformation Strategy
+## QA Leadership: AI Transformation Strategy
 
 ### Transform Your QA Team to AI-First in 6-12 Months
 
