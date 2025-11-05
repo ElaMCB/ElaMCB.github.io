@@ -137,6 +137,16 @@ graph TB
 
 ---
 
+## QA-to-AI Transformation Roadmap - Premium Feature
+
+**Transform your QA team in 6-12 months:** 487% ROI • 40-70% efficiency gains • 85%+ automation coverage
+
+32-week phased strategy for QA Directors and Engineering Leaders ready to lead the AI transformation.
+
+**[Preview Framework →](https://elamcb.github.io/docs/qa-transformation-roadmap.html)** | **[Request Full Access →](mailto:elena.mereanu@gmail.com?subject=QA%20Transformation%20Roadmap%20-%20Premium%20Access%20Request&body=Hi%20Elena%2C%0A%0AI%27m%20interested%20in%20the%20complete%20QA-to-AI%20Transformation%20Roadmap%20package.%0A%0APlease%20send%20me%3A%0A-%20Pricing%20details%0A-%20Available%20packages%20%28Individual%20vs%20Enterprise%29%0A-%20Implementation%20timeline%0A-%20Consultation%20options%0A%0AAbout%20my%20organization%3A%0ACompany%3A%20%0ATeam%20Size%3A%20%0ACurrent%20QA%20Maturity%3A%20%0A%0AThank%20you%21)** (Premium)
+
+---
+
 ## Featured Projects
 
 ### LLMGuardian - Production AI Testing Framework
@@ -211,7 +221,7 @@ Can you spot the difference between code written by AI and code written by human
 - **AI Frameworks**: RAG, MCP, LLM testing, safety validation
 
 ## Star History
-[![Star History Chart](https://api.star-history.com/svg?repos=ElaMCB/ElaMCB.github.io&type=Date)](https://star-history.com/#ElaMCB/ElaMCB.github.io&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=ElaMCB/ElaMCB.github.io&type=Date&t=20251102)](https://star-history.com/#ElaMCB/ElaMCB.github.io&Date)
 
 ## Contributing
 
@@ -229,6 +239,7 @@ Found this useful? Here's how you can help:
 ## Learning Resources
 
 ### AI-First Development Guides
+- **[QA-to-AI Transformation Roadmap](./docs/QA-AI-TRANSFORMATION-ROADMAP.md)** - 🎯 **Transform your QA team to AI-first in 6-12 months** (487% ROI teaser available, 🔒 Full roadmap - Premium)
 - **[Prompt Engineering Guide](./docs/PROMPT-ENGINEERING-GUIDE.md)** - Master effective AI prompting techniques
 - **[AI Workflow Integration](./docs/AI-WORKFLOW-INTEGRATION.md)** - Integrate AI into daily development workflows  
 - **[AI-First Principles](./docs/AI-FIRST-PRINCIPLES.md)** - Core philosophy and development approach
