@@ -22,7 +22,13 @@ jobs:
       run: npm ci
       env:
         NODE_ENV: development
-      
+        
+    - name: List installed modules
+      run: npm list --depth=0
+        
+    - name: List installed modules for CI debugging
+      run: npm ls
+        
     - name: Install Playwright
       run: npx playwright install --with-deps
       
