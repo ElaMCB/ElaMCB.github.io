@@ -4,7 +4,7 @@ test('Portfolio smoke test', async ({ page }) => {
   await page.goto('https://elamcb.github.io');
   
   // Verify critical elements
-  await expect(page).toHaveTitle(/Elena/);
+  await expect(page).toHaveTitle(/Ela MCB/);
   await expect(page.getByText('Projects')).toBeVisible();
   await expect(page.getByText('Research')).toBeVisible();
   
