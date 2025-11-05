@@ -1,5 +1,7 @@
 # [Elena Mereanu - AI-First Quality Engineer](https://elamcb.github.io)
 
+![Portfolio Tests](https://github.com/ElaMCB/ElaMCB.github.io/actions/workflows/portfolio-tests.yml/badge.svg)
+
 > Building reliable AI systems through rigorous testing and automation
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-Live-green?style=for-the-badge&logo=github-pages)](https://elamcb.github.io)

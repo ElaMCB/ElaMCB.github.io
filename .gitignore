@@ -1,0 +1,14 @@
+# Dependency directories
+node_modules/
+
+# Playwright artifacts
+playwright-report/
+test-results/
+
+# IDE files
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
