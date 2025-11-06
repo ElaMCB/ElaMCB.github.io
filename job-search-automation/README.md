@@ -174,4 +174,27 @@ job-search-automation/
 
 ---
 
+## Related Projects
+
+**ARIA - Virtual Recruiter Reply Bot**
+
+Companion project that automates responses to job recruiters. While this system finds jobs, ARIA handles recruiter communications automatically.
+
+**Repository:** https://github.com/ElaMCB/virtual-recruiter-reply-bot
+
+**What it does:**
+- Automatically responds to recruiter emails and SMS
+- Uses local LLM (Ollama) for $0/month operation
+- Tracks conversations across multiple channels
+- Escalates important decisions (salary, interviews) to you
+- Perfect for passive job searching
+
+**When to use:**
+- **Job Search Automation**: Finding and applying to jobs proactively
+- **ARIA**: Handling incoming recruiter messages automatically
+
+Together, they create a complete job search automation ecosystem!
+
+---
+
 *This project demonstrates the practical application of AI and automation technologies to solve real-world challenges while maintaining ethical standards and professional integrity.*

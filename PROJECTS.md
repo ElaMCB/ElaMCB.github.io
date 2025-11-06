@@ -91,6 +91,46 @@ Ethical AI-powered automation for job searching and career management.
 
 ---
 
+### ARIA - Virtual Recruiter Reply Bot
+**Status**: Production Ready | **Type**: AI Agent | **Language**: Python
+
+Autonomous AI agent that responds to job recruiters via email and SMS, handling initial conversations while you focus on interviews.
+
+#### Features
+- **Multi-Channel Support**: Email (Gmail API) and SMS (free email-to-SMS gateway)
+- **Intelligent Responses**: Local LLM (Ollama) or cloud APIs for context-aware replies
+- **Conversation Tracking**: SQLite-based state management across all interactions
+- **Smart Escalation**: Automatically escalates salary negotiation and interview scheduling
+- **Zero Cost Operation**: 100% free using local LLM and free APIs
+
+#### Technical Stack
+- **LLM**: Ollama (local, free) with fallback to OpenAI/Claude
+- **Email**: Gmail API with OAuth 2.0
+- **SMS**: Free email-to-SMS carrier gateways
+- **Database**: SQLite for conversation state
+- **Architecture**: Event-driven orchestrator with multi-agent design
+
+#### Impact
+- **$0/month cost** (saves $65-140/month vs paid solutions)
+- **Automatic response** to AI recruiters like "Alex"
+- **Context-aware conversations** spanning multiple messages
+- **Safe operation** with escalation for important decisions
+- **Perfect for passive job searching** while employed
+
+#### Use Case
+When virtual recruiters reach out via email or SMS, ARIA:
+1. Analyzes the opportunity against your criteria
+2. Responds professionally requesting details
+3. Asks about salary, remote options, and requirements
+4. Tracks conversation history for context
+5. Escalates to you when human decision needed
+
+**[GitHub Repository →](https://github.com/ElaMCB/virtual-recruiter-reply-bot)** | **[Documentation →](https://github.com/ElaMCB/virtual-recruiter-reply-bot#documentation)**
+
+**Related Project**: Works with [Job Search Automation Suite](./job-search-automation/) - ARIA handles inbound recruiters while Job Search Automation finds opportunities proactively.
+
+---
+
 ## Financial Systems
 
 ### Algorithmic Trading System
