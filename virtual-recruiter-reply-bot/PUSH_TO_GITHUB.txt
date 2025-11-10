@@ -1,0 +1,23 @@
+# Commands to Push to GitHub
+
+# After creating the repository at github.com/new with name "ai-recruiter-agent"
+# Copy your repository URL (it will look like: https://github.com/YOUR_USERNAME/ai-recruiter-agent.git)
+
+# Then run these commands:
+
+# 1. Add the remote (replace YOUR_USERNAME with your actual GitHub username)
+git remote add origin https://github.com/YOUR_USERNAME/ai-recruiter-agent.git
+
+# OR if you use SSH:
+# git remote add origin git@github.com:YOUR_USERNAME/ai-recruiter-agent.git
+
+# 2. Push to GitHub
+git push -u origin main
+
+# That's it! Your project is now on GitHub! 🎉
+
+# To update later (after making changes):
+# git add .
+# git commit -m "Your commit message"
+# git push
+

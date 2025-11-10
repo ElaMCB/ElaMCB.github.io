@@ -1,0 +1,75 @@
+# Your Professional Profile
+# This information is used to generate appropriate responses
+
+personal:
+  name: "Elena"
+  current_title: "Java Selenium Automation Architect"
+  years_experience: 10
+  location: "Remote (Preferred)"
+  available_from: "2 weeks notice"
+
+skills:
+  primary:
+    - Java
+    - Selenium
+    - Test Automation
+    - Architecture Design
+  secondary:
+    - CI/CD
+    - Jenkins
+    - Maven/Gradle
+    - TestNG/JUnit
+  
+preferences:
+  work_arrangement: "Remote preferred, hybrid acceptable in Alpharetta/Atlanta area"
+  salary_range:
+    # For salaried positions (annual)
+    minimum_annual: 120000
+    target_annual: 150000
+    # For contract/hourly positions (tiered by level)
+    architect_minimum: 65
+    architect_target: 75
+    senior_engineer_minimum: 50
+    senior_engineer_target: 60
+    mid_level_minimum: 50
+    mid_level_target: 55
+    currency: "USD"
+  benefits_important:
+    - Health insurance
+    - 401k matching
+    - Flexible hours
+    - Professional development budget
+
+job_criteria:
+  # Agent will auto-decline if these aren't met
+  must_have:
+    - title_contains: ["architect", "lead", "senior", "principal"]
+    - remote_option: false  # Can consider onsite in Alpharetta/Atlanta
+  
+  nice_to_have:
+    - tech_stack: ["Java", "Selenium", "Cloud", "CI/CD"]
+    - company_size: "medium to large"
+  
+  auto_decline:
+    - salary_below_annual: 100000
+    - hourly_rate_below: 65  # Auto-decline anything under $65/hr
+    - keywords: ["unpaid", "commission only", "internship"]
+    - contract_length_under_months: 3  # Alex's offer is 6 months, so OK
+
+communication_style:
+  tone: "professional"
+  formality: "medium"
+  response_length: "concise"
+  
+escalation:
+  # When to alert you for human intervention
+  triggers:
+    - "final offer received"
+    - "salary negotiation"
+    - "interview scheduled"
+    - "technical assessment required"
+    - "unclear requirements"
+  
+  notification_method: "email"  # or "sms", "both"
+  notification_email: "your.personal.email@gmail.com"
+

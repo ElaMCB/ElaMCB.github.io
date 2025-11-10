@@ -1,0 +1,33 @@
+# Core dependencies
+python-dotenv==1.0.0
+pyyaml==6.0.1
+
+# Email handling
+google-auth==2.24.0
+google-auth-oauthlib==1.1.0
+google-auth-httplib2==0.1.1
+google-api-python-client==2.108.0
+
+# LLM integration
+langchain==0.1.0
+langchain-community==0.0.10
+ollama==0.1.6
+
+# Alternative LLM APIs (optional)
+anthropic==0.8.0
+openai==1.6.0
+
+# Database
+sqlalchemy==2.0.23
+
+# Web framework (for webhooks if needed)
+flask==3.0.0
+
+# Utilities
+requests==2.31.0
+beautifulsoup4==4.12.2
+python-dateutil==2.8.2
+
+# Logging and monitoring
+colorlog==6.8.0
+
