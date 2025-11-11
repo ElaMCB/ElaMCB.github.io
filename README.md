@@ -201,26 +201,26 @@ This repository includes a complete test automation project that validates the p
 
 ### What's Tested
 
-**🎯 Functional Testing**
+**Functional Testing**
 - Navigation and link validation
 - Content loading and visibility
 - Cross-device responsive design
 - Page Object Model architecture
 
-**⚡ Performance Testing**
+**Performance Testing**
 - Core Web Vitals: LCP < 2.5s, FCP < 1.8s, CLS < 0.1, TTFB < 600ms
 - Resource loading analysis
 - Page load time monitoring
 - Google "Good" thresholds compliance
 
-**🎨 Visual Regression Testing**
+**Visual Regression Testing**
 - Full-page screenshots across devices
 - Mobile (375x667), Tablet (768x1024), Desktop (1280x720)
 - Dark mode validation
 - Print layout testing
 - Component-level screenshots
 
-**♿ Accessibility Testing**
+**Accessibility Testing**
 - WCAG 2.1 Level A & AA compliance (automated)
 - Keyboard navigation verification
 - Color contrast validation (4.5:1 ratio)
@@ -275,11 +275,11 @@ npm run test:report         # View HTML report
 ### Documentation
 
 **Comprehensive Documentation:**
-- 📋 **[Test Plan](./TEST_PLAN.md)** - Complete 17-section QA strategy document
-- 📚 **[Test Suite README](./tests/README.md)** - Detailed test documentation
-- 🚀 **[Setup Guide](./PLAYWRIGHT_SETUP_GUIDE.md)** - Quick start and optimization details
-- 📊 **[Optimization Summary](./PLAYWRIGHT_OPTIMIZATIONS_SUMMARY.md)** - All optimizations explained
-- ⚡ **[Quick Reference](./tests/QUICK_REFERENCE.md)** - Common commands and tips
+- **[Test Plan](./TEST_PLAN.md)** - Complete 17-section QA strategy document
+- **[Test Suite README](./tests/README.md)** - Detailed test documentation
+- **[Setup Guide](./PLAYWRIGHT_SETUP_GUIDE.md)** - Quick start and optimization details
+- **[Optimization Summary](./PLAYWRIGHT_OPTIMIZATIONS_SUMMARY.md)** - All optimizations explained
+- **[Quick Reference](./tests/QUICK_REFERENCE.md)** - Common commands and tips
 
 ### Test Metrics
 
