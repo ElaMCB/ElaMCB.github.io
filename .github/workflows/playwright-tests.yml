@@ -1,4 +1,4 @@
-name: Playwright Tests with Email Report
+name: Playwright Tests
 
 on:
   push:
@@ -28,7 +28,6 @@ jobs:
       run: npx playwright install --with-deps
     
     - name: Run Playwright tests
-      continue-on-error: true # Continue even if tests fail so we can send the report
       run: npx playwright test
     
     - name: Upload Playwright Report as Artifact
@@ -38,36 +37,4 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
-    
-    - name: Zip HTML Report
-      if: always()
-      run: |
-        cd playwright-report
-        zip -r ../playwright-report.zip .
-        cd ..
-    
-    - name: Send Email with Report
-      if: always()
-      uses: dawidd6/action-send-mail@v3
-      with:
-        server_address: ${{ secrets.MAIL_SERVER }}
-        server_port: ${{ secrets.MAIL_PORT }}
-        username: ${{ secrets.MAIL_USERNAME }}
-        password: ${{ secrets.MAIL_PASSWORD }}
-        subject: "Playwright Test Report - ${{ github.repository }} - ${{ job.status }}"
-        to: ${{ secrets.MAIL_TO }}
-        from: ${{ secrets.MAIL_FROM }}
-        body: |
-          Playwright Test Results for ${{ github.repository }}
-          
-          Workflow: ${{ github.workflow }}
-          Branch: ${{ github.ref_name }}
-          Commit: ${{ github.sha }}
-          Status: ${{ job.status }}
-          
-          Run Details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          
-          The HTML report is attached to this email. Extract the zip file and open index.html in your browser to view the interactive report.
-        attachments: playwright-report.zip
-        priority: normal
 
