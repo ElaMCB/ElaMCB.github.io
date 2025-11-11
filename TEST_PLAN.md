@@ -15,14 +15,13 @@
 
 ## 1. Executive Summary
 
-This test plan outlines the quality assurance strategy for the ElaMCB portfolio website. The testing approach encompasses functional, performance, visual, and accessibility testing using modern automation frameworks to ensure a high-quality user experience across all devices and browsers.
+This test plan outlines the quality assurance strategy for the ElaMCB portfolio website. The testing approach encompasses functional and performance testing using modern automation frameworks to ensure a high-quality user experience across all devices and browsers.
 
 ### Key Objectives
 - ✅ Ensure 100% critical functionality works correctly
 - ✅ Meet Google Core Web Vitals standards
-- ✅ Achieve WCAG 2.1 Level AA accessibility compliance
-- ✅ Maintain visual consistency across devices
 - ✅ Provide fast, reliable user experience
+- ✅ Validate navigation and content integrity
 
 ---
 
@@ -43,21 +42,6 @@ This test plan outlines the quality assurance strategy for the ElaMCB portfolio 
 - Core Web Vitals (LCP, FCP, CLS, TTFB)
 - Resource loading optimization
 - Time to Interactive (TTI)
-
-**Visual Testing:**
-- Cross-browser rendering
-- Responsive design breakpoints
-- Dark mode implementation
-- Print styles
-- Component-level consistency
-
-**Accessibility Testing:**
-- WCAG 2.1 Level A compliance
-- WCAG 2.1 Level AA compliance
-- Keyboard navigation
-- Screen reader compatibility
-- Color contrast ratios
-- ARIA attributes
 
 ### 2.2 Out of Scope
 
@@ -135,46 +119,6 @@ This test plan outlines the quality assurance strategy for the ElaMCB portfolio 
 - ✅ Page load under 3 seconds on 4G connection
 - ✅ Total page size under 2MB
 
-#### 3.2.4 Visual Regression Testing
-**Frequency:** Before releases, when UI changes  
-**Duration:** ~5 minutes  
-**Coverage:** UI consistency across devices
-
-**Tests:**
-- Desktop view (1280x720)
-- Tablet view (768x1024)
-- Mobile view (375x667)
-- Dark mode rendering
-- Print layout
-- Component-level screenshots
-
-**Command:** `npm run test:visual`
-
-**Baseline Management:**
-- Update baselines after approved UI changes
-- Store baselines in version control
-- Review diffs manually before approving
-
-#### 3.2.5 Accessibility Testing
-**Frequency:** Weekly, before releases  
-**Duration:** ~2 minutes  
-**Coverage:** WCAG 2.1 compliance
-
-**Tests:**
-- Automated WCAG 2.1 Level A & AA scans
-- Keyboard navigation (Tab, Enter, Escape)
-- Focus indicators visible
-- Color contrast ≥ 4.5:1 for normal text
-- Color contrast ≥ 3:1 for large text
-- Alt text on all images
-- Proper heading hierarchy
-- Form labels (if applicable)
-- ARIA attributes correct
-
-**Command:** `npm run test:a11y`
-
-**Compliance Target:** WCAG 2.1 Level AA
-
 ---
 
 ## 4. Test Environment
@@ -222,14 +166,11 @@ This test plan outlines the quality assurance strategy for the ElaMCB portfolio 
 
 | Category | Test Cases | Priority | Automation Status |
 |----------|-----------|----------|-------------------|
-| Smoke Tests | 4 | Critical | ✅ Automated |
+| Smoke Tests | 2 | Critical | ✅ Automated |
 | Navigation | 3 | High | ✅ Automated |
 | Performance | 3 | High | ✅ Automated |
-| Visual Regression | 7 | Medium | ✅ Automated |
-| Accessibility | 6 | High | ✅ Automated |
-| Responsive Design | 3 | Medium | ✅ Automated |
 
-**Total:** 26+ automated test cases
+**Total:** 8 automated test cases
 
 ### 5.2 Sample Test Cases
 
@@ -280,52 +221,6 @@ This test plan outlines the quality assurance strategy for the ElaMCB portfolio 
 **Actual Result:** ✅ Pass  
 **Automation:** `tests/performance.spec.js`
 
-#### TC-004: Mobile Responsive (Visual)
-**Priority:** Medium  
-**Tag:** @visual, @responsive, @mobile  
-**Preconditions:** Baseline screenshot exists  
-**Steps:**
-1. Set viewport to 375x667 (iPhone SE)
-2. Navigate to homepage
-3. Wait for content loaded
-4. Capture full page screenshot
-5. Compare with baseline
-
-**Expected Result:** No visual regressions detected  
-**Actual Result:** ✅ Pass  
-**Automation:** `tests/visual-regression.spec.js`
-
-#### TC-005: WCAG Compliance (Accessibility)
-**Priority:** High  
-**Tag:** @a11y, @critical, @wcag  
-**Preconditions:** None  
-**Steps:**
-1. Navigate to homepage
-2. Run axe-core accessibility scan
-3. Filter WCAG 2.1 Level A & AA rules
-4. Check for violations
-5. Assert zero violations
-
-**Expected Result:** No WCAG violations found  
-**Actual Result:** ✅ Pass  
-**Automation:** `tests/accessibility.spec.js`
-
-#### TC-006: Keyboard Navigation (Accessibility)
-**Priority:** High  
-**Tag:** @a11y, @keyboard  
-**Preconditions:** Homepage loaded  
-**Steps:**
-1. Identify all focusable elements
-2. Press Tab key
-3. Verify focus moves to first element
-4. Verify focus indicator visible
-5. Continue tabbing through all elements
-6. Verify logical tab order
-
-**Expected Result:** Keyboard navigation works, focus visible  
-**Actual Result:** ✅ Pass  
-**Automation:** `tests/accessibility.spec.js`
-
 ---
 
 ## 6. Test Data
@@ -369,8 +264,6 @@ N/A - Public website, no authentication required
 - ✅ All high-priority tests passing (95%+)
 - ✅ No critical defects open
 - ✅ Performance metrics within thresholds
-- ✅ Accessibility compliance verified
-- ✅ Visual regressions reviewed and approved
 - ✅ Test report generated and reviewed
 
 ---
@@ -387,12 +280,12 @@ N/A - Public website, no authentication required
 **High (P1):**
 - Navigation broken
 - Core features not working
-- Major accessibility violations
+- Critical performance issues
 
 **Medium (P2):**
 - Minor functionality issues
-- Visual inconsistencies
 - Performance degradation
+- Cosmetic issues
 
 **Low (P3):**
 - Cosmetic issues
@@ -411,7 +304,7 @@ N/A - Public website, no authentication required
 ### 8.3 Defect Tracking
 
 **Current:** GitHub Issues  
-**Labels:** `bug`, `critical`, `accessibility`, `performance`, `visual`
+**Labels:** `bug`, `critical`, `performance`, `functional`
 
 ---
 
@@ -442,8 +335,6 @@ npm test            # Full suite via GitHub Actions
 **Weekly:**
 - Full regression suite
 - Performance testing
-- Accessibility audit
-- Visual regression review
 
 **Before Major Release:**
 - Complete test suite
@@ -461,8 +352,6 @@ npm test            # Full suite via GitHub Actions
 |------|------------|--------|-----------|
 | External link breakage | Medium | Low | Regular link validation, monitoring |
 | Performance degradation | Low | High | Automated performance testing, budgets |
-| Accessibility regression | Medium | High | Automated WCAG testing, manual review |
-| Visual inconsistencies | Medium | Medium | Visual regression testing, approval process |
 | Test flakiness | Medium | Medium | Smart retries, explicit waits, stable selectors |
 | CI/CD failures | Low | Medium | Local testing first, CI optimization |
 
@@ -480,11 +369,6 @@ npm test            # Full suite via GitHub Actions
 - Optimize images and assets
 - Use lazy loading
 
-**For Accessibility:**
-- Run automated scans on every change
-- Manual keyboard navigation testing
-- Screen reader testing for critical flows
-
 ---
 
 ## 11. Test Metrics and Reporting
@@ -492,16 +376,15 @@ npm test            # Full suite via GitHub Actions
 ### 11.1 Key Metrics
 
 **Test Execution:**
-- Total test cases: 26+
+- Total test cases: 8
 - Pass rate target: 95%+
-- Execution time: < 10 minutes (full suite)
+- Execution time: < 5 minutes (full suite)
 - Smoke test time: < 30 seconds
 
 **Quality Metrics:**
 - Core Web Vitals: All "Good" (Green)
-- Accessibility violations: 0
-- Visual regressions: 0 unapproved
 - Broken links: 0
+- Critical functionality: 100% passing
 
 **Performance Metrics:**
 - LCP: < 2.5s (Target: < 2.0s)
@@ -552,11 +435,7 @@ npm run test:report  # Open HTML report
 - Auto-wait mechanisms
 - Powerful selectors
 - Video and trace recording
-
-**Accessibility:** @axe-core/playwright 4.10+
-- WCAG 2.1 compliance testing
-- Automated violation detection
-- Best practices validation
+- Performance metrics collection
 
 ### 12.2 CI/CD
 
@@ -590,11 +469,10 @@ npm run test:report  # Open HTML report
 
 ### 13.2 Test Artifacts
 
-- ✅ Test scripts (26+ test cases)
+- ✅ Test scripts (8 test cases)
 - ✅ Page Object Models
 - ✅ Custom fixtures
 - ✅ Configuration files
-- ✅ Visual regression baselines
 - ✅ CI/CD workflow
 
 ### 13.3 Reports
@@ -602,8 +480,7 @@ npm run test:report  # Open HTML report
 - ✅ HTML test reports
 - ✅ JSON results
 - ✅ Performance metrics
-- ✅ Accessibility audit results
-- ✅ Visual regression comparisons
+- ✅ Video and trace captures
 
 ---
 
@@ -613,14 +490,13 @@ npm run test:report  # Open HTML report
 
 **Regular Updates:**
 - Review and update test cases monthly
-- Update visual baselines after approved UI changes
 - Refresh dependencies quarterly
 - Review and update test plan quarterly
 
 **Triggered Updates:**
 - New features: Add test coverage
 - Bug fixes: Add regression tests
-- UI changes: Update baselines and selectors
+- UI changes: Update selectors
 - Performance issues: Add/update performance tests
 
 ### 14.2 Continuous Improvement
@@ -661,9 +537,8 @@ npm run test:report  # Open HTML report
 ### 16.1 Documentation
 
 - [Playwright Documentation](https://playwright.dev)
-- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
 - [Web Vitals](https://web.dev/vitals/)
-- [Axe Accessibility Testing](https://github.com/dequelabs/axe-core)
+- [Core Web Vitals Guide](https://web.dev/vitals/)
 
 ### 16.2 Project Documentation
 
@@ -693,8 +568,6 @@ npm run test:smoke          # Smoke tests
 npm run test:fast           # Fast tests
 npm run test:critical       # Critical tests
 npm run test:performance    # Performance tests
-npm run test:visual         # Visual regression
-npm run test:a11y           # Accessibility tests
 
 # Interactive Testing
 npm run test:ui             # UI mode
@@ -703,9 +576,6 @@ npm run test:debug          # Debug mode
 
 # Reporting
 npm run test:report         # Open HTML report
-
-# Visual Regression
-npm run test:update-snapshots  # Update baselines
 ```
 
 ---

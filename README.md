@@ -193,33 +193,31 @@ graph TB
 ## Portfolio Testing Suite
 
 > **Production-ready Playwright automation validating this portfolio**  
-> 20+ tests | 4x faster execution | Core Web Vitals monitoring | CI/CD integrated
+> 8 reliable tests | 4x faster execution | Core Web Vitals monitoring | CI/CD integrated
 
 **Stack:** Playwright • JavaScript • GitHub Actions  
-**Coverage:** Functional • Performance • Visual Regression
+**Coverage:** Functional • Performance Testing
 
 <details>
 <summary><b>View Test Coverage & Metrics</b></summary>
 
 | Category | Tests | Key Features |
 |----------|-------|--------------|
-| **Functional** | 8+ | Navigation, links, content validation, responsive design |
-| **Performance** | 3+ | Core Web Vitals (LCP, FCP, CLS, TTFB), resource analysis |
-| **Visual Regression** | 7+ | Mobile/tablet/desktop, dark mode, component screenshots |
-| **Fixtures Demo** | 6+ | Custom reusable test fixtures and patterns |
+| **Functional** | 5 | Homepage smoke test, social links, navigation, project links |
+| **Performance** | 3 | Core Web Vitals (LCP, FCP, CLS, TTFB), page load, resource analysis |
 
 **Optimizations:**
 - Page Object Model architecture
-- Parallel execution (4 workers)
-- Smart retry logic (CI-optimized)
-- Test tagging (@smoke, @performance, @visual)
-- Custom fixtures (9+ reusable)
+- Parallel execution (4 workers locally, 2 in CI)
+- Smart retry logic (1 local, 2 in CI)
+- Test tagging (@smoke, @performance, @fast, @critical)
+- Custom fixtures for reusability
 
 **CI/CD:**
 - Automated GitHub Actions workflow
-- HTML/JSON/Email reporting
+- HTML report artifacts (30-day retention)
 - Video & trace capture on failure
-- 30-day artifact retention
+- Badge status in README
 
 </details>
 
@@ -307,8 +305,6 @@ Found this useful? Here's how you can help:
 │   ├── portfolio.spec.js         # Smoke tests with POM
 │   ├── navigation-links.spec.js  # Link validation tests
 │   ├── performance.spec.js       # Core Web Vitals testing
-│   ├── visual-regression.spec.js # Visual regression suite
-│   ├── fixtures-demo.spec.js     # Fixture usage examples
 │   ├── pages/                    # Page Object Models
 │   │   └── PortfolioPage.js      # Portfolio POM
 │   └── fixtures/                 # Custom test fixtures
