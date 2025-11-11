@@ -1,3 +1,5 @@
+import { expect } from '@playwright/test';
+
 /**
  * Page Object Model for Portfolio Homepage
  * Encapsulates page interactions for better maintainability and reusability
