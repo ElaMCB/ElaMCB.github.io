@@ -1,6 +1,6 @@
 # [Elena Mereanu - AI-First Quality Engineer](https://elamcb.github.io)
 
-![Playwright Tests](https://github.com/ElaMCB/ElaMCB.github.io/actions/workflows/playwright-tests.yml/badge.svg?branch=main)
+![Portfolio Tests](https://github.com/ElaMCB/ElaMCB.github.io/actions/workflows/portfolio-tests.yml/badge.svg?branch=main)
 
 > Building reliable AI systems through rigorous testing and automation
 
