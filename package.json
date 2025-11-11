@@ -1,6 +1,21 @@
 {
   "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:fast": "playwright test --grep @fast",
+    "test:critical": "playwright test --grep @critical",
+    "test:performance": "playwright test --grep @performance",
+    "test:visual": "playwright test --grep @visual",
+    "test:a11y": "playwright test --grep @a11y",
+    "test:report": "playwright show-report",
+    "test:update-snapshots": "playwright test --update-snapshots"
+  },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
     "@playwright/test": "^1.56.1"
   },
   "dependencies": {
