@@ -253,16 +253,16 @@ Can you spot the difference between code written by AI and code written by human
 ## Recognition
 
 ### GitHub Metrics
-![GitHub Forks](https://img.shields.io/github/forks/ElaMCB/ElaMCB.github.io?style=social)
-![Watchers](https://img.shields.io/github/watchers/ElaMCB/ElaMCB.github.io?style=social)
-![Issues](https://img.shields.io/github/issues/ElaMCB/ElaMCB.github.io)
-![Pull Requests](https://img.shields.io/github/issues-pr/ElaMCB/ElaMCB.github.io)
+![GitHub Forks](https://img.shields.io/github/forks/ElaMCB/ElaMCB.github.io?style=social&t=1)
+![Watchers](https://img.shields.io/github/watchers/ElaMCB/ElaMCB.github.io?style=social&t=1)
+![Issues](https://img.shields.io/github/issues/ElaMCB/ElaMCB.github.io?t=1)
+![Pull Requests](https://img.shields.io/github/issues-pr/ElaMCB/ElaMCB.github.io?t=1)
 
 ### Impact Metrics
 - **Projects Deployed**: 5 production systems (including Portfolio Testing Suite)
 - **Performance Improvement**: 23-60% across projects  
 - **Testing Coverage**: 85%+ automated validation
-- **Test Automation**: 20+ E2E tests, 4x faster execution, Core Web Vitals monitoring
+- **Test Automation**: 8 E2E tests, 4x faster execution, Core Web Vitals monitoring
 - **AI Frameworks**: RAG, MCP, LLM testing, safety validation
 
 ## Star History
