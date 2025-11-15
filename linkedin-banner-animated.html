@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ela MCB - LinkedIn Banner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', 'Monaco', monospace;
+            background: #0a0a0a;
+            background-image: initial;
+            background-position-x: initial;
+            background-position-y: initial;
+            background-size: initial;
+            background-repeat: initial;
+            background-attachment: initial;
+            background-origin: initial;
+            background-clip: initial;
+            background-color: rgb(10, 10, 10);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .banner-container {
+            width: 1584px;
+            height: 396px;
+            /* Placeholder: Replace with your LinkedIn banner image path */
+            /* To get your current LinkedIn banner: Right-click on your LinkedIn profile banner, "Save image as..." */
+            background-image: url('your-linkedin-banner.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* Fallback gradient matching your portfolio if image not found */
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        /* Dark overlay to ensure text is readable */
+        .banner-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 15, 0.2);
+            z-index: 1;
+        }
+
+        /* Subtle futuristic grid effect */
+        .matrix-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(91, 127, 184, 0.01) 2px,
+                    rgba(91, 127, 184, 0.01) 4px
+                );
+            animation: matrix-scroll 20s linear infinite;
+            z-index: 2;
+        }
+
+        @keyframes matrix-scroll {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        /* Subtle glitch effect overlay */
+        .glitch-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(91, 127, 184, 0.03) 50%,
+                transparent 100%
+            );
+            animation: glitch 0.3s infinite;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translateX(0); opacity: 0; }
+            50% { transform: translateX(2px); opacity: 0.1; }
+        }
+
+        .text-container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .static-text {
+            font-size: 72px;
+            font-weight: bold;
+            color: #5b7fb8;
+            text-shadow: 
+                0 0 8px rgba(91, 127, 184, 0.5),
+                0 0 16px rgba(91, 127, 184, 0.3),
+                0 0 24px rgba(91, 127, 184, 0.2);
+            letter-spacing: 8px;
+            opacity: 1;
+            transition: opacity 1s ease-out;
+        }
+
+        .static-text.fade-out {
+            opacity: 0;
+        }
+
+        .typing-container {
+            display: none;
+            font-size: 96px;
+            font-weight: bold;
+            color: #5b7fb8;
+            text-shadow: 
+                0 0 8px rgba(91, 127, 184, 0.5),
+                0 0 16px rgba(91, 127, 184, 0.3),
+                0 0 24px rgba(91, 127, 184, 0.2);
+            letter-spacing: 12px;
+        }
+
+        .typing-container.active {
+            display: block;
+        }
+
+        .letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: letter-appear 0.3s ease-out forwards;
+        }
+
+        @keyframes letter-appear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 4px;
+            height: 96px;
+            background: #5b7fb8;
+            margin-left: 4px;
+            opacity: 0;
+            box-shadow: 0 0 8px rgba(91, 127, 184, 0.5);
+            transition: opacity 0.3s ease-in;
+        }
+        
+        .cursor.visible {
+            opacity: 1;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        .dots {
+            display: inline-block;
+            margin-left: 2px;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: #5b7fb8;
+            border-radius: 50%;
+            margin: 0 4px;
+            opacity: 0;
+            transform: scale(0);
+            animation: dot-appear 0.4s ease-out forwards;
+            box-shadow: 0 0 8px rgba(91, 127, 184, 0.5);
+        }
+
+        .dot:nth-child(1) { animation-delay: 0.1s; }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes dot-appear {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Scanline effect */
+        .scanline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: rgba(91, 127, 184, 0.2);
+            box-shadow: 0 0 4px rgba(91, 127, 184, 0.3);
+            animation: scan 4s linear infinite;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        @keyframes scan {
+            0% { top: 0; opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { top: 100%; opacity: 1; }
+        }
+
+        /* Pixelated transition effect */
+        .pixelated-transition {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0f;
+            z-index: 5;
+            opacity: 0;
+            display: none;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+            pointer-events: none;
+        }
+
+        .pixelated-transition.active {
+            display: block;
+            opacity: 1;
+            animation: pixelate-out 1.5s ease-in-out forwards;
+        }
+
+        @keyframes pixelate-out {
+            0% {
+                opacity: 1;
+                filter: blur(0px) contrast(1);
+                transform: scale(1);
+            }
+            25% {
+                filter: blur(2px) contrast(2);
+                transform: scale(1.02);
+            }
+            50% {
+                filter: blur(4px) contrast(3);
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+            75% {
+                filter: blur(8px) contrast(4);
+                transform: scale(1.1);
+                opacity: 0.4;
+            }
+            100% {
+                filter: blur(20px) contrast(5);
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Pixelated reveal for typing text */
+        .typing-container.pixelate-in {
+            animation: pixelate-in 1s ease-out forwards, subtle-pulse 3s ease-in-out infinite 1s;
+        }
+
+        @keyframes pixelate-in {
+            0% {
+                filter: blur(20px) contrast(5);
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            50% {
+                filter: blur(8px) contrast(3);
+                opacity: 0.5;
+                transform: scale(0.95);
+            }
+            100% {
+                filter: blur(0px) contrast(1);
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Subtle glitch effect */
+        .glitch-text {
+            position: relative;
+        }
+
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch-text::before {
+            left: -2px;
+            text-shadow: 2px 0 rgba(91, 127, 184, 0.3);
+            clip: rect(0, 900px, 0, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .glitch-text::after {
+            left: 2px;
+            text-shadow: -2px 0 rgba(91, 127, 184, 0.3);
+            clip: rect(0, 900px, 0, 0);
+            animation: glitch-anim2 3s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(42px, 9999px, 44px, 0); }
+            5% { clip: rect(12px, 9999px, 59px, 0); }
+            10% { clip: rect(48px, 9999px, 29px, 0); }
+            15% { clip: rect(42px, 9999px, 73px, 0); }
+            20% { clip: rect(63px, 9999px, 27px, 0); }
+            25% { clip: rect(34px, 9999px, 55px, 0); }
+            30% { clip: rect(86px, 9999px, 73px, 0); }
+            35% { clip: rect(20px, 9999px, 20px, 0); }
+            40% { clip: rect(26px, 9999px, 60px, 0); }
+            45% { clip: rect(25px, 9999px, 66px, 0); }
+            50% { clip: rect(57px, 9999px, 98px, 0); }
+            55% { clip: rect(5px, 9999px, 46px, 0); }
+            60% { clip: rect(82px, 9999px, 31px, 0); }
+            65% { clip: rect(54px, 9999px, 27px, 0); }
+            70% { clip: rect(28px, 9999px, 99px, 0); }
+            75% { clip: rect(45px, 9999px, 69px, 0); }
+            80% { clip: rect(23px, 9999px, 85px, 0); }
+            85% { clip: rect(54px, 9999px, 84px, 0); }
+            90% { clip: rect(10px, 9999px, 2px, 0); }
+            95% { clip: rect(33px, 9999px, 40px, 0); }
+            100% { clip: rect(58px, 9999px, 98px, 0); }
+        }
+
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+            5% { clip: rect(25px, 9999px, 97px, 0); }
+            10% { clip: rect(40px, 9999px, 66px, 0); }
+            15% { clip: rect(52px, 9999px, 99px, 0); }
+            20% { clip: rect(19px, 9999px, 75px, 0); }
+            25% { clip: rect(90px, 9999px, 98px, 0); }
+            30% { clip: rect(2px, 9999px, 14px, 0); }
+            35% { clip: rect(79px, 9999px, 85px, 0); }
+            40% { clip: rect(96px, 9999px, 9px, 0); }
+            45% { clip: rect(7px, 9999px, 50px, 0); }
+            50% { clip: rect(23px, 9999px, 43px, 0); }
+            55% { clip: rect(58px, 9999px, 96px, 0); }
+            60% { clip: rect(88px, 9999px, 10px, 0); }
+            65% { clip: rect(15px, 9999px, 37px, 0); }
+            70% { clip: rect(31px, 9999px, 94px, 0); }
+            75% { clip: rect(47px, 9999px, 11px, 0); }
+            80% { clip: rect(64px, 9999px, 30px, 0); }
+            85% { clip: rect(80px, 9999px, 5px, 0); }
+            90% { clip: rect(1px, 9999px, 60px, 0); }
+            95% { clip: rect(90px, 9999px, 80px, 0); }
+            100% { clip: rect(37px, 9999px, 96px, 0); }
+        }
+
+        /* Subtle pulse on completed text */
+        .typing-container.active.pulse {
+            animation: subtle-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes subtle-pulse {
+            0%, 100% {
+                transform: scale(1);
+                filter: brightness(1);
+            }
+            50% {
+                transform: scale(1.01);
+                filter: brightness(1.05);
+            }
+        }
+
+        /* Terminal-style code characters */
+        .code-char {
+            position: absolute;
+            color: rgba(91, 127, 184, 0.15);
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            pointer-events: none;
+            animation: code-fall 20s linear infinite;
+        }
+
+        @keyframes code-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.15;
+            }
+            90% {
+                opacity: 0.15;
+            }
+            100% {
+                transform: translateY(500px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="banner-container">
+        <!-- Background effects -->
+        <div class="matrix-bg"></div>
+        <div class="glitch-overlay"></div>
+        <div class="scanline"></div>
+        <div id="code-chars-container"></div>
+        <div class="pixelated-transition" id="pixelatedTransition"></div>
+
+        <!-- Static text (initial display) -->
+        <div class="text-container">
+            <div class="static-text" id="staticText">ELAMCB</div>
+        </div>
+
+        <!-- Typing animation (appears after delay) -->
+        <div class="text-container">
+            <div class="typing-container" id="typingContainer">
+                <span class="glitch-text" id="glitchWrapper" data-text="ELAMCB...">
+                    <span id="typingText"></span>
+                </span>
+                <span class="dots">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </span>
+                <span class="cursor" id="cursor"></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const staticText = document.getElementById('staticText');
+        const typingContainer = document.getElementById('typingContainer');
+        const typingText = document.getElementById('typingText');
+        const glitchWrapper = document.getElementById('glitchWrapper');
+        const cursor = document.getElementById('cursor');
+        const letters = ['E', 'L', 'A', 'M', 'C', 'B'];
+        
+        // Wait 3 seconds, then fade out static text
+        setTimeout(() => {
+            staticText.classList.add('fade-out');
+            
+            // Trigger pixelated transition
+            const pixelatedTransition = document.getElementById('pixelatedTransition');
+            pixelatedTransition.classList.add('active');
+            
+            // After fade completes, show typing container and start animation
+            setTimeout(() => {
+                staticText.style.display = 'none';
+                typingContainer.classList.add('active', 'pixelate-in');
+                
+                // Type each letter with delay
+                let index = 0;
+                const typeLetter = () => {
+                    if (index < letters.length) {
+                        const letterSpan = document.createElement('span');
+                        letterSpan.className = 'letter';
+                        letterSpan.textContent = letters[index];
+                        letterSpan.style.animationDelay = `${index * 0.15}s`;
+                        typingText.appendChild(letterSpan);
+                        // Update glitch text
+                        glitchWrapper.setAttribute('data-text', letters.slice(0, index + 1).join(''));
+                        index++;
+                        setTimeout(typeLetter, 150);
+                    } else {
+                        // All letters typed, update glitch text with dots
+                        glitchWrapper.setAttribute('data-text', 'ELAMCB...');
+                        // Wait for dots animation, then show cursor
+                        // Last dot appears at 0.3s delay, so wait a bit more
+                        setTimeout(() => {
+                            cursor.classList.add('visible');
+                            // Add pulse effect after typing completes
+                            typingContainer.classList.add('pulse');
+                        }, 500);
+                    }
+                };
+                
+                typeLetter();
+            }, 1000);
+        }, 3000);
+
+        // Create falling code characters
+        const codeCharsContainer = document.getElementById('code-chars-container');
+        const codeChars = ['0', '1', '{', '}', '[', ']', '(', ')', '<', '>', '/', '*', '+', '-', '=', '&', '|', '%', '#', '@'];
+        const numCodeChars = 8;
+
+        function createCodeChar() {
+            const char = document.createElement('div');
+            char.className = 'code-char';
+            char.textContent = codeChars[Math.floor(Math.random() * codeChars.length)];
+            char.style.left = Math.random() * 1584 + 'px';
+            char.style.animationDuration = (15 + Math.random() * 10) + 's';
+            char.style.animationDelay = Math.random() * 5 + 's';
+            codeCharsContainer.appendChild(char);
+
+            // Remove after animation
+            setTimeout(() => {
+                if (char.parentNode) {
+                    char.parentNode.removeChild(char);
+                }
+            }, 25000);
+        }
+
+        // Create code characters periodically
+        for (let i = 0; i < numCodeChars; i++) {
+            setTimeout(() => {
+                createCodeChar();
+                setInterval(createCodeChar, 3000);
+            }, i * 500);
+        }
+    </script>
+</body>
+</html>
+
