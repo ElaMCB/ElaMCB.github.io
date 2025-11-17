@@ -1265,14 +1265,14 @@
             });
         }
         
-        // Load latest discoveries
+        // Load all discoveries from all scan files
         async function loadDiscoveries() {
             try {
-                // Try to fetch the latest discoveries from GitHub
+                // Try to fetch all discovery files from GitHub
                 const response = await fetch('https://api.github.com/repos/ElaMCB/ElaMCB.github.io/contents/ai-ide-comparison');
                 const files = await response.json();
                 
-                // Find the most recent discoveries JSON file
+                // Find all discoveries JSON files
                 const discoveryFiles = files
                     .filter(f => f.name.startsWith('discoveries-') && f.name.endsWith('.json'))
                     .sort((a, b) => b.name.localeCompare(a.name));
@@ -1282,16 +1282,36 @@
                     return;
                 }
                 
-                // Fetch the latest discovery file
+                // Get the latest scan date from the most recent file
                 const latestFile = discoveryFiles[0];
-                const dataResponse = await fetch(latestFile.download_url);
-                const discoveries = await dataResponse.json();
-                
-                // Extract date from filename
                 const dateMatch = latestFile.name.match(/discoveries-(\d{4}-\d{2}-\d{2})/);
                 const scanDate = dateMatch ? dateMatch[1] : 'Unknown';
                 
-                displayDiscoveries(discoveries, scanDate);
+                // Load and combine all discoveries from all files
+                const allDiscoveries = [];
+                const seenNames = new Set();
+                
+                for (const file of discoveryFiles) {
+                    try {
+                        const dataResponse = await fetch(file.download_url);
+                        const discoveries = await dataResponse.json();
+                        
+                        // Add discoveries that haven't been seen before (avoid duplicates)
+                        if (Array.isArray(discoveries)) {
+                            discoveries.forEach(ide => {
+                                const ideName = (ide.name || ide.title || '').toLowerCase();
+                                if (ideName && !seenNames.has(ideName)) {
+                                    seenNames.add(ideName);
+                                    allDiscoveries.push(ide);
+                                }
+                            });
+                        }
+                    } catch (error) {
+                        console.warn(`Error loading ${file.name}:`, error);
+                    }
+                }
+                
+                displayDiscoveries(allDiscoveries, scanDate);
             } catch (error) {
                 console.error('Error loading discoveries:', error);
                 showNoDiscoveries();
@@ -1319,13 +1339,16 @@
                     <strong>Last Scan:</strong> ${scanDate}
                     <span style="margin: 0 1rem;">•</span>
                     <i class="fas fa-lightbulb" style="color: var(--gold);"></i>
-                    <strong>${discoveries.length} New IDEs Found</strong>
+                    <strong>${discoveries.length} IDEs Pending Review</strong>
+                    <p style="margin-top: 0.5rem; color: rgba(228, 228, 231, 0.6); font-size: 0.85rem;">
+                        Accumulated from all scans - ready for testing
+                    </p>
                 </div>
                 
                 <div style="display: grid; gap: 1.5rem;">
             `;
             
-            discoveries.slice(0, 5).forEach((ide, index) => {
+            discoveries.forEach((ide, index) => {
                 html += `
                     <div style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 15px; border-left: 4px solid var(--accent);">
                         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
@@ -1350,14 +1373,6 @@
                     </div>
                 `;
             });
-            
-            if (discoveries.length > 5) {
-                html += `
-                    <div style="text-align: center; padding: 1rem; color: rgba(228, 228, 231, 0.7);">
-                        <i class="fas fa-plus-circle"></i> ${discoveries.length - 5} more discoveries available in the full report
-                    </div>
-                `;
-            }
             
             html += '</div>';
             content.innerHTML = html;
