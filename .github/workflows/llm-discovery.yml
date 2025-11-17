@@ -1,0 +1,118 @@
+name: Weekly LLM & Gen AI Research Discovery
+
+on:
+  schedule:
+    # Run every Monday at 10 AM EST (3 PM UTC in winter, 2 PM UTC in summer)
+    - cron: '0 15 * * 1'
+  workflow_dispatch: # Allow manual trigger
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Run LLM discovery script
+        run: |
+          cd llm-discovery
+          node auto-discover-llms.js
+        continue-on-error: true
+      
+      - name: Check if discoveries were made
+        id: check_discoveries
+        run: |
+          cd llm-discovery
+          if ls discoveries-*.json 1> /dev/null 2>&1; then
+            echo "has_discoveries=true" >> $GITHUB_OUTPUT
+            # Get the most recent discovery file
+            latest_file=$(ls -t discoveries-*.json | head -n1)
+            models=$(jq '.totalModels // (.models | length)' "$latest_file")
+            papers=$(jq '.totalPapers // (.papers | length)' "$latest_file")
+            echo "model_count=$models" >> $GITHUB_OUTPUT
+            echo "paper_count=$papers" >> $GITHUB_OUTPUT
+          else
+            echo "has_discoveries=false" >> $GITHUB_OUTPUT
+            echo "model_count=0" >> $GITHUB_OUTPUT
+            echo "paper_count=0" >> $GITHUB_OUTPUT
+            echo "No new LLMs or papers discovered this week"
+          fi
+      
+      - name: Commit scan results (always update date)
+        run: |
+          cd llm-discovery
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add discoveries-*.json discoveries-*.md
+          # Check if there are any changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit (files may already exist)"
+            exit 0
+          fi
+          # Get the latest discovery file
+          if ls discoveries-*.json 1> /dev/null 2>&1; then
+            latest_file=$(ls -t discoveries-*.json | head -n1)
+            models=$(jq '.totalModels // (.models | length)' "$latest_file")
+            papers=$(jq '.totalPapers // (.papers | length)' "$latest_file")
+            date_match=$(echo "$latest_file" | grep -oE 'discoveries-[0-9]{4}-[0-9]{2}-[0-9]{2}')
+            scan_date=$(echo "$date_match" | sed 's/discoveries-//')
+            if [ "$models" -gt 0 ] || [ "$papers" -gt 0 ]; then
+              git commit -m "feat: Weekly LLM discovery - $models models, $papers papers found (scan date: $scan_date)"
+            else
+              git commit -m "chore: Weekly LLM scan completed - no new discoveries (scan date: $scan_date)"
+            fi
+            git push origin main
+          else
+            echo "No discovery files found"
+            exit 1
+          fi
+      
+      - name: Create summary comment
+        if: steps.check_discoveries.outputs.has_discoveries == 'false'
+        run: |
+          echo "✅ LLM discovery scan completed successfully"
+          echo "📊 Result: No new LLMs or papers found"
+          echo "🔍 All major releases are already tracked"
+          echo "⏰ Next scan: Next Monday at 10 AM EST"
+      
+      - name: Create issue for discoveries
+        if: steps.check_discoveries.outputs.has_discoveries == 'true'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            const directory = 'llm-discovery';
+            const files = fs.readdirSync(directory)
+              .filter(f => f.startsWith('discoveries-') && f.endsWith('.json'))
+              .map(f => ({ name: f, time: fs.statSync(path.join(directory, f)).mtime }))
+              .sort((a, b) => b.time - a.time);
+            
+            if (files.length > 0) {
+              const filename = files[0].name;
+              const data = JSON.parse(fs.readFileSync(`llm-discovery/${filename}`, 'utf8'));
+              
+              const models = data.totalModels || (data.models ? data.models.length : 0);
+              const papers = data.totalPapers || (data.papers ? data.papers.length : 0);
+              
+              github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: `🔍 ${models} New LLMs & ${papers} Papers Discovered - Weekly Scan`,
+                body: `## Automated LLM & Gen AI Research Discovery\n\n**Discoveries:**\n- ${models} new LLM models found\n- ${papers} new research papers found\n\n**Review the discoveries:**\n- Check \`llm-discovery/${filename}\` for the full data\n- Check \`llm-discovery/${filename.replace('.json', '.md')}\` for the report\n- The discoveries are now live on the [discovery page](https://elamcb.github.io/llm-discovery/)\n\n**Next Steps:**\n1. Review each model/paper\n2. Test promising models (2-4 hours each)\n3. Read and summarize key papers\n4. Update tracking document\n5. Close this issue when done`,
+                labels: ['llm-discovery', 'automated-discovery', 'needs-review']
+              });
+            }
+

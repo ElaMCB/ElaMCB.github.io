@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM & Gen AI Research Discovery - Ela MCB</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            font-family: 'Courier New', 'Monaco', monospace;
+            background: #0a0a0f;
+            color: #e4e4e7;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        h1 {
+            color: #5b7fb8;
+            border-bottom: 2px solid rgba(91, 127, 184, 0.3);
+            padding-bottom: 10px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: rgba(91, 127, 184, 0.2);
+            border-radius: 5px;
+            color: #5b7fb8;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            background: rgba(91, 127, 184, 0.3);
+        }
+        .discovery-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(26, 26, 46, 0.5);
+            border-radius: 10px;
+            border: 1px solid rgba(91, 127, 184, 0.3);
+        }
+        .discovery-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid #5b7fb8;
+            margin: 1rem 0;
+        }
+        .discovery-item h3 {
+            color: #7aa3d8;
+            margin-top: 0;
+        }
+        .discovery-item a {
+            color: #5b7fb8;
+            text-decoration: none;
+        }
+        .discovery-item a:hover {
+            color: #7aa3d8;
+            text-decoration: underline;
+        }
+        .meta-info {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+            color: rgba(228, 228, 231, 0.6);
+            font-size: 0.9rem;
+        }
+        .status-badge {
+            background: rgba(251, 191, 36, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: rgba(228, 228, 231, 0.7);
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to Portfolio</a>
+        
+        <h1>LLM & Gen AI Research Discovery</h1>
+        <p>Automated weekly scans to discover new LLMs and groundbreaking Gen AI research papers.</p>
+        
+        <div id="discoveries-content">
+            <p>Loading discoveries...</p>
+        </div>
+    </div>
+
+    <script>
+        // Load all discoveries from all scan files
+        async function loadDiscoveries() {
+            try {
+                const response = await fetch('https://api.github.com/repos/ElaMCB/ElaMCB.github.io/contents/llm-discovery');
+                const files = await response.json();
+                
+                const discoveryFiles = files
+                    .filter(f => f.name.startsWith('discoveries-') && f.name.endsWith('.json'))
+                    .sort((a, b) => b.name.localeCompare(a.name));
+                
+                if (discoveryFiles.length === 0) {
+                    document.getElementById('discoveries-content').innerHTML = 
+                        '<p>No discovery data available yet. The automated discovery system will run every Monday.</p>';
+                    return;
+                }
+                
+                const latestFile = discoveryFiles[0];
+                const dateMatch = latestFile.name.match(/discoveries-(\d{4}-\d{2}-\d{2})/);
+                const scanDate = dateMatch ? dateMatch[1] : 'Unknown';
+                
+                // Load and combine all discoveries
+                const allModels = [];
+                const allPapers = [];
+                const seenModels = new Set();
+                const seenPapers = new Set();
+                
+                for (const file of discoveryFiles) {
+                    try {
+                        const dataResponse = await fetch(file.download_url);
+                        const data = await dataResponse.json();
+                        
+                        // Handle both old format (array) and new format (object with models/papers)
+                        const models = data.models || (Array.isArray(data) ? data.filter(d => d.source !== 'ArXiv') : []);
+                        const papers = data.papers || (Array.isArray(data) ? data.filter(d => d.source === 'ArXiv') : []);
+                        
+                        models.forEach(model => {
+                            const key = (model.name || '').toLowerCase();
+                            if (key && !seenModels.has(key)) {
+                                seenModels.add(key);
+                                allModels.push(model);
+                            }
+                        });
+                        
+                        papers.forEach(paper => {
+                            const key = (paper.paperId || paper.name || '').toLowerCase();
+                            if (key && !seenPapers.has(key)) {
+                                seenPapers.add(key);
+                                allPapers.push(paper);
+                            }
+                        });
+                    } catch (error) {
+                        console.warn(`Error loading ${file.name}:`, error);
+                    }
+                }
+                
+                displayDiscoveries(allModels, allPapers, scanDate);
+            } catch (error) {
+                console.error('Error loading discoveries:', error);
+                document.getElementById('discoveries-content').innerHTML = 
+                    '<p>Error loading discoveries. Please try again later.</p>';
+            }
+        }
+        
+        function displayDiscoveries(models, papers, scanDate) {
+            const content = document.getElementById('discoveries-content');
+            
+            let html = `
+                <div style="background: rgba(91, 155, 213, 0.08); padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem; text-align: center;">
+                    <i class="fas fa-clock" style="color: #5b7fb8;"></i>
+                    <strong>Last Scan:</strong> ${scanDate}
+                    <span style="margin: 0 1rem;">•</span>
+                    <i class="fas fa-cube" style="color: #7aa3d8;"></i>
+                    <strong>${models.length} Models Pending Review</strong>
+                    <span style="margin: 0 1rem;">•</span>
+                    <i class="fas fa-file-alt" style="color: #5b7fb8;"></i>
+                    <strong>${papers.length} Papers Pending Review</strong>
+                    <p style="margin-top: 0.5rem; color: rgba(228, 228, 231, 0.6); font-size: 0.85rem;">
+                        Accumulated from all scans - ready for review
+                    </p>
+                </div>
+            `;
+            
+            if (models.length > 0) {
+                html += `<div class="discovery-section"><h2>New LLM Models (${models.length})</h2>`;
+                models.forEach((model, index) => {
+                    html += `
+                        <div class="discovery-item">
+                            <h3>${index + 1}. ${model.name || 'Unknown Model'}</h3>
+                            <p>${model.description || 'No description available'}</p>
+                            <div class="meta-info">
+                                <span><i class="fas fa-tag"></i> ${model.source}</span>
+                                ${model.stars ? `<span><i class="fas fa-star"></i> ${model.stars.toLocaleString()} stars</span>` : ''}
+                                ${model.downloads ? `<span><i class="fas fa-download"></i> ${model.downloads.toLocaleString()} downloads</span>` : ''}
+                                ${model.likes ? `<span><i class="fas fa-heart"></i> ${model.likes} likes</span>` : ''}
+                            </div>
+                            <a href="${model.url}" target="_blank" style="display: inline-block; margin-top: 1rem;">
+                                <i class="fas fa-external-link-alt"></i> View ${model.source === 'Hugging Face' ? 'Model' : 'Repository'}
+                            </a>
+                            <div class="status-badge">
+                                <i class="fas fa-info-circle"></i> Status: Under review - not yet tested
+                            </div>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            }
+            
+            if (papers.length > 0) {
+                html += `<div class="discovery-section"><h2>New Research Papers (${papers.length})</h2>`;
+                papers.forEach((paper, index) => {
+                    html += `
+                        <div class="discovery-item">
+                            <h3>${index + 1}. ${paper.name || 'Unknown Paper'}</h3>
+                            <p>${paper.description || 'No description available'}</p>
+                            <div class="meta-info">
+                                <span><i class="fas fa-tag"></i> ${paper.source}</span>
+                                ${paper.category ? `<span><i class="fas fa-folder"></i> ${paper.category}</span>` : ''}
+                                ${paper.published ? `<span><i class="fas fa-calendar"></i> ${paper.published.split('T')[0]}</span>` : ''}
+                            </div>
+                            <a href="${paper.url}" target="_blank" style="display: inline-block; margin-top: 1rem;">
+                                <i class="fas fa-external-link-alt"></i> Read Paper
+                            </a>
+                            <div class="status-badge">
+                                <i class="fas fa-info-circle"></i> Status: Under review - not yet read
+                            </div>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            }
+            
+            if (models.length === 0 && papers.length === 0) {
+                html += `
+                    <div style="text-align: center; padding: 2rem;">
+                        <i class="fas fa-check-circle" style="font-size: 2rem; color: #5b7fb8;"></i>
+                        <p style="margin-top: 1rem; color: rgba(228, 228, 231, 0.9); font-weight: bold;">All Clear!</p>
+                        <p style="color: rgba(228, 228, 231, 0.7);">No new LLMs or papers discovered in the latest scan (${scanDate})</p>
+                    </div>
+                `;
+            }
+            
+            content.innerHTML = html;
+        }
+        
+        window.addEventListener('DOMContentLoaded', loadDiscoveries);
+    </script>
+</body>
+</html>
+
