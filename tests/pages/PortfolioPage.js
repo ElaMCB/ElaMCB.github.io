@@ -17,7 +17,7 @@ export class PortfolioPage {
     
     this.headings = {
       aiProjects: page.getByRole('heading', { name: 'AI Projects' }),
-      research: page.getByRole('heading', { name: 'Research' }),
+      research: page.locator('#research h2').filter({ hasText: 'AI Research' }),
     };
     
     this.socialLinks = {
