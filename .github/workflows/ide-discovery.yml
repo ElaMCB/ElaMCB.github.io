@@ -42,21 +42,38 @@ jobs:
             echo "discovery_count=$count" >> $GITHUB_OUTPUT
           else
             echo "has_discoveries=false" >> $GITHUB_OUTPUT
+            echo "discovery_count=0" >> $GITHUB_OUTPUT
             echo "No new AI IDEs discovered this week"
           fi
       
-      - name: Commit discoveries directly to main
-        if: steps.check_discoveries.outputs.has_discoveries == 'true'
+      - name: Commit scan results (always update date)
         run: |
           cd ai-ide-comparison
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
           git add discoveries-*.json discoveries-*.md
+          # Check if there are any changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit (files may already exist)"
+            exit 0
+          fi
           # Get the latest discovery file to count properly
-          latest_file=$(ls -t discoveries-*.json | head -n1)
-          count=$(jq 'length' "$latest_file")
-          git commit -m "feat: Weekly AI IDE discovery results - $count new IDEs found"
-          git push origin main
+          if ls discoveries-*.json 1> /dev/null 2>&1; then
+            latest_file=$(ls -t discoveries-*.json | head -n1)
+            count=$(jq 'length' "$latest_file")
+            if [ "$count" -gt 0 ]; then
+              git commit -m "feat: Weekly AI IDE discovery results - $count new IDEs found"
+            else
+              # Extract date from filename
+              date_match=$(echo "$latest_file" | grep -oE 'discoveries-[0-9]{4}-[0-9]{2}-[0-9]{2}')
+              scan_date=$(echo "$date_match" | sed 's/discoveries-//')
+              git commit -m "chore: Weekly AI IDE scan completed - no new IDEs found (scan date: $scan_date)"
+            fi
+            git push origin main
+          else
+            echo "No discovery files found"
+            exit 1
+          fi
       
       - name: Create summary comment
         if: steps.check_discoveries.outputs.has_discoveries == 'false'

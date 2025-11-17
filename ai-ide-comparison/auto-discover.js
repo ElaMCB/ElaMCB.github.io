@@ -245,6 +245,7 @@ function saveDiscoveries(discoveries) {
         console.log(`\n✅ Discovery complete!`);
         console.log(`📊 Found ${discoveries.length} potential new AI IDEs\n`);
         
+        // Always save scan date, even if no discoveries
         if (discoveries.length > 0) {
             saveDiscoveries(discoveries);
             
@@ -256,6 +257,8 @@ function saveDiscoveries(discoveries) {
             });
         } else {
             console.log('No new IDEs discovered this week.');
+            // Still save scan date file for tracking
+            saveDiscoveries([]);
         }
     } catch (error) {
         console.error('❌ Discovery failed:', error);
