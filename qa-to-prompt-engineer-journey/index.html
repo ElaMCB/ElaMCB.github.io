@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QA to Prompt Engineer Journey - Ela MCB</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            font-family: 'Courier New', 'Monaco', monospace;
+            background: #0a0a0f;
+            color: #e4e4e7;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(26, 26, 46, 0.5);
+            padding: 40px;
+            border-radius: 10px;
+            border: 1px solid rgba(91, 127, 184, 0.3);
+        }
+        h1 {
+            color: #5b7fb8;
+            border-bottom: 2px solid rgba(91, 127, 184, 0.3);
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #5b7fb8;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #7aa3d8;
+        }
+        a {
+            color: #5b7fb8;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #7aa3d8;
+            text-decoration: underline;
+        }
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        code {
+            background: rgba(91, 127, 184, 0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: rgba(91, 127, 184, 0.2);
+            border-radius: 5px;
+        }
+        .week-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .week-card {
+            background: rgba(91, 127, 184, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(91, 127, 184, 0.2);
+        }
+        .week-card h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to Portfolio</a>
+        
+        <h1>Journey: QA Lead → Prompt Engineer in 4 Weeks</h1>
+        
+        <blockquote>
+            <strong>Value Prop:</strong> "I turn vague requirements into reliable LLM features—measured, cost-optimal, shipped."
+        </blockquote>
+
+        <h2>Goal</h2>
+        <p>Get interview-ready for a Prompt Engineer role in 4 weeks through a structured, high-impact learning plan.</p>
+
+        <h2>Plan Overview</h2>
+        <p>This journey focuses on what hiring managers actually test:</p>
+        <ol>
+            <li><strong>Prompt craft</strong> - Writing effective prompts</li>
+            <li><strong>Eval & metrics</strong> - Proving prompts work with data</li>
+            <li><strong>Domain transfer</strong> - Adapting to new domains</li>
+            <li><strong>Tooling/automation</strong> - Building production-ready systems</li>
+            <li><strong>Communication</strong> - Articulating decisions with data</li>
+        </ol>
+
+        <p><strong>Time Commitment:</strong> ~10 hours/week (90-minute daily blocks)</p>
+
+        <h2>Week-by-Week Breakdown</h2>
+        
+        <div class="week-links">
+            <div class="week-card">
+                <h3>Week 1: Core Prompting</h3>
+                <p>Build reflex-level prompting hygiene</p>
+                <a href="./week1/README.md">View Plan →</a>
+            </div>
+            <div class="week-card">
+                <h3>Week 2: Evaluation & Data</h3>
+                <p>Prove prompts work with metrics</p>
+                <a href="./week2/README.md">View Plan →</a>
+            </div>
+            <div class="week-card">
+                <h3>Week 3: Domain Transfer</h3>
+                <p>Ship production-ready prompts</p>
+                <a href="./week3/README.md">View Plan →</a>
+            </div>
+            <div class="week-card">
+                <h3>Week 4: Portfolio & Interviews</h3>
+                <p>Package evidence for recruiters</p>
+                <a href="./week4/README.md">View Plan →</a>
+            </div>
+        </div>
+
+        <h2>Checkpoint Targets</h2>
+        <ul>
+            <li>Public GitHub repo ≥50 commits, ≥3 runnable projects</li>
+            <li>At least one write-up with >1k views or 50 claps</li>
+            <li>Can recite exact BLEU score improvement + cost delta for every project without notes</li>
+            <li>Five AI-scored answers ≥8/10 + one 45-min peer session with written feedback</li>
+        </ul>
+
+        <h2>Resources</h2>
+        <h3>Datasets</h3>
+        <ul>
+            <li><strong>GSM8K</strong> (math reasoning)</li>
+            <li><strong>MT-bench</strong> (chat evaluation)</li>
+            <li><strong>PubMedQA</strong> (medical Q&A)</li>
+            <li><strong>CaseHOLD</strong> (legal reasoning)</li>
+            <li><strong>SQuAD</strong> (reading comprehension)</li>
+        </ul>
+
+        <h3>Tools</h3>
+        <ul>
+            <li><strong>Promptfoo</strong> - Prompt testing framework</li>
+            <li><strong>Phoenix Arize</strong> - LLM observability</li>
+            <li><strong>LangSmith</strong> - LangChain debugging</li>
+            <li><strong>Weights & Biases "Traces"</strong> - Experiment tracking</li>
+        </ul>
+
+        <h2>Ready-Mode Checklist</h2>
+        <ul>
+            <li>Portfolio live</li>
+            <li>3 case studies with numbers</li>
+            <li>GitHub pinned repos</li>
+            <li>Resume bullet: "Improved LLM task X from A% → B% accuracy while cutting cost by C% via prompt optimization"</li>
+            <li>Calendly link in email signature for recruiter calls</li>
+        </ul>
+
+        <p style="margin-top: 40px; text-align: center;">
+            <a href="https://github.com/ElaMCB/ElaMCB.github.io/tree/main/qa-to-prompt-engineer-journey" target="_blank">View Full Project on GitHub →</a>
+        </p>
+    </div>
+</body>
+</html>
+

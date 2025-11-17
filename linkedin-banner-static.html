@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ela MCB - LinkedIn Banner (Static)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', 'Monaco', monospace;
+            background: #0a0a0a;
+            background-image: initial;
+            background-position-x: initial;
+            background-position-y: initial;
+            background-size: initial;
+            background-repeat: initial;
+            background-attachment: initial;
+            background-origin: initial;
+            background-clip: initial;
+            background-color: rgb(10, 10, 10);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .banner-container {
+            width: 1584px;
+            height: 396px;
+            /* Placeholder: Replace with your LinkedIn banner image path */
+            /* To get your current LinkedIn banner: Right-click on your LinkedIn profile banner, "Save image as..." */
+            background-image: url('your-linkedin-banner.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* Fallback gradient matching your portfolio if image not found */
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        /* Dark overlay to ensure text is readable */
+        .banner-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 15, 0.2);
+            z-index: 1;
+        }
+
+        /* Subtle futuristic grid effect */
+        .matrix-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(91, 127, 184, 0.01) 2px,
+                    rgba(91, 127, 184, 0.01) 4px
+                );
+            animation: matrix-scroll 20s linear infinite;
+            z-index: 2;
+        }
+
+        @keyframes matrix-scroll {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        /* Subtle glitch effect overlay */
+        .glitch-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(91, 127, 184, 0.03) 50%,
+                transparent 100%
+            );
+            animation: glitch 0.3s infinite;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translateX(0); opacity: 0; }
+            50% { transform: translateX(2px); opacity: 0.1; }
+        }
+
+        .text-container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .typing-container {
+            display: block;
+            font-size: 96px;
+            font-weight: bold;
+            color: #5b7fb8;
+            text-shadow: 
+                0 0 8px rgba(91, 127, 184, 0.5),
+                0 0 16px rgba(91, 127, 184, 0.3),
+                0 0 24px rgba(91, 127, 184, 0.2);
+            letter-spacing: 12px;
+            animation: subtle-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes subtle-pulse {
+            0%, 100% {
+                transform: scale(1);
+                filter: brightness(1);
+            }
+            50% {
+                transform: scale(1.01);
+                filter: brightness(1.05);
+            }
+        }
+
+        .letter {
+            display: inline-block;
+            animation: letter-appear 0.3s ease-out forwards;
+        }
+
+        @keyframes letter-appear {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 4px;
+            height: 96px;
+            background: #5b7fb8;
+            margin-left: 4px;
+            box-shadow: 0 0 8px rgba(91, 127, 184, 0.5);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        .dots {
+            display: inline-block;
+            margin-left: 2px;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: #5b7fb8;
+            border-radius: 50%;
+            margin: 0 4px;
+            box-shadow: 0 0 8px rgba(91, 127, 184, 0.5);
+        }
+
+        /* Scanline effect */
+        .scanline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: rgba(91, 127, 184, 0.2);
+            box-shadow: 0 0 4px rgba(91, 127, 184, 0.3);
+            animation: scan 4s linear infinite;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        @keyframes scan {
+            0% { top: 0; opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { top: 100%; opacity: 1; }
+        }
+
+        /* Terminal-style code characters */
+        .code-char {
+            position: absolute;
+            color: rgba(91, 127, 184, 0.15);
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            pointer-events: none;
+            animation: code-fall 20s linear infinite;
+        }
+
+        @keyframes code-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.15;
+            }
+            90% {
+                opacity: 0.15;
+            }
+            100% {
+                transform: translateY(500px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="banner-container">
+        <!-- Background effects -->
+        <div class="matrix-bg"></div>
+        <div class="glitch-overlay"></div>
+        <div class="scanline"></div>
+        <div id="code-chars-container"></div>
+
+        <!-- Typing animation (final state) -->
+        <div class="text-container">
+            <div class="typing-container">
+                <span id="typingText">
+                    <span class="letter">E</span>
+                    <span class="letter">L</span>
+                    <span class="letter">A</span>
+                    <span class="letter">M</span>
+                    <span class="letter">C</span>
+                    <span class="letter">B</span>
+                </span>
+                <span class="dots">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </span>
+                <span class="cursor"></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create falling code characters
+        const codeCharsContainer = document.getElementById('code-chars-container');
+        const codeChars = ['0', '1', '{', '}', '[', ']', '(', ')', '<', '>', '/', '*', '+', '-', '=', '&', '|', '%', '#', '@'];
+        const numCodeChars = 8;
+
+        function createCodeChar() {
+            const char = document.createElement('div');
+            char.className = 'code-char';
+            char.textContent = codeChars[Math.floor(Math.random() * codeChars.length)];
+            char.style.left = Math.random() * 1584 + 'px';
+            char.style.animationDuration = (15 + Math.random() * 10) + 's';
+            char.style.animationDelay = Math.random() * 5 + 's';
+            codeCharsContainer.appendChild(char);
+
+            // Remove after animation
+            setTimeout(() => {
+                if (char.parentNode) {
+                    char.parentNode.removeChild(char);
+                }
+            }, 25000);
+        }
+
+        // Create code characters periodically
+        for (let i = 0; i < numCodeChars; i++) {
+            setTimeout(() => {
+                createCodeChar();
+                setInterval(createCodeChar, 3000);
+            }, i * 500);
+        }
+    </script>
+</body>
+</html>
+
