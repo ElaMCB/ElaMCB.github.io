@@ -54,12 +54,24 @@ jobs:
           cd llm-discovery
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
-          git add discoveries-*.json discoveries-*.md
+          
+          # Check if discovery files exist before trying to add them
+          if ls discoveries-*.json 1> /dev/null 2>&1; then
+            # Add JSON files if they exist
+            git add discoveries-*.json
+          fi
+          
+          if ls discoveries-*.md 1> /dev/null 2>&1; then
+            # Add markdown files if they exist
+            git add discoveries-*.md
+          fi
+          
           # Check if there are any changes to commit
           if git diff --staged --quiet; then
-            echo "No changes to commit (files may already exist)"
+            echo "No changes to commit (files may already exist or script didn't create files)"
             exit 0
           fi
+          
           # Get the latest discovery file
           if ls discoveries-*.json 1> /dev/null 2>&1; then
             latest_file=$(ls -t discoveries-*.json | head -n1)
@@ -74,7 +86,7 @@ jobs:
             fi
             git push origin main
           else
-            echo "No discovery files found"
+            echo "No discovery files found - script may have failed"
             exit 1
           fi
       
