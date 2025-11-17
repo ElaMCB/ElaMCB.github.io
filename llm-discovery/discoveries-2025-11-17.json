@@ -1,0 +1,458 @@
+{
+  "scanDate": "2025-11-17",
+  "models": [
+    {
+      "name": "sglang",
+      "description": "SGLang is a fast serving framework for large language models and vision language models.",
+      "url": "https://github.com/sgl-project/sglang",
+      "stars": 20206,
+      "language": "Python",
+      "updated": "2025-11-17T18:45:04Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "InternLM",
+      "description": "Official release of InternLM series (InternLM, InternLM2, InternLM2.5, InternLM3).",
+      "url": "https://github.com/InternLM/InternLM",
+      "stars": 7108,
+      "language": "Python",
+      "updated": "2025-11-17T08:09:57Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Open-dLLM",
+      "description": "The most open diffusion language model for code generation — releasing pretraining, evaluation, inference, and checkpoints.",
+      "url": "https://github.com/pengzhangzhi/Open-dLLM",
+      "stars": 456,
+      "language": "Python",
+      "updated": "2025-11-17T10:08:27Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "worker-vllm",
+      "description": "The RunPod worker template for serving our large language model endpoints. Powered by vLLM.",
+      "url": "https://github.com/runpod-workers/worker-vllm",
+      "stars": 382,
+      "language": "Python",
+      "updated": "2025-11-17T18:25:24Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Spatial-SSRL",
+      "description": "Official release of \"Spatial-SSRL: Enhancing Spatial Understanding via Self-Supervised Reinforcement Learning\"",
+      "url": "https://github.com/InternLM/Spatial-SSRL",
+      "stars": 71,
+      "language": "Python",
+      "updated": "2025-11-17T07:18:24Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "saycanpay",
+      "description": "Official code release of AAAI 2024 paper SayCanPay.",
+      "url": "https://github.com/RishiHazra/saycanpay",
+      "stars": 50,
+      "language": "Python",
+      "updated": "2025-10-22T10:11:23Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "NewAdversarialAttackPaper",
+      "description": "A list of recent adversarial attack and defense papers (including those on large language models)",
+      "url": "https://github.com/shenyizg/NewAdversarialAttackPaper",
+      "stars": 43,
+      "language": "Python",
+      "updated": "2025-11-14T02:17:31Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "rl-injector",
+      "description": "Official release of code for the paper RL is a hammer and LLMs are nails A simple RL approach to stronger prompt injection attacks",
+      "url": "https://github.com/facebookresearch/rl-injector",
+      "stars": 31,
+      "language": "Python",
+      "updated": "2025-11-14T05:26:09Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "alpha-research",
+      "description": "Repo for \"AlphaResearch: Accelerating New Algorithm Discovery with Language Models\"",
+      "url": "https://github.com/answers111/alpha-research",
+      "stars": 30,
+      "language": "Python",
+      "updated": "2025-11-17T05:16:05Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "qalign",
+      "description": "QAlign is a new test-time alignment approach that improves language model performance by using Markov chain Monte Carlo methods.",
+      "url": "https://github.com/goncalorafaria/qalign",
+      "stars": 24,
+      "language": "Python",
+      "updated": "2025-11-13T19:08:23Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "mcp-github-pr-issue-analyser",
+      "description": "A Model Context Protocol (MCP) application for automated GitHub PR analysis and issue management. Enables LLMs to fetch PR details, analyse diffs, manage issues, and handle releases through a standardised interface",
+      "url": "https://github.com/saidsef/mcp-github-pr-issue-analyser",
+      "stars": 5,
+      "language": "Python",
+      "updated": "2025-11-17T00:37:18Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ai-pretraining-llm",
+      "description": "Pretraining Large Language Models (LLMs) using Hugging Face",
+      "url": "https://github.com/botextractai/ai-pretraining-llm",
+      "stars": 4,
+      "language": "Python",
+      "updated": "2025-11-17T17:52:34Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "dllm-dev",
+      "description": "Internal repo for Diffusion Large Language Models",
+      "url": "https://github.com/kuleshov-group/dllm-dev",
+      "stars": 3,
+      "language": "Python",
+      "updated": "2025-11-17T19:02:39Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "MacBot",
+      "description": "MacBot: pre-release offline AI voice assistant for macOS, featuring an interruptible 5-model pipeline (VAD + Whisper STT + LLM + Neural TTS) with Metal acceleration, native tool integrations, secure RAG knowledge base, real-time WebSocket dashboard, and Docker orchestration.",
+      "url": "https://github.com/lukifer23/MacBot",
+      "stars": 3,
+      "language": "Python",
+      "updated": "2025-11-12T00:45:31Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "POINTS-Reader-OCR",
+      "description": "The POINTS-Reader, a vision-language model for end-to-end document conversion, is a powerful, distillation-free Vision-Language Model that sets new SoTA benchmarks.",
+      "url": "https://github.com/PRITHIVSAKTHIUR/POINTS-Reader-OCR",
+      "stars": 3,
+      "language": "Python",
+      "updated": "2025-11-01T13:45:04Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "etfall",
+      "description": "Emotional-Tone Fairness Across Language Levels in Large Language Models",
+      "url": "https://github.com/DuoChen-317/etfall",
+      "stars": 2,
+      "language": "Python",
+      "updated": "2025-11-17T18:46:06Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "calm_fin_news",
+      "description": "Context-Aware Language Models for Forecasting Market Impact from Sequences of Financial News",
+      "url": "https://github.com/rosskoval/calm_fin_news",
+      "stars": 2,
+      "language": "Python",
+      "updated": "2025-11-05T16:49:09Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "diffweave-ai",
+      "description": "Generate meaningful Git commit messages using large language models (LLMs)",
+      "url": "https://github.com/block/diffweave-ai",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2025-11-17T18:30:56Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "mcp-nvidia",
+      "description": "MCP server to search across NVIDIA blogs and releases to empower LLMs to better answer NVIDIA specific queries ",
+      "url": "https://github.com/bharatr21/mcp-nvidia",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2025-11-17T05:46:40Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "sec2md",
+      "description": "Convert SEC EDGAR filings, exhibits, and press releases to clean, LLM-ready Markdown. Page-aware. Section-aware. Table-preserving. Built for retrieval and reasoning.",
+      "url": "https://github.com/lucasastorian/sec2md",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2025-11-14T20:14:35Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Voice-Search-Enhancement-Using-LLMs",
+      "description": "This repository aims to leverage new Large Language Models (LLMs) and concepts to enhance voice search, especially on e-commerce platforms. The primary focus is on the ability to extract relevant results based on long, conversational audio queries.",
+      "url": "https://github.com/akishtawal/Voice-Search-Enhancement-Using-LLMs",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2025-11-12T08:11:08Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "atuna",
+      "description": "A Fine-tuning assistant for large language models",
+      "url": "https://github.com/mapa17/atuna",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-17T19:00:39Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Farmio",
+      "description": "We are developing a platform for renting farmland and farm tools, which leverages a local LLM (Large Language Model) to establish an AI-driven transaction system. The objective is to encourage more young people to take up farming.",
+      "url": "https://github.com/mato1321/Farmio",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-17T18:37:26Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "LongCat-Audio-Codec",
+      "description": "🔊 Build audio tokenizers and detokenizers for speech large language models with LongCat-Audio-Codec to enhance audio processing and understanding.",
+      "url": "https://github.com/Cleanable-timesignature929/LongCat-Audio-Codec",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-17T18:05:43Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "LLM_for_DUNE",
+      "description": "Large Language Models for DUNE",
+      "url": "https://github.com/DUNE/LLM_for_DUNE",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-17T18:03:19Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "hallmmaos",
+      "description": "HALLMMAOS: Hierarchical Asynchronous Large Language Model Multi-Agent Orchestration System",
+      "url": "https://github.com/joshmrtn/hallmmaos",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-17T18:03:02Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "hollm",
+      "description": "Notes and code from the oreilly book \"Hands-On Large Language Models\"",
+      "url": "https://github.com/thbounzer/hollm",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-17T17:58:22Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "DeepAnalyze",
+      "description": "🔍 Empower data scientists with DeepAnalyze, a tool that leverages large language models for automated data analysis and insights generation.",
+      "url": "https://github.com/Yusuf270200101/DeepAnalyze",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-17T17:54:54Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "autotweet",
+      "description": "Auto generate tweets powered by pre-trained GPT2 based large language model (LLM) available offline. ",
+      "url": "https://github.com/muhammad-ahsan/autotweet",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-17T17:46:02Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "community-release-llm-integration",
+      "description": "AI tasks that interact with LLMs and MCP servers",
+      "url": "https://github.com/xebialabs-community/community-release-llm-integration",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-16T09:16:57Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ReleaseRiskAnalyserAgent",
+      "description": "Code Risk Analyser Agent",
+      "url": "https://github.com/nmansur0ct/ReleaseRiskAnalyserAgent",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-15T15:34:42Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ReleaseNotesRec-Agent",
+      "description": "An AI-powered Release Notes & Feedback Analysis Agent built using LangChain, ChromaDB, and LLMs. It collects release notes, Reddit feedback, and real-world user issues, performs sentiment/topic analysis, and delivers accurate insights through a Retrieval-Augmented Generation (RAG) workflow.",
+      "url": "https://github.com/MohammedFahadd/ReleaseNotesRec-Agent",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-14T20:39:32Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "llm-linguistic-alignment",
+      "description": "This is an experimental implementation of the ALIGN package and is still a work in progress. This is NOT the official release. For the official ALIGN Python package, please visit: https://github.com/nickduran/align-linguistic-alignment. The official implementation is maintained by the original authors (Duran, Paxton, & Fusaroli).",
+      "url": "https://github.com/nickduran/llm-linguistic-alignment",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-13T18:40:43Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "github-release-notifier",
+      "description": "GitHubのリリース通知をLLMで要約してSlackへ自動投稿するOCI Functions",
+      "url": "https://github.com/kichouji/github-release-notifier",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-09T14:15:41Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "release-notes-generator",
+      "description": "This project automates the generation of consistent, structured, and audience-tailored release notes using Large Language Models (LLMs).",
+      "url": "https://github.com/mdsarfarazalam840/release-notes-generator",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-08T06:04:00Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ISRO_EO_DATA",
+      "description": "Large Language Models (LLMs) have achieved remarkable performance in natural language understanding and generation. However, real-world applications often require reasoning across multiple modalities, particularly the ability to interpret and generate responses grounded in visual input. On 5th August 2025, OpenAI released GPT-OSS ",
+      "url": "https://github.com/Supermaxx1/ISRO_EO_DATA",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-04T16:56:59Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "JamUpTaskMaster",
+      "description": "A task manager utilitizng local LLMs that user can fire off rapid ideas without being overwhelmed with a todo list app. Made for neuroatypicals that need to just release building pressure of thoughts without an immediate \"who what when where why\" -- LLMs on a loop will kinda coax that out of you",
+      "url": "https://github.com/jstamagal/JamUpTaskMaster",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-10-30T22:38:37Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Oris-Public",
+      "description": "Initial public release of AI Assistant for home control of light. LLM still in development.",
+      "url": "https://github.com/amnesia-67/Oris-Public",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-10-26T19:57:33Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "AI-Fake-News-Detection-system",
+      "description": "This repository contains an AI-powered Fake News Detection System built using Python, Natural Language Processing (NLP), and Machine Learning. The model classifies news articles as Real or Fake based on textual patterns.",
+      "url": "https://github.com/amanbangari/AI-Fake-News-Detection-system",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-17T16:38:11Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Training-and-evaluating-cognitive-language-models",
+      "description": "For training a cognitive language model with new datasets.",
+      "url": "https://github.com/cjwalmsley/Training-and-evaluating-cognitive-language-models",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-17T16:24:30Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "memfuse",
+      "description": "MemFuse offers a robust memory layer for large language models, enhancing their performance and efficiency. Join our community on GitHub to explore features, report issues, or request new functionalities! 🐙💻",
+      "url": "https://github.com/sakhama/memfuse",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-17T16:19:44Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "AI-Fake-News-Detector",
+      "description": "This repository contains an AI-powered Fake News Detection System built using Python, Natural Language Processing (NLP), and Machine Learning. The model classifies news articles as Real or Fake based on textual patterns.",
+      "url": "https://github.com/vibhutiagg02/AI-Fake-News-Detector",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-17T15:00:08Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "AI-Fake-News-Detection-System-",
+      "description": "This repository contains an AI-powered Fake News Detection System built using Python, Natural Language Processing (NLP), and Machine Learning. The model classifies news articles as Real or Fake based on textual patterns.",
+      "url": "https://github.com/bharat474-a/AI-Fake-News-Detection-System-",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-17T14:53:54Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "opic",
+      "description": "Event-based compositional language (self-hosting, self-compiling). Explore a new model of computation built on voices, chains, and cryptographic trust.",
+      "url": "https://github.com/selfapplied/opic",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-16T17:21:32Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Fake-News-Detection",
+      "description": "TruthGuard: AI-Powered Fake News Detection  A machine learning system designed to automatically classify news articles as real or fake using Natural Language Processing (NLP). The project features a dual-model approach and an interactive web application for easy demonstration and use.",
+      "url": "https://github.com/Owais4077/Fake-News-Detection",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-16T16:24:09Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Fake-news-",
+      "description": "This project aims to detect whether a given news article is real or fake using Natural Language Processing (NLP) and Machine Learning techniques. The model analyzes news headlines or article content to predict the authenticity of the news based on patterns learned from a labeled dataset.",
+      "url": "https://github.com/infigma02-png/Fake-news-",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-14T07:03:06Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "llm-conditional-forget-codex",
+      "description": "Humans can \"conditionally forget\" existing knowledge, such as rules in chess, and apply new hypothetical or analogical rules effectively, whereas large language models (LLMs) struggle to do this even with advanced reasoning capabilities. | Generated by Idea Explorer on 2025-11-06",
+      "url": "https://github.com/ChicagoHAI/llm-conditional-forget-codex",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-07T04:21:54Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Fake-News-Headline-Generator",
+      "description": "The Fake News Headline Generator is an AI-based project that generates realistic and catchy fake news headlines using Natural Language Processing (NLP) and Deep Learning techniques. The goal of this project is to demonstrate how language models can create human-like text,and to raise awareness about the ease of generating misleading content online.",
+      "url": "https://github.com/chetanjain24/Fake-News-Headline-Generator",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-06T11:35:08Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "fake-news-detectors",
+      "description": "The Fake News Detector is a machine learning project designed to classify news articles as “Fake” or “True” based on their textual content. With the rise of misinformation across digital platforms, this model helps in automatically identifying unreliable news sources using Natural Language Processing (NLP) techniques and classification algorithms.",
+      "url": "https://github.com/akshatmanjariya/fake-news-detectors",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-11-05T04:48:55Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Sign-Language-Detector-Translator",
+      "description": "A Python-based sign language recognition project using MediaPipe and TensorFlow. Includes hand-tracking for data collection (cvzone + OpenCV) and real-time classification with a Keras model. Built for easy training, inference, and extension to new gestures.",
+      "url": "https://github.com/austin-stanley-hinson/Sign-Language-Detector-Translator",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2025-10-30T18:14:22Z",
+      "source": "GitHub"
+    }
+  ],
+  "papers": [],
+  "totalModels": 50,
+  "totalPapers": 0
+}
