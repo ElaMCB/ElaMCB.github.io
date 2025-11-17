@@ -10,8 +10,8 @@
  * Usage: node auto-discover-llms.js
  */
 
-const https = require('https');
-const fs = require('fs');
+import https from 'https';
+import fs from 'fs';
 
 // Search keywords for LLMs
 const LLM_KEYWORDS = [
