@@ -1,0 +1,361 @@
+name: Complete E2E Testing Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  PYTHON_VERSION: '3.9'
+  NODE_VERSION: '18'
+
+jobs:
+  # Infrastructure Testing
+  infrastructure-test:
+    name: Infrastructure Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0
+      
+      - name: Terraform Format Check
+        run: terraform fmt -check
+      
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: infrastructure/terraform
+      
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan -no-color
+        working-directory: infrastructure/terraform
+      
+      - name: Security Scan with Checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: infrastructure/terraform
+          framework: terraform
+          soft_fail: true
+      
+      - name: Cost Estimation
+        uses: infracost/actions/comment@v3
+        if: github.event_name == 'pull_request'
+        with:
+          path: infrastructure/terraform
+          terraform_plan_flags: -out=tfplan
+          terraform_use_binary: true
+
+  # Docker Testing
+  docker-test:
+    name: Docker Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Build Docker Image
+        run: docker build -t app:test .
+      
+      - name: Run Container Tests
+        run: |
+          docker run -d --name test-app -p 3000:3000 app:test
+          sleep 10
+          curl -f http://localhost:3000/health || exit 1
+          docker stop test-app
+          docker rm test-app
+      
+      - name: Security Scan with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: app:test
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+      
+      - name: Upload Trivy Results
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  # Kubernetes Testing
+  kubernetes-test:
+    name: Kubernetes Tests
+    runs-on: ubuntu-latest
+    needs: [infrastructure-test, docker-test]
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install kubernetes pytest
+      
+      - name: Setup Kubernetes
+        uses: engineerd/setup-kind@v0.6.0
+        with:
+          version: "v0.20.0"
+      
+      - name: Deploy to Kind
+        run: |
+          kubectl apply -f k8s/
+          kubectl wait --for=condition=available --timeout=300s deployment/test-app
+      
+      - name: Run Kubernetes Tests
+        run: pytest test/infrastructure/test_k8s_e2e.py -v
+      
+      - name: Test Service Endpoints
+        run: |
+          kubectl port-forward svc/test-app-service 3000:3000 &
+          sleep 5
+          curl -f http://localhost:3000/health || exit 1
+
+  # LLM Pipeline Testing
+  llm-pipeline-test:
+    name: LLM Pipeline Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pytest pytest-asyncio langchain openai
+      
+      - name: Run LLM Unit Tests
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: pytest test/llm/test_pipeline.py -v
+      
+      - name: Run LLM Evaluation Tests
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: pytest test/llm/test_evaluation.py -v
+      
+      - name: Test Prompt Management
+        run: pytest test/llm/test_prompt_management.py -v
+
+  # LLM Model Serving Tests
+  llm-serving-test:
+    name: LLM Serving Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      
+      - name: Start LLM Server
+        run: |
+          python -m uvicorn llm_server:app --host 0.0.0.0 --port 8000 &
+          sleep 10
+      
+      - name: Test Model Health
+        run: |
+          curl -f http://localhost:8000/health || exit 1
+      
+      - name: Run Serving Tests
+        run: pytest test/llm/test_model_serving.py -v
+      
+      - name: Test Performance
+        run: pytest test/llm/test_performance.py -v
+
+  # End-to-End Integration Tests
+  e2e-integration-test:
+    name: E2E Integration Tests
+    runs-on: ubuntu-latest
+    needs: [kubernetes-test, llm-pipeline-test]
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pytest requests
+      
+      - name: Deploy to Staging
+        run: ./scripts/deploy.sh staging
+      
+      - name: Wait for Deployment
+        run: sleep 30
+      
+      - name: Run Smoke Tests
+        run: pytest test/e2e/smoke_tests.py -v
+      
+      - name: Run Integration Tests
+        run: pytest test/e2e/integration_tests.py -v
+      
+      - name: Run LLM Pipeline E2E
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: pytest test/e2e/llm_pipeline_e2e.py -v
+
+  # Playwright E2E Tests
+  playwright-e2e:
+    name: Playwright E2E Tests
+    runs-on: ubuntu-latest
+    needs: [e2e-integration-test]
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install Dependencies
+        run: npm ci
+      
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      
+      - name: Run Playwright Tests
+        run: npx playwright test
+      
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+
+  # Monitoring & Observability Tests
+  monitoring-test:
+    name: Monitoring Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install prometheus-client pytest
+      
+      - name: Test Metrics Collection
+        run: pytest test/monitoring/test_metrics.py -v
+      
+      - name: Test Logging
+        run: pytest test/monitoring/test_logging.py -v
+      
+      - name: Test Tracing
+        run: pytest test/monitoring/test_tracing.py -v
+      
+      - name: Test Alerts
+        run: pytest test/monitoring/test_alerts.py -v
+
+  # Security Testing
+  security-test:
+    name: Security Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Run OWASP ZAP Scan
+        uses: zaproxy/action-full-scan@v0.10.0
+        with:
+          target: 'https://staging.example.com'
+          rules_file_name: '.zap/rules.tsv'
+          cmd_options: '-a'
+      
+      - name: Test LLM Prompt Injection
+        run: pytest test/security/test_prompt_injection.py -v
+      
+      - name: Test API Security
+        run: pytest test/security/test_api_security.py -v
+
+  # Performance Testing
+  performance-test:
+    name: Performance Tests
+    runs-on: ubuntu-latest
+    needs: [e2e-integration-test]
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install locust pytest-benchmark
+      
+      - name: Run Load Tests
+        run: |
+          locust -f test/performance/load_test.py \
+            --headless \
+            --users 100 \
+            --spawn-rate 10 \
+            --run-time 5m \
+            --host https://staging.example.com
+      
+      - name: Run Performance Benchmarks
+        run: pytest test/performance/benchmarks.py --benchmark-only
+
+  # Test Report Generation
+  test-report:
+    name: Generate Test Report
+    runs-on: ubuntu-latest
+    needs: [
+      infrastructure-test,
+      docker-test,
+      kubernetes-test,
+      llm-pipeline-test,
+      llm-serving-test,
+      e2e-integration-test,
+      playwright-e2e,
+      monitoring-test,
+      security-test,
+      performance-test
+    ]
+    if: always()
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Generate Test Summary
+        run: |
+          echo "# Test Execution Summary" > test-summary.md
+          echo "## Infrastructure Tests: ${{ needs.infrastructure-test.result }}" >> test-summary.md
+          echo "## Docker Tests: ${{ needs.docker-test.result }}" >> test-summary.md
+          echo "## Kubernetes Tests: ${{ needs.kubernetes-test.result }}" >> test-summary.md
+          echo "## LLM Pipeline Tests: ${{ needs.llm-pipeline-test.result }}" >> test-summary.md
+          echo "## E2E Integration Tests: ${{ needs.e2e-integration-test.result }}" >> test-summary.md
+      
+      - name: Upload Test Summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-summary
+          path: test-summary.md
+
