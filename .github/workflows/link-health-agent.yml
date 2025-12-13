@@ -107,6 +107,7 @@ jobs:
             echo "has_broken=true" >> $GITHUB_OUTPUT
           else
             echo "broken_links=" >> $GITHUB_OUTPUT
+            echo "broken_links=" >> $GITHUB_OUTPUT
             echo "has_broken=false" >> $GITHUB_OUTPUT
             echo "internal_broken=0" >> $GITHUB_OUTPUT
             echo "external_broken=0" >> $GITHUB_OUTPUT
