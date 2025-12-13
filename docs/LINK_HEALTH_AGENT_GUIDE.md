@@ -154,7 +154,7 @@ Track these metrics:
 ## Related Resources
 
 - **[Portfolio Agents Roadmap](./PORTFOLIO_AGENTS_ROADMAP.md)** - See all planned agents
-- **[Autonomous CI Agent Guide](./AUTONOMOUS_CI_AGENT_GUIDE.md)** - Reference implementation
+- **[Autonomous CI Agent Guide](./AUTONOMOUS_CI_AGENT_GUIDE.html)** - Reference implementation
 - **[QA Agentic Workflows Guide](./QA_AGENTIC_WORKFLOWS_GUIDE.md)** - Build your own agents
 
 ---

@@ -304,7 +304,7 @@ Found this useful? Here's how you can help:
 
 | Agent | Status | Purpose | Key Capability | Links |
 |-------|--------|---------|----------------|-------|
-| **CIF-AA**<br/>CI Fix Autonomous Agent | ✅ Active | Auto-fix CI/CD failures | Fixes npm sync, missing deps, creates issues for complex errors | [Guide (HTML)](./docs/AUTONOMOUS_CI_AGENT_GUIDE.html) \| [Guide (MD)](./docs/AUTONOMOUS_CI_AGENT_GUIDE.md) \| [Workflow](./.github/workflows/autonomous-ci-fix-agent.yml) |
+| **CIF-AA**<br/>CI Fix Autonomous Agent | ✅ Active | Auto-fix CI/CD failures | Fixes npm sync, missing deps, creates issues for complex errors | [Guide](./docs/AUTONOMOUS_CI_AGENT_GUIDE.html) \| [Workflow](./.github/workflows/autonomous-ci-fix-agent.yml) |
 | **LHA**<br/>Link Health Agent | ✅ Active | Prevent broken links | Weekly link scans, creates PRs with fix reports, alerts on critical links | [Guide](./docs/LINK_HEALTH_AGENT_GUIDE.md) \| [Workflow](./.github/workflows/link-health-agent.yml) |
 | **SA**<br/>Security Agent | ✅ Active | Security monitoring | npm audit, secret detection, auto-fixes moderate issues, critical alerts | [Guide](./docs/SECURITY_AGENT_GUIDE.md) \| [Workflow](./.github/workflows/security-agent.yml) |
 | **SEO-MA**<br/>SEO Monitor Agent | 🔜 Planned | Monitor SEO health | Weekly audits, Core Web Vitals, meta tag validation | [Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md) |

@@ -310,14 +310,14 @@ Want to add a new agent? Follow these steps:
 4. **Document**: Add guide in `docs/`
 5. **Monitor**: Track performance and impact
 
-See **[Autonomous CI Agent Guide](./AUTONOMOUS_CI_AGENT_GUIDE.md)** for implementation reference.
+See **[Autonomous CI Agent Guide](./AUTONOMOUS_CI_AGENT_GUIDE.html)** for implementation reference.
 
 ---
 
 ## Resources
 
 - **[QA Agentic Workflows Guide](./QA_AGENTIC_WORKFLOWS_GUIDE.md)** - Learn to build agents
-- **[Autonomous CI Agent Guide](./AUTONOMOUS_CI_AGENT_GUIDE.md)** - Implementation example
+- **[Autonomous CI Agent Guide](./AUTONOMOUS_CI_AGENT_GUIDE.html)** - Implementation example
 - **[GitHub Actions Documentation](https://docs.github.com/en/actions)**
 
 ---
