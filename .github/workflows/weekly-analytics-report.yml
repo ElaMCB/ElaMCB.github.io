@@ -1,0 +1,54 @@
+name: Weekly Analytics Report
+
+# SHELVED - Disabled for now
+# To re-enable: Uncomment the 'on' section below and set up analytics
+
+# on:
+#   schedule:
+#     # Run every Monday at 9 AM UTC
+#     - cron: '0 9 * * 1'
+#   workflow_dispatch: # Allows manual trigger
+
+on:
+  workflow_dispatch: # Manual trigger only (workflow is shelved)
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+    # SHELVED: Workflow disabled - see analytics/SHELVED.md
+    # Remove the 'if: false' line below to re-enable
+    if: false
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+    
+    - name: Generate Weekly Report
+      env:
+        GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+        GA4_CREDENTIALS: ${{ secrets.GA4_CREDENTIALS }}
+        OWN_IP_ADDRESSES: ${{ secrets.OWN_IP_ADDRESSES }}
+        OWN_USER_AGENTS: ${{ secrets.OWN_USER_AGENTS }}
+      run: |
+        node analytics/generate-weekly-report.js
+        # Reports are saved to analytics/weekly-report.html and .txt
+    
+    - name: Send Email Report
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: ${{ secrets.MAIL_SERVER }}
+        server_port: ${{ secrets.MAIL_PORT }}
+        username: ${{ secrets.MAIL_USERNAME }}
+        password: ${{ secrets.MAIL_PASSWORD }}
+        subject: 'Weekly Portfolio Analytics Report - Excluding Your Visits'
+        to: ${{ secrets.MAIL_TO }}
+        from: ${{ secrets.MAIL_FROM }}
+        body: file://analytics/weekly-report.txt
+        html_body: file://analytics/weekly-report.html
+        content_type: text/html
+

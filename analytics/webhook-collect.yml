@@ -1,0 +1,74 @@
+# GitHub Action that can be triggered via webhook to collect visits
+# This allows client-side code to send visit data to GitHub
+
+name: Collect Visit Data
+
+on:
+  repository_dispatch:
+    types: [collect-visit]
+  workflow_dispatch:
+    inputs:
+      visit_data:
+        description: 'Visit data JSON'
+        required: true
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    
+    - name: Process Visit Data
+      env:
+        VISIT_DATA: ${{ github.event.client_payload.visit_data || github.event.inputs.visit_data }}
+        OWN_IP_ADDRESSES: ${{ secrets.OWN_IP_ADDRESSES }}
+        OWN_USER_AGENTS: ${{ secrets.OWN_USER_AGENTS }}
+      run: |
+        node -e "
+          const fs = require('fs');
+          const visitData = JSON.parse(process.env.VISIT_DATA || '{}');
+          const ownIPs = (process.env.OWN_IP_ADDRESSES || '').split(',').filter(Boolean);
+          const ownUAs = (process.env.OWN_USER_AGENTS || '').split(',').filter(Boolean);
+          
+          // Load existing visits
+          let analytics = { visits: [], startDate: new Date().toISOString() };
+          if (fs.existsSync('analytics/visits.json')) {
+            analytics = JSON.parse(fs.readFileSync('analytics/visits.json', 'utf8'));
+          }
+          
+          // Check if this is own visit (simplified - would need IP from webhook)
+          const isOwnVisit = ownUAs.some(ua => visitData.userAgent && visitData.userAgent.includes(ua));
+          
+          // Add visit
+          analytics.visits.push({
+            ...visitData,
+            timestamp: new Date().toISOString(),
+            isOwnVisit: isOwnVisit,
+          });
+          
+          // Keep only last 90 days
+          const cutoffDate = new Date();
+          cutoffDate.setDate(cutoffDate.getDate() - 90);
+          analytics.visits = analytics.visits.filter(v => 
+            new Date(v.timestamp) > cutoffDate
+          );
+          
+          // Save
+          fs.mkdirSync('analytics', { recursive: true });
+          fs.writeFileSync('analytics/visits.json', JSON.stringify(analytics, null, 2));
+        "
+    
+    - name: Commit Visit Data
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add analytics/visits.json
+        git diff --staged --quiet || git commit -m "Update visit analytics [skip ci]"
+        git push
+
