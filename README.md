@@ -302,48 +302,20 @@ Found this useful? Here's how you can help:
 
 **Live autonomous agents working on this portfolio 24/7**
 
-This portfolio demonstrates practical AI agentic workflows through a collection of autonomous agents that maintain, monitor, and enhance the site automatically.
+| Agent | Status | Purpose | Key Capability | Links |
+|-------|--------|---------|----------------|-------|
+| **CIF-AA**<br/>CI Fix Autonomous Agent | ✅ Active | Auto-fix CI/CD failures | Fixes npm sync, missing deps, creates issues for complex errors | [Guide](./docs/AUTONOMOUS_CI_AGENT_GUIDE.md) \| [Workflow](./.github/workflows/autonomous-ci-fix-agent.yml) |
+| **SEO-MA**<br/>SEO Monitor Agent | 🔜 Planned | Monitor SEO health | Weekly audits, Core Web Vitals, meta tag validation | [Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md) |
+| **LHA**<br/>Link Health Agent | 🔜 Planned | Prevent broken links | Weekly link scans, auto-fix broken links via PR | [Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md) |
+| **PMA**<br/>Performance Monitor Agent | 🔜 Planned | Track performance | Lighthouse audits, Core Web Vitals monitoring | [Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md) |
+| **DUA**<br/>Dependency Update Agent | 🔜 Planned | Keep dependencies current | Auto-update npm packages, security patches | [Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md) |
+| **CUA**<br/>Content Update Agent | 🔜 Planned | Maintain content freshness | Detect outdated content, update dates | [Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md) |
+| **AA**<br/>Analytics Agent | 🔜 Planned | Generate insights | Weekly analytics reports, trend analysis | [Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md) |
+| **SA**<br/>Security Agent | 🔜 Planned | Security monitoring | Vulnerability scanning, secret detection | [Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md) |
 
-### Active Agents
+**Why Autonomous Agents?** 24/7 operation • Instant response • Consistent quality • Demonstrates practical AI agentic workflows
 
-#### CIF-AA (CI Fix Autonomous Agent)
-**Status**: Active | **Type**: CI/CD Automation
-
-Autonomous agent that monitors GitHub Actions workflows, detects failures, analyzes errors, and automatically fixes common issues without human intervention.
-
-**Capabilities:**
-- Monitors CI/CD pipeline failures in real-time
-- Analyzes error logs using pattern matching and AI
-- Auto-fixes npm lock file sync issues
-- Handles missing dependencies automatically
-- Creates GitHub issues for complex errors requiring manual review
-
-**Impact:**
-- Zero manual intervention for common CI failures
-- Instant fix deployment (no waiting for human review)
-- Reduced context switching (no more copy-pasting errors)
-
-**[View Agent Guide →](./docs/AUTONOMOUS_CI_AGENT_GUIDE.md)** | **[Workflow Source →](./.github/workflows/autonomous-ci-fix-agent.yml)**
-
-### Planned Agents
-
-See **[Portfolio Autonomous Agents Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md)** for upcoming agents including:
-- SEO Monitor Agent
-- Link Health Agent  
-- Performance Monitor Agent
-- Content Update Agent
-- Dependency Update Agent
-- Analytics Agent
-
-### Why Autonomous Agents?
-
-- **24/7 Operation**: Work while you sleep
-- **Instant Response**: Fix issues immediately
-- **Consistent Quality**: Never miss routine maintenance
-- **Learning Opportunity**: Demonstrates practical AI agentic workflows
-- **Portfolio Enhancement**: Shows real-world AI implementation
-
-**Learn to build your own**: **[QA Agentic Workflows Guide](./docs/QA_AGENTIC_WORKFLOWS_GUIDE.md)**
+**Learn to build your own**: **[QA Agentic Workflows Guide](./docs/QA_AGENTIC_WORKFLOWS_GUIDE.md)** | **[Full Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md)**
 
 ## Architecture
 
