@@ -1,6 +1,8 @@
 # Autonomous CI Fix Agent Guide
 
-> **📄 Prefer a styled HTML version?** [View the HTML guide →](./AUTONOMOUS_CI_AGENT_GUIDE.html) (Better formatting, navigation, and code highlighting)
+> **📄 Prefer a styled HTML version?**  
+> **[👉 View the HTML guide here](https://elamcb.github.io/docs/AUTONOMOUS_CI_AGENT_GUIDE.html)**  
+> (Better formatting, navigation, and code highlighting)
 
 ## Overview
 
