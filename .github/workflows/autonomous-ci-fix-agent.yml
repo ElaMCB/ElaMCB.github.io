@@ -2,7 +2,7 @@ name: Autonomous CI Fix Agent
 
 on:
   workflow_run:
-    workflows: ["CI", "Tests", "Build"]
+    workflows: ["CI", "Tests", "Build", "LHA - Link Health Agent", "SA - Security Agent"]
     types:
       - completed
   workflow_dispatch:
@@ -139,8 +139,21 @@ jobs:
           
           cat fix_summary.md
 
+      - name: Auto-fix GitHub Actions output format errors
+        if: steps.analyze.outputs.error_type == 'github_actions_output_error'
+        run: |
+          echo "🔧 Auto-fixing GitHub Actions output format error..."
+          
+          # This error typically occurs when output values are not properly formatted
+          # The fix depends on the specific workflow, so we'll create an issue with suggested fixes
+          echo "fix_applied=false" >> $GITHUB_OUTPUT
+          
+          # Try to identify the problematic workflow file
+          FAILED_WORKFLOW="${{ github.event.workflow_run.name }}"
+          echo "failed_workflow=$FAILED_WORKFLOW" >> $GITHUB_OUTPUT
+
       - name: Create issue for unknown errors
-        if: steps.analyze.outputs.error_type == 'unknown' || steps.analyze.outputs.error_type == 'syntax_error'
+        if: steps.analyze.outputs.error_type == 'unknown' || steps.analyze.outputs.error_type == 'syntax_error' || steps.analyze.outputs.error_type == 'github_actions_output_error'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
