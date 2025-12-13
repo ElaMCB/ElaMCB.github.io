@@ -30,22 +30,48 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Debug workflow run event
+        if: github.event_name == 'workflow_run'
+        run: |
+          echo "Workflow Run Event Details:"
+          echo "Workflow Name: ${{ github.event.workflow_run.name }}"
+          echo "Conclusion: ${{ github.event.workflow_run.conclusion }}"
+          echo "Status: ${{ github.event.workflow_run.status }}"
+          echo "Run ID: ${{ github.event.workflow_run.id }}"
+
       - name: Get failed workflow logs
         id: get-logs
         run: |
           if [ "${{ github.event_name }}" == "workflow_run" ]; then
             RUN_ID="${{ github.event.workflow_run.id }}"
+            WORKFLOW_NAME="${{ github.event.workflow_run.name }}"
+            CONCLUSION="${{ github.event.workflow_run.conclusion }}"
+            
             echo "run_id=$RUN_ID" >> $GITHUB_OUTPUT
+            echo "workflow_name=$WORKFLOW_NAME" >> $GITHUB_OUTPUT
+            echo "conclusion=$CONCLUSION" >> $GITHUB_OUTPUT
+            
+            echo "📥 Downloading logs for workflow: $WORKFLOW_NAME (Conclusion: $CONCLUSION)"
             
             # Download workflow logs
             gh run view $RUN_ID --log > workflow_logs.txt 2>&1 || true
+            
+            if [ ! -s workflow_logs.txt ]; then
+              echo "⚠️ Warning: workflow_logs.txt is empty or doesn't exist"
+            else
+              echo "✅ Logs downloaded successfully ($(wc -l < workflow_logs.txt) lines)"
+            fi
           else
+            echo "🔍 Manual trigger - searching for latest failed CI run..."
             # For manual trigger, check latest failed run
             gh run list --workflow=CI --limit 1 --json databaseId,conclusion --jq '.[] | select(.conclusion=="failure") | .databaseId' | head -1 > run_id.txt || echo "" > run_id.txt
             RUN_ID=$(cat run_id.txt)
             if [ ! -z "$RUN_ID" ]; then
               echo "run_id=$RUN_ID" >> $GITHUB_OUTPUT
+              echo "📥 Downloading logs for run ID: $RUN_ID"
               gh run view $RUN_ID --log > workflow_logs.txt 2>&1 || true
+            else
+              echo "⚠️ No failed CI runs found"
             fi
           fi
 
