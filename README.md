@@ -296,6 +296,55 @@ Found this useful? Here's how you can help:
 
 **Want to customize this template?** See: **[Customization Guide](./docs/CUSTOMIZATION.md)**
 
+---
+
+## Autonomous Agents Ecosystem
+
+**Live autonomous agents working on this portfolio 24/7**
+
+This portfolio demonstrates practical AI agentic workflows through a collection of autonomous agents that maintain, monitor, and enhance the site automatically.
+
+### Active Agents
+
+#### CIF-AA (CI Fix Autonomous Agent)
+**Status**: Active | **Type**: CI/CD Automation
+
+Autonomous agent that monitors GitHub Actions workflows, detects failures, analyzes errors, and automatically fixes common issues without human intervention.
+
+**Capabilities:**
+- Monitors CI/CD pipeline failures in real-time
+- Analyzes error logs using pattern matching and AI
+- Auto-fixes npm lock file sync issues
+- Handles missing dependencies automatically
+- Creates GitHub issues for complex errors requiring manual review
+
+**Impact:**
+- Zero manual intervention for common CI failures
+- Instant fix deployment (no waiting for human review)
+- Reduced context switching (no more copy-pasting errors)
+
+**[View Agent Guide →](./docs/AUTONOMOUS_CI_AGENT_GUIDE.md)** | **[Workflow Source →](./.github/workflows/autonomous-ci-fix-agent.yml)**
+
+### Planned Agents
+
+See **[Portfolio Autonomous Agents Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md)** for upcoming agents including:
+- SEO Monitor Agent
+- Link Health Agent  
+- Performance Monitor Agent
+- Content Update Agent
+- Dependency Update Agent
+- Analytics Agent
+
+### Why Autonomous Agents?
+
+- **24/7 Operation**: Work while you sleep
+- **Instant Response**: Fix issues immediately
+- **Consistent Quality**: Never miss routine maintenance
+- **Learning Opportunity**: Demonstrates practical AI agentic workflows
+- **Portfolio Enhancement**: Shows real-world AI implementation
+
+**Learn to build your own**: **[QA Agentic Workflows Guide](./docs/QA_AGENTIC_WORKFLOWS_GUIDE.md)**
+
 ## Architecture
 
 ### Repository Structure
