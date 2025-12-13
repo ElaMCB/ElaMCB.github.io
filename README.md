@@ -284,6 +284,7 @@ Found this useful? Here's how you can help:
 ## Learning Resources
 
 ### AI-First Development Guides
+- **[QA Agentic Workflows Guide](./docs/QA_AGENTIC_WORKFLOWS_GUIDE.md)** - **Build your own specialized AI agents for daily QA work** - Free solutions, Monday-Friday workflows, chat agents
 - **[QA-to-AI Transformation Roadmap](./docs/QA-AI-TRANSFORMATION-ROADMAP.md)** - 🎯 **Transform your QA team to AI-first in 6-12 months** (487% ROI teaser available, 🔒 Full roadmap - Premium)
 - **[Prompt Engineering Guide](./docs/PROMPT-ENGINEERING-GUIDE.md)** - Master effective AI prompting techniques
 - **[AI Workflow Integration](./docs/AI-WORKFLOW-INTEGRATION.md)** - Integrate AI into daily development workflows  
