@@ -1,5 +1,7 @@
 # Autonomous CI Fix Agent Guide
 
+> **📄 Prefer a styled HTML version?** [View the HTML guide →](./AUTONOMOUS_CI_AGENT_GUIDE.html) (Better formatting, navigation, and code highlighting)
+
 ## Overview
 
 An autonomous agent that monitors your GitHub repository, detects CI/CD failures, analyzes errors, and automatically fixes common issues without human intervention.
