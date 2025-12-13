@@ -11,7 +11,7 @@ jobs:
   analyze-and-fix:
     if: |
       github.event_name == 'workflow_dispatch' || 
-      (github.event.workflow_run.conclusion == 'failure')
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'failure')
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -30,14 +30,18 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Debug workflow run event
-        if: github.event_name == 'workflow_run'
+      - name: Debug event details
         run: |
-          echo "Workflow Run Event Details:"
-          echo "Workflow Name: ${{ github.event.workflow_run.name }}"
-          echo "Conclusion: ${{ github.event.workflow_run.conclusion }}"
-          echo "Status: ${{ github.event.workflow_run.status }}"
-          echo "Run ID: ${{ github.event.workflow_run.id }}"
+          echo "Event Name: ${{ github.event_name }}"
+          if [ "${{ github.event_name }}" == "workflow_run" ]; then
+            echo "Workflow Run Event Details:"
+            echo "Workflow Name: ${{ github.event.workflow_run.name }}"
+            echo "Conclusion: ${{ github.event.workflow_run.conclusion }}"
+            echo "Status: ${{ github.event.workflow_run.status }}"
+            echo "Run ID: ${{ github.event.workflow_run.id }}"
+          else
+            echo "Manual trigger (workflow_dispatch)"
+          fi
 
       - name: Get failed workflow logs
         id: get-logs
