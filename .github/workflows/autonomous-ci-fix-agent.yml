@@ -1,0 +1,169 @@
+name: Autonomous CI Fix Agent
+
+on:
+  workflow_run:
+    workflows: ["CI", "Tests", "Build"]
+    types:
+      - completed
+  workflow_dispatch:
+
+jobs:
+  analyze-and-fix:
+    if: ${{ github.event.workflow_run.conclusion == 'failure' || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Get failed workflow logs
+        id: get-logs
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_run" ]; then
+            RUN_ID="${{ github.event.workflow_run.id }}"
+            echo "run_id=$RUN_ID" >> $GITHUB_OUTPUT
+            
+            # Download workflow logs
+            gh run view $RUN_ID --log > workflow_logs.txt 2>&1 || true
+          else
+            # For manual trigger, check latest failed run
+            gh run list --workflow=CI --limit 1 --json databaseId,conclusion --jq '.[] | select(.conclusion=="failure") | .databaseId' | head -1 > run_id.txt || echo "" > run_id.txt
+            RUN_ID=$(cat run_id.txt)
+            if [ ! -z "$RUN_ID" ]; then
+              echo "run_id=$RUN_ID" >> $GITHUB_OUTPUT
+              gh run view $RUN_ID --log > workflow_logs.txt 2>&1 || true
+            fi
+          fi
+
+      - name: Install GitHub CLI
+        run: |
+          type -p curl >/dev/null || (apt update && apt install curl -y)
+          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+          chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+          apt update
+          apt install gh -y
+
+      - name: Analyze error with AI
+        id: analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -f workflow_logs.txt ]; then
+            ERROR_LOG=$(cat workflow_logs.txt | tail -100)
+            
+            # Use Ollama or OpenAI API to analyze the error
+            # For free option, we'll use a simple pattern matching first
+            # You can enhance this with actual AI API calls
+            
+            echo "error_log<<EOF" >> $GITHUB_OUTPUT
+            echo "$ERROR_LOG" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            
+            # Detect common errors
+            if echo "$ERROR_LOG" | grep -q "npm ci.*can only install packages when your package.json and package-lock.json.*are in sync"; then
+              echo "error_type=npm_lock_sync" >> $GITHUB_OUTPUT
+              echo "fix_action=run_npm_install" >> $GITHUB_OUTPUT
+            elif echo "$ERROR_LOG" | grep -q "Missing:.*from lock file"; then
+              echo "error_type=npm_missing_deps" >> $GITHUB_OUTPUT
+              echo "fix_action=run_npm_install" >> $GITHUB_OUTPUT
+            elif echo "$ERROR_LOG" | grep -q "Module not found"; then
+              echo "error_type=missing_module" >> $GITHUB_OUTPUT
+              echo "fix_action=install_missing_package" >> $GITHUB_OUTPUT
+            elif echo "$ERROR_LOG" | grep -q "SyntaxError\|ParseError"; then
+              echo "error_type=syntax_error" >> $GITHUB_OUTPUT
+              echo "fix_action=review_code" >> $GITHUB_OUTPUT
+            else
+              echo "error_type=unknown" >> $GITHUB_OUTPUT
+              echo "fix_action=manual_review" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "error_type=no_logs" >> $GITHUB_OUTPUT
+            echo "fix_action=skip" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Auto-fix npm lock file sync
+        if: steps.analyze.outputs.error_type == 'npm_lock_sync' || steps.analyze.outputs.error_type == 'npm_missing_deps'
+        run: |
+          echo "🔧 Auto-fixing npm lock file sync issue..."
+          
+          # Install dependencies to update lock file
+          npm install
+          
+          # Check if lock file changed
+          if [ -n "$(git status --porcelain package-lock.json)" ]; then
+            echo "lock_file_changed=true" >> $GITHUB_OUTPUT
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add package-lock.json
+            git commit -m "🤖 Auto-fix: Update package-lock.json to sync with package.json
+
+- Automatically fixed by Autonomous CI Fix Agent
+- Error: ${{ steps.analyze.outputs.error_type }}
+- Action: ${{ steps.analyze.outputs.fix_action }}"
+            git push origin HEAD:${{ github.ref_name }}
+          else
+            echo "lock_file_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create fix summary
+        if: steps.analyze.outputs.error_type != 'no_logs' && steps.analyze.outputs.error_type != 'unknown'
+        run: |
+          cat > fix_summary.md <<EOF
+          # 🤖 Autonomous CI Fix Agent - Auto-Fix Report
+          
+          ## Error Detected
+          **Type**: ${{ steps.analyze.outputs.error_type }}
+          **Action Taken**: ${{ steps.analyze.outputs.fix_action }}
+          
+          ## Fix Applied
+          ${{ steps.analyze.outputs.error_type == 'npm_lock_sync' && '✅ Updated package-lock.json to sync with package.json' || '' }}
+          ${{ steps.analyze.outputs.error_type == 'npm_missing_deps' && '✅ Installed missing dependencies' || '' }}
+          
+          ## Next Steps
+          - The fix has been automatically committed
+          - CI will re-run to verify the fix
+          - If the issue persists, manual review may be needed
+          
+          ---
+          *This fix was automatically generated by the Autonomous CI Fix Agent*
+          EOF
+          
+          cat fix_summary.md
+
+      - name: Create issue for unknown errors
+        if: steps.analyze.outputs.error_type == 'unknown' || steps.analyze.outputs.error_type == 'syntax_error'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "🤖 CI Failure Detected - Requires Manual Review" \
+            --body "## Error Analysis
+          
+          **Error Type**: ${{ steps.analyze.outputs.error_type }}
+          **Action**: ${{ steps.analyze.outputs.fix_action }}
+          
+          ## Error Log
+          \`\`\`
+          ${{ steps.analyze.outputs.error_log }}
+          \`\`\`
+          
+          ## Next Steps
+          This error requires manual review. The Autonomous CI Fix Agent was unable to automatically fix this issue.
+          
+          ---
+          *Generated by Autonomous CI Fix Agent*" \
+            --label "ci-failure,needs-review"
+
