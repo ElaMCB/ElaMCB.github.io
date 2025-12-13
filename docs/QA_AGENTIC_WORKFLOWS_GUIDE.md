@@ -1,5 +1,7 @@
 # QA Agentic Workflows: A Practical Guide to Building Your Own AI Agents
 
+> **📄 Prefer a styled HTML version?** [View the HTML guide →](./QA_AGENTIC_WORKFLOWS_GUIDE.html) (Better formatting, navigation, and code highlighting)
+
 ## Table of Contents
 1. [Introduction: Why Build Your Own Agents?](#introduction)
 2. [What Are AI Agents? (In Simple Terms)](#what-are-agents)
