@@ -316,7 +316,7 @@ See **[Autonomous CI Agent Guide](./AUTONOMOUS_CI_AGENT_GUIDE.html)** for implem
 
 ## Resources
 
-- **[QA Agentic Workflows Guide](./QA_AGENTIC_WORKFLOWS_GUIDE.md)** - Learn to build agents
+- **[QA Agentic Workflows Guide](./QA_AGENTIC_WORKFLOWS_GUIDE.html)** - Learn to build agents
 - **[Autonomous CI Agent Guide](./AUTONOMOUS_CI_AGENT_GUIDE.html)** - Implementation example
 - **[GitHub Actions Documentation](https://docs.github.com/en/actions)**
 

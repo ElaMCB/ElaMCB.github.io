@@ -205,7 +205,7 @@ Track these metrics:
 
 - **[Portfolio Agents Roadmap](./PORTFOLIO_AGENTS_ROADMAP.md)** - See all planned agents
 - **[Autonomous CI Agent Guide](./AUTONOMOUS_CI_AGENT_GUIDE.html)** - Reference implementation
-- **[QA Agentic Workflows Guide](./QA_AGENTIC_WORKFLOWS_GUIDE.md)** - Build your own agents
+- **[QA Agentic Workflows Guide](./QA_AGENTIC_WORKFLOWS_GUIDE.html)** - Build your own agents
 - **[npm audit documentation](https://docs.npmjs.com/cli/v8/commands/npm-audit)**
 - **[GitHub Security Best Practices](https://docs.github.com/en/code-security)**
 

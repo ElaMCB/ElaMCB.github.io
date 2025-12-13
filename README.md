@@ -284,7 +284,7 @@ Found this useful? Here's how you can help:
 ## Learning Resources
 
 ### AI-First Development Guides
-- **[QA Agentic Workflows Guide](./docs/QA_AGENTIC_WORKFLOWS_GUIDE.html)** - **Build your own specialized AI agents for daily QA work** - Free solutions, Monday-Friday workflows, chat agents ([MD version](./docs/QA_AGENTIC_WORKFLOWS_GUIDE.md))
+- **[QA Agentic Workflows Guide](./docs/QA_AGENTIC_WORKFLOWS_GUIDE.html)** - **Build your own specialized AI agents for daily QA work** - Free solutions, Monday-Friday workflows, chat agents
 - **[QA-to-AI Transformation Roadmap](./docs/QA-AI-TRANSFORMATION-ROADMAP.md)** - 🎯 **Transform your QA team to AI-first in 6-12 months** (487% ROI teaser available, 🔒 Full roadmap - Premium)
 - **[Prompt Engineering Guide](./docs/PROMPT-ENGINEERING-GUIDE.md)** - Master effective AI prompting techniques
 - **[AI Workflow Integration](./docs/AI-WORKFLOW-INTEGRATION.md)** - Integrate AI into daily development workflows  
@@ -315,7 +315,7 @@ Found this useful? Here's how you can help:
 
 **Why Autonomous Agents?** 24/7 operation • Instant response • Consistent quality • Demonstrates practical AI agentic workflows
 
-**Learn to build your own**: **[QA Agentic Workflows Guide (HTML)](./docs/QA_AGENTIC_WORKFLOWS_GUIDE.html)** | **[QA Guide (MD)](./docs/QA_AGENTIC_WORKFLOWS_GUIDE.md)** | **[Full Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md)**
+**Learn to build your own**: **[QA Agentic Workflows Guide](./docs/QA_AGENTIC_WORKFLOWS_GUIDE.html)** | **[Full Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md)**
 
 ## Architecture
 
