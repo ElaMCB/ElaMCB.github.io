@@ -108,11 +108,7 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add package-lock.json
-            git commit -m "🤖 Auto-fix: Update package-lock.json to sync with package.json
-
-- Automatically fixed by Autonomous CI Fix Agent
-- Error: ${{ steps.analyze.outputs.error_type }}
-- Action: ${{ steps.analyze.outputs.fix_action }}"
+            git commit -m "🤖 Auto-fix: Update package-lock.json to sync with package.json" -m "Automatically fixed by Autonomous CI Fix Agent" -m "Error: ${{ steps.analyze.outputs.error_type }}" -m "Action: ${{ steps.analyze.outputs.fix_action }}"
             git push origin HEAD:${{ github.ref_name }}
           else
             echo "lock_file_changed=false" >> $GITHUB_OUTPUT
