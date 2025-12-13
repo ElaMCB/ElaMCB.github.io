@@ -79,6 +79,9 @@ jobs:
             elif echo "$ERROR_LOG" | grep -q "Missing:.*from lock file"; then
               echo "error_type=npm_missing_deps" >> $GITHUB_OUTPUT
               echo "fix_action=run_npm_install" >> $GITHUB_OUTPUT
+            elif echo "$ERROR_LOG" | grep -q "Invalid format\|Unable to process file command.*output"; then
+              echo "error_type=github_actions_output_error" >> $GITHUB_OUTPUT
+              echo "fix_action=fix_output_format" >> $GITHUB_OUTPUT
             elif echo "$ERROR_LOG" | grep -q "Module not found"; then
               echo "error_type=missing_module" >> $GITHUB_OUTPUT
               echo "fix_action=install_missing_package" >> $GITHUB_OUTPUT
