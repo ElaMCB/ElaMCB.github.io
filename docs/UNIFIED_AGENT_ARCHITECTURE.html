@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unified Agent Architecture - Single Agent, Multiple Capabilities</title>
+    
+    <meta name="description" content="Architectural analysis of consolidating multiple autonomous agents into a single unified agent with modular capabilities.">
+    <meta name="keywords" content="unified agent, agent architecture, modular agents, GitHub Actions, autonomous systems">
+    
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="manifest" href="../images/site.webmanifest">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0a0a0f;
+            --secondary: #00d4ff;
+            --accent: #7c3aed;
+            --neon-blue: #00f5ff;
+            --neon-purple: #bf00ff;
+            --neon-green: #39ff14;
+            --light: #e4e4e7;
+            --dark: #1a1a1f;
+            --card-bg: rgba(15, 15, 23, 0.9);
+            --glass: rgba(255, 255, 255, 0.1);
+            --success: #39ff14;
+            --warning: #ffaa00;
+            --error: #ff4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            background-attachment: fixed;
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 58, 237, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 0 2rem;
+            border-bottom: 2px solid var(--secondary);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .header-content h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--light);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--secondary);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            font-size: 0.85rem;
+        }
+
+        .nav-links a:hover {
+            background: var(--secondary);
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        section {
+            margin: 3rem 0;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin: 3rem 0 1.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-blue), transparent);
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: var(--neon-blue);
+            margin: 2rem 0 1rem;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            color: var(--neon-green);
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        p {
+            margin: 1rem 0;
+            color: var(--light);
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(0, 212, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.2);
+            border-color: var(--neon-blue);
+        }
+
+        .highlight-box {
+            background: rgba(0, 245, 255, 0.1);
+            border-left: 4px solid var(--neon-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .warning-box {
+            background: rgba(255, 170, 0, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .success-box {
+            background: rgba(57, 255, 20, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--neon-green);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .code-block::before {
+            content: 'CODE';
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--primary);
+            color: var(--neon-green);
+            padding: 0 10px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .code-block code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--light);
+            line-height: 1.6;
+            white-space: pre;
+        }
+
+        .code-block pre {
+            margin: 0;
+            padding: 0;
+            background: none;
+            border: none;
+        }
+
+        .yaml-block {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--neon-purple);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .yaml-block::before {
+            content: 'YAML';
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--primary);
+            color: var(--neon-purple);
+            padding: 0 10px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .yaml-block code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--light);
+            line-height: 1.6;
+            white-space: pre;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: rgba(0, 212, 255, 0.2);
+            color: var(--secondary);
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 2px solid var(--neon-blue);
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            color: var(--light);
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .architecture-diagram {
+            background: rgba(124, 58, 237, 0.1);
+            border: 2px solid var(--neon-purple);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .architecture-diagram h4 {
+            color: var(--neon-purple);
+            margin-top: 0;
+        }
+
+        .folder-structure {
+            background: rgba(0, 0, 0, 0.6);
+            border-left: 4px solid var(--neon-green);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--secondary);
+            color: var(--primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.6);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+            border-top: 2px solid var(--secondary);
+            color: var(--light);
+            opacity: 0.8;
+        }
+
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+            color: var(--light);
+        }
+
+        li {
+            margin: 0.5rem 0;
+        }
+
+        strong {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .header-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .code-block, .yaml-block {
+                font-size: 0.8rem;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Unified Agent Architecture</h1>
+            <p class="subtitle">Single Agent, Multiple Capabilities - Modular Design Analysis</p>
+            <div class="nav-links">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../README.md"><i class="fab fa-github"></i> GitHub</a>
+                <a href="AUTONOMOUS_CI_AGENT_GUIDE.html"><i class="fas fa-cog"></i> CI Agent</a>
+                <a href="PORTFOLIO_AGENTS_ROADMAP.md"><i class="fas fa-road"></i> Roadmap</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section>
+            <div class="card">
+                <h2>Current Architecture Analysis</h2>
+                <p>The portfolio currently uses separate autonomous agents, each with its own workflow file:</p>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Agent</th>
+                            <th>Workflow File</th>
+                            <th>Trigger</th>
+                            <th>Capability</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>CIF-AA</strong></td>
+                            <td>autonomous-ci-fix-agent.yml</td>
+                            <td>workflow_run, workflow_dispatch</td>
+                            <td>CI failure analysis and auto-fix</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LHA</strong></td>
+                            <td>link-health-agent.yml</td>
+                            <td>schedule, push, workflow_dispatch</td>
+                            <td>Link health scanning and reporting</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SA</strong></td>
+                            <td>security-agent.yml</td>
+                            <td>schedule, push, workflow_dispatch</td>
+                            <td>Security vulnerability scanning</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="highlight-box">
+                    <h4>Common Patterns Identified</h4>
+                    <ul>
+                        <li>All agents use similar setup steps (checkout, Node.js setup)</li>
+                        <li>All require similar permissions (contents: write, issues: write, pull-requests: write)</li>
+                        <li>All follow similar patterns: scan/analyze → detect → fix/report</li>
+                        <li>All use continue-on-error for graceful failure handling</li>
+                        <li>All create GitHub issues or PRs for reporting</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Unified Agent Architecture</h2>
+
+            <div class="card">
+                <h3>Concept Overview</h3>
+                <p>A single unified agent that can handle multiple capabilities through modular design. The agent determines which capability to execute based on:</p>
+                
+                <div class="architecture-diagram">
+                    <h4>Unified Agent Decision Flow</h4>
+                    <div class="folder-structure">
+Unified Agent Workflow
+├── Event Detection
+│   ├── workflow_run (CI failures)
+│   ├── schedule (scheduled tasks)
+│   ├── push (file changes)
+│   └── workflow_dispatch (manual)
+│
+├── Capability Router
+│   ├── Determines which capability to run
+│   ├── Based on: event type, file paths, config
+│   └── Loads appropriate module
+│
+└── Capability Modules (./agents/)
+    ├── ci-fix/
+    │   ├── detect.sh
+    │   ├── analyze.sh
+    │   └── fix.sh
+    ├── link-health/
+    │   ├── scan.sh
+    │   ├── analyze.sh
+    │   └── report.sh
+    ├── security/
+    │   ├── scan.sh
+    │   ├── analyze.sh
+    │   └── fix.sh
+    └── config.json (capability settings)
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Benefits of Unified Architecture</h3>
+                
+                <div class="success-box">
+                    <h4>Advantages</h4>
+                    <ul>
+                        <li><strong>Single Source of Truth:</strong> One workflow file to maintain</li>
+                        <li><strong>Shared Infrastructure:</strong> Common setup steps defined once</li>
+                        <li><strong>Easier Updates:</strong> Update permissions, Node version, etc. in one place</li>
+                        <li><strong>Consistent Patterns:</strong> All capabilities follow same structure</li>
+                        <li><strong>Better Monitoring:</strong> Single workflow to monitor all agent activities</li>
+                        <li><strong>Simplified Debugging:</strong> Unified logging and error handling</li>
+                        <li><strong>Resource Efficiency:</strong> Shared dependencies and caching</li>
+                        <li><strong>Easier Testing:</strong> Test all capabilities through one workflow</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <h4>Considerations</h4>
+                    <ul>
+                        <li><strong>Complexity:</strong> Single workflow file becomes larger</li>
+                        <li><strong>Failure Isolation:</strong> One capability failure could affect others (mitigated with proper error handling)</li>
+                        <li><strong>Parallel Execution:</strong> Need to handle multiple capabilities running simultaneously</li>
+                        <li><strong>Configuration:</strong> Need clear configuration system for capability selection</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Implementation Approaches</h2>
+
+            <div class="card">
+                <h3>Approach 1: Folder-Based Modular Design</h3>
+                <p>Each capability lives in its own folder with scripts, and the unified agent routes to the appropriate folder.</p>
+                
+                <div class="folder-structure">
+.github/
+└── workflows/
+    └── unified-autonomous-agent.yml
+
+agents/
+├── ci-fix/
+│   ├── config.json
+│   ├── detect.sh
+│   ├── analyze.sh
+│   └── fix.sh
+├── link-health/
+│   ├── config.json
+│   ├── scan.sh
+│   ├── analyze.sh
+│   └── report.sh
+├── security/
+│   ├── config.json
+│   ├── scan.sh
+│   ├── analyze.sh
+│   └── fix.sh
+└── shared/
+    ├── setup.sh
+    ├── notify.sh
+    └── utils.sh
+                </div>
+
+                <div class="highlight-box">
+                    <h4>How It Works</h4>
+                    <ol>
+                        <li>Unified workflow detects event type and context</li>
+                        <li>Router determines which capability folder to use</li>
+                        <li>Loads capability's config.json for settings</li>
+                        <li>Executes capability's scripts in sequence</li>
+                        <li>Uses shared utilities for common operations</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Approach 2: Configuration-Driven Design</h3>
+                <p>Single configuration file defines all capabilities, and the agent executes based on configuration.</p>
+                
+                <div class="code-block">
+                    <pre><code>// agents/config.json
+{
+  "capabilities": {
+    "ci-fix": {
+      "enabled": true,
+      "triggers": ["workflow_run", "workflow_dispatch"],
+      "conditions": {
+        "workflow_run": {
+          "conclusion": "failure",
+          "workflows": ["CI", "Tests", "Build"]
+        }
+      },
+      "scripts": {
+        "detect": "agents/ci-fix/detect.sh",
+        "analyze": "agents/ci-fix/analyze.sh",
+        "fix": "agents/ci-fix/fix.sh"
+      }
+    },
+    "link-health": {
+      "enabled": true,
+      "triggers": ["schedule", "push", "workflow_dispatch"],
+      "schedule": "0 9 * * 1",
+      "push_paths": ["**.html", "**.md"],
+      "scripts": {
+        "scan": "agents/link-health/scan.sh",
+        "analyze": "agents/link-health/analyze.sh",
+        "report": "agents/link-health/report.sh"
+      }
+    }
+  }
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Approach 3: Parameter-Based Design</h3>
+                <p>Manual trigger with capability parameter, or automatic detection based on event context.</p>
+                
+                <div class="yaml-block">
+                    <pre><code>on:
+  workflow_dispatch:
+    inputs:
+      capability:
+        description: 'Which capability to run'
+        required: false
+        type: choice
+        options:
+          - auto-detect
+          - ci-fix
+          - link-health
+          - security
+          - all
+  workflow_run:
+    workflows: ["CI", "Tests", "Build"]
+    types: [completed]
+  schedule:
+    - cron: '0 9 * * 1'  # Link health
+    - cron: '0 10 * * 1' # Security
+  push:
+    paths:
+      - '**.html'
+      - '**.md'
+      - 'package.json'</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Recommended Implementation</h2>
+
+            <div class="card">
+                <h3>Hybrid Approach: Configuration + Folder-Based</h3>
+                <p>Combines the best of both worlds: configuration for routing logic, folders for capability implementation.</p>
+                
+                <div class="architecture-diagram">
+                    <h4>Unified Agent Structure</h4>
+                    <div class="folder-structure">
+.github/workflows/
+└── unified-autonomous-agent.yml
+
+agents/
+├── config.json (capability definitions)
+├── router.sh (capability selection logic)
+├── shared/
+│   ├── setup.sh
+│   ├── notify.sh
+│   └── utils.sh
+├── capabilities/
+│   ├── ci-fix/
+│   │   ├── config.json
+│   │   ├── detect.sh
+│   │   ├── analyze.sh
+│   │   └── fix.sh
+│   ├── link-health/
+│   │   ├── config.json
+│   │   ├── scan.sh
+│   │   ├── analyze.sh
+│   │   └── report.sh
+│   └── security/
+│       ├── config.json
+│       ├── scan.sh
+│       ├── analyze.sh
+│       └── fix.sh
+                </div>
+                </div>
+
+                <h4>Workflow Structure</h4>
+                <div class="yaml-block">
+                    <pre><code>name: Unified Autonomous Agent
+
+on:
+  workflow_run:
+    workflows: ["CI", "Tests", "Build"]
+    types: [completed]
+  schedule:
+    - cron: '0 9 * * 1'   # Monday 9 AM
+    - cron: '0 10 * * 1'  # Monday 10 AM
+  push:
+    paths:
+      - '**.html'
+      - '**.md'
+      - 'package.json'
+      - 'package-lock.json'
+  workflow_dispatch:
+    inputs:
+      capability:
+        description: 'Capability to run (auto-detect if not specified)'
+        required: false
+        type: choice
+        options:
+          - auto
+          - ci-fix
+          - link-health
+          - security
+          - all
+
+jobs:
+  unified-agent:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      security-events: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          npm install -g linkinator jq
+          # Install other shared dependencies
+      
+      - name: Determine capabilities to run
+        id: router
+        run: |
+          chmod +x agents/router.sh
+          ./agents/router.sh
+      
+      - name: Run CI Fix capability
+        if: steps.router.outputs.run_ci_fix == 'true'
+        run: |
+          cd agents/capabilities/ci-fix
+          chmod +x *.sh
+          ./detect.sh && ./analyze.sh && ./fix.sh
+      
+      - name: Run Link Health capability
+        if: steps.router.outputs.run_link_health == 'true'
+        run: |
+          cd agents/capabilities/link-health
+          chmod +x *.sh
+          ./scan.sh && ./analyze.sh && ./report.sh
+      
+      - name: Run Security capability
+        if: steps.router.outputs.run_security == 'true'
+        run: |
+          cd agents/capabilities/security
+          chmod +x *.sh
+          ./scan.sh && ./analyze.sh && ./fix.sh</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Router Implementation</h3>
+                <p>The router script determines which capabilities to run based on event context:</p>
+                
+                <div class="code-block">
+                    <pre><code>#!/bin/bash
+# agents/router.sh
+
+EVENT_NAME="${{ github.event_name }}"
+MANUAL_CAPABILITY="${{ github.event.inputs.capability }}"
+
+# If manual trigger with specific capability
+if [ "$EVENT_NAME" == "workflow_dispatch" ] && [ -n "$MANUAL_CAPABILITY" ]; then
+  if [ "$MANUAL_CAPABILITY" == "all" ]; then
+    echo "run_ci_fix=true" >> $GITHUB_OUTPUT
+    echo "run_link_health=true" >> $GITHUB_OUTPUT
+    echo "run_security=true" >> $GITHUB_OUTPUT
+  else
+    echo "run_${MANUAL_CAPABILITY}=true" >> $GITHUB_OUTPUT
+  fi
+  exit 0
+fi
+
+# Auto-detect based on event
+if [ "$EVENT_NAME" == "workflow_run" ]; then
+  echo "run_ci_fix=true" >> $GITHUB_OUTPUT
+fi
+
+if [ "$EVENT_NAME" == "schedule" ]; then
+  HOUR=$(date +%H)
+  if [ "$HOUR" == "09" ]; then
+    echo "run_link_health=true" >> $GITHUB_OUTPUT
+  elif [ "$HOUR" == "10" ]; then
+    echo "run_security=true" >> $GITHUB_OUTPUT
+  fi
+fi
+
+if [ "$EVENT_NAME" == "push" ]; then
+  CHANGED_FILES="${{ github.event.head_commit.modified }}"
+  
+  if echo "$CHANGED_FILES" | grep -qE '\.(html|md)$'; then
+    echo "run_link_health=true" >> $GITHUB_OUTPUT
+  fi
+  
+  if echo "$CHANGED_FILES" | grep -qE '(package\.json|package-lock\.json)'; then
+    echo "run_security=true" >> $GITHUB_OUTPUT
+  fi
+fi</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Migration Strategy</h2>
+
+            <div class="card">
+                <h3>Phase 1: Preparation</h3>
+                <ol>
+                    <li>Create agents/ folder structure</li>
+                    <li>Extract capability scripts from existing workflows</li>
+                    <li>Create shared utilities for common operations</li>
+                    <li>Create router.sh for capability selection</li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h3>Phase 2: Implementation</h3>
+                <ol>
+                    <li>Create unified-autonomous-agent.yml workflow</li>
+                    <li>Test each capability in isolation</li>
+                    <li>Test capability routing logic</li>
+                    <li>Test parallel capability execution</li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h3>Phase 3: Migration</h3>
+                <ol>
+                    <li>Deploy unified agent alongside existing agents</li>
+                    <li>Run both in parallel for validation period</li>
+                    <li>Compare results between old and new agents</li>
+                    <li>Gradually disable old agents</li>
+                    <li>Remove old workflow files</li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h3>Phase 4: Enhancement</h3>
+                <ol>
+                    <li>Add new capabilities using same structure</li>
+                    <li>Implement capability dependencies (e.g., security scan before CI fix)</li>
+                    <li>Add capability orchestration (run multiple in sequence)</li>
+                    <li>Implement capability priority system</li>
+                </ol>
+            </div>
+        </section>
+
+        <section>
+            <h2>Comparison: Current vs Unified</h2>
+
+            <div class="card">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Current (Separate Agents)</th>
+                            <th>Unified Agent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Workflow Files</strong></td>
+                            <td>3+ separate files</td>
+                            <td>1 unified file</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Maintenance</strong></td>
+                            <td>Update each file separately</td>
+                            <td>Update once, affects all capabilities</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Setup Steps</strong></td>
+                            <td>Duplicated in each workflow</td>
+                            <td>Defined once, shared</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Monitoring</strong></td>
+                            <td>Monitor multiple workflows</td>
+                            <td>Single workflow to monitor</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Adding Capabilities</strong></td>
+                            <td>Create new workflow file</td>
+                            <td>Add folder + config entry</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Error Isolation</strong></td>
+                            <td>Complete isolation</td>
+                            <td>Conditional execution (if statements)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Resource Usage</strong></td>
+                            <td>Separate runs per agent</td>
+                            <td>Single run, multiple capabilities</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Complexity</strong></td>
+                            <td>Simple, separate concerns</td>
+                            <td>More complex, unified logic</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h2>Recommendation</h2>
+
+            <div class="card">
+                <h3>Recommended Approach</h3>
+                <p>Implement a <strong>unified agent with folder-based modular capabilities</strong>. This provides:</p>
+                
+                <div class="success-box">
+                    <h4>Key Benefits</h4>
+                    <ul>
+                        <li>Single workflow file for easier maintenance</li>
+                        <li>Modular capability structure for clear organization</li>
+                        <li>Easy to add new capabilities (just add a folder)</li>
+                        <li>Shared infrastructure reduces duplication</li>
+                        <li>Consistent patterns across all capabilities</li>
+                        <li>Better resource utilization</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>Implementation Priority</h4>
+                    <ol>
+                        <li><strong>High Value:</strong> Unified agent reduces maintenance overhead significantly</li>
+                        <li><strong>Medium Effort:</strong> Requires refactoring but structure is clear</li>
+                        <li><strong>Future-Proof:</strong> Easy to add new capabilities as portfolio grows</li>
+                    </ol>
+                </div>
+
+                <h3>Next Steps</h3>
+                <ol>
+                    <li>Create the agents/ folder structure</li>
+                    <li>Extract existing agent logic into capability folders</li>
+                    <li>Implement router.sh for capability selection</li>
+                    <li>Create unified-autonomous-agent.yml</li>
+                    <li>Test in parallel with existing agents</li>
+                    <li>Migrate once validated</li>
+                </ol>
+            </div>
+        </section>
+
+        <section>
+            <h2>Example Implementation</h2>
+
+            <div class="card">
+                <p>Would you like me to create the unified agent implementation? I can:</p>
+                <ul>
+                    <li>Create the folder structure</li>
+                    <li>Extract existing agent logic into capability modules</li>
+                    <li>Implement the router script</li>
+                    <li>Create the unified workflow file</li>
+                    <li>Set up the configuration system</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <p><strong>This would consolidate CIF-AA, LHA, and SA into a single unified agent while maintaining all existing functionality.</strong></p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <a href="#" class="back-to-top" title="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <footer>
+        <p>Last Updated: December 2025</p>
+        <p>Unified Agent Architecture Analysis</p>
+        <p><a href="../index.html" style="color: var(--secondary);">← Back to Portfolio</a></p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', function() {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
+
