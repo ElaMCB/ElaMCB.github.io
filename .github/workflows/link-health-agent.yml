@@ -1,6 +1,13 @@
-name: LHA - Link Health Agent
+name: LHA - Link Health Agent (DEPRECATED - Use UAA)
+
+# ⚠️ DEPRECATED: This workflow is replaced by Unified Autonomous Agent (UAA)
+# The UAA workflow provides the same Link-Health capability with better architecture
+# This workflow is disabled but kept for reference
 
 on:
+  workflow_dispatch:  # Only allow manual runs for migration period
+  # schedule:  # DISABLED - Use UAA instead
+  # push:  # DISABLED - Use UAA instead
   schedule:
     # Run every Monday at 9 AM UTC
     - cron: '0 9 * * 1'

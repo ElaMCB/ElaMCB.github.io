@@ -1,6 +1,12 @@
-name: Autonomous CI Fix Agent
+name: Autonomous CI Fix Agent (DEPRECATED - Use UAA)
+
+# ⚠️ DEPRECATED: This workflow is replaced by Unified Autonomous Agent (UAA)
+# The UAA workflow provides the same CI-Fix capability with better architecture
+# This workflow is disabled but kept for reference
 
 on:
+  workflow_dispatch:  # Only allow manual runs for migration period
+  # workflow_run:  # DISABLED - Use UAA instead
   workflow_run:
     workflows: ["CI", "Tests", "Build", "LHA - Link Health Agent", "SA - Security Agent"]
     types:
