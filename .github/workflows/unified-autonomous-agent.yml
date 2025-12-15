@@ -131,6 +131,54 @@ jobs:
             fi
           fi
 
+      - name: Initialize UAA Status File
+        if: steps.determine-capability.outputs.capability != 'skip'
+        run: |
+          mkdir -p docs
+          # Initialize status file if it doesn't exist
+          if [ ! -f "docs/uaa-status.json" ]; then
+            cat > docs/uaa-status.json << 'EOF'
+          {
+            "last_updated": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+            "workflow_status": "unknown",
+            "capabilities": {
+              "ci-fix": {
+                "status": "unknown",
+                "last_run": "N/A",
+                "last_success": "N/A",
+                "last_failure": "N/A",
+                "total_runs": 0,
+                "success_count": 0,
+                "failure_count": 0
+              },
+              "link-health": {
+                "status": "unknown",
+                "last_run": "N/A",
+                "last_success": "N/A",
+                "last_failure": "N/A",
+                "total_runs": 0,
+                "success_count": 0,
+                "failure_count": 0
+              },
+              "security": {
+                "status": "unknown",
+                "last_run": "N/A",
+                "last_success": "N/A",
+                "last_failure": "N/A",
+                "total_runs": 0,
+                "success_count": 0,
+                "failure_count": 0
+              }
+            },
+            "recent_activity": []
+          }
+          EOF
+          fi
+          # Update workflow status to running
+          if command -v jq >/dev/null 2>&1; then
+            jq '.workflow_status = "running" | .last_updated = "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"' docs/uaa-status.json > docs/uaa-status.json.tmp && mv docs/uaa-status.json.tmp docs/uaa-status.json || true
+          fi
+
       - name: Run Unified Agent (UAA)
         if: steps.determine-capability.outputs.capability != 'skip'
         env:
@@ -139,7 +187,12 @@ jobs:
           GITHUB_WORKFLOW: ${{ github.workflow }}
           GITHUB_REF_NAME: ${{ github.ref_name }}
         run: |
-          bash agents/router.sh "${{ steps.determine-capability.outputs.capability }}" "${{ steps.determine-capability.outputs.workflow_event }}"
+          bash agents/router.sh "${{ steps.determine-capability.outputs.capability }}" "${{ steps.determine-capability.outputs.workflow_event }}" || {
+            EXIT_CODE=$?
+            # Update status even on failure
+            bash agents/shared/update_status.sh "ci-fix" "failure" "UAA router failed with exit code $EXIT_CODE" || true
+            exit $EXIT_CODE
+          }
 
       - name: Update UAA Status and Dashboard
         if: always()
@@ -150,12 +203,57 @@ jobs:
           # Install jq if needed
           sudo apt-get update && sudo apt-get install -y jq || true
           
+          # Ensure status file exists
+          mkdir -p docs
+          if [ ! -f "docs/uaa-status.json" ]; then
+            cat > docs/uaa-status.json << 'EOF'
+          {
+            "last_updated": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+            "workflow_status": "${{ job.status }}",
+            "capabilities": {
+              "ci-fix": {"status": "unknown", "last_run": "N/A", "last_success": "N/A", "last_failure": "N/A", "total_runs": 0, "success_count": 0, "failure_count": 0},
+              "link-health": {"status": "unknown", "last_run": "N/A", "last_success": "N/A", "last_failure": "N/A", "total_runs": 0, "success_count": 0, "failure_count": 0},
+              "security": {"status": "unknown", "last_run": "N/A", "last_success": "N/A", "last_failure": "N/A", "total_runs": 0, "success_count": 0, "failure_count": 0}
+            },
+            "recent_activity": []
+          }
+          EOF
+          fi
+          
+          # Update workflow status
+          if command -v jq >/dev/null 2>&1; then
+            jq ".workflow_status = \"${{ job.status }}\" | .last_updated = \"$(date -u +"%Y-%m-%dT%H:%M:%SZ")\"" docs/uaa-status.json > docs/uaa-status.json.tmp && mv docs/uaa-status.json.tmp docs/uaa-status.json || true
+          fi
+          
           # Make status scripts executable
           chmod +x agents/shared/update_status.sh
           chmod +x agents/shared/generate_status_dashboard.sh
           
           # Generate status dashboard
-          bash agents/shared/generate_status_dashboard.sh > /tmp/uaa-dashboard.md
+          bash agents/shared/generate_status_dashboard.sh > /tmp/uaa-dashboard.md || {
+            # Fallback if dashboard generation fails
+            cat > /tmp/uaa-dashboard.md << 'EOF'
+          ## UAA Status Dashboard
+
+          **Last Updated:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+
+          | Component | Status | Last Run | Details |
+          |-----------|--------|----------|---------|
+          | **UAA Workflow** | [${{ job.status }}] ${{ job.status }} | $(date -u +"%Y-%m-%d %H:%M:%S UTC") | [View Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) |
+          | **CI-Fix Capability** | [UNKNOWN] Unknown | N/A | [View Status](./docs/uaa-status.json) |
+          | **Link-Health Capability** | [UNKNOWN] Unknown | N/A | [View Status](./docs/uaa-status.json) |
+          | **Security Capability** | [UNKNOWN] Unknown | N/A | [View Status](./docs/uaa-status.json) |
+
+          ### Quick Links
+          - [UAA Success Indicators Guide](./docs/UAA_SUCCESS_INDICATORS.md)
+          - [UAA Architecture](./docs/UNIFIED_AGENT_ARCHITECTURE.html)
+          - [Agent README](./agents/README.md)
+          - [View All Workflow Runs](https://github.com/${{ github.repository }}/actions/workflows/unified-autonomous-agent.yml)
+
+          ---
+          *Dashboard auto-updated by UAA after each run*
+          EOF
+          }
           
           # Update README with dashboard
           python3 << 'PYTHON_SCRIPT'
