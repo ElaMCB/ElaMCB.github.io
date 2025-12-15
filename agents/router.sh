@@ -6,8 +6,20 @@ set +e
 
 # Load shared utilities and config
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/shared/utils.sh"
-source "$SCRIPT_DIR/shared/config.sh"
+
+# Source utilities with error handling
+if ! source "$SCRIPT_DIR/shared/utils.sh" 2>&1; then
+    echo "ERROR: Failed to load utils.sh from $SCRIPT_DIR/shared/utils.sh" >&2
+    echo "Script directory: $SCRIPT_DIR" >&2
+    ls -la "$SCRIPT_DIR/shared/" >&2 || echo "Cannot list shared directory" >&2
+    exit 1
+fi
+
+# Source config with error handling
+if ! source "$SCRIPT_DIR/shared/config.sh" 2>&1; then
+    log_error "Failed to load config.sh"
+    exit 1
+fi
 
 log_info "========================================="
 log_info "$AGENT_NAME v$AGENT_VERSION"

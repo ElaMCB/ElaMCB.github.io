@@ -1,74 +1,42 @@
 #!/bin/bash
-# Quick UAA Status Check Script
+# Quick UAA Status Check - For AI assistants
 
 echo "=== UAA Status Check ==="
 echo ""
 
-# Check if status files exist
-echo "Status Files:"
+# Check local status files
 if [ -f "docs/uaa-status.json" ]; then
-    echo "  [OK] uaa-status.json exists"
-    echo "  Content:"
-    cat docs/uaa-status.json | jq '.' 2>/dev/null || cat docs/uaa-status.json
+    echo "Status File Found:"
+    if command -v jq >/dev/null 2>&1; then
+        jq '.' docs/uaa-status.json
+    else
+        cat docs/uaa-status.json
+    fi
+    echo ""
 else
-    echo "  [MISSING] uaa-status.json NOT FOUND - UAA hasn't run yet"
+    echo "[INFO] Status file not found locally (may not be committed to repo)"
+    echo ""
 fi
-echo ""
 
+# Check diagnostics
 if [ -f "docs/uaa-diagnostics.json" ]; then
-    echo "  [WARNING] uaa-diagnostics.json exists (errors occurred)"
-    echo "  Content:"
-    cat docs/uaa-diagnostics.json | jq '.' 2>/dev/null || cat docs/uaa-diagnostics.json
-else
-    echo "  [OK] No diagnostic file (no errors or UAA hasn't run)"
-fi
-echo ""
-
-# Check workflow file
-echo "Workflow File:"
-if [ -f ".github/workflows/unified-autonomous-agent.yml" ]; then
-    echo "  [OK] Workflow file exists"
-    # Check for common syntax issues
-    if grep -q "GITHUB_REF_NAME" ".github/workflows/unified-autonomous-agent.yml"; then
-        echo "  [OK] GITHUB_REF_NAME is configured"
+    echo "Diagnostics Found:"
+    if command -v jq >/dev/null 2>&1; then
+        jq '.' docs/uaa-diagnostics.json
     else
-        echo "  [WARNING] GITHUB_REF_NAME might be missing"
+        cat docs/uaa-diagnostics.json
     fi
-else
-    echo "  [ERROR] Workflow file NOT FOUND"
+    echo ""
 fi
-echo ""
 
-# Check agent scripts
-echo "Agent Scripts:"
-for script in "agents/router.sh" "agents/shared/utils.sh" "agents/shared/config.sh" "agents/shared/update_status.sh"; do
-    if [ -f "$script" ]; then
-        echo "  [OK] $script exists"
-    else
-        echo "  [ERROR] $script NOT FOUND"
-    fi
-done
-echo ""
-
-# Check recent commits
-echo "Recent Commits:"
-git log --oneline -5 | head -5
-echo ""
-
-# Check for github-actions commits
-echo "GitHub Actions Commits:"
-if git log --all --author="github-actions" --oneline -5 | grep -q .; then
-    git log --all --author="github-actions" --oneline -5
-    echo "  [OK] UAA has made commits"
+# Check latest workflow run via GitHub API if available
+if command -v gh >/dev/null 2>&1 && [ -n "$GITHUB_TOKEN" ]; then
+    echo "Latest Workflow Runs:"
+    gh run list --workflow="unified-autonomous-agent.yml" --limit 3 --json conclusion,status,createdAt,url,displayTitle \
+        --jq '.[] | "\(.createdAt) | \(.status)/\(.conclusion) | \(.displayTitle) | \(.url)"' 2>/dev/null || echo "Unable to fetch"
 else
-    echo "  [WARNING] No commits from github-actions bot yet"
-    echo "  This means UAA hasn't run or hasn't completed successfully"
+    echo "[INFO] GitHub CLI not available - check https://github.com/ElaMCB/ElaMCB.github.io/actions/workflows/unified-autonomous-agent.yml"
 fi
+
 echo ""
-
-echo "=== Recommendations ==="
-echo "1. Check GitHub Actions: https://github.com/ElaMCB/ElaMCB.github.io/actions"
-echo "2. Look for 'Unified Autonomous Agent' workflow"
-echo "3. If no runs exist, manually trigger it from Actions tab"
-echo "4. If runs exist but failed, check the logs for errors"
-
+echo "=== End Status Check ==="
