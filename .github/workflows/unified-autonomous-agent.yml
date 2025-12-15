@@ -1,0 +1,153 @@
+name: Unified Autonomous Agent
+
+on:
+  # CI Fix triggers
+  workflow_run:
+    workflows: ["CI", "Tests", "Build", "LHA - Link Health Agent", "SA - Security Agent"]
+    types:
+      - completed
+  workflow_dispatch:
+    inputs:
+      capability:
+        description: 'Capability to run (ci-fix, link-health, security, all)'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - ci-fix
+          - link-health
+          - security
+  # Link Health triggers
+  schedule:
+    # Run every Monday at 9 AM UTC
+    - cron: '0 9 * * 1'
+  push:
+    paths:
+      - '**.html'
+      - '**.md'
+      - 'index.html'
+      - 'package.json'
+      - 'package-lock.json'
+      - '**/*.js'
+      - '**/*.py'
+
+jobs:
+  unified-agent:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      security-events: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install GitHub CLI
+        run: |
+          type -p curl >/dev/null || (apt update && apt install curl -y)
+          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+          chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+          apt update
+          apt install gh -y
+
+      - name: Make scripts executable
+        run: |
+          chmod +x agents/router.sh
+          chmod +x agents/capabilities/*/*.sh
+          chmod +x agents/shared/*.sh
+
+      - name: Determine capability to run
+        id: determine-capability
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_run" ]; then
+            if [ "${{ github.event.workflow_run.conclusion }}" == "failure" ]; then
+              echo "capability=ci-fix" >> $GITHUB_OUTPUT
+              echo "workflow_event=workflow_run" >> $GITHUB_OUTPUT
+            else
+              echo "capability=skip" >> $GITHUB_OUTPUT
+            fi
+          elif [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "capability=${{ github.event.inputs.capability }}" >> $GITHUB_OUTPUT
+            echo "workflow_event=workflow_dispatch" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event_name }}" == "schedule" ]; then
+            echo "capability=all" >> $GITHUB_OUTPUT
+            echo "workflow_event=schedule" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event_name }}" == "push" ]; then
+            # Check which files changed
+            if echo "${{ github.event.head_commit.modified }}" | grep -qE "(\.html|\.md|index\.html)"; then
+              echo "capability=link-health" >> $GITHUB_OUTPUT
+            elif echo "${{ github.event.head_commit.modified }}" | grep -qE "(package\.json|package-lock\.json|\.js|\.py)"; then
+              echo "capability=security" >> $GITHUB_OUTPUT
+            else
+              echo "capability=all" >> $GITHUB_OUTPUT
+            fi
+            echo "workflow_event=push" >> $GITHUB_OUTPUT
+          else
+            echo "capability=all" >> $GITHUB_OUTPUT
+            echo "workflow_event=unknown" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Get failed workflow logs (for CI-Fix)
+        if: steps.determine-capability.outputs.capability == 'ci-fix'
+        id: get-logs
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_run" ]; then
+            RUN_ID="${{ github.event.workflow_run.id }}"
+            WORKFLOW_NAME="${{ github.event.workflow_run.name }}"
+            
+            echo "run_id=$RUN_ID" >> $GITHUB_OUTPUT
+            echo "workflow_name=$WORKFLOW_NAME" >> $GITHUB_OUTPUT
+            
+            echo "Downloading logs for workflow: $WORKFLOW_NAME"
+            gh run view $RUN_ID --log > workflow_logs.txt 2>&1 || true
+            
+            if [ ! -s workflow_logs.txt ]; then
+              echo "Warning: workflow_logs.txt is empty or doesn't exist"
+            else
+              echo "Logs downloaded successfully ($(wc -l < workflow_logs.txt) lines)"
+            fi
+          else
+            echo "Manual trigger - searching for latest failed CI run..."
+            gh run list --workflow=CI --limit 1 --json databaseId,conclusion --jq '.[] | select(.conclusion=="failure") | .databaseId' | head -1 > run_id.txt || echo "" > run_id.txt
+            RUN_ID=$(cat run_id.txt)
+            if [ ! -z "$RUN_ID" ]; then
+              echo "run_id=$RUN_ID" >> $GITHUB_OUTPUT
+              echo "Downloading logs for run ID: $RUN_ID"
+              gh run view $RUN_ID --log > workflow_logs.txt 2>&1 || true
+            else
+              echo "No failed CI runs found"
+            fi
+          fi
+
+      - name: Run Unified Agent
+        if: steps.determine-capability.outputs.capability != 'skip'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_WORKFLOW: ${{ github.workflow }}
+        run: |
+          bash agents/router.sh "${{ steps.determine-capability.outputs.capability }}" "${{ steps.determine-capability.outputs.workflow_event }}"
+
+      - name: Agent execution summary
+        if: always()
+        run: |
+          echo "========================================="
+          echo "Unified Autonomous Agent - Execution Summary"
+          echo "========================================="
+          echo "Capability: ${{ steps.determine-capability.outputs.capability }}"
+          echo "Workflow Event: ${{ steps.determine-capability.outputs.workflow_event }}"
+          echo "Status: ${{ job.status }}"
+          echo "========================================="
+
