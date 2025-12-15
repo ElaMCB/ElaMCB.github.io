@@ -5,18 +5,11 @@ name: LHA - Link Health Agent (DEPRECATED - Use UAA)
 # This workflow is disabled but kept for reference
 
 on:
-  workflow_dispatch:  # Only allow manual runs for migration period
+  # DISABLED - All triggers disabled. Use Unified Autonomous Agent (UAA) instead.
   # schedule:  # DISABLED - Use UAA instead
   # push:  # DISABLED - Use UAA instead
-  schedule:
-    # Run every Monday at 9 AM UTC
-    - cron: '0 9 * * 1'
-  workflow_dispatch:
-  push:
-    paths:
-      - '**.html'
-      - '**.md'
-      - 'index.html'
+  # workflow_dispatch:  # DISABLED - Use UAA instead
+  workflow_dispatch:  # Kept only for emergency manual runs - DO NOT USE
 
 jobs:
   check-links:

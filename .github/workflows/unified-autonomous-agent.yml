@@ -3,7 +3,7 @@ name: Unified Autonomous Agent
 on:
   # CI Fix triggers
   workflow_run:
-    workflows: ["CI", "Tests", "Build", "LHA - Link Health Agent", "SA - Security Agent"]
+    workflows: ["CI", "Tests", "Build"]
     types:
       - completed
   workflow_dispatch:

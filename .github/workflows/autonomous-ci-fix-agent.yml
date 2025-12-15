@@ -5,13 +5,10 @@ name: Autonomous CI Fix Agent (DEPRECATED - Use UAA)
 # This workflow is disabled but kept for reference
 
 on:
-  workflow_dispatch:  # Only allow manual runs for migration period
+  # DISABLED - All triggers disabled. Use Unified Autonomous Agent (UAA) instead.
   # workflow_run:  # DISABLED - Use UAA instead
-  workflow_run:
-    workflows: ["CI", "Tests", "Build", "LHA - Link Health Agent", "SA - Security Agent"]
-    types:
-      - completed
-  workflow_dispatch:
+  # workflow_dispatch:  # DISABLED - Use UAA instead
+  workflow_dispatch:  # Kept only for emergency manual runs - DO NOT USE
 
 jobs:
   analyze-and-fix:
