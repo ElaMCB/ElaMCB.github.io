@@ -52,44 +52,6 @@ if [ ! -f "$OUTPUT_FILE" ]; then
 EOF
 fi
 
-# Update capability status
-if [ -n "$CAPABILITY" ] && [ -n "$STATUS" ]; then
-    ensure_dependency "jq" "sudo apt-get update && sudo apt-get install -y jq"
-    
-    local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-    
-    # Update capability status
-    jq --arg cap "$CAPABILITY" \
-       --arg status "$STATUS" \
-       --arg time "$timestamp" \
-       --arg msg "$MESSAGE" \
-       '.capabilities[$cap].status = $status |
-        .capabilities[$cap].last_run = $time |
-        .capabilities[$cap].total_runs += 1 |
-        (if $status == "success" then
-          .capabilities[$cap].last_success = $time |
-          .capabilities[$cap].success_count += 1
-         elif $status == "failure" then
-          .capabilities[$cap].last_failure = $time |
-          .capabilities[$cap].failure_count += 1
-         else . end) |
-        .last_updated = $time |
-        .recent_activity = ([{
-          "time": $time,
-          "capability": $cap,
-          "status": $status,
-          "message": $msg
-        }] + .recent_activity) | .recent_activity = .recent_activity[0:10]' \
-       "$OUTPUT_FILE" > "${OUTPUT_FILE}.tmp" && mv "${OUTPUT_FILE}.tmp" "$OUTPUT_FILE"
-    
-    log_info "Updated status for $CAPABILITY: $STATUS"
-fi
-
-# Generate diagnostic report if failed
-if [ "$STATUS" = "failure" ]; then
-    generate_diagnostic_report "$CAPABILITY" "$MESSAGE"
-fi
-
 # Function to generate diagnostic report
 generate_diagnostic_report() {
     local capability="$1"
@@ -121,10 +83,63 @@ generate_diagnostic_report() {
     "shared_utils_exist": "$([ -f "agents/shared/utils.sh" ] && echo 'true' || echo 'false')",
     "config_exists": "$([ -f "agents/shared/config.sh" ] && echo 'true' || echo 'false')"
   },
-  "recent_logs": "$(tail -20 /tmp/uaa-${capability}.log 2>/dev/null | jq -Rs . || echo 'null')"
+  "recent_logs": "$(tail -20 /tmp/uaa-${capability}.log 2>/dev/null | jq -Rs . 2>/dev/null || echo 'null')"
 }
 EOF
     
     log_info "Diagnostic report generated: $diagnostic_file"
 }
+
+# Update capability status
+if [ -n "$CAPABILITY" ] && [ -n "$STATUS" ]; then
+    # Try to ensure jq is available, but don't fail if we can't install it
+    if ! command_exists "jq"; then
+        log_warning "jq not found, attempting to install..."
+        ensure_dependency "jq" "sudo apt-get update && sudo apt-get install -y jq" || {
+            log_warning "Could not install jq, will create status file without JSON updates"
+        }
+    fi
+    
+    local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+    
+    # Update capability status using jq if available, otherwise create simple status
+    if command_exists "jq"; then
+        jq --arg cap "$CAPABILITY" \
+           --arg status "$STATUS" \
+           --arg time "$timestamp" \
+           --arg msg "$MESSAGE" \
+           '.capabilities[$cap].status = $status |
+            .capabilities[$cap].last_run = $time |
+            .capabilities[$cap].total_runs += 1 |
+            (if $status == "success" then
+              .capabilities[$cap].last_success = $time |
+              .capabilities[$cap].success_count += 1
+             elif $status == "failure" then
+              .capabilities[$cap].last_failure = $time |
+              .capabilities[$cap].failure_count += 1
+             else . end) |
+            .last_updated = $time |
+            .recent_activity = ([{
+              "time": $time,
+              "capability": $cap,
+              "status": $status,
+              "message": $msg
+            }] + .recent_activity) | .recent_activity = .recent_activity[0:10]' \
+           "$OUTPUT_FILE" > "${OUTPUT_FILE}.tmp" 2>/dev/null && mv "${OUTPUT_FILE}.tmp" "$OUTPUT_FILE" || {
+            log_warning "Failed to update status with jq, creating basic status"
+            # Fallback: create a simple status update
+            echo "{\"last_updated\":\"$timestamp\",\"capabilities\":{\"$CAPABILITY\":{\"status\":\"$STATUS\",\"last_run\":\"$timestamp\"}}}" > "$OUTPUT_FILE"
+        }
+    else
+        log_warning "jq not available, creating basic status file"
+        echo "{\"last_updated\":\"$timestamp\",\"capabilities\":{\"$CAPABILITY\":{\"status\":\"$STATUS\",\"last_run\":\"$timestamp\"}}}" > "$OUTPUT_FILE"
+    fi
+    
+    log_info "Updated status for $CAPABILITY: $STATUS"
+fi
+
+# Generate diagnostic report if failed
+if [ "$STATUS" = "failure" ]; then
+    generate_diagnostic_report "$CAPABILITY" "$MESSAGE"
+fi
 

@@ -1,7 +1,8 @@
 #!/bin/bash
 # Unified Agent Router - Orchestrates all agent capabilities
 
-set -e
+# Don't exit on error - we want to track failures and continue
+set +e
 
 # Load shared utilities and config
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -87,19 +88,31 @@ case "$CAPABILITY" in
     all)
         log_info "Running all enabled capabilities..."
         
+        # Track overall success
+        OVERALL_SUCCESS=true
+        
         # Determine which capabilities to run based on workflow event
         if [ "$WORKFLOW_EVENT" = "workflow_run" ] || [ "$WORKFLOW_EVENT" = "workflow_dispatch" ]; then
             # For workflow events, run CI-Fix
-            run_ci_fix
+            run_ci_fix || OVERALL_SUCCESS=false
         elif [ "$WORKFLOW_EVENT" = "schedule" ] || [ "$WORKFLOW_EVENT" = "push" ]; then
             # For scheduled/push events, run Link-Health and Security
-            run_link_health
-            run_security
+            run_link_health || OVERALL_SUCCESS=false
+            run_security || OVERALL_SUCCESS=false
         else
             # Default: run all
-            run_ci_fix
-            run_link_health
-            run_security
+            run_ci_fix || OVERALL_SUCCESS=false
+            run_link_health || OVERALL_SUCCESS=false
+            run_security || OVERALL_SUCCESS=false
+        fi
+        
+        # Exit with appropriate code
+        if [ "$OVERALL_SUCCESS" = "true" ]; then
+            log_success "All capabilities completed successfully"
+            exit 0
+        else
+            log_warning "Some capabilities failed, but execution completed"
+            exit 1
         fi
         ;;
     *)
@@ -109,5 +122,6 @@ case "$CAPABILITY" in
         ;;
 esac
 
-log_success "Unified Agent execution completed"
+# Exit with success if we got here
+exit 0
 
