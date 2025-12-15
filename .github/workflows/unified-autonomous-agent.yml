@@ -141,6 +141,65 @@ jobs:
         run: |
           bash agents/router.sh "${{ steps.determine-capability.outputs.capability }}" "${{ steps.determine-capability.outputs.workflow_event }}"
 
+      - name: Update UAA Status and Dashboard
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          # Install jq if needed
+          sudo apt-get update && sudo apt-get install -y jq || true
+          
+          # Make status scripts executable
+          chmod +x agents/shared/update_status.sh
+          chmod +x agents/shared/generate_status_dashboard.sh
+          
+          # Generate status dashboard
+          bash agents/shared/generate_status_dashboard.sh > /tmp/uaa-dashboard.md
+          
+          # Update README with dashboard
+          python3 << 'PYTHON_SCRIPT'
+          import re
+          import sys
+          
+          with open('README.md', 'r', encoding='utf-8') as f:
+              readme = f.read()
+          
+          # Read dashboard content
+          with open('/tmp/uaa-dashboard.md', 'r', encoding='utf-8') as f:
+              dashboard = f.read()
+          
+          # Find and replace dashboard section
+          pattern = r'(## UAA Status Dashboard.*?---\s*\*Dashboard auto-updated.*?\*)'
+          replacement = dashboard
+          
+          if re.search(pattern, readme, re.DOTALL):
+              readme = re.sub(pattern, replacement, readme, flags=re.DOTALL)
+          else:
+              # Insert after "## Autonomous Agents Ecosystem" section
+              insert_pos = readme.find('## Autonomous Agents Ecosystem')
+              if insert_pos != -1:
+                  # Find end of that section
+                  next_section = readme.find('\n## ', insert_pos + 1)
+                  if next_section == -1:
+                      next_section = len(readme)
+                  readme = readme[:next_section] + '\n\n' + dashboard + '\n\n' + readme[next_section:]
+          
+          with open('README.md', 'w', encoding='utf-8') as f:
+              f.write(readme)
+          
+          print("README dashboard updated successfully")
+          PYTHON_SCRIPT
+          
+          # Commit and push dashboard update
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md docs/uaa-status.json docs/uaa-diagnostics.json 2>/dev/null || true
+          if [ -n "$(git status --porcelain README.md docs/uaa-status.json docs/uaa-diagnostics.json 2>/dev/null)" ]; then
+            git commit -m "🤖 UAA: Update status dashboard [skip ci]" || true
+            git push origin HEAD:${{ github.ref_name }} || true
+          fi
+
       - name: UAA execution summary
         if: always()
         run: |
@@ -150,5 +209,13 @@ jobs:
           echo "Capability: ${{ steps.determine-capability.outputs.capability }}"
           echo "Workflow Event: ${{ steps.determine-capability.outputs.workflow_event }}"
           echo "Status: ${{ job.status }}"
+          if [ "${{ job.status }}" == "failure" ]; then
+            echo ""
+            echo "⚠️ UAA encountered an error. Diagnostic information:"
+            if [ -f "docs/uaa-diagnostics.json" ]; then
+              echo "View diagnostics: docs/uaa-diagnostics.json"
+              cat docs/uaa-diagnostics.json | jq '.' 2>/dev/null || cat docs/uaa-diagnostics.json
+            fi
+          fi
           echo "========================================="
 

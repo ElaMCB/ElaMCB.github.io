@@ -303,6 +303,29 @@ Found this useful? Here's how you can help:
 
 **Unified autonomous agent system working on this portfolio 24/7**
 
+## UAA Status Dashboard
+
+**Last Updated:** Loading...
+
+| Component | Status | Last Run | Details |
+|-----------|--------|----------|---------|
+| **UAA Workflow** | ⚪ Unknown | N/A | [View Runs](https://github.com/ElaMCB/ElaMCB.github.io/actions/workflows/unified-autonomous-agent.yml) |
+| **CI-Fix Capability** | ⚪ Unknown | N/A | [View Status](./docs/uaa-status.json) |
+| **Link-Health Capability** | ⚪ Unknown | N/A | [View Status](./docs/uaa-status.json) |
+| **Security Capability** | ⚪ Unknown | N/A | [View Status](./docs/uaa-status.json) |
+
+### Recent Activity
+- Dashboard will update after first UAA run
+
+### Quick Links
+- [UAA Success Indicators Guide](./docs/UAA_SUCCESS_INDICATORS.md)
+- [UAA Architecture](./docs/UNIFIED_AGENT_ARCHITECTURE.html)
+- [Agent README](./agents/README.md)
+- [View All Workflow Runs](https://github.com/ElaMCB/ElaMCB.github.io/actions/workflows/unified-autonomous-agent.yml)
+
+---
+*Dashboard auto-updated by UAA after each run*
+
 ### Unified Autonomous Agent
 
 **Status:** ✅ Active | **Architecture:** Modular, Single Workflow, Multiple Capabilities

@@ -23,33 +23,54 @@ log_info "Workflow event: $WORKFLOW_EVENT"
 run_ci_fix() {
     if [ "$ENABLE_CI_FIX" != "true" ]; then
         log_warning "CI-Fix capability is disabled"
+        bash "$SCRIPT_DIR/shared/update_status.sh" "ci-fix" "skipped" "Capability disabled"
         return 0
     fi
     
     log_info "Executing CI-Fix capability..."
-    bash "$SCRIPT_DIR/capabilities/ci-fix/ci-fix.sh" "${WORKFLOW_EVENT:-workflow_logs.txt}"
+    if bash "$SCRIPT_DIR/capabilities/ci-fix/ci-fix.sh" "${WORKFLOW_EVENT:-workflow_logs.txt}"; then
+        bash "$SCRIPT_DIR/shared/update_status.sh" "ci-fix" "success" "CI-Fix completed successfully"
+    else
+        local exit_code=$?
+        bash "$SCRIPT_DIR/shared/update_status.sh" "ci-fix" "failure" "CI-Fix failed with exit code $exit_code"
+        return $exit_code
+    fi
 }
 
 # Function to run Link-Health capability
 run_link_health() {
     if [ "$ENABLE_LINK_HEALTH" != "true" ]; then
         log_warning "Link-Health capability is disabled"
+        bash "$SCRIPT_DIR/shared/update_status.sh" "link-health" "skipped" "Capability disabled"
         return 0
     fi
     
     log_info "Executing Link-Health capability..."
-    bash "$SCRIPT_DIR/capabilities/link-health/link-health.sh"
+    if bash "$SCRIPT_DIR/capabilities/link-health/link-health.sh"; then
+        bash "$SCRIPT_DIR/shared/update_status.sh" "link-health" "success" "Link-Health completed successfully"
+    else
+        local exit_code=$?
+        bash "$SCRIPT_DIR/shared/update_status.sh" "link-health" "failure" "Link-Health failed with exit code $exit_code"
+        return $exit_code
+    fi
 }
 
 # Function to run Security capability
 run_security() {
     if [ "$ENABLE_SECURITY" != "true" ]; then
         log_warning "Security capability is disabled"
+        bash "$SCRIPT_DIR/shared/update_status.sh" "security" "skipped" "Capability disabled"
         return 0
     fi
     
     log_info "Executing Security capability..."
-    bash "$SCRIPT_DIR/capabilities/security/security.sh"
+    if bash "$SCRIPT_DIR/capabilities/security/security.sh"; then
+        bash "$SCRIPT_DIR/shared/update_status.sh" "security" "success" "Security completed successfully"
+    else
+        local exit_code=$?
+        bash "$SCRIPT_DIR/shared/update_status.sh" "security" "failure" "Security failed with exit code $exit_code"
+        return $exit_code
+    fi
 }
 
 # Main router logic
