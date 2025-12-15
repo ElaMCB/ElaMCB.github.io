@@ -20,10 +20,16 @@ analyze_error() {
     
     local output_file="${GITHUB_OUTPUT:-/tmp/agent_outputs.txt}"
     
+    # Ensure output file exists and is writable
+    touch "$output_file" 2>/dev/null || {
+        log_error "Cannot write to output file: $output_file"
+        return 1
+    }
+    
     if [ ! -f "$log_file" ] || [ ! -s "$log_file" ]; then
         log_warning "No log file found or log file is empty - skipping CI-Fix analysis"
-        echo "error_type=no_logs" >> "$output_file"
-        echo "fix_action=skip" >> "$output_file"
+        echo "error_type=no_logs" >> "$output_file" 2>/dev/null || log_warning "Could not write to output file"
+        echo "fix_action=skip" >> "$output_file" 2>/dev/null || log_warning "Could not write to output file"
         log_info "CI-Fix skipped: No failed workflow logs to analyze"
         return 0
     fi
@@ -126,14 +132,18 @@ main() {
     # Read outputs from analyze_error function (set via $GITHUB_OUTPUT in GitHub Actions)
     # For local execution, we'll use a temp file
     local output_file="${GITHUB_OUTPUT:-/tmp/agent_outputs.txt}"
-    if [ ! -f "$output_file" ]; then
-        output_file="/tmp/agent_outputs.txt"
-        touch "$output_file"
-    fi
     
-    # Analyze error - if it returns non-zero or sets error_type=no_logs, skip processing
-    analyze_error "$workflow_logs"
-    local analyze_exit=$?
+    # Ensure output file exists
+    touch "$output_file" 2>/dev/null || {
+        log_error "Cannot create output file: $output_file"
+        return 1
+    }
+    
+    # Analyze error - if it returns non-zero, exit with error
+    if ! analyze_error "$workflow_logs"; then
+        log_error "Failed to analyze error logs"
+        return 1
+    fi
     
     local error_type=$(grep '^error_type=' "$output_file" 2>/dev/null | cut -d'=' -f2 || echo "unknown")
     local fix_action=$(grep '^fix_action=' "$output_file" 2>/dev/null | cut -d'=' -f2 || echo "skip")
