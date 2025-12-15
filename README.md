@@ -301,18 +301,32 @@ Found this useful? Here's how you can help:
 
 ## Autonomous Agents Ecosystem
 
-**Live autonomous agents working on this portfolio 24/7**
+**Unified autonomous agent system working on this portfolio 24/7**
 
-| Agent | Status | Purpose | Key Capability | Links |
-|-------|--------|---------|----------------|-------|
-| **CIF-AA**<br/>CI Fix Autonomous Agent | ✅ Active | Auto-fix CI/CD failures | Fixes npm sync, missing deps, creates issues for complex errors | [Guide](./docs/AUTONOMOUS_CI_AGENT_GUIDE.html) \| [Workflow](./.github/workflows/autonomous-ci-fix-agent.yml) |
-| **LHA**<br/>Link Health Agent | ✅ Active | Prevent broken links | Weekly link scans, creates PRs with fix reports, alerts on critical links | [Guide](./docs/LINK_HEALTH_AGENT_GUIDE.md) \| [Workflow](./.github/workflows/link-health-agent.yml) |
-| **SA**<br/>Security Agent | ✅ Active | Security monitoring | npm audit, secret detection, auto-fixes moderate issues, critical alerts | [Guide](./docs/SECURITY_AGENT_GUIDE.md) \| [Workflow](./.github/workflows/security-agent.yml) |
-| **SEO-MA**<br/>SEO Monitor Agent | 🔜 Planned | Monitor SEO health | Weekly audits, Core Web Vitals, meta tag validation | [Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md) |
-| **PMA**<br/>Performance Monitor Agent | 🔜 Planned | Track performance | Lighthouse audits, Core Web Vitals monitoring | [Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md) |
-| **DUA**<br/>Dependency Update Agent | 🔜 Planned | Keep dependencies current | Auto-update npm packages, security patches | [Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md) |
-| **CUA**<br/>Content Update Agent | 🔜 Planned | Maintain content freshness | Detect outdated content, update dates | [Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md) |
-| **AA**<br/>Analytics Agent | 🔜 Planned | Generate insights | Weekly analytics reports, trend analysis | [Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md) |
+### Unified Autonomous Agent
+
+**Status:** ✅ Active | **Architecture:** Modular, Single Workflow, Multiple Capabilities
+
+| Capability | Status | Purpose | Key Features | Links |
+|------------|--------|---------|-------------|-------|
+| **CI-Fix** | ✅ Active | Auto-fix CI/CD failures | Fixes npm sync, missing deps, creates issues for complex errors | [Guide](./docs/AUTONOMOUS_CI_AGENT_GUIDE.html) |
+| **Link-Health** | ✅ Active | Prevent broken links | Weekly link scans, creates PRs with fix reports, alerts on critical links | [Guide](./docs/LINK_HEALTH_AGENT_GUIDE.md) |
+| **Security** | ✅ Active | Security monitoring | npm audit, secret detection, auto-fixes moderate issues, critical alerts | [Guide](./docs/SECURITY_AGENT_GUIDE.md) |
+
+**Unified Workflow:** [`.github/workflows/unified-autonomous-agent.yml`](./.github/workflows/unified-autonomous-agent.yml)  
+**Architecture:** [Unified Agent Architecture](./docs/UNIFIED_AGENT_ARCHITECTURE.html) | [Agent README](./agents/README.md)
+
+**Why Unified Architecture?** Single point of maintenance • Shared utilities • Modular design • Easy to extend • Consistent logging
+
+### Planned Capabilities
+
+| Agent | Status | Purpose | Links |
+|-------|--------|---------|-------|
+| **SEO-MA**<br/>SEO Monitor Agent | 🔜 Planned | Monitor SEO health | [Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md) |
+| **PMA**<br/>Performance Monitor Agent | 🔜 Planned | Track performance | [Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md) |
+| **DUA**<br/>Dependency Update Agent | 🔜 Planned | Keep dependencies current | [Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md) |
+| **CUA**<br/>Content Update Agent | 🔜 Planned | Maintain content freshness | [Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md) |
+| **AA**<br/>Analytics Agent | 🔜 Planned | Generate insights | [Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md) |
 
 **Why Autonomous Agents?** 24/7 operation • Instant response • Consistent quality • Demonstrates practical AI agentic workflows
 
