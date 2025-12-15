@@ -1,7 +1,8 @@
 #!/bin/bash
 # CI Fix Capability - Analyzes and fixes common CI/CD failures
 
-set -e
+# Don't exit on error - let the router handle error tracking
+set +e
 
 # Load shared utilities
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -20,10 +21,11 @@ analyze_error() {
     local output_file="${GITHUB_OUTPUT:-/tmp/agent_outputs.txt}"
     
     if [ ! -f "$log_file" ] || [ ! -s "$log_file" ]; then
-        log_warning "No log file found or log file is empty"
+        log_warning "No log file found or log file is empty - skipping CI-Fix analysis"
         echo "error_type=no_logs" >> "$output_file"
         echo "fix_action=skip" >> "$output_file"
-        return 1
+        log_info "CI-Fix skipped: No failed workflow logs to analyze"
+        return 0
     fi
     
     local error_log=$(tail -100 "$log_file")

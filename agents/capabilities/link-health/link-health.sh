@@ -1,7 +1,8 @@
 #!/bin/bash
 # Link Health Capability - Scans for broken links
 
-set -e
+# Don't exit on error - let the router handle error tracking
+set +e
 
 # Load shared utilities
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
