@@ -28,15 +28,15 @@ analyze_error() {
     
     local error_log=$(tail -100 "$log_file")
     
+    # Use GITHUB_OUTPUT if available (GitHub Actions), otherwise use temp file
+    local output_file="${GITHUB_OUTPUT:-/tmp/agent_outputs.txt}"
+    
     # Set multiline output for error log
     {
         echo "error_log<<EOF"
         echo "$error_log"
         echo "EOF"
-    } >> $GITHUB_OUTPUT
-    
-    # Use GITHUB_OUTPUT if available (GitHub Actions), otherwise use temp file
-    local output_file="${GITHUB_OUTPUT:-/tmp/agent_outputs.txt}"
+    } >> "$output_file"
     
     # Detect common errors
     if echo "$error_log" | grep -q "npm ci.*can only install packages when your package.json and package-lock.json.*are in sync"; then
