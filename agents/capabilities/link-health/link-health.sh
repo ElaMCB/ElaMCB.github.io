@@ -45,8 +45,9 @@ scan_links() {
         broken_count=${broken_count:-0}
         total_count=${total_count:-0}
         
-        echo "broken_count=$broken_count" >> $GITHUB_OUTPUT
-        echo "total_count=$total_count" >> $GITHUB_OUTPUT
+        local output_file="${GITHUB_OUTPUT:-/tmp/agent_outputs.txt}"
+        echo "broken_count=$broken_count" >> "$output_file"
+        echo "total_count=$total_count" >> "$output_file"
         
         # Extract broken links
         cat link-scan-results.json | jq -r '[.[] | select(.status >= 400)] | .[] | "\(.url) - \(.status) - \(.parent)"' > broken-links.txt 2>/dev/null || true
@@ -55,20 +56,23 @@ scan_links() {
         log_info "Scan complete: $broken_count broken links out of $total_count total"
     else
         log_warning "No scan results file generated"
-        echo "broken_count=0" >> $GITHUB_OUTPUT
-        echo "total_count=0" >> $GITHUB_OUTPUT
+        local output_file="${GITHUB_OUTPUT:-/tmp/agent_outputs.txt}"
+        echo "broken_count=0" >> "$output_file"
+        echo "total_count=0" >> "$output_file"
         touch broken-links.txt
     fi
 }
 
 # Function to analyze broken links
 analyze_links() {
+    local output_file="${GITHUB_OUTPUT:-/tmp/agent_outputs.txt}"
+    
     if [ ! -f broken-links.txt ] || [ ! -s broken-links.txt ]; then
         log_info "No broken links found"
-        echo "broken_links=" >> $GITHUB_OUTPUT
-        echo "has_broken=false" >> $GITHUB_OUTPUT
-        echo "internal_broken=0" >> $GITHUB_OUTPUT
-        echo "external_broken=0" >> $GITHUB_OUTPUT
+        echo "broken_links=" >> "$output_file"
+        echo "has_broken=false" >> "$output_file"
+        echo "internal_broken=0" >> "$output_file"
+        echo "external_broken=0" >> "$output_file"
         return 0
     fi
     
@@ -79,7 +83,7 @@ analyze_links() {
         echo "broken_links<<EOF"
         echo "$broken_links"
         echo "EOF"
-    } >> $GITHUB_OUTPUT
+    } >> "$output_file"
     
     # Categorize broken links
     if [ -n "$broken_links" ]; then
@@ -93,9 +97,9 @@ analyze_links() {
     internal=${internal:-0}
     external=${external:-0}
     
-    echo "internal_broken=$internal" >> $GITHUB_OUTPUT
-    echo "external_broken=$external" >> $GITHUB_OUTPUT
-    echo "has_broken=true" >> $GITHUB_OUTPUT
+    echo "internal_broken=$internal" >> "$output_file"
+    echo "external_broken=$external" >> "$output_file"
+    echo "has_broken=true" >> "$output_file"
     
     log_info "Analysis complete: $internal internal, $external external broken links"
 }
@@ -197,14 +201,15 @@ Internal broken links should be fixed immediately as they affect user experience
 main() {
     scan_links
     
-    local broken_count=$(echo "$(cat $GITHUB_OUTPUT | grep '^broken_count=' | cut -d'=' -f2)" || echo "0")
-    local total_count=$(echo "$(cat $GITHUB_OUTPUT | grep '^total_count=' | cut -d'=' -f2)" || echo "0")
+    local output_file="${GITHUB_OUTPUT:-/tmp/agent_outputs.txt}"
+    local broken_count=$(grep '^broken_count=' "$output_file" 2>/dev/null | cut -d'=' -f2 || echo "0")
+    local total_count=$(grep '^total_count=' "$output_file" 2>/dev/null | cut -d'=' -f2 || echo "0")
     
     analyze_links
     
-    local has_broken=$(echo "$(cat $GITHUB_OUTPUT | grep '^has_broken=' | cut -d'=' -f2)" || echo "false")
-    local internal=$(echo "$(cat $GITHUB_OUTPUT | grep '^internal_broken=' | cut -d'=' -f2)" || echo "0")
-    local external=$(echo "$(cat $GITHUB_OUTPUT | grep '^external_broken=' | cut -d'=' -f2)" || echo "0")
+    local has_broken=$(grep '^has_broken=' "$output_file" 2>/dev/null | cut -d'=' -f2 || echo "false")
+    local internal=$(grep '^internal_broken=' "$output_file" 2>/dev/null | cut -d'=' -f2 || echo "0")
+    local external=$(grep '^external_broken=' "$output_file" 2>/dev/null | cut -d'=' -f2 || echo "0")
     local broken_links=$(cat broken-links.txt 2>/dev/null || echo "")
     
     if [ "$has_broken" = "true" ]; then

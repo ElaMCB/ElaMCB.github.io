@@ -64,7 +64,10 @@ commit_and_push() {
     setup_git
     git add $files
     git commit -m "$message" || return 1
-    git push origin HEAD:${{ github.ref_name }} || return 1
+    
+    # Use GITHUB_REF_NAME if available (GitHub Actions), otherwise use current branch
+    local branch="${GITHUB_REF_NAME:-$(git rev-parse --abbrev-ref HEAD)}"
+    git push origin HEAD:"$branch" || return 1
 }
 
 # Check if command exists

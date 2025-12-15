@@ -27,10 +27,11 @@ run_npm_audit() {
         local high=$(cat npm-audit-results.json | jq '[.vulnerabilities[] | select(.severity == "high")] | length' 2>/dev/null || echo "0")
         local moderate=$(cat npm-audit-results.json | jq '[.vulnerabilities[] | select(.severity == "moderate")] | length' 2>/dev/null || echo "0")
         
-        echo "vulnerabilities=$vulnerabilities" >> $GITHUB_OUTPUT
-        echo "critical=$critical" >> $GITHUB_OUTPUT
-        echo "high=$high" >> $GITHUB_OUTPUT
-        echo "moderate=$moderate" >> $GITHUB_OUTPUT
+        local output_file="${GITHUB_OUTPUT:-/tmp/agent_outputs.txt}"
+        echo "vulnerabilities=$vulnerabilities" >> "$output_file"
+        echo "critical=$critical" >> "$output_file"
+        echo "high=$high" >> "$output_file"
+        echo "moderate=$moderate" >> "$output_file"
         
         # Extract vulnerability details
         cat npm-audit-results.json | jq -r '.vulnerabilities | to_entries[] | "\(.key): \(.value.severity) - \(.value.title)"' > vulnerabilities.txt 2>/dev/null || echo "" > vulnerabilities.txt
@@ -38,10 +39,11 @@ run_npm_audit() {
         log_info "Audit complete: $vulnerabilities vulnerabilities ($critical critical, $high high, $moderate moderate)"
     else
         log_warning "No audit results file generated"
-        echo "vulnerabilities=0" >> $GITHUB_OUTPUT
-        echo "critical=0" >> $GITHUB_OUTPUT
-        echo "high=0" >> $GITHUB_OUTPUT
-        echo "moderate=0" >> $GITHUB_OUTPUT
+        local output_file="${GITHUB_OUTPUT:-/tmp/agent_outputs.txt}"
+        echo "vulnerabilities=0" >> "$output_file"
+        echo "critical=0" >> "$output_file"
+        echo "high=0" >> "$output_file"
+        echo "moderate=0" >> "$output_file"
         echo "" > vulnerabilities.txt
     fi
 }
@@ -70,12 +72,13 @@ scan_secrets() {
         fi
     done
     
-    echo "secrets_found=$secrets_found" >> $GITHUB_OUTPUT
+    local output_file="${GITHUB_OUTPUT:-/tmp/agent_outputs.txt}"
+    echo "secrets_found=$secrets_found" >> "$output_file"
     {
         echo "secret_details<<EOF"
         echo -e "$secret_details"
         echo "EOF"
-    } >> $GITHUB_OUTPUT
+    } >> "$output_file"
     
     if [ "$secrets_found" -gt "0" ]; then
         log_warning "Found $secrets_found potential exposed secrets!"
@@ -215,12 +218,13 @@ main() {
     run_npm_audit
     scan_secrets
     
-    local vulnerabilities=$(echo "$(cat $GITHUB_OUTPUT | grep '^vulnerabilities=' | cut -d'=' -f2)" || echo "0")
-    local critical=$(echo "$(cat $GITHUB_OUTPUT | grep '^critical=' | cut -d'=' -f2)" || echo "0")
-    local high=$(echo "$(cat $GITHUB_OUTPUT | grep '^high=' | cut -d'=' -f2)" || echo "0")
-    local moderate=$(echo "$(cat $GITHUB_OUTPUT | grep '^moderate=' | cut -d'=' -f2)" || echo "0")
-    local secrets_found=$(echo "$(cat $GITHUB_OUTPUT | grep '^secrets_found=' | cut -d'=' -f2)" || echo "0")
-    local secret_details=$(cat $GITHUB_OUTPUT | grep -A 100 '^secret_details<<EOF' | grep -v '^secret_details<<EOF' | grep -v '^EOF$' || echo "")
+    local output_file="${GITHUB_OUTPUT:-/tmp/agent_outputs.txt}"
+    local vulnerabilities=$(grep '^vulnerabilities=' "$output_file" 2>/dev/null | cut -d'=' -f2 || echo "0")
+    local critical=$(grep '^critical=' "$output_file" 2>/dev/null | cut -d'=' -f2 || echo "0")
+    local high=$(grep '^high=' "$output_file" 2>/dev/null | cut -d'=' -f2 || echo "0")
+    local moderate=$(grep '^moderate=' "$output_file" 2>/dev/null | cut -d'=' -f2 || echo "0")
+    local secrets_found=$(grep '^secrets_found=' "$output_file" 2>/dev/null | cut -d'=' -f2 || echo "0")
+    local secret_details=$(grep -A 100 '^secret_details<<EOF' "$output_file" 2>/dev/null | grep -v '^secret_details<<EOF' | grep -v '^EOF$' || echo "")
     
     # Calculate critical issues
     local critical_issues=$critical
