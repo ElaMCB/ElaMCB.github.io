@@ -135,12 +135,13 @@ jobs:
         if: steps.determine-capability.outputs.capability != 'skip'
         run: |
           mkdir -p docs
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           # Initialize status file if it doesn't exist
           if [ ! -f "docs/uaa-status.json" ]; then
-            cat > docs/uaa-status.json << 'EOF'
+            cat > docs/uaa-status.json << EOF
           {
-            "last_updated": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
-            "workflow_status": "unknown",
+            "last_updated": "$TIMESTAMP",
+            "workflow_status": "running",
             "capabilities": {
               "ci-fix": {
                 "status": "unknown",
@@ -173,10 +174,11 @@ jobs:
             "recent_activity": []
           }
           EOF
-          fi
-          # Update workflow status to running
-          if command -v jq >/dev/null 2>&1; then
-            jq '.workflow_status = "running" | .last_updated = "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"' docs/uaa-status.json > docs/uaa-status.json.tmp && mv docs/uaa-status.json.tmp docs/uaa-status.json || true
+          else
+            # Update workflow status to running if file exists
+            if command -v jq >/dev/null 2>&1; then
+              jq ".workflow_status = \"running\" | .last_updated = \"$TIMESTAMP\"" docs/uaa-status.json > docs/uaa-status.json.tmp && mv docs/uaa-status.json.tmp docs/uaa-status.json || true
+            fi
           fi
 
       - name: Run Unified Agent (UAA)
@@ -205,10 +207,11 @@ jobs:
           
           # Ensure status file exists
           mkdir -p docs
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           if [ ! -f "docs/uaa-status.json" ]; then
-            cat > docs/uaa-status.json << 'EOF'
+            cat > docs/uaa-status.json << EOF
           {
-            "last_updated": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+            "last_updated": "$TIMESTAMP",
             "workflow_status": "${{ job.status }}",
             "capabilities": {
               "ci-fix": {"status": "unknown", "last_run": "N/A", "last_success": "N/A", "last_failure": "N/A", "total_runs": 0, "success_count": 0, "failure_count": 0},
@@ -222,7 +225,7 @@ jobs:
           
           # Update workflow status
           if command -v jq >/dev/null 2>&1; then
-            jq ".workflow_status = \"${{ job.status }}\" | .last_updated = \"$(date -u +"%Y-%m-%dT%H:%M:%SZ")\"" docs/uaa-status.json > docs/uaa-status.json.tmp && mv docs/uaa-status.json.tmp docs/uaa-status.json || true
+            jq ".workflow_status = \"${{ job.status }}\" | .last_updated = \"$TIMESTAMP\"" docs/uaa-status.json > docs/uaa-status.json.tmp && mv docs/uaa-status.json.tmp docs/uaa-status.json || true
           fi
           
           # Make status scripts executable

@@ -31,31 +31,48 @@ get_capability_status() {
 
 # Generate dashboard markdown
 generate_dashboard() {
-    local workflow_status=$(get_workflow_status "unified-autonomous-agent")
+    local status_file="docs/uaa-status.json"
+    local timestamp=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+    
+    # Get workflow status from file or API
+    local workflow_status_str="unknown"
+    if [ -f "$status_file" ] && command -v jq >/dev/null 2>&1; then
+        workflow_status_str=$(jq -r '.workflow_status // "unknown"' "$status_file" 2>/dev/null || echo "unknown")
+    fi
+    
+    # Get capability statuses
     local ci_fix_status=$(get_capability_status "ci-fix")
     local link_health_status=$(get_capability_status "link-health")
     local security_status=$(get_capability_status "security")
     
+    # Get last run times
+    local ci_fix_time=$(get_last_run_time "ci-fix")
+    local link_health_time=$(get_last_run_time "link-health")
+    local security_time=$(get_last_run_time "security")
+    
+    # Get recent activity
+    local recent_activity=$(get_recent_activity)
+    
     cat <<EOF
 ## UAA Status Dashboard
 
-**Last Updated:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+**Last Updated:** $timestamp
 
 | Component | Status | Last Run | Details |
 |-----------|--------|----------|---------|
-| **UAA Workflow** | $(get_status_badge "$(echo "$workflow_status" | jq -r '.conclusion // "unknown"')") | $(echo "$workflow_status" | jq -r '.created_at // "N/A"') | [View Run]($(echo "$workflow_status" | jq -r '.html_url // "#"')) |
-| **CI-Fix Capability** | $(get_status_badge "$ci_fix_status") | $(get_last_run_time "ci-fix") | [View Logs](./docs/uaa-status.json#ci-fix) |
-| **Link-Health Capability** | $(get_status_badge "$link_health_status") | $(get_last_run_time "link-health") | [View Logs](./docs/uaa-status.json#link-health) |
-| **Security Capability** | $(get_status_badge "$security_status") | $(get_last_run_time "security") | [View Logs](./docs/uaa-status.json#security) |
+| **UAA Workflow** | $(get_status_badge "$workflow_status_str") | $timestamp | [View Runs](https://github.com/${GITHUB_REPOSITORY:-ElaMCB/ElaMCB.github.io}/actions/workflows/unified-autonomous-agent.yml) |
+| **CI-Fix Capability** | $(get_status_badge "$ci_fix_status") | $ci_fix_time | [View Status](./docs/uaa-status.json) |
+| **Link-Health Capability** | $(get_status_badge "$link_health_status") | $link_health_time | [View Status](./docs/uaa-status.json) |
+| **Security Capability** | $(get_status_badge "$security_status") | $security_time | [View Status](./docs/uaa-status.json) |
 
 ### Recent Activity
-$(get_recent_activity)
+$recent_activity
 
 ### Quick Links
 - [UAA Success Indicators Guide](./docs/UAA_SUCCESS_INDICATORS.md)
 - [UAA Architecture](./docs/UNIFIED_AGENT_ARCHITECTURE.html)
 - [Agent README](./agents/README.md)
-- [View All Workflow Runs](https://github.com/$GITHUB_REPOSITORY/actions/workflows/unified-autonomous-agent.yml)
+- [View All Workflow Runs](https://github.com/${GITHUB_REPOSITORY:-ElaMCB/ElaMCB.github.io}/actions/workflows/unified-autonomous-agent.yml)
 
 ---
 *Dashboard auto-updated by UAA after each run*
@@ -98,10 +115,15 @@ get_last_run_time() {
 get_recent_activity() {
     local status_file="docs/uaa-status.json"
     
-    if [ -f "$status_file" ]; then
-        jq -r '.recent_activity[] | "- **\(.time)**: \(.message)"' "$status_file" 2>/dev/null | head -5 || echo "- No recent activity"
+    if [ -f "$status_file" ] && command -v jq >/dev/null 2>&1; then
+        local activity=$(jq -r '.recent_activity[]? | "- **\(.time)**: \(.message)"' "$status_file" 2>/dev/null | head -5)
+        if [ -n "$activity" ]; then
+            echo "$activity"
+        else
+            echo "- Dashboard will update after first UAA run"
+        fi
     else
-        echo "- No recent activity"
+        echo "- Dashboard will update after first UAA run"
     fi
 }
 
