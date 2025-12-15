@@ -2,7 +2,7 @@
 # Configuration file for unified agent
 
 # Agent metadata
-AGENT_NAME="Unified Autonomous Agent"
+AGENT_NAME="UAA (Unified Autonomous Agent)"
 AGENT_VERSION="1.0.0"
 
 # Capability settings

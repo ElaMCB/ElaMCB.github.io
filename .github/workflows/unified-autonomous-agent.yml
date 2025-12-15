@@ -131,20 +131,21 @@ jobs:
             fi
           fi
 
-      - name: Run Unified Agent
+      - name: Run Unified Agent (UAA)
         if: steps.determine-capability.outputs.capability != 'skip'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_WORKFLOW: ${{ github.workflow }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
         run: |
           bash agents/router.sh "${{ steps.determine-capability.outputs.capability }}" "${{ steps.determine-capability.outputs.workflow_event }}"
 
-      - name: Agent execution summary
+      - name: UAA execution summary
         if: always()
         run: |
           echo "========================================="
-          echo "Unified Autonomous Agent - Execution Summary"
+          echo "UAA (Unified Autonomous Agent) - Execution Summary"
           echo "========================================="
           echo "Capability: ${{ steps.determine-capability.outputs.capability }}"
           echo "Workflow Event: ${{ steps.determine-capability.outputs.workflow_event }}"

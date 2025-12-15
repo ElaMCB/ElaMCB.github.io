@@ -1,4 +1,4 @@
-# Unified Autonomous Agent
+# UAA (Unified Autonomous Agent)
 
 A modular, unified agent architecture that consolidates multiple autonomous agent capabilities into a single, maintainable system.
 
