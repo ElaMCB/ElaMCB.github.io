@@ -309,10 +309,10 @@ Found this useful? Here's how you can help:
 
 | Component | Status | Last Run | Details |
 |-----------|--------|----------|---------|
-| **UAA Workflow** | ⚪ Unknown | N/A | [View Runs](https://github.com/ElaMCB/ElaMCB.github.io/actions/workflows/unified-autonomous-agent.yml) |
-| **CI-Fix Capability** | ⚪ Unknown | N/A | [View Status](./docs/uaa-status.json) |
-| **Link-Health Capability** | ⚪ Unknown | N/A | [View Status](./docs/uaa-status.json) |
-| **Security Capability** | ⚪ Unknown | N/A | [View Status](./docs/uaa-status.json) |
+| **UAA Workflow** | [UNKNOWN] Unknown | N/A | [View Runs](https://github.com/ElaMCB/ElaMCB.github.io/actions/workflows/unified-autonomous-agent.yml) |
+| **CI-Fix Capability** | [UNKNOWN] Unknown | N/A | [View Status](./docs/uaa-status.json) |
+| **Link-Health Capability** | [UNKNOWN] Unknown | N/A | [View Status](./docs/uaa-status.json) |
+| **Security Capability** | [UNKNOWN] Unknown | N/A | [View Status](./docs/uaa-status.json) |
 
 ### Recent Activity
 - Dashboard will update after first UAA run
@@ -328,13 +328,13 @@ Found this useful? Here's how you can help:
 
 ### Unified Autonomous Agent
 
-**Status:** ✅ Active | **Architecture:** Modular, Single Workflow, Multiple Capabilities
+**Status:** [ACTIVE] Active | **Architecture:** Modular, Single Workflow, Multiple Capabilities
 
 | Capability | Status | Purpose | Key Features | Links |
 |------------|--------|---------|-------------|-------|
-| **CI-Fix** | ✅ Active | Auto-fix CI/CD failures | Fixes npm sync, missing deps, creates issues for complex errors | [Guide](./docs/AUTONOMOUS_CI_AGENT_GUIDE.html) |
-| **Link-Health** | ✅ Active | Prevent broken links | Weekly link scans, creates PRs with fix reports, alerts on critical links | [Guide](./docs/LINK_HEALTH_AGENT_GUIDE.md) |
-| **Security** | ✅ Active | Security monitoring | npm audit, secret detection, auto-fixes moderate issues, critical alerts | [Guide](./docs/SECURITY_AGENT_GUIDE.md) |
+| **CI-Fix** | [ACTIVE] Active | Auto-fix CI/CD failures | Fixes npm sync, missing deps, creates issues for complex errors | [Guide](./docs/AUTONOMOUS_CI_AGENT_GUIDE.html) |
+| **Link-Health** | [ACTIVE] Active | Prevent broken links | Weekly link scans, creates PRs with fix reports, alerts on critical links | [Guide](./docs/LINK_HEALTH_AGENT_GUIDE.md) |
+| **Security** | [ACTIVE] Active | Security monitoring | npm audit, secret detection, auto-fixes moderate issues, critical alerts | [Guide](./docs/SECURITY_AGENT_GUIDE.md) |
 
 **Unified Workflow:** [`.github/workflows/unified-autonomous-agent.yml`](./.github/workflows/unified-autonomous-agent.yml)  
 **Architecture:** [Unified Agent Architecture](./docs/UNIFIED_AGENT_ARCHITECTURE.html) | [Agent README](./agents/README.md)

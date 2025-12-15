@@ -67,19 +67,19 @@ get_status_badge() {
     local status="$1"
     case "$status" in
         success|completed)
-            echo "✅ Success"
+            echo "[OK] Success"
             ;;
         failure|failed)
-            echo "❌ Failed"
+            echo "[FAILED] Failed"
             ;;
         in_progress|queued)
-            echo "🟡 Running"
+            echo "[RUNNING] Running"
             ;;
         cancelled)
-            echo "⚪ Cancelled"
+            echo "[CANCELLED] Cancelled"
             ;;
         *)
-            echo "⚪ Unknown"
+            echo "[UNKNOWN] Unknown"
             ;;
     esac
 }
