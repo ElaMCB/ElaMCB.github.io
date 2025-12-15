@@ -122,7 +122,6 @@ main() {
     local workflow_logs="${1:-workflow_logs.txt}"
     
     log_info "Analyzing workflow logs: $workflow_logs"
-    analyze_error "$workflow_logs"
     
     # Read outputs from analyze_error function (set via $GITHUB_OUTPUT in GitHub Actions)
     # For local execution, we'll use a temp file
@@ -132,16 +131,30 @@ main() {
         touch "$output_file"
     fi
     
+    # Analyze error - if it returns non-zero or sets error_type=no_logs, skip processing
+    analyze_error "$workflow_logs"
+    local analyze_exit=$?
+    
     local error_type=$(grep '^error_type=' "$output_file" 2>/dev/null | cut -d'=' -f2 || echo "unknown")
     local fix_action=$(grep '^fix_action=' "$output_file" 2>/dev/null | cut -d'=' -f2 || echo "skip")
+    
+    # If no logs found, skip all processing
+    if [ "$error_type" = "no_logs" ] || [ "$fix_action" = "skip" ]; then
+        log_info "Skipping CI-Fix: No logs to analyze"
+        return 0
+    fi
     
     case "$error_type" in
         npm_lock_sync|npm_missing_deps)
             fix_npm_lock_sync
             ;;
         github_actions_output_error|syntax_error|unknown)
-            local error_log=$(cat "$workflow_logs" | tail -100)
-            create_error_issue "$error_type" "$error_log" "${GITHUB_WORKFLOW:-Unknown}"
+            if [ -f "$workflow_logs" ] && [ -s "$workflow_logs" ]; then
+                local error_log=$(cat "$workflow_logs" | tail -100)
+                create_error_issue "$error_type" "$error_log" "${GITHUB_WORKFLOW:-Unknown}"
+            else
+                log_warning "Cannot create issue: log file not available"
+            fi
             ;;
         *)
             log_info "No action needed for error type: $error_type"
@@ -149,6 +162,7 @@ main() {
     esac
     
     log_success "$CAPABILITY_NAME capability completed"
+    return 0
 }
 
 # Run if executed directly
