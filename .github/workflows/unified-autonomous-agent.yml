@@ -233,19 +233,27 @@ jobs:
           chmod +x agents/shared/generate_status_dashboard.sh
           
           # Generate status dashboard
+          TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
           bash agents/shared/generate_status_dashboard.sh > /tmp/uaa-dashboard.md || {
             # Fallback if dashboard generation fails
-            cat > /tmp/uaa-dashboard.md << 'EOF'
+            WORKFLOW_STATUS="${{ job.status }}"
+            case "$WORKFLOW_STATUS" in
+              success) STATUS_BADGE="🟢 Success" ;;
+              failure) STATUS_BADGE="🔴 Failed" ;;
+              cancelled) STATUS_BADGE="⚪ Cancelled" ;;
+              *) STATUS_BADGE="⚪ Unknown" ;;
+            esac
+            cat > /tmp/uaa-dashboard.md << EOF
           ## UAA Status Dashboard
 
-          **Last Updated:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          **Last Updated:** $TIMESTAMP
 
           | Component | Status | Last Run | Details |
           |-----------|--------|----------|---------|
-          | **UAA Workflow** | [${{ job.status }}] ${{ job.status }} | $(date -u +"%Y-%m-%d %H:%M:%S UTC") | [View Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) |
-          | **CI-Fix Capability** | [UNKNOWN] Unknown | N/A | [View Status](./docs/uaa-status.json) |
-          | **Link-Health Capability** | [UNKNOWN] Unknown | N/A | [View Status](./docs/uaa-status.json) |
-          | **Security Capability** | [UNKNOWN] Unknown | N/A | [View Status](./docs/uaa-status.json) |
+          | **UAA Workflow** | $STATUS_BADGE | $TIMESTAMP | [View Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) |
+          | **CI-Fix Capability** | ⚪ Unknown | N/A | [View Status](./docs/uaa-status.json) |
+          | **Link-Health Capability** | ⚪ Unknown | N/A | [View Status](./docs/uaa-status.json) |
+          | **Security Capability** | ⚪ Unknown | N/A | [View Status](./docs/uaa-status.json) |
 
           ### Quick Links
           - [UAA Success Indicators Guide](./docs/UAA_SUCCESS_INDICATORS.md)

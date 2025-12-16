@@ -32,12 +32,17 @@ get_capability_status() {
 # Generate dashboard markdown
 generate_dashboard() {
     local status_file="docs/uaa-status.json"
-    local timestamp=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
     
-    # Get workflow status from file or API
+    # Get current timestamp - ensure it's executed, not literal
+    local timestamp
+    timestamp=$(date -u +"%Y-%m-%d %H:%M:%S UTC" 2>/dev/null || echo "N/A")
+    
+    # Get workflow status from file
     local workflow_status_str="unknown"
+    local workflow_last_run="N/A"
     if [ -f "$status_file" ] && command -v jq >/dev/null 2>&1; then
         workflow_status_str=$(jq -r '.workflow_status // "unknown"' "$status_file" 2>/dev/null || echo "unknown")
+        workflow_last_run=$(jq -r '.last_updated // "N/A"' "$status_file" 2>/dev/null | sed 's/T/ /' | sed 's/Z/ UTC/' || echo "N/A")
     fi
     
     # Get capability statuses
@@ -50,6 +55,11 @@ generate_dashboard() {
     local link_health_time=$(get_last_run_time "link-health")
     local security_time=$(get_last_run_time "security")
     
+    # Format last run times
+    ci_fix_time=$(echo "$ci_fix_time" | sed 's/T/ /' | sed 's/Z/ UTC/' | sed 's/N\/A/N\/A/')
+    link_health_time=$(echo "$link_health_time" | sed 's/T/ /' | sed 's/Z/ UTC/' | sed 's/N\/A/N\/A/')
+    security_time=$(echo "$security_time" | sed 's/T/ /' | sed 's/Z/ UTC/' | sed 's/N\/A/N\/A/')
+    
     # Get recent activity
     local recent_activity=$(get_recent_activity)
     
@@ -60,7 +70,7 @@ generate_dashboard() {
 
 | Component | Status | Last Run | Details |
 |-----------|--------|----------|---------|
-| **UAA Workflow** | $(get_status_badge "$workflow_status_str") | $timestamp | [View Runs](https://github.com/${GITHUB_REPOSITORY:-ElaMCB/ElaMCB.github.io}/actions/workflows/unified-autonomous-agent.yml) |
+| **UAA Workflow** | $(get_status_badge "$workflow_status_str") | $workflow_last_run | [View Runs](https://github.com/${GITHUB_REPOSITORY:-ElaMCB/ElaMCB.github.io}/actions/workflows/unified-autonomous-agent.yml) |
 | **CI-Fix Capability** | $(get_status_badge "$ci_fix_status") | $ci_fix_time | [View Status](./docs/uaa-status.json) |
 | **Link-Health Capability** | $(get_status_badge "$link_health_status") | $link_health_time | [View Status](./docs/uaa-status.json) |
 | **Security Capability** | $(get_status_badge "$security_status") | $security_time | [View Status](./docs/uaa-status.json) |
