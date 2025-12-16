@@ -85,10 +85,15 @@ jobs:
             echo "capability=all" >> $GITHUB_OUTPUT
             echo "workflow_event=schedule" >> $GITHUB_OUTPUT
           elif [ "${{ github.event_name }}" == "push" ]; then
-            # Check which files changed
-            if echo "${{ github.event.head_commit.modified }}" | grep -qE "(\.html|\.md|index\.html)"; then
+            # Check which files changed (handle empty/modified gracefully)
+            MODIFIED_FILES="${{ github.event.head_commit.modified }}"
+            if [ -z "$MODIFIED_FILES" ]; then
+              # If modified is empty, try to get from git diff
+              MODIFIED_FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || echo "")
+            fi
+            if echo "$MODIFIED_FILES" | grep -qE "(\.html|\.md|index\.html)"; then
               echo "capability=link-health" >> $GITHUB_OUTPUT
-            elif echo "${{ github.event.head_commit.modified }}" | grep -qE "(package\.json|package-lock\.json|\.js|\.py)"; then
+            elif echo "$MODIFIED_FILES" | grep -qE "(package\.json|package-lock\.json|\.js|\.py)"; then
               echo "capability=security" >> $GITHUB_OUTPUT
             else
               echo "capability=all" >> $GITHUB_OUTPUT
@@ -189,12 +194,23 @@ jobs:
           GITHUB_WORKFLOW: ${{ github.workflow }}
           GITHUB_REF_NAME: ${{ github.ref_name }}
         run: |
-          bash agents/router.sh "${{ steps.determine-capability.outputs.capability }}" "${{ steps.determine-capability.outputs.workflow_event }}" || {
+          # Debug: Show current directory and verify script exists
+          echo "Current directory: $(pwd)"
+          echo "Checking if router.sh exists:"
+          ls -la agents/router.sh || echo "ERROR: router.sh not found!"
+          echo "Checking if shared/utils.sh exists:"
+          ls -la agents/shared/utils.sh || echo "ERROR: utils.sh not found!"
+          echo "Capability: ${{ steps.determine-capability.outputs.capability }}"
+          echo "Workflow event: ${{ steps.determine-capability.outputs.workflow_event }}"
+          
+          # Run the router with explicit error handling
+          if ! bash agents/router.sh "${{ steps.determine-capability.outputs.capability }}" "${{ steps.determine-capability.outputs.workflow_event }}"; then
             EXIT_CODE=$?
+            echo "ERROR: Router failed with exit code $EXIT_CODE"
             # Update status even on failure
             bash agents/shared/update_status.sh "ci-fix" "failure" "UAA router failed with exit code $EXIT_CODE" || true
             exit $EXIT_CODE
-          }
+          fi
 
       - name: Update UAA Status and Dashboard
         if: always()
