@@ -53,14 +53,8 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install GitHub CLI
-        run: |
-          type -p curl >/dev/null || (apt update && apt install curl -y)
-          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-          chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
-          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-          apt update
-          apt install gh -y
+      - name: Setup GitHub CLI
+        uses: github/setup-gh-cli@v1
 
       - name: Make scripts executable
         run: |
@@ -107,6 +101,8 @@ jobs:
       - name: Get failed workflow logs (for CI-Fix)
         if: steps.determine-capability.outputs.capability == 'ci-fix'
         id: get-logs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [ "${{ github.event_name }}" == "workflow_run" ]; then
             RUN_ID="${{ github.event.workflow_run.id }}"
@@ -116,7 +112,16 @@ jobs:
             echo "workflow_name=$WORKFLOW_NAME" >> $GITHUB_OUTPUT
             
             echo "Downloading logs for workflow: $WORKFLOW_NAME"
-            gh run view $RUN_ID --log > workflow_logs.txt 2>&1 || true
+            if command -v gh >/dev/null 2>&1; then
+              gh run view $RUN_ID --log > workflow_logs.txt 2>&1 || true
+            else
+              # Fallback: Use GitHub API with curl
+              echo "GitHub CLI not available, using API fallback..."
+              curl -s -H "Authorization: token $GITHUB_TOKEN" \
+                -H "Accept: application/vnd.github.v3+json" \
+                "https://api.github.com/repos/${{ github.repository }}/actions/runs/$RUN_ID/logs" \
+                -o workflow_logs.txt 2>&1 || true
+            fi
             
             if [ ! -s workflow_logs.txt ]; then
               echo "Warning: workflow_logs.txt is empty or doesn't exist"
@@ -124,16 +129,8 @@ jobs:
               echo "Logs downloaded successfully ($(wc -l < workflow_logs.txt) lines)"
             fi
           else
-            echo "Manual trigger - searching for latest failed CI run..."
-            gh run list --workflow=CI --limit 1 --json databaseId,conclusion --jq '.[] | select(.conclusion=="failure") | .databaseId' | head -1 > run_id.txt || echo "" > run_id.txt
-            RUN_ID=$(cat run_id.txt)
-            if [ ! -z "$RUN_ID" ]; then
-              echo "run_id=$RUN_ID" >> $GITHUB_OUTPUT
-              echo "Downloading logs for run ID: $RUN_ID"
-              gh run view $RUN_ID --log > workflow_logs.txt 2>&1 || true
-            else
-              echo "No failed CI runs found"
-            fi
+            echo "Manual trigger - skipping log download (no failed workflow to analyze)"
+            touch workflow_logs.txt
           fi
 
       - name: Initialize UAA Status File
