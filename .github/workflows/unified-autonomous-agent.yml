@@ -283,42 +283,99 @@ jobs:
           import re
           import sys
           
-          with open('README.md', 'r', encoding='utf-8') as f:
-              readme = f.read()
-          
-          # Read dashboard content
-          with open('/tmp/uaa-dashboard.md', 'r', encoding='utf-8') as f:
-              dashboard = f.read()
-          
-          # Find and replace dashboard section
-          pattern = r'(## UAA Status Dashboard.*?---\s*\*Dashboard auto-updated.*?\*)'
-          replacement = dashboard
-          
-          if re.search(pattern, readme, re.DOTALL):
-              readme = re.sub(pattern, replacement, readme, flags=re.DOTALL)
-          else:
-              # Insert after "## Autonomous Agents Ecosystem" section
-              insert_pos = readme.find('## Autonomous Agents Ecosystem')
-              if insert_pos != -1:
-                  # Find end of that section
-                  next_section = readme.find('\n## ', insert_pos + 1)
-                  if next_section == -1:
-                      next_section = len(readme)
-                  readme = readme[:next_section] + '\n\n' + dashboard + '\n\n' + readme[next_section:]
-          
-          with open('README.md', 'w', encoding='utf-8') as f:
-              f.write(readme)
-          
-          print("README dashboard updated successfully")
+          try:
+              with open('README.md', 'r', encoding='utf-8') as f:
+                  readme = f.read()
+              
+              # Read dashboard content
+              with open('/tmp/uaa-dashboard.md', 'r', encoding='utf-8') as f:
+                  dashboard = f.read()
+              
+              # Find and replace dashboard section - use a more flexible pattern
+              # Match from "## UAA Status Dashboard" to the end marker
+              pattern = r'(## UAA Status Dashboard.*?---\s*\*Dashboard auto-updated.*?\*)'
+              
+              if re.search(pattern, readme, re.DOTALL | re.MULTILINE):
+                  readme = re.sub(pattern, dashboard, readme, flags=re.DOTALL | re.MULTILINE)
+                  print("Found existing dashboard section and replaced it")
+              else:
+                  # Try to find the section more flexibly
+                  # Look for "## UAA Status Dashboard" anywhere
+                  dashboard_start = readme.find('## UAA Status Dashboard')
+                  if dashboard_start != -1:
+                      # Find the next section (##) or end of file
+                      next_section = readme.find('\n## ', dashboard_start + 1)
+                      if next_section == -1:
+                          next_section = len(readme)
+                      else:
+                          # Go back to find the end of previous line
+                          next_section = readme.rfind('\n', dashboard_start, next_section)
+                          if next_section == -1:
+                              next_section = len(readme)
+                      
+                      # Replace the section
+                      readme = readme[:dashboard_start] + dashboard + readme[next_section:]
+                      print("Found dashboard section marker and replaced content")
+                  else:
+                      # Insert after "## Autonomous Agents Ecosystem" section
+                      insert_pos = readme.find('## Autonomous Agents Ecosystem')
+                      if insert_pos != -1:
+                          # Find end of that section (next ## or end of file)
+                          next_section = readme.find('\n## ', insert_pos + 1)
+                          if next_section == -1:
+                              next_section = len(readme)
+                          else:
+                              # Find the newline before the next section
+                              next_section = readme.rfind('\n', insert_pos, next_section)
+                              if next_section == -1:
+                                  next_section = len(readme)
+                          
+                          readme = readme[:next_section] + '\n\n' + dashboard + '\n\n' + readme[next_section:]
+                          print("Inserted dashboard after Autonomous Agents Ecosystem section")
+                      else:
+                          print("ERROR: Could not find insertion point in README", file=sys.stderr)
+                          sys.exit(1)
+              
+              with open('README.md', 'w', encoding='utf-8') as f:
+                  f.write(readme)
+              
+              print("README dashboard updated successfully")
+          except Exception as e:
+              print(f"ERROR updating README: {e}", file=sys.stderr)
+              sys.exit(1)
           PYTHON_SCRIPT
+          
+          # Verify the update worked
+          if grep -q "UAA Status Dashboard" README.md 2>/dev/null; then
+              echo "✓ README dashboard section found after update"
+          else
+              echo "⚠ WARNING: Dashboard section not found in README after update"
+          fi
           
           # Commit and push dashboard update
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Add files and check for changes
           git add README.md docs/uaa-status.json docs/uaa-diagnostics.json 2>/dev/null || true
-          if [ -n "$(git status --porcelain README.md docs/uaa-status.json docs/uaa-diagnostics.json 2>/dev/null)" ]; then
-            git commit -m "UAA: Update status dashboard [skip ci]" || true
-            git push origin HEAD:${{ github.ref_name }} || true
+          
+          # Check if there are any changes to commit
+          if git diff --staged --quiet README.md docs/uaa-status.json docs/uaa-diagnostics.json 2>/dev/null; then
+            echo "No changes to commit for dashboard update"
+          else
+            echo "Changes detected, committing..."
+            git commit -m "UAA: Update status dashboard [skip ci]" || {
+              echo "WARNING: Failed to commit dashboard update"
+              exit 0  # Don't fail the workflow
+            }
+            
+            # Push the changes
+            git push origin HEAD:${{ github.ref_name }} || {
+              echo "WARNING: Failed to push dashboard update"
+              exit 0  # Don't fail the workflow
+            }
+            
+            echo "✓ Dashboard update committed and pushed successfully"
           fi
 
       - name: UAA execution summary
