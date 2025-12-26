@@ -1,6 +1,6 @@
 # [Elena Mereanu - AI-First Quality Engineer](https://elamcb.github.io)
 
-<!-- UAA manual trigger -->
+<!-- UAA manual trigger - Last test: 2025-12-26 -->
 
 ![Playwright Tests](https://github.com/ElaMCB/ElaMCB.github.io/actions/workflows/playwright-tests.yml/badge.svg?branch=main&t=1)
 
