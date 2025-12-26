@@ -203,17 +203,24 @@ jobs:
           ls -la agents/router.sh || echo "ERROR: router.sh not found!"
           echo "Checking if shared/utils.sh exists:"
           ls -la agents/shared/utils.sh || echo "ERROR: utils.sh not found!"
+          echo "Checking if shared/config.sh exists:"
+          ls -la agents/shared/config.sh || echo "ERROR: config.sh not found!"
           echo "Capability: ${{ steps.determine-capability.outputs.capability }}"
           echo "Workflow event: ${{ steps.determine-capability.outputs.workflow_event }}"
           
-          # Run the router with explicit error handling
-          if ! bash agents/router.sh "${{ steps.determine-capability.outputs.capability }}" "${{ steps.determine-capability.outputs.workflow_event }}"; then
+          # Test sourcing utils.sh
+          echo "Testing utils.sh source..."
+          bash -c "source agents/shared/utils.sh && echo 'utils.sh sourced successfully'" || echo "ERROR: Failed to source utils.sh"
+          
+          # Run the router with explicit error handling and verbose output
+          echo "Running router.sh..."
+          bash -x agents/router.sh "${{ steps.determine-capability.outputs.capability }}" "${{ steps.determine-capability.outputs.workflow_event }}" 2>&1 || {
             EXIT_CODE=$?
             echo "ERROR: Router failed with exit code $EXIT_CODE"
             # Update status even on failure
             bash agents/shared/update_status.sh "ci-fix" "failure" "UAA router failed with exit code $EXIT_CODE" || true
             exit $EXIT_CODE
-          fi
+          }
 
       - name: Update UAA Status and Dashboard
         if: always()
