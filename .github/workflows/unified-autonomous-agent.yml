@@ -363,32 +363,50 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Add files
-          git add README.md docs/uaa-status.json docs/uaa-diagnostics.json 2>/dev/null || true
+          # Force update the timestamp in status file to ensure there's always a change
+          if [ -f "docs/uaa-status.json" ] && command -v jq >/dev/null 2>&1; then
+            FINAL_TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+            jq ".last_updated = \"$FINAL_TIMESTAMP\" | .workflow_status = \"${{ job.status }}\"" docs/uaa-status.json > docs/uaa-status.json.tmp && mv docs/uaa-status.json.tmp docs/uaa-status.json || true
+            echo "Final status update - workflow_status: ${{ job.status }}, timestamp: $FINAL_TIMESTAMP"
+          fi
           
-          # Check if there are any changes to commit
+          # Add files (always add to ensure they're staged)
+          git add -f README.md docs/uaa-status.json 2>/dev/null || true
+          git add docs/uaa-diagnostics.json 2>/dev/null || true
+          
+          # Always commit status file (it should always have updated timestamp/workflow_status)
+          # Even if README didn't change, the status file should have
+          if git diff --staged --quiet docs/uaa-status.json 2>/dev/null && git diff --quiet docs/uaa-status.json 2>/dev/null; then
+            echo "WARNING: Status file appears unchanged, forcing update..."
+            # Touch the file to force a change
+            touch docs/uaa-status.json
+            git add -f docs/uaa-status.json
+          fi
+          
+          # Check if there are any staged changes
           if git diff --staged --quiet 2>/dev/null; then
-            echo "No changes to commit for dashboard update"
-            # Debug: Show status of files
-            echo "Current status:"
+            echo "No changes detected after force update - this shouldn't happen"
+            echo "Current git status:"
             git status --short docs/uaa-status.json README.md docs/uaa-diagnostics.json 2>/dev/null || true
+            echo "Status file content (last 20 lines):"
+            tail -20 docs/uaa-status.json 2>/dev/null || true
           else
             echo "Changes detected, committing..."
-            # Show what we're committing for debugging
             echo "Files to commit:"
             git status --short docs/uaa-status.json README.md docs/uaa-diagnostics.json 2>/dev/null || true
             
             git commit -m "UAA: Update status dashboard [skip ci]" || {
-              echo "WARNING: Failed to commit dashboard update"
-              # Try to see why commit failed
+              echo "ERROR: Failed to commit dashboard update"
               git status
-              exit 0  # Don't fail the workflow
+              git diff --staged || true
+              exit 0  # Don't fail the workflow, but log the error
             }
             
             # Push the changes
             git push origin HEAD:${{ github.ref_name }} || {
-              echo "WARNING: Failed to push dashboard update"
-              exit 0  # Don't fail the workflow
+              echo "ERROR: Failed to push dashboard update"
+              git status
+              exit 0  # Don't fail the workflow, but log the error
             }
             
             echo "✓ Dashboard update committed and pushed successfully"
