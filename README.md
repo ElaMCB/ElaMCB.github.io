@@ -1,5 +1,7 @@
 # [Elena Mereanu - AI-First Quality Engineer](https://elamcb.github.io)
 
+<!-- UAA manual trigger -->
+
 ![Playwright Tests](https://github.com/ElaMCB/ElaMCB.github.io/actions/workflows/playwright-tests.yml/badge.svg?branch=main&t=1)
 
 > Building reliable AI systems through rigorous testing and automation
