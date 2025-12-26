@@ -1,0 +1,35 @@
+{
+  "last_updated": "2025-01-27T00:00:00Z",
+  "workflow_status": "unknown",
+  "capabilities": {
+    "ci-fix": {
+      "status": "unknown",
+      "last_run": "N/A",
+      "last_success": "N/A",
+      "last_failure": "N/A",
+      "total_runs": 0,
+      "success_count": 0,
+      "failure_count": 0
+    },
+    "link-health": {
+      "status": "unknown",
+      "last_run": "N/A",
+      "last_success": "N/A",
+      "last_failure": "N/A",
+      "total_runs": 0,
+      "success_count": 0,
+      "failure_count": 0
+    },
+    "security": {
+      "status": "unknown",
+      "last_run": "N/A",
+      "last_success": "N/A",
+      "last_failure": "N/A",
+      "total_runs": 0,
+      "success_count": 0,
+      "failure_count": 0
+    }
+  },
+  "recent_activity": []
+}
+
