@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAA Status Dashboard - Unified Autonomous Agent</title>
+    
+    <meta name="description" content="Real-time status dashboard for the Unified Autonomous Agent (UAA) - CI-Fix, Link-Health, and Security capabilities.">
+    <meta name="keywords" content="UAA, unified autonomous agent, status dashboard, CI-Fix, Link-Health, Security, GitHub Actions">
+    
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="manifest" href="../images/site.webmanifest">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0a0a0f;
+            --secondary: #00d4ff;
+            --accent: #7c3aed;
+            --neon-blue: #00f5ff;
+            --neon-purple: #bf00ff;
+            --neon-green: #39ff14;
+            --light: #e4e4e7;
+            --dark: #1a1a1f;
+            --card-bg: rgba(15, 15, 23, 0.9);
+            --glass: rgba(255, 255, 255, 0.1);
+            --success: #39ff14;
+            --warning: #ffaa00;
+            --error: #ff4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            background-attachment: fixed;
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 58, 237, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            border-bottom: 2px solid var(--secondary);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--light);
+            opacity: 0.8;
+            font-size: 1.1rem;
+        }
+
+        .last-updated {
+            margin-top: 1rem;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .status-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .status-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .status-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-badge.success {
+            background: rgba(57, 255, 20, 0.2);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .status-badge.failure {
+            background: rgba(255, 68, 68, 0.2);
+            color: var(--error);
+            border: 1px solid var(--error);
+        }
+
+        .status-badge.running {
+            background: rgba(255, 170, 0, 0.2);
+            color: var(--warning);
+            border: 1px solid var(--warning);
+        }
+
+        .status-badge.unknown {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .status-info {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .info-label {
+            color: var(--light);
+            opacity: 0.7;
+        }
+
+        .info-value {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .activity-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .activity-section h2 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .activity-list {
+            list-style: none;
+        }
+
+        .activity-item {
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .links-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .link-btn {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .link-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        .error-message {
+            background: rgba(255, 68, 68, 0.2);
+            border: 1px solid var(--error);
+            color: var(--error);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-tachometer-alt"></i> UAA Status Dashboard</h1>
+            <p class="subtitle">Unified Autonomous Agent - Real-time Status Monitoring</p>
+            <p class="last-updated" id="lastUpdated">Loading...</p>
+        </header>
+
+        <div id="dashboard-content">
+            <div class="loading">Loading dashboard data</div>
+        </div>
+    </div>
+
+    <script>
+        const STATUS_URL = 'https://raw.githubusercontent.com/ElaMCB/ElaMCB.github.io/main/docs/uaa-status.json';
+        const GITHUB_REPO = 'ElaMCB/ElaMCB.github.io';
+
+        function getStatusBadge(status) {
+            const statusLower = (status || 'unknown').toLowerCase();
+            if (statusLower === 'success' || statusLower === 'completed') {
+                return '<span class="status-badge success">🟢 Success</span>';
+            } else if (statusLower === 'failure' || statusLower === 'failed') {
+                return '<span class="status-badge failure">🔴 Failed</span>';
+            } else if (statusLower === 'running' || statusLower === 'in_progress') {
+                return '<span class="status-badge running">🟡 Running</span>';
+            } else {
+                return '<span class="status-badge unknown">⚪ Unknown</span>';
+            }
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr || dateStr === 'N/A') return 'N/A';
+            try {
+                const date = new Date(dateStr);
+                return date.toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    timeZoneName: 'short'
+                });
+            } catch (e) {
+                return dateStr;
+            }
+        }
+
+        async function loadDashboard() {
+            try {
+                const response = await fetch(STATUS_URL + '?t=' + Date.now());
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                const data = await response.json();
+
+                // Update last updated
+                document.getElementById('lastUpdated').textContent = 
+                    `Last Updated: ${formatDate(data.last_updated)}`;
+
+                // Build dashboard HTML
+                let html = '<div class="dashboard-grid">';
+
+                // UAA Workflow Status Card
+                html += `
+                    <div class="status-card">
+                        <div class="card-header">
+                            <div class="card-title">UAA Workflow</div>
+                            ${getStatusBadge(data.workflow_status)}
+                        </div>
+                        <div class="status-info">
+                            <div class="info-item">
+                                <span class="info-label">Last Run:</span>
+                                <span class="info-value">${formatDate(data.last_updated)}</span>
+                            </div>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <a href="https://github.com/${GITHUB_REPO}/actions/workflows/unified-autonomous-agent.yml" 
+                               target="_blank" 
+                               class="link-btn" 
+                               style="width: 100%; text-align: center; justify-content: center;">
+                                <i class="fab fa-github"></i> View Runs
+                            </a>
+                        </div>
+                    </div>
+                `;
+
+                // Capability Cards
+                const capabilities = ['ci-fix', 'link-health', 'security'];
+                const capabilityNames = {
+                    'ci-fix': 'CI-Fix',
+                    'link-health': 'Link-Health',
+                    'security': 'Security'
+                };
+
+                capabilities.forEach(cap => {
+                    const capData = data.capabilities?.[cap] || {};
+                    html += `
+                        <div class="status-card">
+                            <div class="card-header">
+                                <div class="card-title">${capabilityNames[cap]} Capability</div>
+                                ${getStatusBadge(capData.status)}
+                            </div>
+                            <div class="status-info">
+                                <div class="info-item">
+                                    <span class="info-label">Last Run:</span>
+                                    <span class="info-value">${formatDate(capData.last_run)}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Total Runs:</span>
+                                    <span class="info-value">${capData.total_runs || 0}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Success:</span>
+                                    <span class="info-value" style="color: var(--success);">${capData.success_count || 0}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Failures:</span>
+                                    <span class="info-value" style="color: var(--error);">${capData.failure_count || 0}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += '</div>';
+
+                // Recent Activity
+                if (data.recent_activity && data.recent_activity.length > 0) {
+                    html += `
+                        <div class="activity-section">
+                            <h2><i class="fas fa-history"></i> Recent Activity</h2>
+                            <ul class="activity-list">
+                                ${data.recent_activity.slice(0, 5).map(activity => `
+                                    <li class="activity-item">
+                                        <strong>${formatDate(activity.time)}</strong> - 
+                                        ${activity.message || `${activity.capability || 'UAA'} - ${activity.status || 'completed'}`}
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    `;
+                } else {
+                    html += `
+                        <div class="activity-section">
+                            <h2><i class="fas fa-history"></i> Recent Activity</h2>
+                            <p style="opacity: 0.7; text-align: center; padding: 2rem;">
+                                Dashboard will update after first UAA run
+                            </p>
+                        </div>
+                    `;
+                }
+
+                // Quick Links
+                html += `
+                    <div class="links-section">
+                        <a href="https://github.com/${GITHUB_REPO}#uaa-status-dashboard" target="_blank" class="link-btn">
+                            <i class="fab fa-github"></i> README Dashboard
+                        </a>
+                        <a href="./UNIFIED_AGENT_ARCHITECTURE.html" class="link-btn">
+                            <i class="fas fa-sitemap"></i> Architecture
+                        </a>
+                        <a href="../agents/README.md" target="_blank" class="link-btn">
+                            <i class="fas fa-book"></i> Agent README
+                        </a>
+                        <a href="https://github.com/${GITHUB_REPO}/actions/workflows/unified-autonomous-agent.yml" target="_blank" class="link-btn">
+                            <i class="fas fa-code-branch"></i> Workflow Runs
+                        </a>
+                    </div>
+                `;
+
+                document.getElementById('dashboard-content').innerHTML = html;
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+                document.getElementById('dashboard-content').innerHTML = `
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Error Loading Dashboard</h3>
+                        <p>Unable to load status data. The UAA may not have run yet, or there was a network error.</p>
+                        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                            Error: ${error.message}
+                        </p>
+                        <div style="margin-top: 1.5rem;">
+                            <a href="https://github.com/${GITHUB_REPO}/actions/workflows/unified-autonomous-agent.yml" 
+                               target="_blank" 
+                               class="link-btn">
+                                <i class="fab fa-github"></i> Check Workflow Runs
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Load dashboard on page load
+        loadDashboard();
+
+        // Auto-refresh every 60 seconds
+        setInterval(loadDashboard, 60000);
+    </script>
+</body>
+</html>
+
