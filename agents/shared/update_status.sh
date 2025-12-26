@@ -100,7 +100,12 @@ if [ -n "$CAPABILITY" ] && [ -n "$STATUS" ]; then
         }
     fi
     
-    local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+    # Get timestamp - ensure it's not empty
+    timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ" 2>/dev/null || echo "")
+    if [ -z "$timestamp" ]; then
+        log_error "Failed to get timestamp, using fallback"
+        timestamp="N/A"
+    fi
     
     # Update capability status using jq if available, otherwise create simple status
     if command_exists "jq"; then

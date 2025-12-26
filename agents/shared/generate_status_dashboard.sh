@@ -132,7 +132,14 @@ get_last_run_time() {
     local status_file="docs/uaa-status.json"
     
     if [ -f "$status_file" ]; then
-        jq -r ".capabilities.$capability.last_run // \"N/A\"" "$status_file" 2>/dev/null || echo "N/A"
+        # Get last_run, but handle empty strings by returning N/A
+        local last_run=$(jq -r ".capabilities.$capability.last_run // \"N/A\"" "$status_file" 2>/dev/null || echo "N/A")
+        # If the value is empty string, return N/A
+        if [ -z "$last_run" ] || [ "$last_run" = "" ]; then
+            echo "N/A"
+        else
+            echo "$last_run"
+        fi
     else
         echo "N/A"
     fi
