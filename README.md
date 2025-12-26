@@ -307,14 +307,14 @@ Found this useful? Here's how you can help:
 
 ## UAA Status Dashboard
 
-**Last Updated:** Loading...
+**Last Updated:** N/A
 
 | Component | Status | Last Run | Details |
 |-----------|--------|----------|---------|
-| **UAA Workflow** | [UNKNOWN] Unknown | N/A | [View Runs](https://github.com/ElaMCB/ElaMCB.github.io/actions/workflows/unified-autonomous-agent.yml) |
-| **CI-Fix Capability** | [UNKNOWN] Unknown | N/A | [View Status](./docs/uaa-status.json) |
-| **Link-Health Capability** | [UNKNOWN] Unknown | N/A | [View Status](./docs/uaa-status.json) |
-| **Security Capability** | [UNKNOWN] Unknown | N/A | [View Status](./docs/uaa-status.json) |
+| **UAA Workflow** | ⚪ Unknown | N/A | [View Runs](https://github.com/ElaMCB/ElaMCB.github.io/actions/workflows/unified-autonomous-agent.yml) |
+| **CI-Fix Capability** | ⚪ Unknown | N/A | [View Status](./docs/uaa-status.json) |
+| **Link-Health Capability** | ⚪ Unknown | N/A | [View Status](./docs/uaa-status.json) |
+| **Security Capability** | ⚪ Unknown | N/A | [View Status](./docs/uaa-status.json) |
 
 ### Recent Activity
 - Dashboard will update after first UAA run
