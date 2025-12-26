@@ -2033,6 +2033,22 @@ Data is stored locally and not shared with any third parties.
             color: var(--secondary);
         }
         
+        .project-links a.dashboard-link {
+            background: linear-gradient(135deg, #39ff14, #00d4ff);
+            color: #0a0a0a;
+            font-weight: bold;
+            border: 2px solid #39ff14;
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+        
+        .project-links a.dashboard-link:hover {
+            color: #0a0a0a;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.8);
+            transform: translateY(-2px);
+        }
+        
         .use-case-demo {
             background: #1e1e2e;
             padding: 1rem;
@@ -2958,7 +2974,7 @@ Data is stored locally and not shared with any third parties.
                             </ul>
                         </div>
                         <div class="project-links">
-                            <a href="./docs/UAA_DASHBOARD.html" class="dashboard-link" style="background: linear-gradient(135deg, #39ff14, #00d4ff); color: #0a0a0a; font-weight: bold; border: 2px solid #39ff14; box-shadow: 0 0 15px rgba(57, 255, 20, 0.5);"><i class="fas fa-tachometer-alt"></i> 📊 Status Dashboard</a>
+                            <a href="./docs/UAA_DASHBOARD.html" class="dashboard-link"><i class="fas fa-tachometer-alt"></i> 📊 Status Dashboard</a>
                             <a href="./docs/UNIFIED_AGENT_ARCHITECTURE.html"><i class="fas fa-sitemap"></i> Architecture</a>
                             <a href="./agents/README.md"><i class="fas fa-book"></i> Agent README</a>
                             <a href="./docs/QA_AGENTIC_WORKFLOWS_GUIDE.html"><i class="fas fa-graduation-cap"></i> Build Your Own</a>
