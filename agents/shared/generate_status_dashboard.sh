@@ -4,14 +4,27 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/utils.sh"
 
-# Get latest workflow run status
+# Get latest workflow run status (using GitHub REST API via curl, no GitHub CLI needed)
 get_workflow_status() {
     local workflow_name="$1"
     
-    # Try to get from GitHub API if available
-    if command_exists gh && [ -n "$GITHUB_TOKEN" ]; then
-        gh api repos/$GITHUB_REPOSITORY/actions/workflows/unified-autonomous-agent.yml/runs \
-            --jq '.workflow_runs[0] | {status: .status, conclusion: .conclusion, created_at: .created_at, html_url: .html_url}' 2>/dev/null || echo '{"status":"unknown","conclusion":"unknown"}'
+    # Use GitHub REST API if token and repository are available
+    if [ -n "$GITHUB_TOKEN" ] && [ -n "$GITHUB_REPOSITORY" ]; then
+        local owner_repo="${GITHUB_REPOSITORY}"
+        local workflow_file="unified-autonomous-agent.yml"
+        local api_url="https://api.github.com/repos/${owner_repo}/actions/workflows/${workflow_file}/runs?per_page=1"
+        
+        local response
+        response=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "$api_url" 2>/dev/null)
+        
+        if command_exists jq; then
+            echo "$response" | jq '.workflow_runs[0] | {status: .status, conclusion: .conclusion, created_at: .created_at, html_url: .html_url}' 2>/dev/null || echo '{"status":"unknown","conclusion":"unknown"}'
+        else
+            # Basic parsing without jq (just return unknown status)
+            echo '{"status":"unknown","conclusion":"unknown"}'
+        fi
     else
         echo '{"status":"unknown","conclusion":"unknown"}'
     fi

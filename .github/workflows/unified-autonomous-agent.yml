@@ -53,15 +53,6 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Setup GitHub CLI
-        run: |
-          type -p curl >/dev/null || (apt update && apt install curl -y)
-          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-          chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
-          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-          apt update
-          apt install gh -y
-
       - name: Make scripts executable
         run: |
           chmod +x agents/router.sh
@@ -118,16 +109,11 @@ jobs:
             echo "workflow_name=$WORKFLOW_NAME" >> $GITHUB_OUTPUT
             
             echo "Downloading logs for workflow: $WORKFLOW_NAME"
-            if command -v gh >/dev/null 2>&1; then
-              gh run view $RUN_ID --log > workflow_logs.txt 2>&1 || true
-            else
-              # Fallback: Use GitHub API with curl
-              echo "GitHub CLI not available, using API fallback..."
-              curl -s -H "Authorization: token $GITHUB_TOKEN" \
-                -H "Accept: application/vnd.github.v3+json" \
-                "https://api.github.com/repos/${{ github.repository }}/actions/runs/$RUN_ID/logs" \
-                -o workflow_logs.txt 2>&1 || true
-            fi
+            # Use GitHub API with curl (no GitHub CLI needed)
+            curl -s -H "Authorization: Bearer $GITHUB_TOKEN" \
+              -H "Accept: application/vnd.github.v3+json" \
+              "https://api.github.com/repos/${{ github.repository }}/actions/runs/$RUN_ID/logs" \
+              -L -o workflow_logs.txt 2>&1 || true
             
             if [ ! -s workflow_logs.txt ]; then
               echo "Warning: workflow_logs.txt is empty or doesn't exist"
