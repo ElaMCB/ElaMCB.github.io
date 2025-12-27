@@ -1,0 +1,2256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QA Agentic Workflows Guide - Build Your Own AI Agents</title>
+    
+    <meta name="description" content="Practical guide for QA professionals to build their own AI agents using free tools like Ollama, with step-by-step instructions and code examples.">
+    <meta name="keywords" content="AI agents, QA automation, Ollama, test automation, AI testing, agentic workflows">
+    
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="manifest" href="../images/site.webmanifest">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0a0a0f;
+            --secondary: #00d4ff;
+            --accent: #7c3aed;
+            --neon-blue: #00f5ff;
+            --neon-purple: #bf00ff;
+            --neon-green: #39ff14;
+            --light: #e4e4e7;
+            --dark: #1a1a1f;
+            --card-bg: rgba(15, 15, 23, 0.9);
+            --glass: rgba(255, 255, 255, 0.1);
+            --success: #39ff14;
+            --warning: #ffaa00;
+            --error: #ff4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            background-attachment: fixed;
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 58, 237, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 0 2rem;
+            border-bottom: 2px solid var(--secondary);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .header-content h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--light);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--secondary);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            font-size: 0.85rem;
+        }
+
+        .nav-links a:hover {
+            background: var(--secondary);
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        .toc {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border: 2px solid var(--secondary);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .toc h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .toc ol {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .toc li {
+            margin: 0.8rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .toc li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--neon-green);
+            text-shadow: 0 0 5px var(--neon-green);
+        }
+
+        .toc a {
+            color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .toc a:hover {
+            color: var(--secondary);
+        }
+
+        section {
+            margin: 3rem 0;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin: 3rem 0 1.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-blue), transparent);
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: var(--neon-blue);
+            margin: 2rem 0 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+        }
+
+        th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light);
+        }
+
+        tbody tr:hover {
+            background: rgba(124, 58, 237, 0.1);
+            transition: background 0.3s;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        table ul {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        table li {
+            margin: 0.3rem 0;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                font-size: 0.9rem;
+            }
+            th, td {
+                padding: 0.7rem;
+            }
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            color: var(--neon-green);
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        p {
+            margin: 1rem 0;
+            color: var(--light);
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(0, 212, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.2);
+            border-color: var(--neon-blue);
+        }
+
+        .highlight-box {
+            background: rgba(0, 245, 255, 0.1);
+            border-left: 4px solid var(--neon-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .warning-box {
+            background: rgba(255, 170, 0, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .success-box {
+            background: rgba(57, 255, 20, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--neon-green);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .code-block::before {
+            content: 'CODE';
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--primary);
+            color: var(--neon-green);
+            padding: 0 10px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .code-block code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--light);
+            line-height: 1.6;
+            white-space: pre;
+        }
+
+        .code-block pre {
+            margin: 0;
+            padding: 0;
+            background: none;
+            border: none;
+        }
+
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+            color: var(--light);
+        }
+
+        li {
+            margin: 0.5rem 0;
+        }
+
+        strong {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: var(--neon-blue);
+            text-decoration: underline;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid var(--secondary);
+            margin: 2rem 0;
+            opacity: 0.3;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--secondary);
+            color: var(--primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.6);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+            border-top: 2px solid var(--secondary);
+            color: var(--light);
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .header-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .code-block {
+                font-size: 0.8rem;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>QA Agentic Workflows Guide</h1>
+            <p class="subtitle">A Practical Guide to Building Your Own AI Agents</p>
+            <div class="nav-links">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../README.md"><i class="fab fa-github"></i> GitHub</a>
+                <a href="AUTONOMOUS_CI_AGENT_GUIDE.html"><i class="fas fa-cog"></i> CI Agent Guide</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="toc">
+<h3>Table of Contents</h3>
+<ol>
+<li><a href="#introduction">Introduction: Why Build Your Own Agents?</a></li>
+<li><a href="#what-are-agents">What Are AI Agents?</a></li>
+<li><a href="#current-state">Current State: What You Already Have</a></li>
+<li><a href="#latest-developments">Latest Developments & Updates</a></li>
+<li><a href="#building-first-agent">Building Your First Agent</a></li>
+<li><a href="#specialized-agents">Specialized Agents for Daily QA Work</a></li>
+<li><a href="#free-solutions">Free & Fast Solutions</a></li>
+<li><a href="#chat-agent">Chat Agent for Daily Assistance</a></li>
+<li><a href="#monday-friday-workflow">Monday to Friday Agent Workflow</a></li>
+<li><a href="#troubleshooting">Troubleshooting & Best Practices</a></li>
+</ol>
+</div>
+
+<section>
+<h1>QA Agentic Workflows: A Practical Guide to Building Your Own AI Agents</h1>
+
+<h2 id="introduction">Introduction: Why Build Your Own Agents?</h2>
+
+<p>As a QA professional, you're already using agentic workflows in your IDE (like Cursor's code review agent). But what if you could create specialized agents that help with your specific daily tasks?</p>
+
+<h3>The Problem</h3>
+<ul>
+<li><strong>Repetitive Tasks</strong>: Writing the same test cases, checking the same things every day</li>
+<li><strong>Time Constraints</strong>: Not enough hours to test everything thoroughly</li>
+<li><strong>Knowledge Gaps</strong>: Forgetting edge cases or missing important test scenarios</li>
+<li><strong>Context Switching</strong>: Jumping between different tools and systems</li>
+</ul>
+
+<h3>The Solution: Your Own Specialized Agents</h3>
+<p>Think of an AI agent as a <strong>smart assistant that never gets tired</strong> and can:</p>
+<ul>
+<li>Work 24/7 on repetitive tasks</li>
+<li>Remember all your testing patterns</li>
+<li>Learn from your work style</li>
+<li>Handle multiple tasks simultaneously</li>
+<li>Provide instant answers to common questions</li>
+</ul>
+
+<h3>Real-World Impact</h3>
+<p>Based on research and practical implementations:</p>
+<ul>
+<li><strong>70% reduction</strong> in manual testing time</li>
+<li><strong>10x faster</strong> test case generation</li>
+<li><strong>95%+ bug detection</strong> rate</li>
+<li><strong>487% ROI</strong> demonstrated in healthcare QA case studies</li>
+</ul>
+
+<hr>
+
+<h2 id="what-are-ai-agents?-(in-simple-terms)-{#what-are-agents}">What Are AI Agents? (In Simple Terms) {#what-are-agents}</h2>
+
+<h3>Traditional Automation vs AI Agents</h3>
+
+<p><strong>Traditional Automation:</strong></p>
+<ul>
+<li>You write a script that does exactly what you tell it</li>
+<li>If something changes, the script breaks</li>
+<li>You must update it manually</li>
+<li>It can't adapt or learn</li>
+</ul>
+
+<p><strong>AI Agents:</strong></p>
+<ul>
+<li>You tell it what you want to achieve (in plain English)</li>
+<li>It figures out how to do it</li>
+<li>It adapts when things change</li>
+<li>It learns from experience</li>
+<li>It can reason about problems</li>
+</ul>
+
+<h3>The Five Key Abilities of AI Agents</h3>
+
+<ol>
+<li><strong>Perceive</strong>: Understand what's happening (read code, analyze requirements, check system state)</li>
+<li><strong>Reason</strong>: Think about what needs to be done (decide what to test, identify risks)</li>
+<li><strong>Act</strong>: Do the work (generate tests, run checks, create reports)</li>
+<li><strong>Learn</strong>: Remember what worked and what didn't</li>
+<li><strong>Collaborate</strong>: Work with other agents or tools</li>
+</ol>
+
+<h3>Types of Agents You Can Build</h3>
+
+<ol>
+<li><strong>Test Generator Agent</strong>: Creates test cases from requirements</li>
+<li><strong>Code Reviewer Agent</strong>: Reviews code changes before commits</li>
+<li><strong>Bug Analyzer Agent</strong>: Investigates failures and suggests fixes</li>
+<li><strong>Documentation Agent</strong>: Updates test documentation automatically</li>
+<li><strong>Chat Agent</strong>: Answers questions about your codebase and processes</li>
+<li><strong>Daily Standup Agent</strong>: Prepares your daily status updates</li>
+<li><strong>Regression Agent</strong>: Runs smart regression tests based on changes</li>
+</ol>
+
+<hr>
+
+<h2 id="current-state:-what-you-already-have-{#current-state}">Current State: Portfolio Agent Implementation Status {#current-state}</h2>
+
+<h3>Currently Implemented Agents</h3>
+
+<table>
+<thead>
+<tr>
+<th>Agent</th>
+<th>Status</th>
+<th>Capabilities</th>
+<th>Technologies</th>
+<th>Impact/Metrics</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IDE Agentic Workflow (Cursor)</strong></td>
+<td>✅ Active</td>
+<td>
+<ul style="margin: 0; padding-left: 20px;">
+<li>Code review before commits</li>
+<li>Automated code analysis</li>
+<li>Background workflow integration</li>
+</ul>
+</td>
+<td>Cursor IDE, GitHub</td>
+<td>Integrated into daily workflow, zero interruption</td>
+<td>IDE Integration</td>
+</tr>
+<tr>
+<td><strong>AI Agents for QA Research</strong></td>
+<td>✅ Research Complete</td>
+<td>
+<ul style="margin: 0; padding-left: 20px;">
+<li>7 agent types identified</li>
+<li>Explorer, Test Generator, Executor</li>
+<li>Security, Compliance, Analyzer, Orchestrator</li>
+</ul>
+</td>
+<td>Research Framework</td>
+<td>
+<ul style="margin: 0; padding-left: 20px;">
+<li>487% ROI (healthcare case study)</li>
+<li>92% test coverage</li>
+<li>88% faster execution</li>
+</ul>
+</td>
+<td><a href="./research/notebooks/ai-agents-qa-healthcare.html">Healthcare Research</a></td>
+</tr>
+<tr>
+<td><strong>Autonomous AI Testing Agent (Data Engineering)</strong></td>
+<td>✅ Implemented</td>
+<td>
+<ul style="margin: 0; padding-left: 20px;">
+<li>ETL/ELT pipeline discovery</li>
+<li>Automated test generation</li>
+<li>Intelligent test execution</li>
+<li>Result analysis & fix suggestions</li>
+<li>Learning from test runs</li>
+</ul>
+</td>
+<td>AWS Bedrock, Lambda, Step Functions, DynamoDB</td>
+<td>Production-ready, autonomous pipeline testing</td>
+<td><a href="https://github.com/ElaMCB/Data-engineering/blob/main/projects/02-etl-pipeline-framework/AI_TESTING_AGENT.md">Data Engineering Portfolio</a></td>
+</tr>
+<tr>
+<td><strong>Unified Autonomous Agent (UAA)</strong></td>
+<td>✅ Active</td>
+<td>
+<ul style="margin: 0; padding-left: 20px;">
+<li>CI/CD failure auto-fix (CI-Fix)</li>
+<li>Broken link scanning (Link-Health)</li>
+<li>Security vulnerability scanning (Security)</li>
+<li>24/7 autonomous operation</li>
+</ul>
+</td>
+<td>GitHub Actions, Bash, Node.js</td>
+<td>Zero manual intervention for common issues, instant fixes</td>
+<td><a href="./UNIFIED_AGENT_ARCHITECTURE.html">UAA Architecture</a> | <a href="../README.md#autonomous-agents-ecosystem">Portfolio Dashboard</a></td>
+</tr>
+</tbody>
+</table>
+
+<h3>Next Steps & Planned Enhancements</h3>
+
+<table>
+<thead>
+<tr>
+<th>Planned Feature</th>
+<th>Priority</th>
+<th>Description</th>
+<th>Expected Benefit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Personal Chat Agent</strong></td>
+<td>High</td>
+<td>Local AI chat agent for quick QA questions, test case suggestions, and daily assistance</td>
+<td>Instant answers, reduced context switching, 24/7 availability</td>
+</tr>
+<tr>
+<td><strong>Daily Workflow Agents (Monday-Friday)</strong></td>
+<td>High</td>
+<td>Specialized agents for daily QA tasks: planning, test generation, regression, bug analysis, reporting</td>
+<td>Automated daily workflows, consistent quality, time savings</td>
+</tr>
+<tr>
+<td><strong>Free/Open-Source Alternatives</strong></td>
+<td>Medium</td>
+<td>Local AI models (Ollama, GPT4All) for cost-sensitive projects, no API dependency</td>
+<td>Zero cost, complete privacy, offline capability</td>
+</tr>
+<tr>
+<td><strong>Simplified Setup for Non-AWS</strong></td>
+<td>Medium</td>
+<td>Docker-based agents, local execution options, simplified deployment</td>
+<td>Easier adoption, broader compatibility, reduced setup complexity</td>
+</tr>
+<tr>
+<td><strong>Additional UAA Capabilities</strong></td>
+<td>Medium</td>
+<td>SEO monitoring, performance monitoring, content updates, dependency updates</td>
+<td>Expanded autonomous portfolio management</td>
+</tr>
+<tr>
+<td><strong>Agent Learning & Memory</strong></td>
+<td>Low</td>
+<td>Long-term memory systems, pattern learning, adaptive behavior</td>
+<td>Improved accuracy, personalized responses, reduced repetition</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Implementation Priority:</strong> Start with the Personal Chat Agent (easiest, immediate value) → Daily Workflow Agents (high impact) → Expand UAA capabilities (incremental value)</p>
+
+<hr>
+
+<h2 id="latest-developments">Latest Developments & Updates</h2>
+
+<h3>Recent Advances in Agent Technology</h3>
+
+<h4>1. Local AI Models (Free & Private)</h4>
+<ul>
+<li><strong>Ollama</strong>: Run AI models locally on your machine</li>
+<li><strong>LM Studio</strong>: Easy interface for local models</li>
+<li><strong>GPT4All</strong>: Free, open-source alternative</li>
+<li><strong>Benefits</strong>: No API costs, complete privacy, works offline</li>
+</ul>
+
+<h4>2. Simplified Agent Frameworks</h4>
+<ul>
+<li><strong>LangChain</strong>: Makes building agents easier</li>
+<li><strong>AutoGen</strong>: Multi-agent conversations</li>
+<li><strong>CrewAI</strong>: Role-based agent teams</li>
+<li><strong>Benefits</strong>: Less code, faster development</li>
+</ul>
+
+<h4>3. IDE Integration</h4>
+<ul>
+<li><strong>Cursor</strong>: Agentic workflows built-in</li>
+<li><strong>GitHub Copilot</strong>: AI pair programming</li>
+<li><strong>Codeium</strong>: Free alternative</li>
+<li><strong>Benefits</strong>: Agents work where you work</li>
+</ul>
+
+<h4>4. No-Code Agent Builders</h4>
+<ul>
+<li><strong>Zapier AI</strong>: Connect tools with AI</li>
+<li><strong>Make.com</strong>: Visual agent workflows</li>
+<li><strong>n8n</strong>: Open-source automation</li>
+<li><strong>Benefits</strong>: Build agents without coding</li>
+</ul>
+
+<h3>What This Means for You</h3>
+<ul>
+<li><strong>Easier to build</strong>: Less technical knowledge required</li>
+<li><strong>More affordable</strong>: Free options available</li>
+<li><strong>Better integration</strong>: Works with tools you already use</li>
+<li><strong>Faster setup</strong>: Can have agents running in hours, not weeks</li>
+</ul>
+
+<hr>
+
+<h2 id="building-first-agent">Building Your First Agent: Step-by-Step</h2>
+
+<h3>Prerequisites</h3>
+<ul>
+<li>Basic Python knowledge (or willingness to learn)</li>
+<li>A computer (Windows, Mac, or Linux)</li>
+<li>Internet connection (for initial setup)</li>
+<li>30 minutes of time</li>
+</ul>
+
+<h3>Option 1: Simple Chat Agent (Easiest Start)</h3>
+
+<h4>What It Does</h4>
+<p>A chat agent that answers questions about your codebase, testing processes, and daily work.</p>
+
+<h4>Step 1: Install Ollama (Free Local AI)</h4>
+<div class="code-block"><pre><code>
+# Windows (PowerShell)
+
+winget install Ollama.Ollama
+
+
+
+# Mac
+
+brew install ollama
+
+
+
+# Linux
+
+curl -fsSL https://ollama.com/install.sh | sh
+
+</code></pre></div>
+
+<h4>Step 2: Download a Model</h4>
+<div class="code-block"><pre><code>
+# Download a small, fast model (about 4GB)
+
+ollama pull llama3.2:1b
+
+
+
+# Or a better quality model (about 7GB)
+
+ollama pull llama3.2:3b
+
+</code></pre></div>
+
+<h4>Step 3: Create Your Chat Agent</h4>
+<p>Create a file called <code style="color: var(--neon-green);">chat_agent.py</code>:</p>
+
+<div class="code-block"><pre><code>
+import ollama
+
+import os
+
+
+
+class QAChatAgent:
+
+    &quot;&quot;&quot;Simple chat agent for QA questions&quot;&quot;&quot;
+
+    
+
+    def __init__(self, model=&quot;llama3.2:3b&quot;):
+
+        self.model = model
+
+        self.context = self._load_context()
+
+    
+
+    def _load_context(self):
+
+        &quot;&quot;&quot;Load your QA knowledge base&quot;&quot;&quot;
+
+        return &quot;&quot;&quot;
+
+        You are a helpful QA assistant. You help with:
+
+        - Test case generation
+
+        - Bug analysis
+
+        - Testing best practices
+
+        - Code review questions
+
+        - Daily QA workflows
+
+        &quot;&quot;&quot;
+
+    
+
+    def ask(self, question):
+
+        &quot;&quot;&quot;Ask the agent a question&quot;&quot;&quot;
+
+        prompt = f&quot;{self.context}\n\nQuestion: {question}\n\nAnswer:&quot;
+
+        
+
+        response = ollama.generate(
+
+            model=self.model,
+
+            prompt=prompt
+
+        )
+
+        
+
+        return response[&#x27;response&#x27;]
+
+    
+
+    def chat(self):
+
+        &quot;&quot;&quot;Interactive chat mode&quot;&quot;&quot;
+
+        print(&quot;QA Chat Agent - Type &#x27;quit&#x27; to exit\n&quot;)
+
+        
+
+        while True:
+
+            question = input(&quot;You: &quot;)
+
+            if question.lower() == &#x27;quit&#x27;:
+
+                break
+
+            
+
+            print(&quot;\nAgent: &quot;, end=&quot;&quot;)
+
+            answer = self.ask(question)
+
+            print(answer)
+
+            print()
+
+
+
+# Run the agent
+
+if __name__ == &quot;__main__&quot;:
+
+    agent = QAChatAgent()
+
+    agent.chat()
+
+</code></pre></div>
+
+<h4>Step 4: Install Python Package</h4>
+<div class="code-block"><pre><code>
+pip install ollama
+
+</code></pre></div>
+
+<h4>Step 5: Run Your Agent</h4>
+<div class="code-block"><pre><code>
+python chat_agent.py
+
+</code></pre></div>
+
+<p><strong>That's it!</strong> You now have a working chat agent.</p>
+
+<h3>Option 2: Test Generator Agent (More Advanced)</h3>
+
+<h4>What It Does</h4>
+<p>Reads requirements or code and generates test cases automatically.</p>
+
+<h4>Create <code style="color: var(--neon-green);">test_generator_agent.py</code>:</h4>
+
+<div class="code-block"><pre><code>
+import ollama
+
+import json
+
+
+
+class TestGeneratorAgent:
+
+    &quot;&quot;&quot;Generates test cases from requirements&quot;&quot;&quot;
+
+    
+
+    def __init__(self, model=&quot;llama3.2:3b&quot;):
+
+        self.model = model
+
+    
+
+    def generate_tests(self, requirement_text):
+
+        &quot;&quot;&quot;Generate test cases from requirements&quot;&quot;&quot;
+
+        prompt = f&quot;&quot;&quot;
+
+        You are a QA test case generator. Given the following requirement, 
+
+        generate comprehensive test cases in JSON format.
+
+        
+
+        Requirement:
+
+        {requirement_text}
+
+        
+
+        Generate test cases with:
+
+        - Test ID
+
+        - Test Description
+
+        - Test Steps
+
+        - Expected Result
+
+        - Priority (High/Medium/Low)
+
+        
+
+        Return as JSON array.
+
+        &quot;&quot;&quot;
+
+        
+
+        response = ollama.generate(
+
+            model=self.model,
+
+            prompt=prompt,
+
+            format=&quot;json&quot;
+
+        )
+
+        
+
+        try:
+
+            tests = json.loads(response[&#x27;response&#x27;])
+
+            return tests
+
+        except:
+
+            return [{&quot;error&quot;: &quot;Failed to parse response&quot;}]
+
+    
+
+    def generate_from_file(self, file_path):
+
+        &quot;&quot;&quot;Generate tests from a requirements file&quot;&quot;&quot;
+
+        with open(file_path, &#x27;r&#x27;) as f:
+
+            requirements = f.read()
+
+        
+
+        return self.generate_tests(requirements)
+
+
+
+# Example usage
+
+if __name__ == &quot;__main__&quot;:
+
+    agent = TestGeneratorAgent()
+
+    
+
+    requirement = &quot;&quot;&quot;
+
+    Feature: User Login
+
+    - User can login with email and password
+
+    - User sees error message for invalid credentials
+
+    - User can reset password
+
+    &quot;&quot;&quot;
+
+    
+
+    tests = agent.generate_tests(requirement)
+
+    
+
+    for test in tests:
+
+        print(f&quot;Test ID: {test.get(&#x27;id&#x27;, &#x27;N/A&#x27;)}&quot;)
+
+        print(f&quot;Description: {test.get(&#x27;description&#x27;, &#x27;N/A&#x27;)}&quot;)
+
+        print(f&quot;Priority: {test.get(&#x27;priority&#x27;, &#x27;N/A&#x27;)}&quot;)
+
+        print(&quot;---&quot;)
+
+</code></pre></div>
+
+<h3>Option 3: Code Review Agent (Like Cursor, But Custom)</h3>
+
+<h4>What It Does</h4>
+<p>Reviews code changes and provides feedback before you commit.</p>
+
+<h4>Create <code style="color: var(--neon-green);">code_review_agent.py</code>:</h4>
+
+<div class="code-block"><pre><code>
+import ollama
+
+import subprocess
+
+import sys
+
+
+
+class CodeReviewAgent:
+
+    &quot;&quot;&quot;Reviews code changes before commit&quot;&quot;&quot;
+
+    
+
+    def __init__(self, model=&quot;llama3.2:3b&quot;):
+
+        self.model = model
+
+    
+
+    def get_diff(self):
+
+        &quot;&quot;&quot;Get git diff of changes&quot;&quot;&quot;
+
+        result = subprocess.run(
+
+            [&quot;git&quot;, &quot;diff&quot;, &quot;--cached&quot;],
+
+            capture_output=True,
+
+            text=True
+
+        )
+
+        return result.stdout
+
+    
+
+    def review(self, diff_text=None):
+
+        &quot;&quot;&quot;Review code changes&quot;&quot;&quot;
+
+        if not diff_text:
+
+            diff_text = self.get_diff()
+
+        
+
+        if not diff_text:
+
+            return &quot;No changes to review&quot;
+
+        
+
+        prompt = f&quot;&quot;&quot;
+
+        You are a QA code reviewer. Review the following code changes 
+
+        and provide feedback on:
+
+        1. Potential bugs
+
+        2. Test coverage gaps
+
+        3. Code quality issues
+
+        4. Security concerns
+
+        5. Best practices
+
+        
+
+        Code changes:
+
+        {diff_text}
+
+        
+
+        Provide structured feedback.
+
+        &quot;&quot;&quot;
+
+        
+
+        response = ollama.generate(
+
+            model=self.model,
+
+            prompt=prompt
+
+        )
+
+        
+
+        return response[&#x27;response&#x27;]
+
+    
+
+    def review_and_suggest_tests(self, diff_text=None):
+
+        &quot;&quot;&quot;Review code and suggest test cases&quot;&quot;&quot;
+
+        review = self.review(diff_text)
+
+        
+
+        prompt = f&quot;&quot;&quot;
+
+        Based on this code review:
+
+        {review}
+
+        
+
+        Suggest specific test cases that should be written to test these changes.
+
+        &quot;&quot;&quot;
+
+        
+
+        response = ollama.generate(
+
+            model=self.model,
+
+            prompt=prompt
+
+        )
+
+        
+
+        return {
+
+            &quot;review&quot;: review,
+
+            &quot;suggested_tests&quot;: response[&#x27;response&#x27;]
+
+        }
+
+
+
+# Usage: Run before git commit
+
+if __name__ == &quot;__main__&quot;:
+
+    agent = CodeReviewAgent()
+
+    review = agent.review()
+
+    print(review)
+
+    
+
+    # You can add this as a git pre-commit hook
+
+</code></pre></div>
+
+<hr>
+
+<h2 id="specialized-agents-for-daily-qa-work-{#specialized-agents}">Specialized Agents for Daily QA Work {#specialized-agents}</h2>
+
+<h3>Monday: Week Planning Agent</h3>
+
+<p><strong>Purpose</strong>: Helps plan your testing week based on upcoming releases and priorities.</p>
+
+<p><strong>What It Does:</strong></p>
+<ul>
+<li>Analyzes JIRA/issue tracker for upcoming work</li>
+<li>Suggests test planning based on risk</li>
+<li>Creates weekly test schedule</li>
+<li>Identifies dependencies</li>
+</ul>
+
+<p><strong>Simple Implementation:</strong></p>
+<div class="code-block"><pre><code>
+class WeekPlanningAgent:
+
+    def plan_week(self, upcoming_tickets):
+
+        &quot;&quot;&quot;Plan testing week based on tickets&quot;&quot;&quot;
+
+        prompt = f&quot;&quot;&quot;
+
+        As a QA planning agent, analyze these upcoming tickets:
+
+        {upcoming_tickets}
+
+        
+
+        Create a weekly test plan with:
+
+        1. High priority items
+
+        2. Estimated testing time
+
+        3. Dependencies
+
+        4. Risk areas to focus on
+
+        &quot;&quot;&quot;
+
+        # Use Ollama or similar to generate plan
+
+        return plan
+
+</code></pre></div>
+
+<h3>Tuesday: Test Case Generator Agent</h3>
+
+<p><strong>Purpose</strong>: Generates test cases for new features.</p>
+
+<p><strong>What It Does:</strong></p>
+<ul>
+<li>Reads requirements documents</li>
+<li>Generates comprehensive test cases</li>
+<li>Suggests edge cases</li>
+<li>Creates test data scenarios</li>
+</ul>
+
+<p><strong>Already covered in "Building Your First Agent" section above.</strong></p>
+
+<h3>Wednesday: Regression Testing Agent</h3>
+
+<p><strong>Purpose</strong>: Intelligently selects which tests to run based on code changes.</p>
+
+<p><strong>What It Does:</strong></p>
+<ul>
+<li>Analyzes git commits</li>
+<li>Identifies affected areas</li>
+<li>Selects relevant test cases</li>
+<li>Runs regression suite</li>
+<li>Reports results</li>
+</ul>
+
+<p><strong>Implementation:</strong></p>
+<div class="code-block"><pre><code>
+class RegressionAgent:
+
+    def analyze_changes(self, commits):
+
+        &quot;&quot;&quot;Analyze what changed&quot;&quot;&quot;
+
+        # Use AI to understand code changes
+
+        # Map changes to test areas
+
+        # Select relevant tests
+
+        pass
+
+    
+
+    def run_smart_regression(self):
+
+        &quot;&quot;&quot;Run only relevant tests&quot;&quot;&quot;
+
+        changes = self.get_recent_changes()
+
+        affected_areas = self.analyze_changes(changes)
+
+        tests = self.select_tests(affected_areas)
+
+        return self.run_tests(tests)
+
+</code></pre></div>
+
+<h3>Thursday: Bug Analysis Agent</h3>
+
+<p><strong>Purpose</strong>: Analyzes bug reports and suggests root causes.</p>
+
+<p><strong>What It Does:</strong></p>
+<ul>
+<li>Reads bug reports</li>
+<li>Analyzes logs and stack traces</li>
+<li>Suggests potential root causes</li>
+<li>Recommends test cases to prevent recurrence</li>
+<li>Creates bug reproduction steps</li>
+</ul>
+
+<p><strong>Implementation:</strong></p>
+<div class="code-block"><pre><code>
+class BugAnalysisAgent:
+
+    def analyze_bug(self, bug_report, logs):
+
+        &quot;&quot;&quot;Analyze bug and suggest root cause&quot;&quot;&quot;
+
+        prompt = f&quot;&quot;&quot;
+
+        Bug Report:
+
+        {bug_report}
+
+        
+
+        Logs:
+
+        {logs}
+
+        
+
+        Analyze this bug and provide:
+
+        1. Likely root cause
+
+        2. Steps to reproduce
+
+        3. Suggested fix
+
+        4. Test cases to prevent this
+
+        &quot;&quot;&quot;
+
+        # Generate analysis
+
+        return analysis
+
+</code></pre></div>
+
+<h3>Friday: Weekly Report Agent</h3>
+
+<p><strong>Purpose</strong>: Automatically generates your weekly QA report.</p>
+
+<p><strong>What It Does:</strong></p>
+<ul>
+<li>Collects testing metrics</li>
+<li>Summarizes work completed</li>
+<li>Identifies blockers</li>
+<li>Creates status report</li>
+<li>Suggests improvements for next week</li>
+</ul>
+
+<p><strong>Implementation:</strong></p>
+<div class="code-block"><pre><code>
+class WeeklyReportAgent:
+
+    def generate_report(self, week_data):
+
+        &quot;&quot;&quot;Generate weekly QA report&quot;&quot;&quot;
+
+        prompt = f&quot;&quot;&quot;
+
+        Create a professional weekly QA report from this data:
+
+        {week_data}
+
+        
+
+        Include:
+
+        1. Tests executed
+
+        2. Bugs found/fixed
+
+        3. Coverage metrics
+
+        4. Blockers
+
+        5. Next week priorities
+
+        &quot;&quot;&quot;
+
+        return report
+
+</code></pre></div>
+
+<hr>
+
+<h2 id="free-&-fast-solutions-{#free-solutions}">Free & Fast Solutions {#free-solutions}</h2>
+
+<h3>Completely Free Options</h3>
+
+<h4>1. Ollama (Local AI)</h4>
+<ul>
+<li><strong>Cost</strong>: Free</li>
+<li><strong>Speed</strong>: Fast (runs on your machine)</li>
+<li><strong>Privacy</strong>: 100% private</li>
+<li><strong>Setup Time</strong>: 5 minutes</li>
+<li><strong>Best For</strong>: Chat agents, simple task automation</li>
+</ul>
+
+<h4>2. Hugging Face (Free Tier)</h4>
+<ul>
+<li><strong>Cost</strong>: Free tier available</li>
+<li><strong>Speed</strong>: Depends on model size</li>
+<li><strong>Privacy</strong>: Cloud-based</li>
+<li><strong>Setup Time</strong>: 10 minutes</li>
+<li><strong>Best For</strong>: More advanced agents</li>
+</ul>
+
+<h4>3. OpenAI API (Free Tier)</h4>
+<ul>
+<li><strong>Cost</strong>: $5 free credit monthly</li>
+<li><strong>Speed</strong>: Very fast</li>
+<li><strong>Privacy</strong>: Cloud-based</li>
+<li><strong>Setup Time</strong>: 5 minutes</li>
+<li><strong>Best For</strong>: Quick prototypes</li>
+</ul>
+
+<h4>4. Google Colab (Free)</h4>
+<ul>
+<li><strong>Cost</strong>: Free</li>
+<li><strong>Speed</strong>: Good (with GPU)</li>
+<li><strong>Privacy</strong>: Cloud-based</li>
+<li><strong>Setup Time</strong>: 15 minutes</li>
+<li><strong>Best For</strong>: Experimentation</li>
+</ul>
+
+<h3>Fast Setup Solutions</h3>
+
+<h4>Quick Start: 5-Minute Chat Agent</h4>
+<div class="code-block"><pre><code>
+# 1. Install Ollama (2 minutes)
+
+winget install Ollama.Ollama  # Windows
+
+# or
+
+brew install ollama  # Mac
+
+
+
+# 2. Download model (2 minutes)
+
+ollama pull llama3.2:3b
+
+
+
+# 3. Create agent file (1 minute)
+
+# Copy the chat_agent.py code above
+
+
+
+# 4. Run (instant)
+
+python chat_agent.py
+
+</code></pre></div>
+
+<h4>Quick Start: 10-Minute Test Generator</h4>
+<div class="code-block"><pre><code>
+# 1. Install dependencies
+
+pip install ollama
+
+
+
+# 2. Create test_generator_agent.py
+
+# Copy code from above
+
+
+
+# 3. Run
+
+python test_generator_agent.py
+
+</code></pre></div>
+
+<hr>
+
+<h2 id="chat-agent-for-daily-assistance-{#chat-agent}">Chat Agent for Daily Assistance {#chat-agent}</h2>
+
+<h3>Why a Chat Agent?</h3>
+
+<p>A chat agent is like having a QA expert available 24/7 that:</p>
+<ul>
+<li>Remembers your testing patterns</li>
+<li>Answers questions instantly</li>
+<li>Helps with test case ideas</li>
+<li>Explains complex concepts</li>
+<li>Suggests best practices</li>
+</ul>
+
+<h3>Enhanced Chat Agent with Memory</h3>
+
+<p>Create <code style="color: var(--neon-green);">enhanced_chat_agent.py</code>:</p>
+
+<div class="code-block"><pre><code>
+import ollama
+
+import json
+
+import os
+
+from datetime import datetime
+
+
+
+class EnhancedQAChatAgent:
+
+    &quot;&quot;&quot;Chat agent with memory and context&quot;&quot;&quot;
+
+    
+
+    def __init__(self, model=&quot;llama3.2:3b&quot;):
+
+        self.model = model
+
+        self.memory_file = &quot;agent_memory.json&quot;
+
+        self.memory = self._load_memory()
+
+        self.context = self._build_context()
+
+    
+
+    def _load_memory(self):
+
+        &quot;&quot;&quot;Load conversation memory&quot;&quot;&quot;
+
+        if os.path.exists(self.memory_file):
+
+            with open(self.memory_file, &#x27;r&#x27;) as f:
+
+                return json.load(f)
+
+        return {&quot;conversations&quot;: [], &quot;learned_patterns&quot;: []}
+
+    
+
+    def _save_memory(self):
+
+        &quot;&quot;&quot;Save conversation memory&quot;&quot;&quot;
+
+        with open(self.memory_file, &#x27;w&#x27;) as f:
+
+            json.dump(self.memory, f, indent=2)
+
+    
+
+    def _build_context(self):
+
+        &quot;&quot;&quot;Build context from memory&quot;&quot;&quot;
+
+        context = &quot;&quot;&quot;
+
+        You are a helpful QA assistant with knowledge of:
+
+        - Software testing best practices
+
+        - Test case design
+
+        - Bug analysis
+
+        - Test automation
+
+        - QA workflows
+
+        &quot;&quot;&quot;
+
+        
+
+        # Add learned patterns
+
+        if self.memory.get(&quot;learned_patterns&quot;):
+
+            context += &quot;\n\nLearned patterns:\n&quot;
+
+            for pattern in self.memory[&quot;learned_patterns&quot;][-5:]:  # Last 5
+
+                context += f&quot;- {pattern}\n&quot;
+
+        
+
+        return context
+
+    
+
+    def ask(self, question):
+
+        &quot;&quot;&quot;Ask with context from previous conversations&quot;&quot;&quot;
+
+        # Add recent conversation history
+
+        recent_conversations = self.memory[&quot;conversations&quot;][-3:]
+
+        
+
+        conversation_history = &quot;&quot;
+
+        for conv in recent_conversations:
+
+            conversation_history += f&quot;Q: {conv[&#x27;question&#x27;]}\nA: {conv[&#x27;answer&#x27;]}\n\n&quot;
+
+        
+
+        prompt = f&quot;&quot;&quot;
+
+        {self.context}
+
+        
+
+        Previous conversation:
+
+        {conversation_history}
+
+        
+
+        Current question: {question}
+
+        
+
+        Answer helpfully and concisely.
+
+        &quot;&quot;&quot;
+
+        
+
+        response = ollama.generate(
+
+            model=self.model,
+
+            prompt=prompt
+
+        )
+
+        
+
+        answer = response[&#x27;response&#x27;]
+
+        
+
+        # Save to memory
+
+        self.memory[&quot;conversations&quot;].append({
+
+            &quot;timestamp&quot;: datetime.now().isoformat(),
+
+            &quot;question&quot;: question,
+
+            &quot;answer&quot;: answer
+
+        })
+
+        
+
+        # Keep only last 20 conversations
+
+        if len(self.memory[&quot;conversations&quot;]) &gt; 20:
+
+            self.memory[&quot;conversations&quot;] = self.memory[&quot;conversations&quot;][-20:]
+
+        
+
+        self._save_memory()
+
+        
+
+        return answer
+
+    
+
+    def learn_pattern(self, pattern):
+
+        &quot;&quot;&quot;Teach the agent a new pattern&quot;&quot;&quot;
+
+        self.memory[&quot;learned_patterns&quot;].append(pattern)
+
+        self._save_memory()
+
+        self.context = self._build_context()
+
+    
+
+    def chat(self):
+
+        &quot;&quot;&quot;Interactive chat&quot;&quot;&quot;
+
+        print(&quot;Enhanced QA Chat Agent&quot;)
+
+        print(&quot;Type &#x27;quit&#x27; to exit, &#x27;learn &lt;pattern&gt;&#x27; to teach, &#x27;memory&#x27; to see history\n&quot;)
+
+        
+
+        while True:
+
+            user_input = input(&quot;You: &quot;).strip()
+
+            
+
+            if user_input.lower() == &#x27;quit&#x27;:
+
+                break
+
+            elif user_input.lower().startswith(&#x27;learn &#x27;):
+
+                pattern = user_input[6:]
+
+                self.learn_pattern(pattern)
+
+                print(f&quot;Learned: {pattern}\n&quot;)
+
+            elif user_input.lower() == &#x27;memory&#x27;:
+
+                print(f&quot;\nConversation history: {len(self.memory[&#x27;conversations&#x27;])} items&quot;)
+
+                print(f&quot;Learned patterns: {len(self.memory[&#x27;learned_patterns&#x27;])} items\n&quot;)
+
+            else:
+
+                print(&quot;\nAgent: &quot;, end=&quot;&quot;)
+
+                answer = self.ask(user_input)
+
+                print(answer)
+
+                print()
+
+
+
+if __name__ == &quot;__main__&quot;:
+
+    agent = EnhancedQAChatAgent()
+
+    agent.chat()
+
+</code></pre></div>
+
+<h3>Using Your Chat Agent</h3>
+
+<p><strong>Daily Use Cases:</strong></p>
+<ul>
+<li>"What test cases should I write for a login feature?"</li>
+<li>"How do I test API rate limiting?"</li>
+<li>"What's the best way to test this bug?"</li>
+<li>"Explain the difference between unit and integration tests"</li>
+<li>"Suggest edge cases for this feature"</li>
+</ul>
+
+<p><strong>Teaching Your Agent:</strong></p>
+<ul>
+<li>"learn Our team uses Playwright for E2E tests"</li>
+<li>"learn We test on Chrome, Firefox, and Safari"</li>
+<li>"learn Our API uses JWT authentication"</li>
+</ul>
+
+<p><strong>The agent remembers these and uses them in future answers.</strong></p>
+
+<hr>
+
+<h2 id="monday-to-friday-agent-workflow-{#monday-friday-workflow}">Monday to Friday Agent Workflow {#monday-friday-workflow}</h2>
+
+<h3>Complete Weekly Agent Setup</h3>
+
+<p>Create <code style="color: var(--neon-green);">weekly_qa_agents.py</code>:</p>
+
+<div class="code-block"><pre><code>
+import ollama
+
+from datetime import datetime
+
+import json
+
+
+
+class WeeklyQAAgents:
+
+    &quot;&quot;&quot;Collection of agents for weekly QA work&quot;&quot;&quot;
+
+    
+
+    def __init__(self):
+
+        self.model = &quot;llama3.2:3b&quot;
+
+        self.agents = {
+
+            &quot;monday&quot;: self.monday_planning,
+
+            &quot;tuesday&quot;: self.tuesday_test_generation,
+
+            &quot;wednesday&quot;: self.wednesday_regression,
+
+            &quot;thursday&quot;: self.thursday_bug_analysis,
+
+            &quot;friday&quot;: self.friday_report
+
+        }
+
+    
+
+    def monday_planning(self, tickets):
+
+        &quot;&quot;&quot;Monday: Week planning&quot;&quot;&quot;
+
+        prompt = f&quot;&quot;&quot;
+
+        Create a weekly QA test plan from these tickets:
+
+        {tickets}
+
+        
+
+        Provide:
+
+        1. Priority order
+
+        2. Estimated time per item
+
+        3. Dependencies
+
+        4. Risk areas
+
+        5. Suggested test approach
+
+        &quot;&quot;&quot;
+
+        return self._generate(prompt)
+
+    
+
+    def tuesday_test_generation(self, requirements):
+
+        &quot;&quot;&quot;Tuesday: Generate test cases&quot;&quot;&quot;
+
+        prompt = f&quot;&quot;&quot;
+
+        Generate comprehensive test cases for:
+
+        {requirements}
+
+        
+
+        Include:
+
+        - Happy path tests
+
+        - Edge cases
+
+        - Error scenarios
+
+        - Integration tests
+
+        &quot;&quot;&quot;
+
+        return self._generate(prompt)
+
+    
+
+    def wednesday_regression(self, changes):
+
+        &quot;&quot;&quot;Wednesday: Smart regression&quot;&quot;&quot;
+
+        prompt = f&quot;&quot;&quot;
+
+        Analyze these code changes:
+
+        {changes}
+
+        
+
+        Recommend:
+
+        1. Which test areas are affected
+
+        2. Specific test cases to run
+
+        3. New tests that might be needed
+
+        4. Areas that can be skipped
+
+        &quot;&quot;&quot;
+
+        return self._generate(prompt)
+
+    
+
+    def thursday_bug_analysis(self, bug_report):
+
+        &quot;&quot;&quot;Thursday: Bug analysis&quot;&quot;&quot;
+
+        prompt = f&quot;&quot;&quot;
+
+        Analyze this bug report:
+
+        {bug_report}
+
+        
+
+        Provide:
+
+        1. Likely root cause
+
+        2. Reproduction steps
+
+        3. Suggested fix
+
+        4. Test cases to prevent recurrence
+
+        &quot;&quot;&quot;
+
+        return self._generate(prompt)
+
+    
+
+    def friday_report(self, week_data):
+
+        &quot;&quot;&quot;Friday: Weekly report&quot;&quot;&quot;
+
+        prompt = f&quot;&quot;&quot;
+
+        Create a weekly QA report from:
+
+        {week_data}
+
+        
+
+        Include:
+
+        1. Summary of work
+
+        2. Metrics (tests run, bugs found)
+
+        3. Blockers and issues
+
+        4. Next week priorities
+
+        &quot;&quot;&quot;
+
+        return self._generate(prompt)
+
+    
+
+    def _generate(self, prompt):
+
+        &quot;&quot;&quot;Generate response using Ollama&quot;&quot;&quot;
+
+        response = ollama.generate(
+
+            model=self.model,
+
+            prompt=prompt
+
+        )
+
+        return response[&#x27;response&#x27;]
+
+    
+
+    def run_daily_agent(self):
+
+        &quot;&quot;&quot;Run the appropriate agent for today&quot;&quot;&quot;
+
+        day = datetime.now().strftime(&quot;%A&quot;).lower()
+
+        
+
+        if day == &quot;monday&quot;:
+
+            return &quot;Run Monday planning agent&quot;
+
+        elif day == &quot;tuesday&quot;:
+
+            return &quot;Run Tuesday test generation agent&quot;
+
+        elif day == &quot;wednesday&quot;:
+
+            return &quot;Run Wednesday regression agent&quot;
+
+        elif day == &quot;thursday&quot;:
+
+            return &quot;Run Thursday bug analysis agent&quot;
+
+        elif day == &quot;friday&quot;:
+
+            return &quot;Run Friday report agent&quot;
+
+        else:
+
+            return &quot;Weekend - no agents scheduled&quot;
+
+
+
+# Usage
+
+if __name__ == &quot;__main__&quot;:
+
+    agents = WeeklyQAAgents()
+
+    
+
+    # Example: Monday planning
+
+    tickets = &quot;&quot;&quot;
+
+    - Ticket 123: Add user authentication
+
+    - Ticket 124: Update payment processing
+
+    - Ticket 125: Fix login bug
+
+    &quot;&quot;&quot;
+
+    
+
+    plan = agents.monday_planning(tickets)
+
+    print(plan)
+
+</code></pre></div>
+
+<h3>Automation: Run Agents Automatically</h3>
+
+<p>Create a simple scheduler <code style="color: var(--neon-green);">agent_scheduler.py</code>:</p>
+
+<div class="code-block"><pre><code>
+import schedule
+
+import time
+
+from weekly_qa_agents import WeeklyQAAgents
+
+
+
+agents = WeeklyQAAgents()
+
+
+
+def monday_morning():
+
+    &quot;&quot;&quot;Run Monday planning agent&quot;&quot;&quot;
+
+    print(&quot;Running Monday planning agent...&quot;)
+
+    # Your implementation here
+
+    pass
+
+
+
+def tuesday_morning():
+
+    &quot;&quot;&quot;Run Tuesday test generation&quot;&quot;&quot;
+
+    print(&quot;Running Tuesday test generation agent...&quot;)
+
+    pass
+
+
+
+# Schedule agents
+
+schedule.every().monday.at(&quot;09:00&quot;).do(monday_morning)
+
+schedule.every().tuesday.at(&quot;09:00&quot;).do(tuesday_morning)
+
+# ... etc
+
+
+
+# Run scheduler
+
+while True:
+
+    schedule.run_pending()
+
+    time.sleep(60)
+
+</code></pre></div>
+
+<hr>
+
+<h2 id="troubleshooting">Troubleshooting & Best Practices</h2>
+
+<h3>Common Issues</h3>
+
+<h4>Issue 1: Agent Responses Are Slow</h4>
+<p><strong>Solution:</strong></p>
+<ul>
+<li>Use smaller models (llama3.2:1b instead of 3b)</li>
+<li>Run on GPU if available</li>
+<li>Cache common responses</li>
+<li>Use cloud API for faster responses</li>
+</ul>
+
+<h4>Issue 2: Agent Gives Wrong Answers</h4>
+<p><strong>Solution:</strong></p>
+<ul>
+<li>Provide more context in prompts</li>
+<li>Use better quality models</li>
+<li>Add examples to prompts</li>
+<li>Fine-tune on your specific domain</li>
+</ul>
+
+<h4>Issue 3: Agent Forgets Context</h4>
+<p><strong>Solution:</strong></p>
+<ul>
+<li>Implement memory system (like enhanced chat agent)</li>
+<li>Use conversation history</li>
+<li>Save important patterns</li>
+<li>Use vector databases for long-term memory</li>
+</ul>
+
+<h4>Issue 4: Setup Is Too Complex</h4>
+<p><strong>Solution:</strong></p>
+<ul>
+<li>Start with simplest agent (chat agent)</li>
+<li>Use pre-built solutions</li>
+<li>Follow step-by-step guides</li>
+<li>Ask for help in communities</li>
+</ul>
+
+<h3>Best Practices</h3>
+
+<ol>
+<li><strong>Start Simple</strong>: Begin with a chat agent, then expand</li>
+<li><strong>Iterate</strong>: Improve agents based on usage</li>
+<li><strong>Document</strong>: Keep notes on what works</li>
+<li><strong>Share</strong>: Teach others in your team</li>
+<li><strong>Combine</strong>: Use multiple simple agents instead of one complex one</li>
+</ol>
+
+<h3>Security Considerations</h3>
+
+<ul>
+<li><strong>Local Models</strong>: Use Ollama for sensitive data</li>
+<li><strong>API Keys</strong>: Never commit API keys to git</li>
+<li><strong>Data Privacy</strong>: Be careful with what you send to cloud APIs</li>
+<li><strong>Access Control</strong>: Limit who can modify agents</li>
+</ul>
+
+<hr>
+
+<h2 id="next-steps">Next Steps</h2>
+
+<ol>
+<li><strong>Start Today</strong>: Set up the simple chat agent (5 minutes)</li>
+<li><strong>Use Daily</strong>: Integrate into your workflow</li>
+<li><strong>Expand Gradually</strong>: Add one agent per week</li>
+<li><strong>Share Knowledge</strong>: Teach your team</li>
+<li><strong>Iterate</strong>: Improve based on feedback</li>
+</ol>
+
+<h3>Resources</h3>
+
+<ul>
+<li><strong>Ollama Documentation</strong>: https://ollama.com</li>
+<li><strong>LangChain Tutorials</strong>: https://python.langchain.com</li>
+<li><strong>Your Research</strong>: See <a href="./research/notebooks/ai-agents-qa-healthcare.html">Healthcare AI Agents Research</a></li>
+<li><strong>Data Engineering Agents</strong>: <a href="https://github.com/ElaMCB/Data-engineering">Data Engineering Portfolio</a></li>
+</ul>
+
+<hr>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Building your own AI agents doesn't have to be complicated or expensive. Start with a simple chat agent, use it daily, and gradually expand. The key is to solve real problems you face every day.</p>
+
+<p>Remember:</p>
+<ul>
+<li><strong>Free options exist</strong>: Ollama, Hugging Face, etc.</li>
+<li><strong>Start simple</strong>: Chat agent is easiest</li>
+<li><strong>Iterate</strong>: Improve based on usage</li>
+<li><strong>Share</strong>: Help your team learn</li>
+</ul>
+
+<p>You're already using agentic workflows (like Cursor's code review). Now you can create specialized agents for your specific QA needs.</p>
+
+<hr>
+
+<p>*Last Updated: 2025*</p>
+<p>*Based on practical implementations and latest AI agent developments*</p>
+
+
+</section>
+    </div>
+
+    <a href="#" class="back-to-top" title="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <footer>
+        <p>Last Updated: 2025</p>
+        <p>QA Agentic Workflows Guide - Build Your Own AI Agents</p>
+        <p><a href="../index.html">← Back to Portfolio</a></p>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Show/hide back to top button
+        window.addEventListener('scroll', function() {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
