@@ -1318,58 +1318,84 @@
             });
         }
 
-        // Fetch real view counts from GoatCounter API
-        async function fetchViewCounts() {
+        // Fetch real view counts from GoatCounter JSON API
+        async function fetchViewCountFromGoatCounter(path) {
             try {
-                // GoatCounter API endpoint (you'll need to set this up)
-                // For now, we'll use localStorage to track views per page
-                const viewCounts = JSON.parse(localStorage.getItem('research_view_counts') || '{}');
-                return viewCounts;
+                // Encode the path properly for GoatCounter API
+                const encodedPath = encodeURIComponent(path);
+                const apiUrl = `https://elamcb.goatcounter.com/counter/${encodedPath}.json`;
+                
+                const response = await fetch(apiUrl);
+                if (response.ok) {
+                    const data = await response.json();
+                    // Remove thousands separators and convert to number
+                    return parseInt(data.count.replace(/,/g, '')) || 0;
+                } else if (response.status === 404) {
+                    // Page not found in GoatCounter yet (new content)
+                    return 0;
+                }
+                return 0;
             } catch (error) {
-                console.debug('Could not fetch view counts:', error);
-                return {};
+                console.debug(`Could not fetch view count for ${path}:`, error);
+                return 0;
             }
         }
 
-        // Track page view in localStorage (simple client-side tracking)
-        function trackPageView(pagePath) {
-            const viewCounts = JSON.parse(localStorage.getItem('research_view_counts') || '{}');
-            const key = pagePath || window.location.pathname;
+        // Get the full path for a research page from its link
+        function getResearchPagePath(card) {
+            const link = card.querySelector('.research-links a[href]');
+            if (!link) return null;
             
-            if (!viewCounts[key]) {
-                viewCounts[key] = 0;
+            let href = link.getAttribute('href');
+            if (!href) return null;
+            
+            // Handle relative paths
+            if (href.startsWith('../')) {
+                // ../docs/... -> /docs/...
+                href = href.replace('../', '/');
+            } else if (href.startsWith('./')) {
+                // ./notebooks/... -> /research/notebooks/...
+                href = '/research' + href.substring(1);
+            } else if (href.startsWith('/')) {
+                // Already absolute
+                return href;
+            } else {
+                // Relative to current directory -> /research/...
+                href = '/research/' + href;
             }
-            viewCounts[key]++;
             
-            localStorage.setItem('research_view_counts', JSON.stringify(viewCounts));
-            return viewCounts[key];
+            return href;
         }
 
         // Add metrics to cards that don't have them
         async function addMetrics() {
-            // Get view counts (from localStorage for now, can be upgraded to API later)
-            const viewCounts = await fetchViewCounts();
+            // Fetch view counts for all cards in parallel
+            const viewCountPromises = Array.from(researchCards).map(async (card) => {
+                const pagePath = getResearchPagePath(card);
+                if (!pagePath) return { card, views: 0 };
+                
+                const views = await fetchViewCountFromGoatCounter(pagePath);
+                return { card, views };
+            });
+            
+            const viewCounts = await Promise.all(viewCountPromises);
+            const viewCountMap = new Map();
+            viewCounts.forEach(({ card, views }) => {
+                viewCountMap.set(card, views);
+            });
             
             researchCards.forEach(card => {
                 const content = card.querySelector('.research-content');
                 const existingMetrics = content.querySelector('.card-metrics');
                 
                 if (!existingMetrics) {
-                    // Try to get real views from data attribute or localStorage
+                    // Get real views from GoatCounter
                     let views = card.getAttribute('data-views');
                     
-                    // If no explicit views, try to get from localStorage based on card title
                     if (!views) {
-                        const cardTitle = card.querySelector('h3').textContent;
-                        const cardKey = cardTitle.toLowerCase().replace(/[^a-z0-9]/g, '_');
-                        const storedViews = viewCounts[cardKey];
-                        
-                        if (storedViews) {
-                            views = storedViews;
-                        } else {
-                            // Start new content at 0 - views will increment as people visit
-                            views = 0;
-                        }
+                        views = viewCountMap.get(card) || 0;
+                    } else {
+                        views = parseInt(views) || 0;
                     }
                     
                     const downloads = card.getAttribute('data-downloads');
@@ -1463,11 +1489,21 @@
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
             addNewBadges();
-            addMetrics();
+            // Wait for GoatCounter to load before fetching counts
+            var checkGoatCounter = setInterval(function() {
+                if (window.goatcounter) {
+                    clearInterval(checkGoatCounter);
+                    addMetrics();
+                }
+            }, 100);
             
-            // Track view for this page
-            const currentPath = window.location.pathname;
-            trackPageView(currentPath);
+            // Fallback: if GoatCounter doesn't load after 5 seconds, still show metrics
+            setTimeout(() => {
+                if (!window.goatcounter) {
+                    clearInterval(checkGoatCounter);
+                    addMetrics(); // Will use 0 for all if API fails
+                }
+            }, 5000);
         });
     </script>
 </body>
