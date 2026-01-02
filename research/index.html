@@ -1345,17 +1345,49 @@
                         readingTimeDiv.innerHTML = `<i class="fas fa-clock"></i><span>~${readingTime} min read</span>`;
                         metricsDiv.appendChild(readingTimeDiv);
                     } else {
-                        // Calculate reading time from content
-                        const text = card.querySelector('.research-content p').textContent;
-                        const wordCount = text.split(/\s+/).length;
-                        const estimatedMinutes = Math.ceil(wordCount / 200); // Average reading speed: 200 words/min
+                        // Estimate reading time based on type and difficulty
+                        const cardType = card.getAttribute('data-type');
+                        const difficulty = card.getAttribute('data-difficulty');
                         
-                        if (estimatedMinutes > 0) {
-                            const readingTimeDiv = document.createElement('div');
-                            readingTimeDiv.className = 'reading-time';
-                            readingTimeDiv.innerHTML = `<i class="fas fa-clock"></i><span>~${estimatedMinutes} min read</span>`;
-                            metricsDiv.appendChild(readingTimeDiv);
+                        let estimatedMinutes = 20; // Default
+                        
+                        // Academic papers are longer
+                        if (cardType === 'academic') {
+                            if (difficulty === 'advanced') {
+                                estimatedMinutes = 50; // Advanced academic papers: 45-60 min
+                            } else if (difficulty === 'intermediate') {
+                                estimatedMinutes = 35; // Intermediate academic: 30-45 min
+                            } else {
+                                estimatedMinutes = 25; // Beginner academic: 20-30 min
+                            }
                         }
+                        // Case studies
+                        else if (cardType === 'case-study') {
+                            estimatedMinutes = 30; // Case studies: 25-35 min
+                        }
+                        // Practical guides
+                        else if (cardType === 'practical') {
+                            if (difficulty === 'advanced') {
+                                estimatedMinutes = 35; // Advanced practical: 30-40 min
+                            } else if (difficulty === 'intermediate') {
+                                estimatedMinutes = 25; // Intermediate practical: 20-30 min
+                            } else {
+                                estimatedMinutes = 15; // Beginner practical: 10-20 min
+                            }
+                        }
+                        // Tools
+                        else if (cardType === 'tool') {
+                            if (difficulty === 'advanced') {
+                                estimatedMinutes = 25; // Advanced tools: 20-30 min
+                            } else {
+                                estimatedMinutes = 18; // Beginner/intermediate tools: 15-25 min
+                            }
+                        }
+                        
+                        const readingTimeDiv = document.createElement('div');
+                        readingTimeDiv.className = 'reading-time';
+                        readingTimeDiv.innerHTML = `<i class="fas fa-clock"></i><span>~${estimatedMinutes} min read</span>`;
+                        metricsDiv.appendChild(readingTimeDiv);
                     }
                     
                     // Insert before research-links
