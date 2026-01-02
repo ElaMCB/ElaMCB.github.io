@@ -1656,6 +1656,30 @@
             }).join('');
         }
 
+        // Update view counts dynamically
+        function updateViewCounts() {
+            researchCards.forEach(card => {
+                const metricsDiv = card.querySelector('.card-metrics');
+                if (!metricsDiv) return;
+                
+                const viewCountSpan = metricsDiv.querySelector('.view-count');
+                if (!viewCountSpan) return;
+                
+                const pagePath = getResearchPagePath(card);
+                if (!pagePath) return;
+                
+                // Fetch updated view count
+                fetchViewCountFromGoatCounter(pagePath).then(views => {
+                    const currentViews = parseInt(viewCountSpan.textContent.replace(/,/g, '')) || 0;
+                    if (views !== currentViews) {
+                        viewCountSpan.textContent = formatNumber(views);
+                    }
+                }).catch(() => {
+                    // Silently fail - keep current count
+                });
+            });
+        }
+
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
             addNewBadges();
@@ -1664,6 +1688,8 @@
                 if (window.goatcounter) {
                     clearInterval(checkGoatCounter);
                     addMetrics();
+                    // Auto-refresh view counts every 30 seconds
+                    setInterval(updateViewCounts, 30000);
                 }
             }, 100);
             
@@ -1672,6 +1698,8 @@
                 if (!window.goatcounter) {
                     clearInterval(checkGoatCounter);
                     addMetrics(); // Will use 0 for all if API fails
+                    // Auto-refresh view counts every 30 seconds even if GoatCounter script didn't load
+                    setInterval(updateViewCounts, 30000);
                 }
             }, 5000);
 
