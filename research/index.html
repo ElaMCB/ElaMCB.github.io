@@ -1375,27 +1375,63 @@
             });
         }
 
-        // Fetch real view counts from GoatCounter JSON API
-        async function fetchViewCountFromGoatCounter(path) {
+        // Track page views in localStorage as fallback
+        function trackPageViewInLocalStorage(path) {
             try {
-                // Encode the path properly for GoatCounter API
-                const encodedPath = encodeURIComponent(path);
-                const apiUrl = `https://elamcb.goatcounter.com/counter/${encodedPath}.json`;
-                
-                const response = await fetch(apiUrl);
-                if (response.ok) {
-                    const data = await response.json();
-                    // Remove thousands separators and convert to number
-                    return parseInt(data.count.replace(/,/g, '')) || 0;
-                } else if (response.status === 404) {
-                    // Page not found in GoatCounter yet (new content)
-                    return 0;
-                }
-                return 0;
-            } catch (error) {
-                console.debug(`Could not fetch view count for ${path}:`, error);
+                const key = `view_count_${path}`;
+                const stored = localStorage.getItem(key);
+                const count = stored ? parseInt(stored) : 0;
+                localStorage.setItem(key, (count + 1).toString());
+                return count + 1;
+            } catch (e) {
                 return 0;
             }
+        }
+
+        // Get view count from localStorage
+        function getLocalStorageViewCount(path) {
+            try {
+                const key = `view_count_${path}`;
+                const stored = localStorage.getItem(key);
+                return stored ? parseInt(stored) : 0;
+            } catch (e) {
+                return 0;
+            }
+        }
+
+        // Fetch real view counts from GoatCounter JSON API
+        async function fetchViewCountFromGoatCounter(path) {
+            // First try GoatCounter API
+            try {
+                const encodedPath = encodeURIComponent(path);
+                
+                // GoatCounter visitor counter API (requires "Allow adding visitor counts" in settings)
+                let apiUrl = `https://elamcb.goatcounter.com/counter/${encodedPath}.json`;
+                
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Handle different response formats
+                    if (data.count !== undefined) {
+                        const count = parseInt(String(data.count).replace(/,/g, '')) || 0;
+                        if (count > 0) return count;
+                    } else if (typeof data === 'number') {
+                        return data;
+                    }
+                }
+            } catch (error) {
+                console.debug(`GoatCounter API error for ${path}:`, error);
+            }
+            
+            // Fallback to localStorage tracking
+            return getLocalStorageViewCount(path);
         }
 
         // Get the full path for a research page from its link
@@ -1657,8 +1693,8 @@
         }
 
         // Update view counts dynamically
-        function updateViewCounts() {
-            researchCards.forEach(card => {
+        async function updateViewCounts() {
+            const updatePromises = researchCards.map(async (card) => {
                 const metricsDiv = card.querySelector('.card-metrics');
                 if (!metricsDiv) return;
                 
@@ -1668,16 +1704,27 @@
                 const pagePath = getResearchPagePath(card);
                 if (!pagePath) return;
                 
-                // Fetch updated view count
-                fetchViewCountFromGoatCounter(pagePath).then(views => {
+                try {
+                    // Fetch updated view count (tries GoatCounter first, falls back to localStorage)
+                    const views = await fetchViewCountFromGoatCounter(pagePath);
                     const currentViews = parseInt(viewCountSpan.textContent.replace(/,/g, '')) || 0;
+                    
+                    // Always update if we have a different count
                     if (views !== currentViews) {
                         viewCountSpan.textContent = formatNumber(views);
+                        // Add a subtle animation to indicate update
+                        viewCountSpan.style.transition = 'color 0.3s';
+                        viewCountSpan.style.color = 'var(--neon-green)';
+                        setTimeout(() => {
+                            viewCountSpan.style.color = '';
+                        }, 500);
                     }
-                }).catch(() => {
-                    // Silently fail - keep current count
-                });
+                } catch (error) {
+                    console.debug(`Failed to update view count for ${pagePath}:`, error);
+                }
             });
+            
+            await Promise.all(updatePromises);
         }
 
         // Initialize on page load
