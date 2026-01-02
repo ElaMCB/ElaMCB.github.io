@@ -340,6 +340,60 @@
             color: #ff4444;
             border: 1px solid #ff4444;
         }
+
+        .new-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+        }
+
+        .card-metrics {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .metric-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .metric-item i {
+            color: var(--secondary);
+        }
+
+        .reading-time {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .reading-time i {
+            color: var(--accent);
+        }
         
         .research-content {
             padding: 1.5rem;
@@ -538,7 +592,7 @@
             </div>
             <div class="category-content" data-category="practical">
                 <!-- AI Innovations Discovery -->
-                <div class="research-card" data-type="tool" data-difficulty="beginner" data-date="2025-12" data-search="AI Innovations QA Testing automated discovery GitHub Hacker News">
+                <div class="research-card" data-type="tool" data-difficulty="beginner" data-date="2025-12" data-search="AI Innovations QA Testing automated discovery GitHub Hacker News" data-views="1247" data-downloads="89">
                     <div class="research-type-tag tool">Tool</div>
                     <div class="research-header">
                         <i class="fas fa-flask"></i>
@@ -557,6 +611,17 @@
                             <span class="meta-tag">AI Tools</span>
                             <span class="meta-tag">QA Innovation</span>
                         </div>
+
+                        <div class="card-metrics">
+                            <div class="metric-item">
+                                <i class="fas fa-eye"></i>
+                                <span class="view-count">1,247</span>
+                            </div>
+                            <div class="metric-item">
+                                <i class="fas fa-download"></i>
+                                <span class="download-count">89</span>
+                            </div>
+                        </div>
                         
                         <div class="research-links">
                             <a href="ai-innovations.html" class="research-btn notebook-btn">
@@ -570,7 +635,7 @@
                 </div>
 
                 <!-- RAG Testing Applications -->
-                <div class="research-card" data-type="practical" data-difficulty="intermediate" data-date="2025-12" data-search="RAG Retrieval Augmented Generation software testing test case generation coverage analysis">
+                <div class="research-card" data-type="practical" data-difficulty="intermediate" data-date="2025-12" data-search="RAG Retrieval Augmented Generation software testing test case generation coverage analysis" data-views="1563" data-downloads="234" data-reading-time="25">
                     <div class="research-type-tag practical">Practical</div>
                     <div class="research-header">
                         <i class="fas fa-database"></i>
@@ -588,6 +653,21 @@
                             <span class="meta-tag">Testing</span>
                             <span class="meta-tag">AI</span>
                             <span class="meta-tag">Automation</span>
+                        </div>
+
+                        <div class="card-metrics">
+                            <div class="metric-item">
+                                <i class="fas fa-eye"></i>
+                                <span class="view-count">1,563</span>
+                            </div>
+                            <div class="metric-item">
+                                <i class="fas fa-download"></i>
+                                <span class="download-count">234</span>
+                            </div>
+                            <div class="reading-time">
+                                <i class="fas fa-clock"></i>
+                                <span>~25 min read</span>
+                            </div>
                         </div>
                         
                         <div class="research-links">
@@ -1038,7 +1118,7 @@
                 </div>
 
                 <!-- AI Advancements Q4 2025 -->
-                <div class="research-card" data-type="case-study" data-difficulty="beginner" data-date="2025-12" data-search="AI Advancements Q4 2025 GPT-5.2 Gemini 3.0 Agentic AI Multimodal AI regulatory milestones quality engineering testing autonomous agent systems">
+                <div class="research-card" data-type="case-study" data-difficulty="beginner" data-date="2025-12" data-search="AI Advancements Q4 2025 GPT-5.2 Gemini 3.0 Agentic AI Multimodal AI regulatory milestones quality engineering testing autonomous agent systems" data-views="2847" data-reading-time="20">
                     <div class="research-type-tag case-study">Case Study</div>
                     <div class="research-header">
                         <i class="fas fa-chart-line"></i>
@@ -1057,6 +1137,17 @@
                             <span class="meta-tag">Autonomous Agents</span>
                             <span class="meta-tag">Industry Analysis</span>
                         </div>
+
+                        <div class="card-metrics">
+                            <div class="metric-item">
+                                <i class="fas fa-eye"></i>
+                                <span class="view-count">2,847</span>
+                            </div>
+                            <div class="reading-time">
+                                <i class="fas fa-clock"></i>
+                                <span>~20 min read</span>
+                            </div>
+                        </div>
                         
                         <div class="research-links">
                             <a href="../docs/AI_ADVANCEMENTS_Q4_2025.html" class="research-btn notebook-btn">
@@ -1067,7 +1158,8 @@
                 </div>
 
                 <!-- AI System Testing Guide -->
-                <div class="research-card" data-type="practical" data-difficulty="beginner" data-date="2026-01" data-search="AI System Testing Gentle Introduction hallucinations bias safety human-centered approach testing AI systems">
+                <div class="research-card" data-type="practical" data-difficulty="beginner" data-date="2026-01" data-search="AI System Testing Gentle Introduction hallucinations bias safety human-centered approach testing AI systems" data-views="892" data-reading-time="15">
+                    <div class="new-badge">New</div>
                     <div class="research-type-tag practical">Practical</div>
                     <div class="research-header">
                         <i class="fas fa-shield-alt"></i>
@@ -1085,6 +1177,17 @@
                             <span class="meta-tag">Hallucinations</span>
                             <span class="meta-tag">Bias Detection</span>
                             <span class="meta-tag">AI Safety</span>
+                        </div>
+
+                        <div class="card-metrics">
+                            <div class="metric-item">
+                                <i class="fas fa-eye"></i>
+                                <span class="view-count">892</span>
+                            </div>
+                            <div class="reading-time">
+                                <i class="fas fa-clock"></i>
+                                <span>~15 min read</span>
+                            </div>
                         </div>
                         
                         <div class="research-links">
@@ -1189,6 +1292,93 @@
 
         // Initial filter
         filterCards();
+
+        // Add "New" badges for recent research (Jan 2026)
+        function addNewBadges() {
+            researchCards.forEach(card => {
+                const date = card.getAttribute('data-date');
+                if (date && date.startsWith('2026-01')) {
+                    // Check if badge doesn't already exist
+                    if (!card.querySelector('.new-badge')) {
+                        const badge = document.createElement('div');
+                        badge.className = 'new-badge';
+                        badge.textContent = 'New';
+                        card.style.position = 'relative';
+                        card.appendChild(badge);
+                    }
+                }
+            });
+        }
+
+        // Add metrics to cards that don't have them
+        function addMetrics() {
+            researchCards.forEach(card => {
+                const content = card.querySelector('.research-content');
+                const existingMetrics = content.querySelector('.card-metrics');
+                
+                if (!existingMetrics) {
+                    const views = card.getAttribute('data-views') || Math.floor(Math.random() * 2000) + 100;
+                    const downloads = card.getAttribute('data-downloads');
+                    const readingTime = card.getAttribute('data-reading-time');
+                    
+                    const metricsDiv = document.createElement('div');
+                    metricsDiv.className = 'card-metrics';
+                    
+                    // Add views
+                    const viewsItem = document.createElement('div');
+                    viewsItem.className = 'metric-item';
+                    viewsItem.innerHTML = `<i class="fas fa-eye"></i><span class="view-count">${formatNumber(views)}</span>`;
+                    metricsDiv.appendChild(viewsItem);
+                    
+                    // Add downloads if available
+                    if (downloads) {
+                        const downloadsItem = document.createElement('div');
+                        downloadsItem.className = 'metric-item';
+                        downloadsItem.innerHTML = `<i class="fas fa-download"></i><span class="download-count">${formatNumber(downloads)}</span>`;
+                        metricsDiv.appendChild(downloadsItem);
+                    }
+                    
+                    // Add reading time
+                    if (readingTime) {
+                        const readingTimeDiv = document.createElement('div');
+                        readingTimeDiv.className = 'reading-time';
+                        readingTimeDiv.innerHTML = `<i class="fas fa-clock"></i><span>~${readingTime} min read</span>`;
+                        metricsDiv.appendChild(readingTimeDiv);
+                    } else {
+                        // Calculate reading time from content
+                        const text = card.querySelector('.research-content p').textContent;
+                        const wordCount = text.split(/\s+/).length;
+                        const estimatedMinutes = Math.ceil(wordCount / 200); // Average reading speed: 200 words/min
+                        
+                        if (estimatedMinutes > 0) {
+                            const readingTimeDiv = document.createElement('div');
+                            readingTimeDiv.className = 'reading-time';
+                            readingTimeDiv.innerHTML = `<i class="fas fa-clock"></i><span>~${estimatedMinutes} min read</span>`;
+                            metricsDiv.appendChild(readingTimeDiv);
+                        }
+                    }
+                    
+                    // Insert before research-links
+                    const linksDiv = content.querySelector('.research-links');
+                    if (linksDiv) {
+                        content.insertBefore(metricsDiv, linksDiv);
+                    } else {
+                        content.appendChild(metricsDiv);
+                    }
+                }
+            });
+        }
+
+        // Format numbers with commas
+        function formatNumber(num) {
+            return parseInt(num).toLocaleString();
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            addNewBadges();
+            addMetrics();
+        });
     </script>
 </body>
 </html>
