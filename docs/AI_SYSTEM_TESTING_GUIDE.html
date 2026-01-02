@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Gentle Introduction to AI System Testing: Understanding Hallucinations, Bias, and Safety</title>
+    
+    <meta name="description" content="A gentle, human-centered introduction to testing AI systems, understanding hallucinations, bias, and safety considerations in AI interactions.">
+    <meta name="keywords" content="AI testing, AI hallucinations, AI bias, AI safety, LLM testing, AI system validation, prompt testing">
+    
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="manifest" href="../images/site.webmanifest">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0a0a0f;
+            --secondary: #00d4ff;
+            --accent: #7c3aed;
+            --neon-blue: #00f5ff;
+            --neon-purple: #bf00ff;
+            --neon-green: #39ff14;
+            --light: #e4e4e7;
+            --dark: #1a1a1f;
+            --card-bg: rgba(15, 15, 23, 0.9);
+            --glass: rgba(255, 255, 255, 0.1);
+            --success: #39ff14;
+            --warning: #ffaa00;
+            --error: #ff4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            background-attachment: fixed;
+            color: var(--light);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 58, 237, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 0 2rem;
+            border-bottom: 2px solid var(--secondary);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .header-content h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .header-content .subtitle {
+            font-size: 1.1rem;
+            color: var(--light);
+            opacity: 0.9;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--secondary);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--neon-blue);
+            transform: translateX(-5px);
+        }
+
+        .content-section {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .content-section:hover {
+            border-color: rgba(0, 212, 255, 0.4);
+            box-shadow: 0 12px 40px rgba(0, 212, 255, 0.2);
+        }
+
+        .content-section h2 {
+            font-size: 1.8rem;
+            color: var(--neon-blue);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .content-section h3 {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-section p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        .content-section ul, .content-section ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-section li {
+            margin-bottom: 0.8rem;
+            font-size: 1.05rem;
+        }
+
+        .content-section strong {
+            color: var(--secondary);
+        }
+
+        .quote-box {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 4px solid var(--neon-blue);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            font-style: italic;
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--neon-blue);
+            opacity: 0.3;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            font-family: Georgia, serif;
+        }
+
+        .highlight-box {
+            background: rgba(124, 58, 237, 0.15);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-box h4 {
+            color: var(--neon-purple);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .practice-box {
+            background: rgba(57, 255, 20, 0.1);
+            border: 1px solid rgba(57, 255, 20, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .practice-box h4 {
+            color: var(--neon-green);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 2px solid var(--secondary);
+            margin-top: 4rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .header-content h1 {
+                font-size: 1.6rem;
+            }
+
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            .content-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .content-section h3 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html#research" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Research
+        </a>
+
+        <header>
+            <div class="header-content">
+                <h1>A Gentle Introduction to AI System Testing</h1>
+                <p class="subtitle">Understanding Hallucinations, Bias, and Safety</p>
+            </div>
+        </header>
+
+        <div class="content-section">
+            <h2>A Quiet Conversation About How We Talk to Machines</h2>
+            <p>Imagine you've just met someone who always sounds confident, always has an answer, and never says "I don't know." Sometimes they're brilliantly right. Sometimes they're convincingly wrong. This is our current generation of AI systems—not because they're flawed, but because they're designed to generate, not necessarily to understand.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>What We're Really Doing Here</h2>
+            <p>When we test AI systems, we're not looking for traditional "bugs" like we might in regular software. We're learning to listen differently—to hear when something sounds slightly off, when an answer is too smooth, when confidence outpaces accuracy.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>The Poetry of Hallucinations</h2>
+            
+            <h3>What They Are, Without the Jargon</h3>
+            <p>Hallucinations are like dreams the AI has while it's awake—moments when it creates something that never existed, remembers something that never happened, or connects dots that were never meant to touch. They're not lies; they're more like creative interpretations that forgot to mention they're fictional.</p>
+
+            <div class="quote-box">
+                <p>Hallucinations are not lies; they're more like creative interpretations that forgot to mention they're fictional.</p>
+            </div>
+
+            <h3>How We Notice Them (Gently)</h3>
+            <p>Instead of "testing for hallucinations," think of it as:</p>
+            <ul>
+                <li><strong>Listening for overconfidence:</strong> When every answer sounds equally certain</li>
+                <li><strong>Noticing the too-perfect response:</strong> When something sounds complete but feels hollow</li>
+                <li><strong>Catching the subtle drift:</strong> When a conversation slowly veers into slightly wrong territory</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h4>Simple First Steps</h4>
+                <ul>
+                    <li>Ask the same question three different ways. Do the answers harmonize or contradict?</li>
+                    <li>Request sources for factual claims. Can it provide them?</li>
+                    <li>Notice when it changes the subject rather than admitting uncertainty</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Bias as a Quiet Companion</h2>
+            
+            <h3>Understanding Without Judgment</h3>
+            <p>Bias in AI systems isn't malicious—it's more like inherited memory. These systems learned from human writing, human choices, human patterns. They absorbed our collective assumptions the way children absorb family stories: completely, unconsciously, and without questioning.</p>
+
+            <div class="quote-box">
+                <p>Bias in AI systems isn't malicious—it's more like inherited memory. These systems learned from human writing, human choices, human patterns.</p>
+            </div>
+
+            <h3>Gentle Detection Methods</h3>
+            <ul>
+                <li><strong>The friend test:</strong> Would you be comfortable if someone spoke about your friend this way?</li>
+                <li><strong>The substitution game:</strong> Replace names, genders, or locations. Does the tone shift?</li>
+                <li><strong>The pause moment:</strong> Notice when something makes you slightly uncomfortable but you can't immediately say why</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h4>Questions to Ask Yourself</h4>
+                <ul>
+                    <li>Who might feel unseen by this response?</li>
+                    <li>What assumptions are baked into this answer?</li>
+                    <li>If I read this aloud, who might shift uncomfortably in their seat?</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Safety as Creating Space</h2>
+            
+            <h3>Beyond Technical Definitions</h3>
+            <p>Safety isn't just about preventing harm—it's about creating spaces where people feel heard, respected, and protected. When we test for safety, we're asking: "Who might feel unsafe here, and why?"</p>
+
+            <h3>Gentle Safety Considerations</h3>
+            <ul>
+                <li><strong>The vulnerability check:</strong> Would this response be appropriate for someone having a difficult day?</li>
+                <li><strong>The power dynamic:</strong> Does this advice respect the person's autonomy and agency?</li>
+                <li><strong>The long view:</strong> Might this seem harmless now but problematic in different circumstances?</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Tools as Extensions of Intuition</h2>
+            <p>The tools we use—Promptfoo, various testing frameworks—they're not replacing human judgment. They're more like tuning forks, helping us hear frequencies we might otherwise miss. They extend our ability to notice patterns, but they don't replace the human capacity for gentle discernment.</p>
+
+            <div class="practice-box">
+                <h4>Starting Simply</h4>
+                <ul>
+                    <li>Keep a notebook of moments that feel "off"</li>
+                    <li>Practice describing why something doesn't sit right</li>
+                    <li>Share observations with others and listen to their perspectives</li>
+                    <li>Remember that noticing is the first skill—fixing comes later</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>A Philosophy of Approach</h2>
+            
+            <h3>Curiosity Over Judgment</h3>
+            <p>Approach each interaction wondering "What's happening here?" rather than "What's wrong here?" The AI isn't failing—it's revealing its nature, and our job is to understand and document that nature with compassion.</p>
+
+            <h3>Humility in the Process</h3>
+            <p>Remember that we're all learning together. Today's "hallucination" might be tomorrow's creative breakthrough. Today's "bias" might help us understand our own blind spots better. The goal isn't perfection—it's understanding.</p>
+
+            <h3>Patience with the Pace</h3>
+            <p>These systems change and evolve. What we notice today might be different tomorrow. Our testing approaches need to breathe and adapt, not rigidly enforce yesterday's standards on today's reality.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Creating Your Own Practice</h2>
+            
+            <h3>Beginning Gently</h3>
+            <ul>
+                <li><strong>Start with wonder:</strong> Pick an AI interaction that intrigued or puzzled you</li>
+                <li><strong>Notice without naming:</strong> What did you feel? What caught your attention?</li>
+                <li><strong>Describe to a friend:</strong> How would you explain this to someone who wasn't there?</li>
+                <li><strong>Ask "what if":</strong> What if different people encountered this? What might they experience?</li>
+            </ul>
+
+            <div class="practice-box">
+                <h4>Building Awareness</h4>
+                <ul>
+                    <li>Keep a simple log of interesting interactions</li>
+                    <li>Practice explaining technical concepts in human terms</li>
+                    <li>Share observations with others and listen to their perspectives</li>
+                    <li>Remember that your intuition is a valid testing tool</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>The Larger Context</h2>
+            <p>We're participating in a moment when human communication is changing. These AI systems are new forms of conversation partners, and we're learning to be good listeners in this new dialogue. The skills we develop—noticing subtle cues, questioning our assumptions, considering multiple perspectives—these are fundamentally human capabilities that technology is helping us refine rather than replace.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Moving Forward</h2>
+            <p>There's no rush to master everything at once. Start by simply noticing. Pay attention to what feels right, what feels wrong, and what feels interesting. The technical skills will come. The frameworks will develop. But first, we practice seeing clearly and describing honestly what we observe.</p>
+
+            <div class="quote-box" style="text-align: center; font-size: 1.2rem; margin-top: 2rem;">
+                <p>The most sophisticated testing often begins with the simplest question: "What just happened there?"</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Elena Mereanu | AI Research & Quality Engineering</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.7;">
+                <a href="../index.html#research" style="color: var(--secondary); text-decoration: none;">View All Research</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
+
