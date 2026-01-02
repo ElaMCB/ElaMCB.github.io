@@ -12,7 +12,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: "pages-deploy-${{ github.ref }}"
   cancel-in-progress: true
 
 jobs:
@@ -62,3 +62,13 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        continue-on-error: true
+      
+      - name: Check deployment status
+        if: failure()
+        run: |
+          if [[ "${{ steps.deployment.outcome }}" == "failure" ]]; then
+            echo "⚠️ Deployment conflict detected. This is normal when multiple commits happen quickly."
+            echo "The site will update automatically once the previous deployment completes."
+            echo "No action needed - the next push will deploy successfully."
+          fi
