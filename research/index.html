@@ -496,6 +496,90 @@
             box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
         }
         
+        .releases-section {
+            margin: 3rem 0;
+        }
+
+        .releases-content {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(120, 58, 237, 0.3);
+        }
+
+        .releases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .release-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .release-card:hover {
+            border-color: var(--neon-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.2);
+        }
+
+        .release-card h4 {
+            color: var(--neon-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .release-card .release-tag {
+            display: inline-block;
+            background: rgba(124, 58, 237, 0.3);
+            color: var(--neon-purple);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+        }
+
+        .release-card .release-date {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .release-card .release-description {
+            color: var(--light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .release-card .release-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .release-card .release-link:hover {
+            color: var(--neon-blue);
+            transform: translateX(5px);
+        }
+
+        .release-placeholder {
+            text-align: center;
+            padding: 3rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
         .coming-soon {
             background: rgba(255, 107, 107, 0.1);
             border: 1px solid rgba(255, 107, 107, 0.3);
@@ -1160,6 +1244,27 @@
             </div>
         </div>
 
+        <!-- GitHub Releases Section -->
+        <div class="releases-section">
+            <div class="category-header" style="cursor: default;">
+                <h2><i class="fab fa-github"></i> Research Tool Releases</h2>
+                <a href="https://github.com/ElaMCB/ElaMCB.github.io/releases" target="_blank" class="research-btn" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                    <i class="fas fa-external-link-alt"></i> View All Releases
+                </a>
+            </div>
+            <div class="releases-content">
+                <p style="text-align: center; color: var(--light); margin-bottom: 1.5rem;">
+                    Research tools and notebooks are released via GitHub Releases for easy download and version tracking.
+                </p>
+                <div class="releases-grid" id="releasesGrid">
+                    <div class="release-placeholder">
+                        <i class="fab fa-github" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                        <p>Loading releases...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="coming-soon">
             <h3><i class="fas fa-flask"></i> More Research Coming Soon</h3>
             <p>I'm actively working on new research in AI testing, model validation, and safety frameworks. Check back regularly for updates, or follow my work on GitHub.</p>
@@ -1438,6 +1543,79 @@
             return parseInt(num).toLocaleString();
         }
 
+        // Fetch GitHub Releases
+        async function fetchGitHubReleases() {
+            try {
+                const response = await fetch('https://api.github.com/repos/ElaMCB/ElaMCB.github.io/releases?per_page=10');
+                if (response.ok) {
+                    const releases = await response.json();
+                    return releases.filter(release => 
+                        !release.draft && 
+                        (release.name.toLowerCase().includes('research') || 
+                         release.name.toLowerCase().includes('tool') ||
+                         release.tag_name.match(/^v?\d{4}\.\d{2}/) || // Version tags like 2025.01
+                         release.body.toLowerCase().includes('research'))
+                    );
+                }
+                return [];
+            } catch (error) {
+                console.debug('Could not fetch GitHub releases:', error);
+                return [];
+            }
+        }
+
+        // Display GitHub Releases
+        async function displayReleases() {
+            const releasesGrid = document.getElementById('releasesGrid');
+            if (!releasesGrid) return;
+
+            const releases = await fetchGitHubReleases();
+            
+            if (releases.length === 0) {
+                releasesGrid.innerHTML = `
+                    <div class="release-placeholder">
+                        <i class="fab fa-github" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                        <p>No releases yet. Research tools will appear here when published via GitHub Releases.</p>
+                        <p style="margin-top: 1rem; font-size: 0.9rem;">
+                            <a href="https://github.com/ElaMCB/ElaMCB.github.io/releases/new" target="_blank" class="research-btn" style="display: inline-flex; margin-top: 1rem;">
+                                <i class="fas fa-plus"></i> Create Release
+                            </a>
+                        </p>
+                    </div>
+                `;
+                return;
+            }
+
+            releasesGrid.innerHTML = releases.map(release => {
+                const releaseDate = new Date(release.published_at).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+                
+                const assetCount = release.assets ? release.assets.length : 0;
+                const downloadCount = release.assets ? release.assets.reduce((sum, asset) => sum + (asset.download_count || 0), 0) : 0;
+
+                return `
+                    <div class="release-card">
+                        <span class="release-tag">${release.tag_name}</span>
+                        <h4>${release.name}</h4>
+                        <div class="release-date">
+                            <i class="far fa-calendar"></i> ${releaseDate}
+                            ${assetCount > 0 ? ` • <i class="fas fa-download"></i> ${assetCount} file${assetCount > 1 ? 's' : ''}` : ''}
+                            ${downloadCount > 0 ? ` • ${downloadCount.toLocaleString()} downloads` : ''}
+                        </div>
+                        <div class="release-description">
+                            ${release.body ? release.body.substring(0, 150) + (release.body.length > 150 ? '...' : '') : 'Research tool release'}
+                        </div>
+                        <a href="${release.html_url}" target="_blank" class="release-link">
+                            <i class="fab fa-github"></i> View Release
+                        </a>
+                    </div>
+                `;
+            }).join('');
+        }
+
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
             addNewBadges();
@@ -1456,6 +1634,9 @@
                     addMetrics(); // Will use 0 for all if API fails
                 }
             }, 5000);
+
+            // Load GitHub releases
+            displayReleases();
         });
     </script>
 </body>

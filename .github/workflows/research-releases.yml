@@ -1,0 +1,57 @@
+name: Research Tool Releases
+
+on:
+  workflow_dispatch:
+    inputs:
+      research_name:
+        description: 'Research tool name (e.g., "AutoTriage Manual Test Assessment")'
+        required: true
+        type: string
+      version:
+        description: 'Version tag (e.g., "v1.0.0" or "2025.01")'
+        required: true
+        type: string
+      description:
+        description: 'Release description'
+        required: false
+        type: string
+        default: 'Research tool release'
+      files:
+        description: 'Comma-separated file paths to include (e.g., "research/notebooks/tool.html,research/notebooks/tool.ipynb")'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.event.inputs.version }}
+          name: ${{ github.event.inputs.research_name }} - ${{ github.event.inputs.version }}
+          body: |
+            ## ${{ github.event.inputs.research_name }}
+            
+            ${{ github.event.inputs.description }}
+            
+            ### Files Included
+            ${{ github.event.inputs.files }}
+            
+            ### View Research
+            - [View on Research Page](https://elamcb.github.io/research/)
+            - [View Source](https://github.com/ElaMCB/ElaMCB.github.io/tree/main/research)
+          files: ${{ github.event.inputs.files }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+
