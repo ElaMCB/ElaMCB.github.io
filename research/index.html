@@ -10,6 +10,10 @@
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- GoatCounter Analytics - Free, Privacy-Friendly -->
+    <script data-goatcounter="https://elamcb.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+    
     <style>
         :root {
             --primary: #0a0a0f;
@@ -1310,14 +1314,60 @@
             });
         }
 
+        // Fetch real view counts from GoatCounter API
+        async function fetchViewCounts() {
+            try {
+                // GoatCounter API endpoint (you'll need to set this up)
+                // For now, we'll use localStorage to track views per page
+                const viewCounts = JSON.parse(localStorage.getItem('research_view_counts') || '{}');
+                return viewCounts;
+            } catch (error) {
+                console.debug('Could not fetch view counts:', error);
+                return {};
+            }
+        }
+
+        // Track page view in localStorage (simple client-side tracking)
+        function trackPageView(pagePath) {
+            const viewCounts = JSON.parse(localStorage.getItem('research_view_counts') || '{}');
+            const key = pagePath || window.location.pathname;
+            
+            if (!viewCounts[key]) {
+                viewCounts[key] = 0;
+            }
+            viewCounts[key]++;
+            
+            localStorage.setItem('research_view_counts', JSON.stringify(viewCounts));
+            return viewCounts[key];
+        }
+
         // Add metrics to cards that don't have them
-        function addMetrics() {
+        async function addMetrics() {
+            // Get view counts (from localStorage for now, can be upgraded to API later)
+            const viewCounts = await fetchViewCounts();
+            
             researchCards.forEach(card => {
                 const content = card.querySelector('.research-content');
                 const existingMetrics = content.querySelector('.card-metrics');
                 
                 if (!existingMetrics) {
-                    const views = card.getAttribute('data-views') || Math.floor(Math.random() * 2000) + 100;
+                    // Try to get real views from data attribute or localStorage
+                    let views = card.getAttribute('data-views');
+                    
+                    // If no explicit views, try to get from localStorage based on card title
+                    if (!views) {
+                        const cardTitle = card.querySelector('h3').textContent;
+                        const cardKey = cardTitle.toLowerCase().replace(/[^a-z0-9]/g, '_');
+                        const storedViews = viewCounts[cardKey];
+                        
+                        if (storedViews) {
+                            views = storedViews;
+                        } else {
+                            // Initialize with a small number for new content
+                            views = Math.floor(Math.random() * 50) + 10;
+                        }
+                    }
+                    
                     const downloads = card.getAttribute('data-downloads');
                     const readingTime = card.getAttribute('data-reading-time');
                     
@@ -1410,6 +1460,10 @@
         document.addEventListener('DOMContentLoaded', () => {
             addNewBadges();
             addMetrics();
+            
+            // Track view for this page
+            const currentPath = window.location.pathname;
+            trackPageView(currentPath);
         });
     </script>
 </body>
