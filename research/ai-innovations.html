@@ -301,6 +301,25 @@
             }
         }
     </style>
+
+    <!-- View Tracking Script -->
+    <script>
+        (function() {
+            // Track page view in localStorage
+            try {
+                const pagePath = window.location.pathname;
+                const key = 'view_count_' + pagePath;
+                const stored = localStorage.getItem(key);
+                const count = stored ? parseInt(stored) : 0;
+                localStorage.setItem(key, (count + 1).toString());
+                
+                // Also track in a global object for immediate access
+                window.pageViewCount = count + 1;
+            } catch (e) {
+                // localStorage not available
+            }
+        })();
+    </script>
 </head>
 <body>
     <a href="index.html" class="back-btn">
