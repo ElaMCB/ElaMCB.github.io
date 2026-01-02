@@ -1,0 +1,57 @@
+name: Create First Research Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type "CREATE" to confirm creating the AutoTriage release'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    if: github.event.inputs.confirm == 'CREATE'
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: autotriage-v1.0.0
+          name: AutoTriage: Manual Test Assessment Tool - v1.0.0
+          body: |
+            ## AutoTriage: Manual Test Assessment Tool
+
+            Professional framework for assessing manual regression tests and calculating business value. Analyzes technical feasibility, business impact, and ROI to generate 4-tier automation priorities.
+
+            ### Features
+            - Technical feasibility analysis
+            - Business value calculation
+            - ROI analysis and prioritization
+            - 4-tier automation priority system
+
+            ### Files Included
+            - `research/notebooks/autotriage-manual-test-assessment.html` - Interactive tool
+            - `research/notebooks/autotriage-manual-test-assessment.ipynb` - Jupyter notebook source
+
+            ### View Research
+            - [View on Research Page](https://elamcb.github.io/research/)
+            - [View Source Code](https://github.com/ElaMCB/ElaMCB.github.io/tree/main/research/notebooks)
+
+            ### Publication Date
+            Published: September 2025
+          files: |
+            research/notebooks/autotriage-manual-test-assessment.html
+            research/notebooks/autotriage-manual-test-assessment.ipynb
+          draft: false
+          prerelease: false
+          generate_release_notes: false
+
