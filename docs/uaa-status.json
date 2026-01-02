@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-02T18:33:24Z",
+  "last_updated": "2026-01-02T18:40:07Z",
   "workflow_status": "success",
   "capabilities": {
     "ci-fix": {
@@ -13,11 +13,11 @@
     },
     "link-health": {
       "status": "success",
-      "last_run": "2026-01-02T18:33:14Z",
-      "last_success": "2026-01-02T18:33:14Z",
+      "last_run": "2026-01-02T18:39:57Z",
+      "last_success": "2026-01-02T18:39:57Z",
       "last_failure": "N/A",
-      "total_runs": 10,
-      "success_count": 10,
+      "total_runs": 11,
+      "success_count": 11,
       "failure_count": 0
     },
     "security": {
@@ -31,6 +31,12 @@
     }
   },
   "recent_activity": [
+    {
+      "time": "2026-01-02T18:39:57Z",
+      "capability": "link-health",
+      "status": "success",
+      "message": "Link-Health completed successfully"
+    },
     {
       "time": "2026-01-02T18:33:14Z",
       "capability": "link-health",
@@ -81,12 +87,6 @@
     },
     {
       "time": "2025-12-29T09:29:36Z",
-      "capability": "link-health",
-      "status": "success",
-      "message": "Link-Health completed successfully"
-    },
-    {
-      "time": "2025-12-27T00:10:21Z",
       "capability": "link-health",
       "status": "success",
       "message": "Link-Health completed successfully"
