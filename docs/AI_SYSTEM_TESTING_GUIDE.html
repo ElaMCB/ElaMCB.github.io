@@ -109,6 +109,32 @@
             margin-top: 0.5rem;
         }
 
+        .back-home {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .back-home a {
+            color: var(--light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--secondary);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-home a:hover {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -253,14 +279,25 @@
             .content-section h3 {
                 font-size: 1.2rem;
             }
+
+            .back-home {
+                position: static;
+                margin: 1rem 0;
+                text-align: center;
+            }
+
+            .back-home a {
+                display: inline-flex;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="back-home">
+        <a href="../index.html"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+    </div>
+
     <div class="container">
-        <a href="../index.html#research" class="back-link">
-            <i class="fas fa-arrow-left"></i> Back to Research
-        </a>
 
         <header>
             <div class="header-content">
