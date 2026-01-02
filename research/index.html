@@ -85,12 +85,177 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
         }
-        
-        .research-grid {
+
+        /* Search and Filter Section */
+        .controls-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(120, 58, 237, 0.3);
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--secondary);
+            border-radius: 25px;
+            color: var(--light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary);
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .filter-btn {
+            padding: 0.6rem 1.2rem;
+            background: rgba(139, 233, 253, 0.1);
+            border: 2px solid var(--accent);
+            border-radius: 20px;
+            color: var(--light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(124, 58, 237, 0.4);
+        }
+
+        .difficulty-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .difficulty-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(57, 255, 20, 0.1);
+            border: 2px solid var(--neon-green);
+            border-radius: 15px;
+            color: var(--neon-green);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .difficulty-btn:hover,
+        .difficulty-btn.active {
+            background: var(--neon-green);
+            color: var(--dark);
+        }
+
+        .difficulty-btn.intermediate {
+            border-color: #ffaa00;
+            color: #ffaa00;
+            background: rgba(255, 170, 0, 0.1);
+        }
+
+        .difficulty-btn.intermediate:hover,
+        .difficulty-btn.intermediate.active {
+            background: #ffaa00;
+            color: var(--dark);
+        }
+
+        .difficulty-btn.advanced {
+            border-color: #ff4444;
+            color: #ff4444;
+            background: rgba(255, 68, 68, 0.1);
+        }
+
+        .difficulty-btn.advanced:hover,
+        .difficulty-btn.advanced.active {
+            background: #ff4444;
+            color: white;
+        }
+
+        .results-count {
+            text-align: center;
+            color: var(--secondary);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Collapsible Sections */
+        .category-section {
+            margin-bottom: 2rem;
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.3), rgba(0, 212, 255, 0.3));
+            padding: 1.2rem 1.5rem;
+            border-radius: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .category-header:hover {
+            border-color: var(--neon-blue);
+            transform: translateX(5px);
+        }
+
+        .category-header h2 {
+            font-size: 1.5rem;
+            color: var(--light);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .category-header i {
+            transition: transform 0.3s ease;
+        }
+
+        .category-header.collapsed i {
+            transform: rotate(-90deg);
+        }
+
+        .category-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
-            margin-bottom: 3rem;
+            transition: all 0.3s ease;
+        }
+
+        .category-content.collapsed {
+            display: none;
         }
         
         .research-card {
@@ -102,6 +267,10 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(120, 58, 237, 0.3);
             position: relative;
+        }
+
+        .research-card.hidden {
+            display: none;
         }
         
         .research-card:hover {
@@ -130,6 +299,47 @@
             font-size: 1.4rem;
             margin: 0;
         }
+
+        .card-meta-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .publication-date {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .difficulty-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .difficulty-badge.beginner {
+            background: rgba(57, 255, 20, 0.2);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+        }
+
+        .difficulty-badge.intermediate {
+            background: rgba(255, 170, 0, 0.2);
+            color: #ffaa00;
+            border: 1px solid #ffaa00;
+        }
+
+        .difficulty-badge.advanced {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff4444;
+            border: 1px solid #ff4444;
+        }
         
         .research-content {
             padding: 1.5rem;
@@ -153,6 +363,42 @@
             padding: 0.3rem 0.7rem;
             border-radius: 20px;
             font-size: 0.8rem;
+        }
+
+        .research-type-tag {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.4rem 0.9rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            backdrop-filter: blur(10px);
+        }
+
+        .research-type-tag.academic {
+            background: rgba(191, 0, 255, 0.3);
+            color: var(--neon-purple);
+            border: 1px solid var(--neon-purple);
+        }
+
+        .research-type-tag.practical {
+            background: rgba(0, 245, 255, 0.3);
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+        }
+
+        .research-type-tag.case-study {
+            background: rgba(57, 255, 20, 0.3);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+        }
+
+        .research-type-tag.tool {
+            background: rgba(255, 170, 0, 0.3);
+            color: #ffaa00;
+            border: 1px solid #ffaa00;
         }
         
         .research-links {
@@ -203,7 +449,8 @@
         }
         
         @media (max-width: 768px) {
-            .research-grid {
+            .research-grid,
+            .category-content {
                 grid-template-columns: 1fr;
             }
             
@@ -213,6 +460,19 @@
                 left: 0;
                 margin-bottom: 1rem;
                 display: inline-block;
+            }
+
+            .filter-buttons,
+            .difficulty-filter {
+                justify-content: center;
+            }
+
+            .category-header {
+                padding: 1rem;
+            }
+
+            .category-header h2 {
+                font-size: 1.2rem;
             }
             
             h1 {
@@ -234,458 +494,604 @@
     </header>
 
     <main class="container">
-        <div class="research-grid">
-            <!-- AI Innovations Discovery -->
-            <div class="research-card">
-                <div class="research-header">
-                    <i class="fas fa-flask"></i>
-                    <h3>AI Innovations for QA Testing</h3>
-                </div>
-                <div class="research-content">
-                    <p>Weekly automated discovery of AI innovations applicable to quality assurance and testing. Automatically scans GitHub, Hacker News, and research sources to find cutting-edge AI tools, frameworks, and methodologies that can enhance QA testing workflows.</p>
-                    
-                    <div class="research-meta">
-                        <span class="meta-tag">Automated Discovery</span>
-                        <span class="meta-tag">Weekly Updates</span>
-                        <span class="meta-tag">AI Tools</span>
-                        <span class="meta-tag">QA Innovation</span>
+        <!-- Search and Filter Controls -->
+        <div class="controls-section">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search research by title, description, or tags...">
+            </div>
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">
+                    <i class="fas fa-th"></i> All Research
+                </button>
+                <button class="filter-btn" data-filter="academic">
+                    <i class="fas fa-graduation-cap"></i> Academic
+                </button>
+                <button class="filter-btn" data-filter="practical">
+                    <i class="fas fa-tools"></i> Practical
+                </button>
+                <button class="filter-btn" data-filter="case-study">
+                    <i class="fas fa-chart-bar"></i> Case Studies
+                </button>
+                <button class="filter-btn" data-filter="tool">
+                    <i class="fas fa-wrench"></i> Tools
+                </button>
+            </div>
+
+            <div class="difficulty-filter">
+                <span style="color: var(--light); margin-right: 0.5rem;">Difficulty:</span>
+                <button class="difficulty-btn active" data-difficulty="all">All Levels</button>
+                <button class="difficulty-btn beginner" data-difficulty="beginner">Beginner</button>
+                <button class="difficulty-btn intermediate" data-difficulty="intermediate">Intermediate</button>
+                <button class="difficulty-btn advanced" data-difficulty="advanced">Advanced</button>
+            </div>
+
+            <div class="results-count" id="resultsCount"></div>
+        </div>
+
+        <!-- Research Categories -->
+        <div class="category-section">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <h2><i class="fas fa-flask"></i> Practical Research & Tools</h2>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="category-content" data-category="practical">
+                <!-- AI Innovations Discovery -->
+                <div class="research-card" data-type="tool" data-difficulty="beginner" data-date="2025-01" data-search="AI Innovations QA Testing automated discovery GitHub Hacker News">
+                    <div class="research-type-tag tool">Tool</div>
+                    <div class="research-header">
+                        <i class="fas fa-flask"></i>
+                        <h3>AI Innovations for QA Testing</h3>
+                        <div class="card-meta-info">
+                            <span class="publication-date"><i class="far fa-calendar"></i> Jan 2025</span>
+                            <span class="difficulty-badge beginner">Beginner</span>
+                        </div>
                     </div>
-                    
-                    <div class="research-links">
-                        <a href="ai-innovations.html" class="research-btn notebook-btn">
-                            <i class="fas fa-flask"></i> View Discoveries
-                        </a>
-                        <a href="https://github.com/ElaMCB/ElaMCB.github.io/tree/main/research/discoveries" class="research-btn" target="_blank">
-                            <i class="fab fa-github"></i> Data
-                        </a>
+                    <div class="research-content">
+                        <p>Weekly automated discovery of AI innovations applicable to quality assurance and testing. Automatically scans GitHub, Hacker News, and research sources to find cutting-edge AI tools, frameworks, and methodologies that can enhance QA testing workflows.</p>
+                        
+                        <div class="research-meta">
+                            <span class="meta-tag">Automated Discovery</span>
+                            <span class="meta-tag">Weekly Updates</span>
+                            <span class="meta-tag">AI Tools</span>
+                            <span class="meta-tag">QA Innovation</span>
+                        </div>
+                        
+                        <div class="research-links">
+                            <a href="ai-innovations.html" class="research-btn notebook-btn">
+                                <i class="fas fa-flask"></i> View Discoveries
+                            </a>
+                            <a href="https://github.com/ElaMCB/ElaMCB.github.io/tree/main/research/discoveries" class="research-btn" target="_blank">
+                                <i class="fab fa-github"></i> Data
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RAG Testing Applications -->
+                <div class="research-card" data-type="practical" data-difficulty="intermediate" data-date="2024-12" data-search="RAG Retrieval Augmented Generation software testing test case generation coverage analysis">
+                    <div class="research-type-tag practical">Practical</div>
+                    <div class="research-header">
+                        <i class="fas fa-database"></i>
+                        <h3>RAG in Software Testing</h3>
+                        <div class="card-meta-info">
+                            <span class="publication-date"><i class="far fa-calendar"></i> Dec 2024</span>
+                            <span class="difficulty-badge intermediate">Intermediate</span>
+                        </div>
+                    </div>
+                    <div class="research-content">
+                        <p>Exploring applications of Retrieval Augmented Generation in software testing, including test case generation, coverage analysis, and testing strategy recommendations.</p>
+                        
+                        <div class="research-meta">
+                            <span class="meta-tag">RAG</span>
+                            <span class="meta-tag">Testing</span>
+                            <span class="meta-tag">AI</span>
+                            <span class="meta-tag">Automation</span>
+                        </div>
+                        
+                        <div class="research-links">
+                            <a href="notebooks/rag-testing-applications.html" class="research-btn notebook-btn">
+                                <i class="fas fa-book"></i> View Notebook
+                            </a>
+                            <a href="notebooks/rag-testing-applications.ipynb" class="research-btn">
+                                <i class="fas fa-code"></i> Source
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MCP in Software Testing -->
+                <div class="research-card" data-type="practical" data-difficulty="intermediate" data-date="2024-12" data-search="MCP Model Context Protocol software testing test automation context-aware">
+                    <div class="research-type-tag practical">Practical</div>
+                    <div class="research-header">
+                        <i class="fas fa-network-wired"></i>
+                        <h3>MCP in Software Testing</h3>
+                        <div class="card-meta-info">
+                            <span class="publication-date"><i class="far fa-calendar"></i> Dec 2024</span>
+                            <span class="difficulty-badge intermediate">Intermediate</span>
+                        </div>
+                    </div>
+                    <div class="research-content">
+                        <p>Exploring Model Context Protocol applications in software testing, examining how standardized AI-tool communication can revolutionize test automation and create context-aware testing frameworks.</p>
+                        
+                        <div class="research-meta">
+                            <span class="meta-tag">MCP</span>
+                            <span class="meta-tag">Context-Aware</span>
+                            <span class="meta-tag">AI Testing</span>
+                            <span class="meta-tag">Automation</span>
+                        </div>
+                        
+                        <div class="research-links">
+                            <a href="notebooks/mcp-software-testing.html" class="research-btn notebook-btn">
+                                <i class="fas fa-book"></i> View Notebook
+                            </a>
+                            <a href="notebooks/mcp-software-testing.ipynb" class="research-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agentic Testing Integration -->
+                <div class="research-card" data-type="practical" data-difficulty="advanced" data-date="2024-11" data-search="Agentic Testing Integration autonomous AI agents software testing multi-agent orchestration">
+                    <div class="research-type-tag practical">Practical</div>
+                    <div class="research-header">
+                        <i class="fas fa-robot"></i>
+                        <h3>Agentic Testing Integration</h3>
+                        <div class="card-meta-info">
+                            <span class="publication-date"><i class="far fa-calendar"></i> Nov 2024</span>
+                            <span class="difficulty-badge advanced">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="research-content">
+                        <p>Investigating autonomous AI agents for software testing, from existing platform integration to specialized testing agent development and multi-agent orchestration systems.</p>
+                        
+                        <div class="research-meta">
+                            <span class="meta-tag">AI Agents</span>
+                            <span class="meta-tag">Autonomous Testing</span>
+                            <span class="meta-tag">Multi-Agent Systems</span>
+                            <span class="meta-tag">Quality Engineering</span>
+                        </div>
+                        
+                        <div class="research-links">
+                            <a href="notebooks/agentic-testing-integration.html" class="research-btn notebook-btn">
+                                <i class="fas fa-book"></i> View Notebook
+                            </a>
+                            <a href="notebooks/agentic-testing-integration.ipynb" class="research-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CI/CD Test Optimization -->
+                <div class="research-card" data-type="tool" data-difficulty="advanced" data-date="2024-10" data-search="CI/CD Test Optimization Monte Carlo framework test suite pytest GitHub Actions">
+                    <div class="research-type-tag tool">Tool</div>
+                    <div class="research-header">
+                        <i class="fas fa-rocket"></i>
+                        <h3>CI/CD Test Optimization Tool</h3>
+                        <div class="card-meta-info">
+                            <span class="publication-date"><i class="far fa-calendar"></i> Oct 2024</span>
+                            <span class="difficulty-badge advanced">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="research-content">
+                        <p>Production-ready Monte Carlo framework that ingests test history and code changes, runs 10,000 simulations, and outputs an optimized test suite for CI/CD pipelines. Exports in pytest, GitHub Actions, and JSON formats.</p>
+                        
+                        <div class="research-meta">
+                            <span class="meta-tag">CI/CD</span>
+                            <span class="meta-tag">Monte Carlo</span>
+                            <span class="meta-tag">Test Optimization</span>
+                            <span class="meta-tag">DevOps</span>
+                        </div>
+                        
+                        <div class="research-links">
+                            <a href="notebooks/ci-test-optimization-monte-carlo.html" class="research-btn notebook-btn">
+                                <i class="fas fa-book"></i> View Tool
+                            </a>
+                            <a href="notebooks/ci-test-optimization-monte-carlo.ipynb" class="research-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AutoTriage Manual Test Assessment -->
+                <div class="research-card" data-type="tool" data-difficulty="intermediate" data-date="2024-09" data-search="AutoTriage Manual Test Assessment tool manual regression tests business value ROI automation priorities">
+                    <div class="research-type-tag tool">Tool</div>
+                    <div class="research-header">
+                        <i class="fas fa-balance-scale-right"></i>
+                        <h3>AutoTriage: Manual Test Assessment Tool</h3>
+                        <div class="card-meta-info">
+                            <span class="publication-date"><i class="far fa-calendar"></i> Sep 2024</span>
+                            <span class="difficulty-badge intermediate">Intermediate</span>
+                        </div>
+                    </div>
+                    <div class="research-content">
+                        <p>Professional framework for assessing manual regression tests and calculating business value. Analyzes technical feasibility, business impact, and ROI to generate 4-tier automation priorities. Solves the critical challenge of manual test evaluation.</p>
+                        
+                        <div class="research-meta">
+                            <span class="meta-tag">Manual Testing</span>
+                            <span class="meta-tag">Business Value</span>
+                            <span class="meta-tag">ROI Analysis</span>
+                            <span class="meta-tag">Test Triage</span>
+                        </div>
+                        
+                        <div class="research-links">
+                            <a href="notebooks/autotriage-manual-test-assessment.html" class="research-btn notebook-btn">
+                                <i class="fas fa-book"></i> View Tool
+                            </a>
+                            <a href="notebooks/autotriage-manual-test-assessment.ipynb" class="research-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- RAG Testing Applications -->
-            <div class="research-card">
-                <div class="research-header">
-                    <i class="fas fa-database"></i>
-                    <h3>RAG in Software Testing</h3>
-                </div>
-                <div class="research-content">
-                    <p>Exploring applications of Retrieval Augmented Generation in software testing, including test case generation, coverage analysis, and testing strategy recommendations.</p>
-                    
-                    <div class="research-meta">
-                        <span class="meta-tag">RAG</span>
-                        <span class="meta-tag">Testing</span>
-                        <span class="meta-tag">AI</span>
-                        <span class="meta-tag">Automation</span>
+        <!-- Academic Research Section -->
+        <div class="category-section">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <h2><i class="fas fa-graduation-cap"></i> Academic Research</h2>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="category-content" data-category="academic">
+                <!-- LLM Testing Methodologies -->
+                <div class="research-card" data-type="academic" data-difficulty="advanced" data-date="2024-11" data-search="LLM Testing Methodologies Large Language Models hallucination detection bias measurement safety validation">
+                    <div class="research-type-tag academic">Academic</div>
+                    <div class="research-header">
+                        <i class="fas fa-brain"></i>
+                        <h3>LLM Testing Methodologies</h3>
+                        <div class="card-meta-info">
+                            <span class="publication-date"><i class="far fa-calendar"></i> Nov 2024</span>
+                            <span class="difficulty-badge advanced">Advanced</span>
+                        </div>
                     </div>
-                    
-                    <div class="research-links">
-                        <a href="notebooks/rag-testing-applications.html" class="research-btn notebook-btn">
-                            <i class="fas fa-book"></i> View Notebook
-                        </a>
-                        <a href="notebooks/rag-testing-applications.ipynb" class="research-btn">
-                            <i class="fas fa-code"></i> Source
-                        </a>
+                    <div class="research-content">
+                        <p>Comprehensive analysis of testing approaches for Large Language Models, including hallucination detection, bias measurement, and safety validation frameworks.</p>
+                        
+                        <div class="research-meta">
+                            <span class="meta-tag">Machine Learning</span>
+                            <span class="meta-tag">Testing</span>
+                            <span class="meta-tag">LLMs</span>
+                            <span class="meta-tag">Safety</span>
+                        </div>
+                        
+                        <div class="research-links">
+                            <a href="notebooks/llm-testing-analysis.html" class="research-btn notebook-btn">
+                                <i class="fas fa-book"></i> View Notebook
+                            </a>
+                            <a href="#" class="research-btn">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Safety Metrics -->
+                <div class="research-card" data-type="academic" data-difficulty="advanced" data-date="2024-10" data-search="AI Safety Metrics prompt injection detection output toxicity model reliability scoring">
+                    <div class="research-type-tag academic">Academic</div>
+                    <div class="research-header">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>AI Safety Metrics</h3>
+                        <div class="card-meta-info">
+                            <span class="publication-date"><i class="far fa-calendar"></i> Oct 2024</span>
+                            <span class="difficulty-badge advanced">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="research-content">
+                        <p>Research into quantifiable metrics for AI safety, including prompt injection detection, output toxicity measurement, and model reliability scoring.</p>
+                        
+                        <div class="research-meta">
+                            <span class="meta-tag">AI Safety</span>
+                            <span class="meta-tag">Metrics</span>
+                            <span class="meta-tag">Evaluation</span>
+                            <span class="meta-tag">Security</span>
+                        </div>
+                        
+                        <div class="research-links">
+                            <a href="notebooks/ai-safety-metrics.html" class="research-btn notebook-btn">
+                                <i class="fas fa-book"></i> View Notebook
+                            </a>
+                            <a href="#" class="research-btn">
+                                <i class="fas fa-download"></i> Dataset
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Automated Testing Patterns -->
+                <div class="research-card" data-type="academic" data-difficulty="intermediate" data-date="2024-09" data-search="Automated Testing Patterns AI-augmented test automation test generation maintenance execution optimization">
+                    <div class="research-type-tag academic">Academic</div>
+                    <div class="research-header">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Automated Testing Patterns</h3>
+                        <div class="card-meta-info">
+                            <span class="publication-date"><i class="far fa-calendar"></i> Sep 2024</span>
+                            <span class="difficulty-badge intermediate">Intermediate</span>
+                        </div>
+                    </div>
+                    <div class="research-content">
+                        <p>Analysis of emerging patterns in AI-augmented test automation, including test generation, maintenance, and execution optimization strategies.</p>
+                        
+                        <div class="research-meta">
+                            <span class="meta-tag">Automation</span>
+                            <span class="meta-tag">Testing</span>
+                            <span class="meta-tag">Patterns</span>
+                            <span class="meta-tag">AI-Augmented</span>
+                        </div>
+                        
+                        <div class="research-links">
+                            <a href="notebooks/automated-testing-patterns.html" class="research-btn notebook-btn">
+                                <i class="fas fa-book"></i> View Notebook
+                            </a>
+                            <a href="papers/automated-testing-patterns.html" class="research-btn">
+                                <i class="fas fa-external-link-alt"></i> Paper
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Evaluating AI Models for Testing -->
+                <div class="research-card" data-type="academic" data-difficulty="advanced" data-date="2024-11" data-search="Evaluating AI Models Testing benchmarking methodologies performance metrics ROI analysis production deployment">
+                    <div class="research-type-tag academic">Academic</div>
+                    <div class="research-header">
+                        <i class="fas fa-balance-scale"></i>
+                        <h3>Evaluating AI Models for Testing</h3>
+                        <div class="card-meta-info">
+                            <span class="publication-date"><i class="far fa-calendar"></i> Nov 2024</span>
+                            <span class="difficulty-badge advanced">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="research-content">
+                        <p>Comprehensive framework for evaluating AI models in software testing contexts, including benchmarking methodologies, performance metrics, ROI analysis, and production deployment strategies.</p>
+                        
+                        <div class="research-meta">
+                            <span class="meta-tag">Model Evaluation</span>
+                            <span class="meta-tag">Benchmarking</span>
+                            <span class="meta-tag">ROI Analysis</span>
+                            <span class="meta-tag">LLMs</span>
+                        </div>
+                        
+                        <div class="research-links">
+                            <a href="notebooks/model-evaluation-software-testing.html" class="research-btn notebook-btn">
+                                <i class="fas fa-book"></i> View Notebook
+                            </a>
+                            <a href="notebooks/model-evaluation-software-testing.ipynb" class="research-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multi-Agent Orchestration Framework -->
+                <div class="research-card" data-type="academic" data-difficulty="advanced" data-date="2024-10" data-search="Multi-Agent Orchestration Framework Manager-Worker Collaborative Swarm Sequential Pipeline ATAO framework bug detection cost reduction">
+                    <div class="research-type-tag academic">Academic</div>
+                    <div class="research-header">
+                        <i class="fas fa-project-diagram"></i>
+                        <h3>Multi-Agent Orchestration Framework</h3>
+                        <div class="card-meta-info">
+                            <span class="publication-date"><i class="far fa-calendar"></i> Oct 2024</span>
+                            <span class="difficulty-badge advanced">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="research-content">
+                        <p>Academic research comparing Manager-Worker, Collaborative Swarm, and Sequential Pipeline architectures for AI testing. Demonstrates 23-47% higher bug detection with 31% cost reduction. Includes ATAO framework for context-aware architecture selection.</p>
+                        
+                        <div class="research-meta">
+                            <span class="meta-tag">Multi-Agent Systems</span>
+                            <span class="meta-tag">Orchestration</span>
+                            <span class="meta-tag">Research</span>
+                            <span class="meta-tag">Architecture Patterns</span>
+                        </div>
+                        
+                        <div class="research-links">
+                            <a href="notebooks/multi-agent-orchestration-framework.html" class="research-btn notebook-btn">
+                                <i class="fas fa-book"></i> View Research
+                            </a>
+                            <a href="notebooks/multi-agent-orchestration-framework.ipynb" class="research-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- I, QA: Workforce Transformation -->
+                <div class="research-card" data-type="academic" data-difficulty="advanced" data-date="2024-08" data-search="I QA LLM-Driven Workforce Transformation Bass Diffusion Model Monte Carlo simulations task automation 2028 Adaptation Gap">
+                    <div class="research-type-tag academic">Academic</div>
+                    <div class="research-header">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>I, QA: LLM-Driven Workforce Transformation</h3>
+                        <div class="card-meta-info">
+                            <span class="publication-date"><i class="far fa-calendar"></i> Aug 2024</span>
+                            <span class="difficulty-badge advanced">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="research-content">
+                        <p>Quantitative analysis of QA transformation using Bass Diffusion Model and Monte Carlo simulations. Forecasts 70-85% task automation by 2028, identifies critical "Adaptation Gap", and analyzes three workforce scenarios. Includes statistical models for technology adoption vs reskilling, emerging role taxonomy, and strategic imperatives.</p>
+                        
+                        <div class="research-meta">
+                            <span class="meta-tag">Workforce Transformation</span>
+                            <span class="meta-tag">Technology Forecasting</span>
+                            <span class="meta-tag">Bass Diffusion</span>
+                            <span class="meta-tag">Monte Carlo</span>
+                            <span class="meta-tag">LLM Impact</span>
+                        </div>
+                        
+                        <div class="research-links">
+                            <a href="notebooks/llm-qa-workforce-transformation.html" class="research-btn notebook-btn">
+                                <i class="fas fa-book"></i> View Paper
+                            </a>
+                            <a href="notebooks/llm-qa-workforce-transformation.ipynb" class="research-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Databricks Testing Framework -->
+                <div class="research-card" data-type="academic" data-difficulty="advanced" data-date="2024-07" data-search="Databricks Lakehouse Testing Delta Lake test pipelines AI-powered test generation predictive analytics e-commerce case study">
+                    <div class="research-type-tag academic">Academic</div>
+                    <div class="research-header">
+                        <i class="fas fa-database"></i>
+                        <h3>Databricks Lakehouse for Testing</h3>
+                        <div class="card-meta-info">
+                            <span class="publication-date"><i class="far fa-calendar"></i> Jul 2024</span>
+                            <span class="difficulty-badge advanced">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="research-content">
+                        <p>Practical framework demonstrating Databricks' lakehouse architecture for intelligent QA. Includes working code for Delta Lake test pipelines, AI-powered test generation, predictive analytics, and e-commerce case study showing 64% execution time reduction and $1.2M annual savings.</p>
+                        
+                        <div class="research-meta">
+                            <span class="meta-tag">Databricks</span>
+                            <span class="meta-tag">Delta Lake</span>
+                            <span class="meta-tag">MLflow</span>
+                            <span class="meta-tag">Test Intelligence</span>
+                            <span class="meta-tag">Data Engineering</span>
+                        </div>
+                        
+                        <div class="research-links">
+                            <a href="notebooks/databricks-testing-framework.html" class="research-btn notebook-btn">
+                                <i class="fas fa-book"></i> View Paper
+                            </a>
+                            <a href="notebooks/databricks-testing-framework.ipynb" class="research-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AutoTriage Research Paper -->
+                <div class="research-card" data-type="academic" data-difficulty="advanced" data-date="2024-06" data-search="AutoTriage Research Paper AI-driven framework test automation triage Ensemble machine learning technical business operational dimensions ROI">
+                    <div class="research-type-tag academic">Academic</div>
+                    <div class="research-header">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>AutoTriage Research Paper</h3>
+                        <div class="card-meta-info">
+                            <span class="publication-date"><i class="far fa-calendar"></i> Jun 2024</span>
+                            <span class="difficulty-badge advanced">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="research-content">
+                        <p>Academic research paper presenting an AI-driven framework for test automation triage. Ensemble machine learning approach combining technical, business, and operational dimensions. Demonstrates 85% accuracy in predicting high-value automation candidates with 3.2x ROI improvement.</p>
+                        
+                        <div class="research-meta">
+                            <span class="meta-tag">Academic Research</span>
+                            <span class="meta-tag">Ensemble AI</span>
+                            <span class="meta-tag">Test Selection</span>
+                            <span class="meta-tag">Automation Strategy</span>
+                        </div>
+                        
+                        <div class="research-links">
+                            <a href="notebooks/autotriage-research-paper.html" class="research-btn notebook-btn">
+                                <i class="fas fa-book"></i> View Paper
+                            </a>
+                            <a href="notebooks/autotriage-research-paper.ipynb" class="research-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- MCP in Software Testing -->
-            <div class="research-card">
-                <div class="research-header">
-                    <i class="fas fa-network-wired"></i>
-                    <h3>MCP in Software Testing</h3>
-                </div>
-                <div class="research-content">
-                    <p>Exploring Model Context Protocol applications in software testing, examining how standardized AI-tool communication can revolutionize test automation and create context-aware testing frameworks.</p>
-                    
-                    <div class="research-meta">
-                        <span class="meta-tag">MCP</span>
-                        <span class="meta-tag">Context-Aware</span>
-                        <span class="meta-tag">AI Testing</span>
-                        <span class="meta-tag">Automation</span>
-                    </div>
-                    
-                    <div class="research-links">
-                        <a href="notebooks/mcp-software-testing.html" class="research-btn notebook-btn">
-                            <i class="fas fa-book"></i> View Notebook
-                        </a>
-                        <a href="notebooks/mcp-software-testing.ipynb" class="research-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
+        <!-- Case Studies Section -->
+        <div class="category-section">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <h2><i class="fas fa-chart-bar"></i> Case Studies & Analysis</h2>
+                <i class="fas fa-chevron-down"></i>
             </div>
+            <div class="category-content" data-category="case-study">
+                <!-- AI Agents for QA Healthcare -->
+                <div class="research-card" data-type="case-study" data-difficulty="intermediate" data-date="2024-11" data-search="Why Use AI Agents Testing healthcare case study QA professionals AI agentic flows autonomous testing intelligent test generation security scanning multi-agent orchestration 487% ROI">
+                    <div class="research-type-tag case-study">Case Study</div>
+                    <div class="research-header">
+                        <i class="fas fa-hospital-user"></i>
+                        <h3>Why Use AI Agents for Testing?</h3>
+                        <div class="card-meta-info">
+                            <span class="publication-date"><i class="far fa-calendar"></i> Nov 2024</span>
+                            <span class="difficulty-badge intermediate">Intermediate</span>
+                        </div>
+                    </div>
+                    <div class="research-content">
+                        <p>Practical healthcare case study answering why QA professionals should use AI agentic flows. Demonstrates autonomous testing, intelligent test generation, proactive security scanning, and multi-agent orchestration with 487% ROI.</p>
+                        
+                        <div class="research-meta">
+                            <span class="meta-tag">AI Agents</span>
+                            <span class="meta-tag">Healthcare</span>
+                            <span class="meta-tag">HIPAA</span>
+                            <span class="meta-tag">QA Automation</span>
+                        </div>
+                        
+                        <div class="research-links">
+                            <a href="notebooks/ai-agents-qa-healthcare.html" class="research-btn notebook-btn">
+                                <i class="fas fa-book"></i> View Notebook
+                            </a>
+                            <a href="notebooks/ai-agents-qa-healthcare.ipynb" class="research-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- Agentic Testing Integration -->
-            <div class="research-card">
-                <div class="research-header">
-                    <i class="fas fa-robot"></i>
-                    <h3>Agentic Testing Integration</h3>
-                </div>
-                <div class="research-content">
-                    <p>Investigating autonomous AI agents for software testing, from existing platform integration to specialized testing agent development and multi-agent orchestration systems.</p>
-                    
-                    <div class="research-meta">
-                        <span class="meta-tag">AI Agents</span>
-                        <span class="meta-tag">Autonomous Testing</span>
-                        <span class="meta-tag">Multi-Agent Systems</span>
-                        <span class="meta-tag">Quality Engineering</span>
+                <!-- AI Advancements Q4 2025 -->
+                <div class="research-card" data-type="case-study" data-difficulty="beginner" data-date="2025-01" data-search="AI Advancements Q4 2025 GPT-5.2 Gemini 3.0 Agentic AI Multimodal AI regulatory milestones quality engineering testing autonomous agent systems">
+                    <div class="research-type-tag case-study">Case Study</div>
+                    <div class="research-header">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>AI Advancements Q4 2025</h3>
+                        <div class="card-meta-info">
+                            <span class="publication-date"><i class="far fa-calendar"></i> Jan 2025</span>
+                            <span class="difficulty-badge beginner">Beginner</span>
+                        </div>
                     </div>
-                    
-                    <div class="research-links">
-                        <a href="notebooks/agentic-testing-integration.html" class="research-btn notebook-btn">
-                            <i class="fas fa-book"></i> View Notebook
-                        </a>
-                        <a href="notebooks/agentic-testing-integration.ipynb" class="research-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
+                    <div class="research-content">
+                        <p>Comprehensive analysis of major AI breakthroughs in October-December 2025 and their direct implications for quality engineering, testing, and autonomous agent systems. Covers GPT-5.2, Gemini 3.0, Agentic AI, Multimodal AI, and regulatory milestones.</p>
+                        
+                        <div class="research-meta">
+                            <span class="meta-tag">AI Trends</span>
+                            <span class="meta-tag">Quality Engineering</span>
+                            <span class="meta-tag">Autonomous Agents</span>
+                            <span class="meta-tag">Industry Analysis</span>
+                        </div>
+                        
+                        <div class="research-links">
+                            <a href="../docs/AI_ADVANCEMENTS_Q4_2025.html" class="research-btn notebook-btn">
+                                <i class="fas fa-book"></i> View Analysis
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- LLM Testing Methodologies -->
-            <div class="research-card">
-                <div class="research-header">
-                    <i class="fas fa-brain"></i>
-                    <h3>LLM Testing Methodologies</h3>
-                </div>
-                <div class="research-content">
-                    <p>Comprehensive analysis of testing approaches for Large Language Models, including hallucination detection, bias measurement, and safety validation frameworks.</p>
-                    
-                    <div class="research-meta">
-                        <span class="meta-tag">Machine Learning</span>
-                        <span class="meta-tag">Testing</span>
-                        <span class="meta-tag">LLMs</span>
-                        <span class="meta-tag">Safety</span>
+                <!-- AI System Testing Guide -->
+                <div class="research-card" data-type="practical" data-difficulty="beginner" data-date="2025-01" data-search="AI System Testing Gentle Introduction hallucinations bias safety human-centered approach testing AI systems">
+                    <div class="research-type-tag practical">Practical</div>
+                    <div class="research-header">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>AI System Testing: A Gentle Introduction</h3>
+                        <div class="card-meta-info">
+                            <span class="publication-date"><i class="far fa-calendar"></i> Jan 2025</span>
+                            <span class="difficulty-badge beginner">Beginner</span>
+                        </div>
                     </div>
-                    
-                    <div class="research-links">
-                        <a href="notebooks/llm-testing-analysis.html" class="research-btn notebook-btn">
-                            <i class="fas fa-book"></i> View Notebook
-                        </a>
-                        <a href="#" class="research-btn">
-                            <i class="fab fa-github"></i> Code
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sample Research Card 2 -->
-            <div class="research-card">
-                <div class="research-header">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>AI Safety Metrics</h3>
-                </div>
-                <div class="research-content">
-                    <p>Research into quantifiable metrics for AI safety, including prompt injection detection, output toxicity measurement, and model reliability scoring.</p>
-                    
-                    <div class="research-meta">
-                        <span class="meta-tag">AI Safety</span>
-                        <span class="meta-tag">Metrics</span>
-                        <span class="meta-tag">Evaluation</span>
-                        <span class="meta-tag">Security</span>
-                    </div>
-                    
-                    <div class="research-links">
-                        <a href="notebooks/ai-safety-metrics.html" class="research-btn notebook-btn">
-                            <i class="fas fa-book"></i> View Notebook
-                        </a>
-                        <a href="#" class="research-btn">
-                            <i class="fas fa-download"></i> Dataset
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sample Research Card 3 -->
-            <div class="research-card">
-                <div class="research-header">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Automated Testing Patterns</h3>
-                </div>
-                <div class="research-content">
-                    <p>Analysis of emerging patterns in AI-augmented test automation, including test generation, maintenance, and execution optimization strategies.</p>
-                    
-                    <div class="research-meta">
-                        <span class="meta-tag">Automation</span>
-                        <span class="meta-tag">Testing</span>
-                        <span class="meta-tag">Patterns</span>
-                        <span class="meta-tag">AI-Augmented</span>
-                    </div>
-                    
-                    <div class="research-links">
-                        <a href="notebooks/automated-testing-patterns.html" class="research-btn notebook-btn">
-                            <i class="fas fa-book"></i> View Notebook
-                        </a>
-                        <a href="papers/automated-testing-patterns.html" class="research-btn">
-                            <i class="fas fa-external-link-alt"></i> Paper
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Model Evaluation for Software Testing -->
-            <div class="research-card">
-                <div class="research-header">
-                    <i class="fas fa-balance-scale"></i>
-                    <h3>Evaluating AI Models for Testing</h3>
-                </div>
-                <div class="research-content">
-                    <p>Comprehensive framework for evaluating AI models in software testing contexts, including benchmarking methodologies, performance metrics, ROI analysis, and production deployment strategies.</p>
-                    
-                    <div class="research-meta">
-                        <span class="meta-tag">Model Evaluation</span>
-                        <span class="meta-tag">Benchmarking</span>
-                        <span class="meta-tag">ROI Analysis</span>
-                        <span class="meta-tag">LLMs</span>
-                    </div>
-                    
-                    <div class="research-links">
-                        <a href="notebooks/model-evaluation-software-testing.html" class="research-btn notebook-btn">
-                            <i class="fas fa-book"></i> View Notebook
-                        </a>
-                        <a href="notebooks/model-evaluation-software-testing.ipynb" class="research-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- AI Agents for QA Healthcare -->
-            <div class="research-card">
-                <div class="research-header">
-                    <i class="fas fa-hospital-user"></i>
-                    <h3>Why Use AI Agents for Testing?</h3>
-                </div>
-                <div class="research-content">
-                    <p>Practical healthcare case study answering why QA professionals should use AI agentic flows. Demonstrates autonomous testing, intelligent test generation, proactive security scanning, and multi-agent orchestration with 487% ROI.</p>
-                    
-                    <div class="research-meta">
-                        <span class="meta-tag">AI Agents</span>
-                        <span class="meta-tag">Healthcare</span>
-                        <span class="meta-tag">HIPAA</span>
-                        <span class="meta-tag">QA Automation</span>
-                    </div>
-                    
-                    <div class="research-links">
-                        <a href="notebooks/ai-agents-qa-healthcare.html" class="research-btn notebook-btn">
-                            <i class="fas fa-book"></i> View Notebook
-                        </a>
-                        <a href="notebooks/ai-agents-qa-healthcare.ipynb" class="research-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Multi-Agent Orchestration Framework -->
-            <div class="research-card">
-                <div class="research-header">
-                    <i class="fas fa-project-diagram"></i>
-                    <h3>Multi-Agent Orchestration Framework</h3>
-                </div>
-                <div class="research-content">
-                    <p>Academic research comparing Manager-Worker, Collaborative Swarm, and Sequential Pipeline architectures for AI testing. Demonstrates 23-47% higher bug detection with 31% cost reduction. Includes ATAO framework for context-aware architecture selection.</p>
-                    
-                    <div class="research-meta">
-                        <span class="meta-tag">Multi-Agent Systems</span>
-                        <span class="meta-tag">Orchestration</span>
-                        <span class="meta-tag">Research</span>
-                        <span class="meta-tag">Architecture Patterns</span>
-                    </div>
-                    
-                    <div class="research-links">
-                        <a href="notebooks/multi-agent-orchestration-framework.html" class="research-btn notebook-btn">
-                            <i class="fas fa-book"></i> View Research
-                        </a>
-                        <a href="notebooks/multi-agent-orchestration-framework.ipynb" class="research-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CI/CD Test Optimization -->
-            <div class="research-card">
-                <div class="research-header">
-                    <i class="fas fa-rocket"></i>
-                    <h3>CI/CD Test Optimization Tool</h3>
-                </div>
-                <div class="research-content">
-                    <p>Production-ready Monte Carlo framework that ingests test history and code changes, runs 10,000 simulations, and outputs an optimized test suite for CI/CD pipelines. Exports in pytest, GitHub Actions, and JSON formats.</p>
-                    
-                    <div class="research-meta">
-                        <span class="meta-tag">CI/CD</span>
-                        <span class="meta-tag">Monte Carlo</span>
-                        <span class="meta-tag">Test Optimization</span>
-                        <span class="meta-tag">DevOps</span>
-                    </div>
-                    
-                    <div class="research-links">
-                        <a href="notebooks/ci-test-optimization-monte-carlo.html" class="research-btn notebook-btn">
-                            <i class="fas fa-book"></i> View Tool
-                        </a>
-                        <a href="notebooks/ci-test-optimization-monte-carlo.ipynb" class="research-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- I, QA: Workforce Transformation -->
-            <div class="research-card">
-                <div class="research-header">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>I, QA: LLM-Driven Workforce Transformation</h3>
-                </div>
-                <div class="research-content">
-                    <p>Quantitative analysis of QA transformation using Bass Diffusion Model and Monte Carlo simulations. Forecasts 70-85% task automation by 2028, identifies critical "Adaptation Gap", and analyzes three workforce scenarios. Includes statistical models for technology adoption vs reskilling, emerging role taxonomy, and strategic imperatives.</p>
-                    
-                    <div class="research-meta">
-                        <span class="meta-tag">Workforce Transformation</span>
-                        <span class="meta-tag">Technology Forecasting</span>
-                        <span class="meta-tag">Bass Diffusion</span>
-                        <span class="meta-tag">Monte Carlo</span>
-                        <span class="meta-tag">LLM Impact</span>
-                    </div>
-                    
-                    <div class="research-links">
-                        <a href="notebooks/llm-qa-workforce-transformation.html" class="research-btn notebook-btn">
-                            <i class="fas fa-book"></i> View Paper
-                        </a>
-                        <a href="notebooks/llm-qa-workforce-transformation.ipynb" class="research-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Databricks Testing Framework -->
-            <div class="research-card">
-                <div class="research-header">
-                    <i class="fas fa-database"></i>
-                    <h3>Databricks Lakehouse for Testing</h3>
-                </div>
-                <div class="research-content">
-                    <p>Practical framework demonstrating Databricks' lakehouse architecture for intelligent QA. Includes working code for Delta Lake test pipelines, AI-powered test generation, predictive analytics, and e-commerce case study showing 64% execution time reduction and $1.2M annual savings.</p>
-                    
-                    <div class="research-meta">
-                        <span class="meta-tag">Databricks</span>
-                        <span class="meta-tag">Delta Lake</span>
-                        <span class="meta-tag">MLflow</span>
-                        <span class="meta-tag">Test Intelligence</span>
-                        <span class="meta-tag">Data Engineering</span>
-                    </div>
-                    
-                    <div class="research-links">
-                        <a href="notebooks/databricks-testing-framework.html" class="research-btn notebook-btn">
-                            <i class="fas fa-book"></i> View Paper
-                        </a>
-                        <a href="notebooks/databricks-testing-framework.ipynb" class="research-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- AutoTriage Research Paper -->
-            <div class="research-card">
-                <div class="research-header">
-                    <i class="fas fa-graduation-cap"></i>
-                    <h3>AutoTriage Research Paper</h3>
-                </div>
-                <div class="research-content">
-                    <p>Academic research paper presenting an AI-driven framework for test automation triage. Ensemble machine learning approach combining technical, business, and operational dimensions. Demonstrates 85% accuracy in predicting high-value automation candidates with 3.2x ROI improvement.</p>
-                    
-                    <div class="research-meta">
-                        <span class="meta-tag">Academic Research</span>
-                        <span class="meta-tag">Ensemble AI</span>
-                        <span class="meta-tag">Test Selection</span>
-                        <span class="meta-tag">Automation Strategy</span>
-                    </div>
-                    
-                    <div class="research-links">
-                        <a href="notebooks/autotriage-research-paper.html" class="research-btn notebook-btn">
-                            <i class="fas fa-book"></i> View Paper
-                        </a>
-                        <a href="notebooks/autotriage-research-paper.ipynb" class="research-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- AutoTriage Manual Test Assessment -->
-            <div class="research-card">
-                <div class="research-header">
-                    <i class="fas fa-balance-scale-right"></i>
-                    <h3>AutoTriage: Manual Test Assessment Tool</h3>
-                </div>
-                <div class="research-content">
-                    <p>Professional framework for assessing manual regression tests and calculating business value. Analyzes technical feasibility, business impact, and ROI to generate 4-tier automation priorities. Solves the critical challenge of manual test evaluation.</p>
-                    
-                    <div class="research-meta">
-                        <span class="meta-tag">Manual Testing</span>
-                        <span class="meta-tag">Business Value</span>
-                        <span class="meta-tag">ROI Analysis</span>
-                        <span class="meta-tag">Test Triage</span>
-                    </div>
-                    
-                    <div class="research-links">
-                        <a href="notebooks/autotriage-manual-test-assessment.html" class="research-btn notebook-btn">
-                            <i class="fas fa-book"></i> View Tool
-                        </a>
-                        <a href="notebooks/autotriage-manual-test-assessment.ipynb" class="research-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- AI Advancements Q4 2025 -->
-            <div class="research-card">
-                <div class="research-header">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>AI Advancements Q4 2025</h3>
-                </div>
-                <div class="research-content">
-                    <p>Comprehensive analysis of major AI breakthroughs in October-December 2025 and their direct implications for quality engineering, testing, and autonomous agent systems. Covers GPT-5.2, Gemini 3.0, Agentic AI, Multimodal AI, and regulatory milestones.</p>
-                    
-                    <div class="research-meta">
-                        <span class="meta-tag">AI Trends</span>
-                        <span class="meta-tag">Quality Engineering</span>
-                        <span class="meta-tag">Autonomous Agents</span>
-                        <span class="meta-tag">Industry Analysis</span>
-                    </div>
-                    
-                    <div class="research-links">
-                        <a href="../docs/AI_ADVANCEMENTS_Q4_2025.html" class="research-btn notebook-btn">
-                            <i class="fas fa-book"></i> View Analysis
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- AI System Testing Guide -->
-            <div class="research-card">
-                <div class="research-header">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>AI System Testing: A Gentle Introduction</h3>
-                </div>
-                <div class="research-content">
-                    <p>A human-centered approach to understanding and testing AI systems, exploring hallucinations, bias, and safety considerations through gentle observation and compassionate inquiry. Learn to listen differently and notice when confidence outpaces accuracy.</p>
-                    
-                    <div class="research-meta">
-                        <span class="meta-tag">AI Testing</span>
-                        <span class="meta-tag">Hallucinations</span>
-                        <span class="meta-tag">Bias Detection</span>
-                        <span class="meta-tag">AI Safety</span>
-                    </div>
-                    
-                    <div class="research-links">
-                        <a href="../docs/AI_SYSTEM_TESTING_GUIDE.html" class="research-btn notebook-btn">
-                            <i class="fas fa-book"></i> View Guide
-                        </a>
+                    <div class="research-content">
+                        <p>A human-centered approach to understanding and testing AI systems, exploring hallucinations, bias, and safety considerations through gentle observation and compassionate inquiry. Learn to listen differently and notice when confidence outpaces accuracy.</p>
+                        
+                        <div class="research-meta">
+                            <span class="meta-tag">AI Testing</span>
+                            <span class="meta-tag">Hallucinations</span>
+                            <span class="meta-tag">Bias Detection</span>
+                            <span class="meta-tag">AI Safety</span>
+                        </div>
+                        
+                        <div class="research-links">
+                            <a href="../docs/AI_SYSTEM_TESTING_GUIDE.html" class="research-btn notebook-btn">
+                                <i class="fas fa-book"></i> View Guide
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -696,5 +1102,93 @@
             <p>I'm actively working on new research in AI testing, model validation, and safety frameworks. Check back regularly for updates, or follow my work on GitHub.</p>
         </div>
     </main>
+
+    <script>
+        // Category Toggle
+        function toggleCategory(header) {
+            const content = header.nextElementSibling;
+            header.classList.toggle('collapsed');
+            content.classList.toggle('collapsed');
+        }
+
+        // Filter and Search Functionality
+        const searchInput = document.getElementById('searchInput');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const difficultyButtons = document.querySelectorAll('.difficulty-btn');
+        const researchCards = document.querySelectorAll('.research-card');
+        const resultsCount = document.getElementById('resultsCount');
+
+        let currentFilter = 'all';
+        let currentDifficulty = 'all';
+        let currentSearch = '';
+
+        function filterCards() {
+            let visibleCount = 0;
+
+            researchCards.forEach(card => {
+                const cardType = card.getAttribute('data-type');
+                const cardDifficulty = card.getAttribute('data-difficulty');
+                const searchText = card.getAttribute('data-search').toLowerCase();
+                const cardTitle = card.querySelector('h3').textContent.toLowerCase();
+                const cardDescription = card.querySelector('.research-content p').textContent.toLowerCase();
+
+                const matchesType = currentFilter === 'all' || cardType === currentFilter;
+                const matchesDifficulty = currentDifficulty === 'all' || cardDifficulty === currentDifficulty;
+                const matchesSearch = currentSearch === '' || 
+                    searchText.includes(currentSearch.toLowerCase()) ||
+                    cardTitle.includes(currentSearch.toLowerCase()) ||
+                    cardDescription.includes(currentSearch.toLowerCase());
+
+                if (matchesType && matchesDifficulty && matchesSearch) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            // Update results count
+            resultsCount.textContent = `Showing ${visibleCount} of ${researchCards.length} research projects`;
+
+            // Hide empty category sections
+            document.querySelectorAll('.category-content').forEach(category => {
+                const visibleCards = category.querySelectorAll('.research-card:not(.hidden)');
+                if (visibleCards.length === 0) {
+                    category.style.display = 'none';
+                } else {
+                    category.style.display = 'grid';
+                }
+            });
+        }
+
+        // Filter button handlers
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.getAttribute('data-filter');
+                filterCards();
+            });
+        });
+
+        // Difficulty button handlers
+        difficultyButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                difficultyButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentDifficulty = btn.getAttribute('data-difficulty');
+                filterCards();
+            });
+        });
+
+        // Search input handler
+        searchInput.addEventListener('input', (e) => {
+            currentSearch = e.target.value;
+            filterCards();
+        });
+
+        // Initial filter
+        filterCards();
+    </script>
 </body>
 </html>
