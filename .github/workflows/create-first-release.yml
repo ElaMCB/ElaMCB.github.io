@@ -26,7 +26,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: autotriage-v1.0.0
-          name: AutoTriage: Manual Test Assessment Tool - v1.0.0
+          name: 'AutoTriage: Manual Test Assessment Tool - v1.0.0'
           body: |
             ## AutoTriage: Manual Test Assessment Tool
 
