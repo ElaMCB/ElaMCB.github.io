@@ -684,7 +684,7 @@
             </div>
             <div class="category-content" data-category="practical">
                 <!-- AI Innovations Discovery -->
-                <div class="research-card" data-type="tool" data-difficulty="beginner" data-date="2025-12" data-search="AI Innovations QA Testing automated discovery GitHub Hacker News" data-downloads="89">
+                <div class="research-card" data-type="tool" data-difficulty="beginner" data-date="2025-12" data-search="AI Innovations QA Testing automated discovery GitHub Hacker News">
                     <div class="research-type-tag tool">Tool</div>
                     <div class="research-header">
                         <i class="fas fa-flask"></i>
@@ -716,7 +716,7 @@
                 </div>
 
                 <!-- RAG Testing Applications -->
-                <div class="research-card" data-type="practical" data-difficulty="intermediate" data-date="2025-12" data-search="RAG Retrieval Augmented Generation software testing test case generation coverage analysis" data-downloads="234" data-reading-time="25">
+                <div class="research-card" data-type="practical" data-difficulty="intermediate" data-date="2025-12" data-search="RAG Retrieval Augmented Generation software testing test case generation coverage analysis" data-reading-time="25">
                     <div class="research-type-tag practical">Practical</div>
                     <div class="research-header">
                         <i class="fas fa-database"></i>
@@ -1425,8 +1425,40 @@
         }
 
         // Add metrics to cards that don't have them
+        // Match research card to GitHub release by name
+        function matchCardToRelease(card, releases) {
+            const cardTitle = card.querySelector('h3')?.textContent?.toLowerCase() || '';
+            
+            // Try to match by release name or tag
+            for (const release of releases) {
+                const releaseName = release.name.toLowerCase();
+                const releaseTag = release.tag_name.toLowerCase();
+                
+                // Match by title keywords (e.g., "AutoTriage" matches "autotriage-v1.0.0")
+                const titleWords = cardTitle.split(/\s+/).filter(w => w.length > 3);
+                for (const word of titleWords) {
+                    if (releaseName.includes(word) || releaseTag.includes(word)) {
+                        return release;
+                    }
+                }
+                
+                // Direct match for common patterns
+                if (cardTitle.includes('autotriage') && (releaseTag.includes('autotriage') || releaseName.includes('autotriage'))) {
+                    return release;
+                }
+                if (cardTitle.includes('rag') && (releaseTag.includes('rag') || releaseName.includes('rag'))) {
+                    return release;
+                }
+                if (cardTitle.includes('ci/cd') && (releaseTag.includes('ci') || releaseName.includes('ci'))) {
+                    return release;
+                }
+            }
+            
+            return null;
+        }
+
         async function addMetrics() {
-            // Fetch view counts for all cards in parallel
+            // Fetch view counts and releases in parallel
             const viewCountPromises = Array.from(researchCards).map(async (card) => {
                 const pagePath = getResearchPagePath(card);
                 if (!pagePath) return { card, views: 0 };
@@ -1434,6 +1466,8 @@
                 const views = await fetchViewCountFromGoatCounter(pagePath);
                 return { card, views };
             });
+            
+            const releases = await fetchGitHubReleases();
             
             const viewCounts = await Promise.all(viewCountPromises);
             const viewCountMap = new Map();
@@ -1455,7 +1489,13 @@
                         views = parseInt(views) || 0;
                     }
                     
-                    const downloads = card.getAttribute('data-downloads');
+                    // Get downloads from GitHub Releases (real data only)
+                    let downloads = 0;
+                    const matchedRelease = matchCardToRelease(card, releases);
+                    if (matchedRelease && matchedRelease.assets) {
+                        downloads = matchedRelease.assets.reduce((sum, asset) => sum + (asset.download_count || 0), 0);
+                    }
+                    
                     const readingTime = card.getAttribute('data-reading-time');
                     
                     const metricsDiv = document.createElement('div');
@@ -1467,8 +1507,8 @@
                     viewsItem.innerHTML = `<i class="fas fa-eye"></i><span class="view-count">${formatNumber(views)}</span>`;
                     metricsDiv.appendChild(viewsItem);
                     
-                    // Add downloads if available
-                    if (downloads) {
+                    // Add downloads only if there's a release with actual downloads
+                    if (downloads > 0) {
                         const downloadsItem = document.createElement('div');
                         downloadsItem.className = 'metric-item';
                         downloadsItem.innerHTML = `<i class="fas fa-download"></i><span class="download-count">${formatNumber(downloads)}</span>`;
