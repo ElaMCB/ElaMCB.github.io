@@ -756,6 +756,9 @@
                 <a href="../index.html"><i class="fas fa-home"></i> Home</a>
                 <a href="../README.md"><i class="fab fa-github"></i> GitHub</a>
                 <a href="AUTONOMOUS_CI_AGENT_GUIDE.html"><i class="fas fa-cog"></i> CI Agent</a>
+                <span class="view-count-badge" id="viewCountBadge" style="display: none;">
+                    <i class="fas fa-eye"></i> <span id="viewCount">0</span> views
+                </span>
                 <button class="mobile-menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
             </div>
         </div>
@@ -2033,6 +2036,26 @@ if __name__ == "__main__":
 
         // Initialize code highlighting
         hljs.highlightAll();
+        
+        // Display view count
+        (function() {
+            try {
+                const pagePath = window.location.pathname;
+                const key = 'view_count_' + pagePath;
+                const stored = localStorage.getItem(key);
+                const count = stored ? parseInt(stored) : 0;
+                
+                const badge = document.getElementById('viewCountBadge');
+                const countSpan = document.getElementById('viewCount');
+                
+                if (badge && countSpan && count > 0) {
+                    countSpan.textContent = count.toLocaleString();
+                    badge.style.display = 'inline-flex';
+                }
+            } catch (e) {
+                // localStorage not available
+            }
+        })();
     </script>
 </body>
 </html>
