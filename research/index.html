@@ -1468,10 +1468,10 @@
         }
 
         // Filter and Search Functionality
+        let researchCards = [];
         const searchInput = document.getElementById('searchInput');
         const filterButtons = document.querySelectorAll('.filter-btn');
         const difficultyButtons = document.querySelectorAll('.difficulty-btn');
-        const researchCards = document.querySelectorAll('.research-card');
         const resultsCount = document.getElementById('resultsCount');
 
         let currentFilter = 'all';
@@ -1546,12 +1546,8 @@
         // Initial filter
         filterCards();
 
-        // Add "New" badge only to the most recent research
-        function addNewBadges() {
-            // First, remove all existing "New" badges
-            document.querySelectorAll('.new-badge').forEach(badge => badge.remove());
-            
-            // Find the most recent date from all research cards
+        // Find the most recent research card
+        function findLatestResearch() {
             let latestDate = null;
             let latestCard = null;
             
@@ -1569,6 +1565,16 @@
                 }
             });
             
+            return latestCard;
+        }
+
+        // Add "New" badge only to the most recent research
+        function addNewBadges() {
+            // First, remove all existing "New" badges
+            document.querySelectorAll('.new-badge').forEach(badge => badge.remove());
+            
+            const latestCard = findLatestResearch();
+            
             // Add "New" badge only to the most recent research
             if (latestCard) {
                 const badge = document.createElement('div');
@@ -1577,6 +1583,74 @@
                 latestCard.style.position = 'relative';
                 latestCard.appendChild(badge);
             }
+        }
+
+        // Populate featured section with latest research
+        function populateFeaturedSection() {
+            const featuredSection = document.getElementById('featuredSection');
+            const featuredCard = document.getElementById('featuredCard');
+            const latestCard = findLatestResearch();
+            
+            if (!latestCard || !featuredSection || !featuredCard) return;
+            
+            // Get card data
+            const title = latestCard.querySelector('h3')?.textContent || '';
+            const description = latestCard.querySelector('.research-content p')?.textContent || '';
+            const date = latestCard.getAttribute('data-date');
+            const difficulty = latestCard.getAttribute('data-difficulty');
+            const type = latestCard.getAttribute('data-type');
+            const link = latestCard.querySelector('.research-links a[href]');
+            const href = link?.getAttribute('href') || '#';
+            const linkText = link?.textContent.trim() || 'View Research';
+            
+            // Format date
+            let formattedDate = '';
+            if (date) {
+                const [year, month] = date.split('-');
+                const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                formattedDate = `${monthNames[parseInt(month) - 1]} ${year}`;
+            }
+            
+            // Get type tag
+            const typeTag = latestCard.querySelector('.research-type-tag')?.textContent || type;
+            
+            // Get meta tags
+            const metaTags = Array.from(latestCard.querySelectorAll('.meta-tag')).map(tag => tag.textContent);
+            
+            // Build featured card HTML
+            featuredCard.innerHTML = `
+                <div class="featured-card-header">
+                    <div class="featured-card-title">
+                        <h3>${title}</h3>
+                        <div class="featured-card-meta">
+                            <span class="featured-badge">
+                                <i class="fas fa-sparkles"></i> New
+                            </span>
+                            <span class="publication-date">
+                                <i class="far fa-calendar"></i> ${formattedDate}
+                            </span>
+                            <span class="difficulty-badge ${difficulty}">${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}</span>
+                            <span class="research-type-tag ${type}" style="position: relative; top: 0; right: 0;">${typeTag}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="featured-card-content">
+                    <p>${description}</p>
+                    ${metaTags.length > 0 ? `
+                        <div class="research-meta" style="margin-top: 1rem;">
+                            ${metaTags.map(tag => `<span class="meta-tag">${tag}</span>`).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+                <div class="featured-card-links">
+                    <a href="${href}" class="research-btn notebook-btn" style="font-size: 1.1rem; padding: 1rem 2rem;">
+                        <i class="fas fa-book"></i> ${linkText}
+                    </a>
+                </div>
+            `;
+            
+            // Show featured section
+            featuredSection.style.display = 'block';
         }
 
         // Track page views in localStorage as fallback
@@ -1933,8 +2007,19 @@
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
+            // Initialize researchCards after DOM is loaded
+            researchCards = document.querySelectorAll('.research-card');
+            
+            // Ensure researchCards is available
+            if (researchCards.length === 0) {
+                console.warn('No research cards found');
+                return;
+            }
+            
+            // Add badges and featured section first
             addNewBadges();
             populateFeaturedSection();
+            
             // Wait for GoatCounter to load before fetching counts
             var checkGoatCounter = setInterval(function() {
                 if (window.goatcounter) {
