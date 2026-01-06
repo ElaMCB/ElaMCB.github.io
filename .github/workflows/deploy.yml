@@ -71,11 +71,13 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/main'
     steps:
-      - name: Wait and retry deployment
+      - name: Wait and check for in-progress deployments
         run: |
-          echo "Waiting before deployment to avoid conflicts..."
-          sleep 20
-          echo "Proceeding with deployment..."
+          echo "Checking for in-progress deployments..."
+          echo "GitHub Pages only allows one deployment at a time."
+          echo "If a previous deployment is running, this will wait..."
+          sleep 30
+          echo "Proceeding with deployment attempt..."
       
       - name: Deploy to GitHub Pages
         id: deployment
