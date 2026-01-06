@@ -183,12 +183,16 @@
             background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 50%, #2a2a2a 100%);
             padding: 1.5rem;
             position: relative;
+            padding-right: 8rem; /* Add padding to prevent badge overlap */
         }
         
         .innovation-title {
             font-size: 1.3rem;
             margin-bottom: 0.5rem;
             color: var(--light);
+            padding-right: 0.5rem; /* Extra padding for long titles */
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         
         .innovation-meta {
@@ -213,13 +217,19 @@
             position: absolute;
             top: 1rem;
             right: 1rem;
-            background: var(--gold);
-            color: var(--dark);
+            background: rgba(251, 191, 36, 0.3); /* See-through yellow */
+            color: var(--gold);
             padding: 0.3rem 0.8rem;
             border-radius: 15px;
             font-size: 0.75rem;
             font-weight: bold;
             text-transform: uppercase;
+            border: 1px solid rgba(251, 191, 36, 0.5); /* Subtle border for visibility */
+            backdrop-filter: blur(5px);
+            max-width: 40%; /* Prevent very long tags */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .innovation-content {
