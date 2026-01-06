@@ -1543,9 +1543,6 @@
             filterCards();
         });
 
-        // Initial filter
-        filterCards();
-
         // Find the most recent research card
         function findLatestResearch() {
             let latestDate = null;
@@ -2015,6 +2012,9 @@
                 console.warn('No research cards found');
                 return;
             }
+            
+            // Run initial filter to show correct count
+            filterCards();
             
             // Add badges and featured section first
             addNewBadges();
