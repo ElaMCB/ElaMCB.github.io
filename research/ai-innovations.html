@@ -293,6 +293,79 @@
             opacity: 0.5;
         }
         
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .pagination-info {
+            color: var(--light);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .pagination-controls {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        
+        .pagination-btn {
+            background: rgba(120, 58, 237, 0.3);
+            color: var(--light);
+            border: 1px solid rgba(120, 58, 237, 0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            min-width: 40px;
+            text-align: center;
+        }
+        
+        .pagination-btn:hover:not(:disabled) {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .pagination-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        
+        .pagination-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        
+        .items-per-page {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--light);
+            font-size: 0.9rem;
+        }
+        
+        .items-per-page select {
+            background: rgba(120, 58, 237, 0.3);
+            color: var(--light);
+            border: 1px solid rgba(120, 58, 237, 0.5);
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .items-per-page select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
         @media (max-width: 768px) {
             .innovations-grid {
                 grid-template-columns: 1fr;
@@ -372,12 +445,28 @@
                 <p>Loading AI innovations...</p>
             </div>
         </div>
+
+        <div class="pagination-container" id="paginationContainer" style="display: none;">
+            <div class="pagination-info" id="paginationInfo"></div>
+            <div class="pagination-controls" id="paginationControls"></div>
+            <div class="items-per-page">
+                <label for="itemsPerPage">Items per page:</label>
+                <select id="itemsPerPage">
+                    <option value="12">12</option>
+                    <option value="24" selected>24</option>
+                    <option value="48">48</option>
+                    <option value="96">96</option>
+                </select>
+            </div>
+        </div>
     </main>
 
     <script>
         let allInnovations = [];
         let filteredInnovations = [];
         let currentFilter = 'all';
+        let currentPage = 1;
+        let itemsPerPage = 24;
 
         // Category display names
         const categoryNames = {
@@ -521,6 +610,7 @@
 
         function filterByCategory(category) {
             currentFilter = category;
+            currentPage = 1; // Reset to first page when filtering
             
             // Update active button
             document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -540,6 +630,7 @@
 
         function displayInnovations() {
             const grid = document.getElementById('innovationsGrid');
+            const paginationContainer = document.getElementById('paginationContainer');
             
             if (filteredInnovations.length === 0) {
                 grid.innerHTML = `
@@ -548,10 +639,20 @@
                         <p>No innovations found in this category.</p>
                     </div>
                 `;
+                paginationContainer.style.display = 'none';
                 return;
             }
             
-            grid.innerHTML = filteredInnovations.map(innovation => {
+            // Calculate pagination
+            const totalPages = Math.ceil(filteredInnovations.length / itemsPerPage);
+            currentPage = Math.min(currentPage, totalPages) || 1;
+            
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageInnovations = filteredInnovations.slice(startIndex, endIndex);
+            
+            // Display current page items
+            grid.innerHTML = pageInnovations.map(innovation => {
                 const category = innovation.category || 'general';
                 const categoryDisplay = categoryNames[category] || category;
                 const qaApp = qaApplications[category] || qaApplications['general'];
@@ -586,6 +687,85 @@
                     </div>
                 `;
             }).join('');
+            
+            // Update pagination controls
+            updatePagination(totalPages, startIndex + 1, Math.min(endIndex, filteredInnovations.length), filteredInnovations.length);
+        }
+        
+        function updatePagination(totalPages, startItem, endItem, totalItems) {
+            const paginationContainer = document.getElementById('paginationContainer');
+            const paginationInfo = document.getElementById('paginationInfo');
+            const paginationControls = document.getElementById('paginationControls');
+            
+            if (totalPages <= 1) {
+                paginationContainer.style.display = 'none';
+                return;
+            }
+            
+            paginationContainer.style.display = 'flex';
+            
+            // Update info
+            paginationInfo.textContent = `Showing ${startItem}-${endItem} of ${totalItems} innovations`;
+            
+            // Build pagination controls
+            let controlsHTML = '';
+            
+            // Previous button
+            controlsHTML += `
+                <button class="pagination-btn" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            `;
+            
+            // Page numbers (show max 7 pages)
+            const maxVisiblePages = 7;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            
+            if (endPage - startPage < maxVisiblePages - 1) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+            
+            if (startPage > 1) {
+                controlsHTML += `<button class="pagination-btn" onclick="goToPage(1)">1</button>`;
+                if (startPage > 2) {
+                    controlsHTML += `<span class="pagination-btn" style="cursor: default; border: none;">...</span>`;
+                }
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                controlsHTML += `
+                    <button class="pagination-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">
+                        ${i}
+                    </button>
+                `;
+            }
+            
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    controlsHTML += `<span class="pagination-btn" style="cursor: default; border: none;">...</span>`;
+                }
+                controlsHTML += `<button class="pagination-btn" onclick="goToPage(${totalPages})">${totalPages}</button>`;
+            }
+            
+            // Next button
+            controlsHTML += `
+                <button class="pagination-btn" onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            `;
+            
+            paginationControls.innerHTML = controlsHTML;
+        }
+        
+        function goToPage(page) {
+            const totalPages = Math.ceil(filteredInnovations.length / itemsPerPage);
+            if (page >= 1 && page <= totalPages) {
+                currentPage = page;
+                displayInnovations();
+                // Scroll to top of grid
+                document.getElementById('innovationsGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
         function showEmptyState(message) {
@@ -607,6 +787,13 @@
             return div.innerHTML;
         }
 
+        // Items per page change handler
+        document.getElementById('itemsPerPage').addEventListener('change', (e) => {
+            itemsPerPage = parseInt(e.target.value);
+            currentPage = 1; // Reset to first page
+            displayInnovations();
+        });
+        
         // Load innovations on page load
         loadInnovations();
     </script>
