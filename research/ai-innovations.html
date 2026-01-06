@@ -397,42 +397,22 @@
 
         async function loadInnovations() {
             try {
-                // Find the most recent discovery file
-                const response = await fetch('../research/discoveries/');
-                if (!response.ok) {
-                    // Try to find the latest file manually
-                    const files = await getLatestDiscoveryFile();
-                    if (!files || files.length === 0) {
-                        showEmptyState('No discoveries found. Check back after the next weekly scan!');
-                        return;
-                    }
-                    
-                    // Load the most recent JSON file
-                    const latestFile = files[files.length - 1];
-                    const data = await fetch(`discoveries/${latestFile}`);
-                    const json = await data.json();
-                    allInnovations = Array.isArray(json) ? json : json.discoveries || [];
-                } else {
-                    // If we can list directory, find latest file
-                    const text = await response.text();
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(text, 'text/html');
-                    const links = Array.from(doc.querySelectorAll('a'))
-                        .map(a => a.href)
-                        .filter(href => href.includes('innovations-') && href.includes('-simple.json'))
-                        .sort()
-                        .reverse();
-                    
-                    if (links.length > 0) {
-                        const latestFile = links[0].split('/').pop();
-                        const data = await fetch(`discoveries/${latestFile}`);
-                        const json = await data.json();
-                        allInnovations = Array.isArray(json) ? json : json.discoveries || [];
-                    } else {
-                        showEmptyState('No discovery files found. The weekly scan will create them automatically.');
-                        return;
-                    }
+                // Try to find the latest file manually
+                const latestFile = await getLatestDiscoveryFile();
+                if (!latestFile) {
+                    showEmptyState('No discoveries found. Check back after the next weekly scan!');
+                    return;
                 }
+                
+                // Load the most recent JSON file
+                const data = await fetch(`discoveries/${latestFile}`);
+                if (!data.ok) {
+                    showEmptyState('Error loading discovery file. Please try again later.');
+                    return;
+                }
+                
+                const json = await data.json();
+                allInnovations = Array.isArray(json) ? json : json.discoveries || [];
 
                 if (allInnovations.length === 0) {
                     showEmptyState('No innovations found yet. Check back after the next weekly scan!');
@@ -456,30 +436,41 @@
 
         async function getLatestDiscoveryFile() {
             // Since we can't easily list directory in browser, try common patterns
+            // Try a wider date range - last 3 months (90 days)
             const today = new Date();
             const dates = [];
             
-            // Try last 4 weeks
-            for (let i = 0; i < 28; i++) {
+            // Generate dates for the last 90 days
+            for (let i = 0; i < 90; i++) {
                 const date = new Date(today);
                 date.setDate(date.getDate() - i);
                 const dateStr = date.toISOString().split('T')[0];
                 dates.push(`innovations-${dateStr}-simple.json`);
             }
             
-            // Try loading them
+            // Also try known dates from existing files (Oct 30, Nov 3, 2025)
+            const knownDates = [
+                '2025-11-03',
+                '2025-10-30'
+            ];
+            
+            for (const dateStr of knownDates) {
+                dates.unshift(`innovations-${dateStr}-simple.json`);
+            }
+            
+            // Try loading them (most recent first)
             for (const file of dates) {
                 try {
                     const response = await fetch(`discoveries/${file}`);
                     if (response.ok) {
-                        return [file];
+                        return file;
                     }
                 } catch (e) {
                     // Continue
                 }
             }
             
-            return [];
+            return null;
         }
 
         function updateStats() {
