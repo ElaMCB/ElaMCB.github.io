@@ -216,6 +216,155 @@
             font-size: 0.9rem;
         }
 
+        /* Featured Section */
+        .featured-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(0, 212, 255, 0.2));
+            border: 2px solid var(--accent);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(124, 58, 237, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .featured-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .featured-header h2 {
+            font-size: 1.8rem;
+            color: var(--light);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .featured-header i {
+            color: var(--neon-green);
+            font-size: 2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .featured-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .featured-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(124, 58, 237, 0.4);
+            border-color: var(--neon-blue);
+        }
+
+        .featured-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+
+        .featured-card-title {
+            flex: 1;
+        }
+
+        .featured-card-title h3 {
+            font-size: 1.8rem;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .featured-card-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .featured-card-content {
+            margin-bottom: 1.5rem;
+        }
+
+        .featured-card-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .featured-card-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .featured-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @media (max-width: 768px) {
+            .featured-section {
+                padding: 1.5rem;
+                margin: 2rem 0;
+            }
+
+            .featured-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .featured-card-title h3 {
+                font-size: 1.4rem;
+            }
+
+            .featured-card {
+                padding: 1.5rem;
+            }
+        }
+
         /* Collapsible Sections */
         .category-section {
             margin-bottom: 2rem;
@@ -674,6 +823,17 @@
             </div>
 
             <div class="results-count" id="resultsCount"></div>
+        </div>
+
+        <!-- Featured Research Section -->
+        <div class="featured-section" id="featuredSection" style="display: none;">
+            <div class="featured-header">
+                <i class="fas fa-star"></i>
+                <h2>Featured: Latest Research</h2>
+            </div>
+            <div class="featured-card" id="featuredCard">
+                <!-- Content will be populated by JavaScript -->
+            </div>
         </div>
 
         <!-- Research Categories -->
@@ -1774,6 +1934,7 @@
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
             addNewBadges();
+            populateFeaturedSection();
             // Wait for GoatCounter to load before fetching counts
             var checkGoatCounter = setInterval(function() {
                 if (window.goatcounter) {
