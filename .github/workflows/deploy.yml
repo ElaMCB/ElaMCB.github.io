@@ -5,6 +5,13 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      force_deploy:
+        description: 'Force deployment (cancel previous if needed)'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -64,17 +71,19 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/main'
     steps:
-      - name: Wait for any in-progress deployments
+      - name: Wait and retry deployment
         run: |
-          echo "Checking for in-progress deployments..."
-          sleep 15
+          echo "Waiting before deployment to avoid conflicts..."
+          sleep 20
           echo "Proceeding with deployment..."
       
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
         continue-on-error: true
-        timeout-minutes: 5
+        timeout-minutes: 3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Check deployment status
         if: always()
