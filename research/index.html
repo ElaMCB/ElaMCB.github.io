@@ -1244,7 +1244,6 @@
 
                 <!-- AI System Testing Guide -->
                 <div class="research-card" data-type="practical" data-difficulty="beginner" data-date="2026-01" data-search="AI System Testing Gentle Introduction hallucinations bias safety human-centered approach testing AI systems" data-reading-time="15">
-                    <div class="new-badge">New</div>
                     <div class="research-type-tag practical">Practical</div>
                     <div class="research-header">
                         <i class="fas fa-shield-alt"></i>
@@ -1388,21 +1387,37 @@
         // Initial filter
         filterCards();
 
-        // Add "New" badges for recent research (Jan 2026)
+        // Add "New" badge only to the most recent research
         function addNewBadges() {
+            // First, remove all existing "New" badges
+            document.querySelectorAll('.new-badge').forEach(badge => badge.remove());
+            
+            // Find the most recent date from all research cards
+            let latestDate = null;
+            let latestCard = null;
+            
             researchCards.forEach(card => {
                 const date = card.getAttribute('data-date');
-                if (date && date.startsWith('2026-01')) {
-                    // Check if badge doesn't already exist
-                    if (!card.querySelector('.new-badge')) {
-                        const badge = document.createElement('div');
-                        badge.className = 'new-badge';
-                        badge.textContent = 'New';
-                        card.style.position = 'relative';
-                        card.appendChild(badge);
+                if (date) {
+                    // Parse date (format: YYYY-MM)
+                    const [year, month] = date.split('-').map(Number);
+                    const dateValue = year * 100 + month; // Convert to comparable number
+                    
+                    if (!latestDate || dateValue > latestDate) {
+                        latestDate = dateValue;
+                        latestCard = card;
                     }
                 }
             });
+            
+            // Add "New" badge only to the most recent research
+            if (latestCard) {
+                const badge = document.createElement('div');
+                badge.className = 'new-badge';
+                badge.textContent = 'New';
+                latestCard.style.position = 'relative';
+                latestCard.appendChild(badge);
+            }
         }
 
         // Track page views in localStorage as fallback
