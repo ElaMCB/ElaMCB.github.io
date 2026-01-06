@@ -439,6 +439,20 @@
             </div>
         </div>
 
+        <div class="pagination-container" id="paginationContainerTop" style="display: none;">
+            <div class="pagination-info" id="paginationInfoTop"></div>
+            <div class="pagination-controls" id="paginationControlsTop"></div>
+            <div class="items-per-page">
+                <label for="itemsPerPageTop">Items per page:</label>
+                <select id="itemsPerPageTop">
+                    <option value="12">12</option>
+                    <option value="24" selected>24</option>
+                    <option value="48">48</option>
+                    <option value="96">96</option>
+                </select>
+            </div>
+        </div>
+
         <div class="innovations-grid" id="innovationsGrid">
             <div class="empty-state">
                 <i class="fas fa-spinner fa-spin"></i>
@@ -446,12 +460,12 @@
             </div>
         </div>
 
-        <div class="pagination-container" id="paginationContainer" style="display: none;">
-            <div class="pagination-info" id="paginationInfo"></div>
-            <div class="pagination-controls" id="paginationControls"></div>
+        <div class="pagination-container" id="paginationContainerBottom" style="display: none;">
+            <div class="pagination-info" id="paginationInfoBottom"></div>
+            <div class="pagination-controls" id="paginationControlsBottom"></div>
             <div class="items-per-page">
-                <label for="itemsPerPage">Items per page:</label>
-                <select id="itemsPerPage">
+                <label for="itemsPerPageBottom">Items per page:</label>
+                <select id="itemsPerPageBottom">
                     <option value="12">12</option>
                     <option value="24" selected>24</option>
                     <option value="48">48</option>
@@ -630,7 +644,8 @@
 
         function displayInnovations() {
             const grid = document.getElementById('innovationsGrid');
-            const paginationContainer = document.getElementById('paginationContainer');
+            const paginationContainerTop = document.getElementById('paginationContainerTop');
+            const paginationContainerBottom = document.getElementById('paginationContainerBottom');
             
             if (filteredInnovations.length === 0) {
                 grid.innerHTML = `
@@ -639,7 +654,8 @@
                         <p>No innovations found in this category.</p>
                     </div>
                 `;
-                paginationContainer.style.display = 'none';
+                paginationContainerTop.style.display = 'none';
+                paginationContainerBottom.style.display = 'none';
                 return;
             }
             
@@ -688,26 +704,33 @@
                 `;
             }).join('');
             
-            // Update pagination controls
+            // Update pagination controls (both top and bottom)
             updatePagination(totalPages, startIndex + 1, Math.min(endIndex, filteredInnovations.length), filteredInnovations.length);
         }
         
         function updatePagination(totalPages, startItem, endItem, totalItems) {
-            const paginationContainer = document.getElementById('paginationContainer');
-            const paginationInfo = document.getElementById('paginationInfo');
-            const paginationControls = document.getElementById('paginationControls');
+            const paginationContainerTop = document.getElementById('paginationContainerTop');
+            const paginationContainerBottom = document.getElementById('paginationContainerBottom');
+            const paginationInfoTop = document.getElementById('paginationInfoTop');
+            const paginationInfoBottom = document.getElementById('paginationInfoBottom');
+            const paginationControlsTop = document.getElementById('paginationControlsTop');
+            const paginationControlsBottom = document.getElementById('paginationControlsBottom');
             
             if (totalPages <= 1) {
-                paginationContainer.style.display = 'none';
+                paginationContainerTop.style.display = 'none';
+                paginationContainerBottom.style.display = 'none';
                 return;
             }
             
-            paginationContainer.style.display = 'flex';
+            paginationContainerTop.style.display = 'flex';
+            paginationContainerBottom.style.display = 'flex';
             
-            // Update info
-            paginationInfo.textContent = `Showing ${startItem}-${endItem} of ${totalItems} innovations`;
+            // Update info (both top and bottom)
+            const infoText = `Showing ${startItem}-${endItem} of ${totalItems} innovations`;
+            paginationInfoTop.textContent = infoText;
+            paginationInfoBottom.textContent = infoText;
             
-            // Build pagination controls
+            // Build pagination controls HTML
             let controlsHTML = '';
             
             // Previous button
@@ -755,7 +778,13 @@
                 </button>
             `;
             
-            paginationControls.innerHTML = controlsHTML;
+            // Update both top and bottom controls
+            paginationControlsTop.innerHTML = controlsHTML;
+            paginationControlsBottom.innerHTML = controlsHTML;
+            
+            // Sync items per page selectors
+            document.getElementById('itemsPerPageTop').value = itemsPerPage;
+            document.getElementById('itemsPerPageBottom').value = itemsPerPage;
         }
         
         function goToPage(page) {
@@ -787,11 +816,22 @@
             return div.innerHTML;
         }
 
-        // Items per page change handler
-        document.getElementById('itemsPerPage').addEventListener('change', (e) => {
-            itemsPerPage = parseInt(e.target.value);
+        // Items per page change handlers (sync both selectors)
+        function handleItemsPerPageChange(value) {
+            itemsPerPage = parseInt(value);
             currentPage = 1; // Reset to first page
+            // Sync both selectors
+            document.getElementById('itemsPerPageTop').value = itemsPerPage;
+            document.getElementById('itemsPerPageBottom').value = itemsPerPage;
             displayInnovations();
+        }
+        
+        document.getElementById('itemsPerPageTop').addEventListener('change', (e) => {
+            handleItemsPerPageChange(e.target.value);
+        });
+        
+        document.getElementById('itemsPerPageBottom').addEventListener('change', (e) => {
+            handleItemsPerPageChange(e.target.value);
         });
         
         // Load innovations on page load
