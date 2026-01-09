@@ -313,7 +313,7 @@ Found this useful? Here's how you can help:
 |-----------|--------|----------|---------|
 | **UAA Workflow** | 🟢 Success | 2026-01-09 13:54:23 UTC | [View Runs](https://github.com/ElaMCB/ElaMCB.github.io/actions/workflows/unified-autonomous-agent.yml) |
 | **CI-Fix Capability** | ⚪ Unknown | N/A | [View Status](./docs/uaa-status.json) |
-| **Link-Health Capability** | ⚪ Unknown | N/A | [View Status](./docs/uaa-status.json) |
+| **Link-Health Capability** | 🟢 Success | 2026-01-09 13:54:13 UTC | [View Status](./docs/uaa-status.json) |
 | **Security Capability** | 🟢 Success | 2026-01-05 09:31:28 UTC | [View Status](./docs/uaa-status.json) |
 
 ### Recent Activity
