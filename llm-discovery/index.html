@@ -395,6 +395,92 @@
             color: rgba(228, 228, 231, 0.7);
             margin-top: 1rem;
         }
+        
+        /* Pagination Styles */
+        .pagination-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: rgba(26, 26, 46, 0.5);
+            border-radius: 10px;
+            border: 1px solid rgba(91, 127, 184, 0.3);
+        }
+        
+        .pagination-info {
+            color: rgba(228, 228, 231, 0.8);
+            font-size: 0.9rem;
+        }
+        
+        .pagination-controls {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .pagination-btn {
+            background: rgba(91, 127, 184, 0.2);
+            color: #5b7fb8;
+            border: 1px solid rgba(91, 127, 184, 0.4);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            min-width: 40px;
+            font-family: 'Courier New', 'Monaco', monospace;
+        }
+        
+        .pagination-btn:hover:not(:disabled) {
+            background: rgba(91, 127, 184, 0.4);
+            border-color: rgba(91, 127, 184, 0.6);
+            color: #7aa3d8;
+            box-shadow: 0 0 8px rgba(91, 127, 184, 0.3);
+        }
+        
+        .pagination-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        
+        .pagination-btn.active {
+            background: rgba(91, 127, 184, 0.5);
+            border-color: #5b7fb8;
+            color: #7aa3d8;
+            box-shadow: 0 0 12px rgba(91, 127, 184, 0.5);
+        }
+        
+        .items-per-page {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(228, 228, 231, 0.8);
+            font-size: 0.9rem;
+        }
+        
+        .items-per-page select {
+            background: rgba(91, 127, 184, 0.2);
+            color: #5b7fb8;
+            border: 1px solid rgba(91, 127, 184, 0.4);
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Courier New', 'Monaco', monospace;
+        }
+        
+        .items-per-page select:focus {
+            outline: none;
+            border-color: #5b7fb8;
+            box-shadow: 0 0 8px rgba(91, 127, 184, 0.3);
+        }
+        
+        .items-per-page label {
+            color: rgba(228, 228, 231, 0.8);
+        }
     </style>
 </head>
 <body>
@@ -435,6 +521,66 @@
         
         <div id="discoveries-content">
             <p>Loading discoveries...</p>
+        </div>
+        
+        <!-- Pagination for Models (Top) -->
+        <div class="pagination-wrapper" id="modelsPaginationTop" style="display: none;">
+            <div class="pagination-info" id="modelsPaginationInfoTop"></div>
+            <div class="pagination-controls" id="modelsPaginationControlsTop"></div>
+            <div class="items-per-page">
+                <label for="modelsItemsPerPageTop">Items per page:</label>
+                <select id="modelsItemsPerPageTop">
+                    <option value="10">10</option>
+                    <option value="20" selected>20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Pagination for Papers (Top) -->
+        <div class="pagination-wrapper" id="papersPaginationTop" style="display: none;">
+            <div class="pagination-info" id="papersPaginationInfoTop"></div>
+            <div class="pagination-controls" id="papersPaginationControlsTop"></div>
+            <div class="items-per-page">
+                <label for="papersItemsPerPageTop">Items per page:</label>
+                <select id="papersItemsPerPageTop">
+                    <option value="10">10</option>
+                    <option value="20" selected>20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Pagination for Models (Bottom) -->
+        <div class="pagination-wrapper" id="modelsPaginationBottom" style="display: none;">
+            <div class="pagination-info" id="modelsPaginationInfoBottom"></div>
+            <div class="pagination-controls" id="modelsPaginationControlsBottom"></div>
+            <div class="items-per-page">
+                <label for="modelsItemsPerPageBottom">Items per page:</label>
+                <select id="modelsItemsPerPageBottom">
+                    <option value="10">10</option>
+                    <option value="20" selected>20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Pagination for Papers (Bottom) -->
+        <div class="pagination-wrapper" id="papersPaginationBottom" style="display: none;">
+            <div class="pagination-info" id="papersPaginationInfoBottom"></div>
+            <div class="pagination-controls" id="papersPaginationControlsBottom"></div>
+            <div class="items-per-page">
+                <label for="papersItemsPerPageBottom">Items per page:</label>
+                <select id="papersItemsPerPageBottom">
+                    <option value="10">10</option>
+                    <option value="20" selected>20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
         </div>
     </div>
 
@@ -519,6 +665,14 @@
             }, i * 500);
         }
 
+        // Pagination state
+        let allModels = [];
+        let allPapers = [];
+        let modelsCurrentPage = 1;
+        let papersCurrentPage = 1;
+        let modelsItemsPerPage = 20;
+        let papersItemsPerPage = 20;
+        
         // Load all discoveries from all scan files
         async function loadDiscoveries() {
             try {
@@ -540,8 +694,8 @@
                 const scanDate = dateMatch ? dateMatch[1] : 'Unknown';
                 
                 // Load and combine all discoveries
-                const allModels = [];
-                const allPapers = [];
+                allModels = [];
+                allPapers = [];
                 const seenModels = new Set();
                 const seenPapers = new Set();
                 
@@ -601,53 +755,14 @@
                 </div>
             `;
             
+            // Display models section with pagination
             if (models.length > 0) {
-                html += `<div class="discovery-section"><h2>New LLM Models (${models.length})</h2>`;
-                models.forEach((model, index) => {
-                    html += `
-                        <div class="discovery-item">
-                            <h3>${index + 1}. ${model.name || 'Unknown Model'}</h3>
-                            <p>${model.description || 'No description available'}</p>
-                            <div class="meta-info">
-                                <span><i class="fas fa-tag"></i> ${model.source}</span>
-                                ${model.stars ? `<span><i class="fas fa-star"></i> ${model.stars.toLocaleString()} stars</span>` : ''}
-                                ${model.downloads ? `<span><i class="fas fa-download"></i> ${model.downloads.toLocaleString()} downloads</span>` : ''}
-                                ${model.likes ? `<span><i class="fas fa-heart"></i> ${model.likes} likes</span>` : ''}
-                            </div>
-                            <a href="${model.url}" target="_blank" style="display: inline-block; margin-top: 1rem;">
-                                <i class="fas fa-external-link-alt"></i> View ${model.source === 'Hugging Face' ? 'Model' : 'Repository'}
-                            </a>
-                            <div class="status-badge">
-                                <i class="fas fa-info-circle"></i> Status: Under review - not yet tested
-                            </div>
-                        </div>
-                    `;
-                });
-                html += `</div>`;
+                html += `<div class="discovery-section" id="modelsSection"><h2>New LLM Models (${models.length})</h2><div id="modelsContainer"></div></div>`;
             }
             
+            // Display papers section with pagination
             if (papers.length > 0) {
-                html += `<div class="discovery-section"><h2>New Research Papers (${papers.length})</h2>`;
-                papers.forEach((paper, index) => {
-                    html += `
-                        <div class="discovery-item">
-                            <h3>${index + 1}. ${paper.name || 'Unknown Paper'}</h3>
-                            <p>${paper.description || 'No description available'}</p>
-                            <div class="meta-info">
-                                <span><i class="fas fa-tag"></i> ${paper.source}</span>
-                                ${paper.category ? `<span><i class="fas fa-folder"></i> ${paper.category}</span>` : ''}
-                                ${paper.published ? `<span><i class="fas fa-calendar"></i> ${paper.published.split('T')[0]}</span>` : ''}
-                            </div>
-                            <a href="${paper.url}" target="_blank" style="display: inline-block; margin-top: 1rem;">
-                                <i class="fas fa-external-link-alt"></i> Read Paper
-                            </a>
-                            <div class="status-badge">
-                                <i class="fas fa-info-circle"></i> Status: Under review - not yet read
-                            </div>
-                        </div>
-                    `;
-                });
-                html += `</div>`;
+                html += `<div class="discovery-section" id="papersSection"><h2>New Research Papers (${papers.length})</h2><div id="papersContainer"></div></div>`;
             }
             
             if (models.length === 0 && papers.length === 0) {
@@ -661,6 +776,269 @@
             }
             
             content.innerHTML = html;
+            
+            // Move pagination controls to correct positions and display paginated content
+            if (models.length > 0) {
+                const modelsSection = document.getElementById('modelsSection');
+                const modelsPaginationTop = document.getElementById('modelsPaginationTop');
+                const modelsPaginationBottom = document.getElementById('modelsPaginationBottom');
+                
+                if (modelsSection && modelsPaginationTop && modelsPaginationBottom) {
+                    // Move top pagination right before models section
+                    modelsSection.parentNode.insertBefore(modelsPaginationTop, modelsSection);
+                    // Move bottom pagination right after models section
+                    modelsSection.parentNode.insertBefore(modelsPaginationBottom, modelsSection.nextSibling);
+                }
+                
+                displayModels();
+                setupModelsPagination();
+            }
+            
+            if (papers.length > 0) {
+                const papersSection = document.getElementById('papersSection');
+                const papersPaginationTop = document.getElementById('papersPaginationTop');
+                const papersPaginationBottom = document.getElementById('papersPaginationBottom');
+                
+                if (papersSection && papersPaginationTop && papersPaginationBottom) {
+                    // Move top pagination right before papers section
+                    papersSection.parentNode.insertBefore(papersPaginationTop, papersSection);
+                    // Move bottom pagination right after papers section
+                    papersSection.parentNode.insertBefore(papersPaginationBottom, papersSection.nextSibling);
+                }
+                
+                displayPapers();
+                setupPapersPagination();
+            }
+        }
+        
+        function displayModels() {
+            const container = document.getElementById('modelsContainer');
+            if (!container) return;
+            
+            const startIndex = (modelsCurrentPage - 1) * modelsItemsPerPage;
+            const endIndex = startIndex + modelsItemsPerPage;
+            const paginatedModels = allModels.slice(startIndex, endIndex);
+            
+            let html = '';
+            paginatedModels.forEach((model, index) => {
+                const globalIndex = startIndex + index;
+                html += `
+                    <div class="discovery-item">
+                        <h3>${globalIndex + 1}. ${model.name || 'Unknown Model'}</h3>
+                        <p>${model.description || 'No description available'}</p>
+                        <div class="meta-info">
+                            <span><i class="fas fa-tag"></i> ${model.source}</span>
+                            ${model.stars ? `<span><i class="fas fa-star"></i> ${model.stars.toLocaleString()} stars</span>` : ''}
+                            ${model.downloads ? `<span><i class="fas fa-download"></i> ${model.downloads.toLocaleString()} downloads</span>` : ''}
+                            ${model.likes ? `<span><i class="fas fa-heart"></i> ${model.likes} likes</span>` : ''}
+                        </div>
+                        <a href="${model.url}" target="_blank" style="display: inline-block; margin-top: 1rem;">
+                            <i class="fas fa-external-link-alt"></i> View ${model.source === 'Hugging Face' ? 'Model' : 'Repository'}
+                        </a>
+                        <div class="status-badge">
+                            <i class="fas fa-info-circle"></i> Status: Under review - not yet tested
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            
+            // Update pagination info and controls
+            updateModelsPagination();
+        }
+        
+        function displayPapers() {
+            const container = document.getElementById('papersContainer');
+            if (!container) return;
+            
+            const startIndex = (papersCurrentPage - 1) * papersItemsPerPage;
+            const endIndex = startIndex + papersItemsPerPage;
+            const paginatedPapers = allPapers.slice(startIndex, endIndex);
+            
+            let html = '';
+            paginatedPapers.forEach((paper, index) => {
+                const globalIndex = startIndex + index;
+                html += `
+                    <div class="discovery-item">
+                        <h3>${globalIndex + 1}. ${paper.name || 'Unknown Paper'}</h3>
+                        <p>${paper.description || 'No description available'}</p>
+                        <div class="meta-info">
+                            <span><i class="fas fa-tag"></i> ${paper.source}</span>
+                            ${paper.category ? `<span><i class="fas fa-folder"></i> ${paper.category}</span>` : ''}
+                            ${paper.published ? `<span><i class="fas fa-calendar"></i> ${paper.published.split('T')[0]}</span>` : ''}
+                        </div>
+                        <a href="${paper.url}" target="_blank" style="display: inline-block; margin-top: 1rem;">
+                            <i class="fas fa-external-link-alt"></i> Read Paper
+                        </a>
+                        <div class="status-badge">
+                            <i class="fas fa-info-circle"></i> Status: Under review - not yet read
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            
+            // Update pagination info and controls
+            updatePapersPagination();
+        }
+        
+        function updateModelsPagination() {
+            const totalPages = Math.ceil(allModels.length / modelsItemsPerPage);
+            const startIndex = (modelsCurrentPage - 1) * modelsItemsPerPage + 1;
+            const endIndex = Math.min(modelsCurrentPage * modelsItemsPerPage, allModels.length);
+            
+            // Update info
+            document.getElementById('modelsPaginationInfoTop').textContent = 
+                `Showing ${startIndex}-${endIndex} of ${allModels.length} models`;
+            document.getElementById('modelsPaginationInfoBottom').textContent = 
+                `Showing ${startIndex}-${endIndex} of ${allModels.length} models`;
+            
+            // Render controls
+            renderPaginationControls('models', totalPages, modelsCurrentPage);
+            
+            // Show/hide pagination
+            const shouldShow = allModels.length > modelsItemsPerPage;
+            document.getElementById('modelsPaginationTop').style.display = shouldShow ? 'flex' : 'none';
+            document.getElementById('modelsPaginationBottom').style.display = shouldShow ? 'flex' : 'none';
+        }
+        
+        function updatePapersPagination() {
+            const totalPages = Math.ceil(allPapers.length / papersItemsPerPage);
+            const startIndex = (papersCurrentPage - 1) * papersItemsPerPage + 1;
+            const endIndex = Math.min(papersCurrentPage * papersItemsPerPage, allPapers.length);
+            
+            // Update info
+            document.getElementById('papersPaginationInfoTop').textContent = 
+                `Showing ${startIndex}-${endIndex} of ${allPapers.length} papers`;
+            document.getElementById('papersPaginationInfoBottom').textContent = 
+                `Showing ${startIndex}-${endIndex} of ${allPapers.length} papers`;
+            
+            // Render controls
+            renderPaginationControls('papers', totalPages, papersCurrentPage);
+            
+            // Show/hide pagination
+            const shouldShow = allPapers.length > papersItemsPerPage;
+            document.getElementById('papersPaginationTop').style.display = shouldShow ? 'flex' : 'none';
+            document.getElementById('papersPaginationBottom').style.display = shouldShow ? 'flex' : 'none';
+        }
+        
+        function renderPaginationControls(type, totalPages, currentPage) {
+            const topControls = document.getElementById(`${type}PaginationControlsTop`);
+            const bottomControls = document.getElementById(`${type}PaginationControlsBottom`);
+            
+            let html = '';
+            
+            // First button
+            html += `<button class="pagination-btn" ${currentPage === 1 ? 'disabled' : ''} onclick="goTo${type.charAt(0).toUpperCase() + type.slice(1)}Page(1)">First</button>`;
+            
+            // Previous button
+            html += `<button class="pagination-btn" ${currentPage === 1 ? 'disabled' : ''} onclick="goTo${type.charAt(0).toUpperCase() + type.slice(1)}Page(${currentPage - 1})">Prev</button>`;
+            
+            // Page numbers
+            const maxVisible = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+            
+            if (endPage - startPage < maxVisible - 1) {
+                startPage = Math.max(1, endPage - maxVisible + 1);
+            }
+            
+            if (startPage > 1) {
+                html += `<button class="pagination-btn" onclick="goTo${type.charAt(0).toUpperCase() + type.slice(1)}Page(1)">1</button>`;
+                if (startPage > 2) {
+                    html += `<span style="color: rgba(228, 228, 231, 0.5); padding: 0 0.5rem;">...</span>`;
+                }
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                html += `<button class="pagination-btn ${i === currentPage ? 'active' : ''}" onclick="goTo${type.charAt(0).toUpperCase() + type.slice(1)}Page(${i})">${i}</button>`;
+            }
+            
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    html += `<span style="color: rgba(228, 228, 231, 0.5); padding: 0 0.5rem;">...</span>`;
+                }
+                html += `<button class="pagination-btn" onclick="goTo${type.charAt(0).toUpperCase() + type.slice(1)}Page(${totalPages})">${totalPages}</button>`;
+            }
+            
+            // Next button
+            html += `<button class="pagination-btn" ${currentPage === totalPages ? 'disabled' : ''} onclick="goTo${type.charAt(0).toUpperCase() + type.slice(1)}Page(${currentPage + 1})">Next</button>`;
+            
+            // Last button
+            html += `<button class="pagination-btn" ${currentPage === totalPages ? 'disabled' : ''} onclick="goTo${type.charAt(0).toUpperCase() + type.slice(1)}Page(${totalPages})">Last</button>`;
+            
+            topControls.innerHTML = html;
+            bottomControls.innerHTML = html;
+        }
+        
+        function goToModelsPage(page) {
+            const totalPages = Math.ceil(allModels.length / modelsItemsPerPage);
+            if (page >= 1 && page <= totalPages) {
+                modelsCurrentPage = page;
+                displayModels();
+                // Scroll to models section
+                const modelsSection = document.getElementById('modelsSection');
+                if (modelsSection) {
+                    modelsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        }
+        
+        function goToPapersPage(page) {
+            const totalPages = Math.ceil(allPapers.length / papersItemsPerPage);
+            if (page >= 1 && page <= totalPages) {
+                papersCurrentPage = page;
+                displayPapers();
+                // Scroll to papers section
+                const papersSection = document.getElementById('papersSection');
+                if (papersSection) {
+                    papersSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        }
+        
+        function setupModelsPagination() {
+            // Items per page handlers
+            const topSelect = document.getElementById('modelsItemsPerPageTop');
+            const bottomSelect = document.getElementById('modelsItemsPerPageBottom');
+            
+            const changeItemsPerPage = (value) => {
+                modelsItemsPerPage = parseInt(value);
+                modelsCurrentPage = 1; // Reset to first page
+                displayModels();
+            };
+            
+            topSelect.addEventListener('change', (e) => {
+                changeItemsPerPage(e.target.value);
+                bottomSelect.value = e.target.value;
+            });
+            
+            bottomSelect.addEventListener('change', (e) => {
+                changeItemsPerPage(e.target.value);
+                topSelect.value = e.target.value;
+            });
+        }
+        
+        function setupPapersPagination() {
+            // Items per page handlers
+            const topSelect = document.getElementById('papersItemsPerPageTop');
+            const bottomSelect = document.getElementById('papersItemsPerPageBottom');
+            
+            const changeItemsPerPage = (value) => {
+                papersItemsPerPage = parseInt(value);
+                papersCurrentPage = 1; // Reset to first page
+                displayPapers();
+            };
+            
+            topSelect.addEventListener('change', (e) => {
+                changeItemsPerPage(e.target.value);
+                bottomSelect.value = e.target.value;
+            });
+            
+            bottomSelect.addEventListener('change', (e) => {
+                changeItemsPerPage(e.target.value);
+                topSelect.value = e.target.value;
+            });
         }
         
         window.addEventListener('DOMContentLoaded', loadDiscoveries);
