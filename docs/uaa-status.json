@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-09T14:04:16Z",
+  "last_updated": "2026-01-12T09:32:02Z",
   "workflow_status": "success",
   "capabilities": {
     "ci-fix": {
@@ -13,24 +13,36 @@
     },
     "link-health": {
       "status": "success",
-      "last_run": "2026-01-09T14:04:06Z",
-      "last_success": "2026-01-09T14:04:06Z",
+      "last_run": "2026-01-12T09:31:51Z",
+      "last_success": "2026-01-12T09:31:51Z",
       "last_failure": "N/A",
-      "total_runs": 36,
-      "success_count": 36,
+      "total_runs": 37,
+      "success_count": 37,
       "failure_count": 0
     },
     "security": {
       "status": "success",
-      "last_run": "2026-01-05T09:31:28Z",
-      "last_success": "2026-01-05T09:31:28Z",
+      "last_run": "2026-01-12T09:31:52Z",
+      "last_success": "2026-01-12T09:31:52Z",
       "last_failure": "N/A",
-      "total_runs": 3,
-      "success_count": 3,
+      "total_runs": 4,
+      "success_count": 4,
       "failure_count": 0
     }
   },
   "recent_activity": [
+    {
+      "time": "2026-01-12T09:31:52Z",
+      "capability": "security",
+      "status": "success",
+      "message": "Security completed successfully"
+    },
+    {
+      "time": "2026-01-12T09:31:51Z",
+      "capability": "link-health",
+      "status": "success",
+      "message": "Link-Health completed successfully"
+    },
     {
       "time": "2026-01-09T14:04:06Z",
       "capability": "link-health",
@@ -75,18 +87,6 @@
     },
     {
       "time": "2026-01-06T16:55:12Z",
-      "capability": "link-health",
-      "status": "success",
-      "message": "Link-Health completed successfully"
-    },
-    {
-      "time": "2026-01-06T16:19:06Z",
-      "capability": "link-health",
-      "status": "success",
-      "message": "Link-Health completed successfully"
-    },
-    {
-      "time": "2026-01-06T15:48:00Z",
       "capability": "link-health",
       "status": "success",
       "message": "Link-Health completed successfully"
