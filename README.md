@@ -142,56 +142,82 @@ graph TB
 
 ---
 
-## QA-to-AI Transformation Roadmap - Premium Feature
+## Offerings & Projects
 
-**Transform your QA team in 6-12 months:** 487% ROI • 40-70% efficiency gains • 85%+ automation coverage
+### Premium Offering
 
-32-week phased strategy for QA Directors and Engineering Leaders ready to lead the AI transformation.
-
-**[Preview Framework →](https://elamcb.github.io/docs/qa-transformation-roadmap.html)** | **[Request Full Access →](mailto:elena.mereanu@gmail.com?subject=QA%20Transformation%20Roadmap%20-%20Premium%20Access%20Request&body=Hi%20Elena%2C%0A%0AI%27m%20interested%20in%20the%20complete%20QA-to-AI%20Transformation%20Roadmap%20package.%0A%0APlease%20send%20me%3A%0A-%20Pricing%20details%0A-%20Available%20packages%20%28Individual%20vs%20Enterprise%29%0A-%20Implementation%20timeline%0A-%20Consultation%20options%0A%0AAbout%20my%20organization%3A%0ACompany%3A%20%0ATeam%20Size%3A%20%0ACurrent%20QA%20Maturity%3A%20%0A%0AThank%20you%21)** (Premium)
+> **QA-to-AI Transformation Roadmap** — *32-week phased strategy for QA Directors and Engineering Leaders*
+>
+> **Impact:** 487% ROI • 40-70% efficiency gains • 85%+ automation coverage  
+> **For:** Teams ready to lead the AI transformation  
+> `leadership` `strategy` `change-management` `ROI`  
+> **[Preview Framework →](https://elamcb.github.io/docs/qa-transformation-roadmap.html)** | **[Request Full Access →](mailto:elena.mereanu@gmail.com?subject=QA%20Transformation%20Roadmap%20-%20Premium%20Access%20Request&body=Hi%20Elena%2C%0A%0AI%27m%20interested%20in%20the%20complete%20QA-to-AI%20Transformation%20Roadmap%20package.%0A%0APlease%20send%20me%3A%0A-%20Pricing%20details%0A-%20Available%20packages%20%28Individual%20vs%20Enterprise%29%0A-%20Implementation%20timeline%0A-%20Consultation%20options%0A%0AAbout%20my%20organization%3A%0ACompany%3A%20%0ATeam%20Size%3A%20%0ACurrent%20QA%20Maturity%3A%20%0A%0AThank%20you%21)** (Premium)
 
 ---
 
-## Featured Projects
+### Featured Projects
 
-### LLMGuardian - Production AI Testing Framework
+| Project | Impact | Tech | Links |
+|---------|--------|------|-------|
+| **LLMGuardian** | 23% accuracy ↑ • 60% faster • 3 safety violations prevented | JavaScript, AI APIs, RAG, MCP | [Demo](./llm-guardian/demo.html) • [Docs](./llm-guardian/) |
+| **Legacy-AI Bridge** | 40% faster • 60% fraud ↓ • Zero downtime | Python, Legacy Integration | [Framework](./legacy-ai-bridge/) • [Assessment](./legacy-ai-bridge/assessment-template.md) |
+| **Job Search Automation** | 60% time ↓ • 85% match accuracy | Python, Playwright, React | [Quick Start](./job-search-automation/quick-start.html) • [Dashboard](./job-search-automation/app.html) |
+| **AI IDE Collection** | 100+ hrs testing • S-Tier rankings | 10 IDEs compared | [Comparison](./ai-ide-comparison/) • [Source](https://github.com/ElaMCB/ElaMCB.github.io/tree/main/ai-ide-comparison) |
+| **Algorithmic Trading** | +127% return • 1.67 Sharpe • 64% win rate | Python, pandas, Risk Mgmt | [Strategy](./algorithmic-trading/) • [Implementation](./algorithmic-trading/strategy-implementation.md) |
+
+<details>
+<summary><b>LLMGuardian</b> — Production AI Testing Framework</summary>
+
 *Advanced validation for Large Language Models with RAG, MCP, and safety testing*
 
 **Impact:** 23% accuracy improvement • 60% faster testing • 3 critical safety violations prevented  
 **Tech:** JavaScript/Node.js, AI APIs, RAG, MCP  
 `LLM-testing` `AI-safety` `RAG` `MCP` `production-AI`  
 **[Live Demo](./llm-guardian/demo.html)** | **[Documentation](./llm-guardian/)** | **[Case Studies](./llm-guardian/case-studies/)**
+</details>
 
-### Legacy-AI Bridge Framework  
+<details>
+<summary><b>Legacy-AI Bridge</b> — Enterprise Integration</summary>
+
 *Gradual AI integration for enterprise systems without disruption*
 
 **Impact:** 40% faster processing • 60% fraud reduction • Zero downtime migration  
 **Tech:** Python, Legacy System Integration, AI/ML Pipeline  
 **[Framework Details](./legacy-ai-bridge/)** | **[Assessment Tool](./legacy-ai-bridge/assessment-template.md)**
+</details>
 
-### Job Search Automation Suite
+<details>
+<summary><b>Job Search Automation</b> — Career Management</summary>
+
 *Ethical AI-powered automation for career management*
 
 **Impact:** 60% time reduction • 85% job matching accuracy • Improved application quality  
 **Tech:** Python, Playwright, AI/ML, React/TypeScript  
 **[Quick Start](./job-search-automation/quick-start.html)** | **[Try Dashboard](./job-search-automation/app.html)** | **[Documentation](./job-search-automation/)**
+</details>
 
-### AI IDE Collection - Gotta Code 'Em All
+<details>
+<summary><b>AI IDE Collection</b> — Gotta Code 'Em All</summary>
+
 *Interactive comparison of 10 AI-powered development environments*
 
 **Analysis:** 100+ hours testing • S-Tier through B-Tier rankings • Real-world performance insights  
 **IDEs:** Cursor, Windsurf, Void, Continue.dev, GitHub Copilot, Zed, Replit AI, CodeWhisperer, Tabnine  
 `developer-tools` `AI-assistants` `IDE-comparison` `code-editors`  
 **[View Comparison](./ai-ide-comparison/)** | **[Source Code](https://github.com/ElaMCB/ElaMCB.github.io/tree/main/ai-ide-comparison)**
+</details>
 
-### Algorithmic Trading System
+<details>
+<summary><b>Algorithmic Trading</b> — Quantitative Strategy</summary>
+
 *Systematic quantitative trading with risk management*
 
 **Performance:** +127% total return • 1.67 Sharpe ratio • 64% win rate  
 **Tech:** Python, pandas, Statistical Analysis, Risk Management  
 **[Strategy Details](./algorithmic-trading/)** | **[Implementation](./algorithmic-trading/strategy-implementation.md)**
+</details>
 
-[**View All Projects →**](./PROJECTS.md)
+**[View All Projects →](./PROJECTS.md)**
 
 ---
 
