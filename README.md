@@ -27,7 +27,7 @@
 **15 Research Notebooks Organized in 3 Categories:**
 
 🟢 **Practical Applications** - Databricks Testing, AutoTriage Assessment, Healthcare AI Agents, CI/CD Optimization, RAG Testing, MCP Testing  
-🔵 **Academic Research** - I QA Workforce Transformation, AutoTriage Research, Multi-Agent Orchestration, Monte Carlo Testing, Model Evaluation, LLM Testing  
+🔵 **Academic Research** - Hydro-Swarm MoE, I QA Workforce Transformation, AutoTriage Research, Multi-Agent Orchestration, Monte Carlo Testing, Model Evaluation, LLM Testing  
 🟡 **Frameworks & Tools** - Agentic Testing, Automated Patterns, AI Safety
 
 ```mermaid
@@ -45,6 +45,7 @@ graph TB
     Practical --> RAG[RAG Testing<br/>Applications]
     Practical --> MCP[MCP in Testing<br/>Context-Aware]
     
+    Academic --> HydroSwarm[Hydro-Swarm MoE<br/>Adaptive AI Testing]
     Academic --> IQA[I QA Transformation<br/>Workforce Forecasting]
     Academic --> AutoTriageResearch[AutoTriage Research<br/>85% Accuracy]
     Academic --> MultiAgent[Multi-Agent Orchestration<br/>80.2% Detection]
@@ -60,6 +61,7 @@ graph TB
     style AutoTriage fill:#51cf66,stroke:#2f9e44,color:#000
     style Healthcare fill:#51cf66,stroke:#2f9e44,color:#000
     style CICD fill:#51cf66,stroke:#2f9e44,color:#000
+    style HydroSwarm fill:#74c0fc,stroke:#1971c2,color:#000
     style IQA fill:#74c0fc,stroke:#1971c2,color:#000
     style AutoTriageResearch fill:#74c0fc,stroke:#1971c2,color:#000
     style MultiAgent fill:#51cf66,stroke:#2f9e44,color:#000
@@ -86,6 +88,7 @@ graph TB
 | [LLM Methodologies](./research/notebooks/llm-testing-analysis.html) | Analysis | Hallucination detection | Testing LLMs | Safety frameworks |
 | [AI Safety Metrics](./research/notebooks/ai-safety-metrics.html) | Metrics | Prompt injection detection | Security validation | Safety evaluators |
 | [Testing Patterns](./research/notebooks/automated-testing-patterns.html) | Patterns | AI-augmented automation | Best practices | Pytest, CI/CD |
+| [Hydro-Swarm MoE](./docs/HYDRO_SWARM_MOE.html) | Academic | 35% compute ↓, 22% coverage ↑ | Adaptive AI testing (PARL + IDA-MoE) | MoE, AQUA, LILIA |
 
 ### Featured Research
 
@@ -135,7 +138,7 @@ graph TB
 **[View](./research/notebooks/model-evaluation-software-testing.html)** | **[Download](./research/notebooks/model-evaluation-software-testing.ipynb)**
 </details>
 
-**[View All 15 Research Notebooks →](./research/)** | **[Complete Research Index](./research/notebooks/README.md)**
+**[View All Research →](./research/)** | **[Complete Research Index](./research/notebooks/README.md)**
 
 ---
 
@@ -286,6 +289,7 @@ Found this useful? Here's how you can help:
 ## Learning Resources
 
 ### AI-First Development Guides
+- **[Hydro-Swarm MoE](./docs/HYDRO_SWARM_MOE.html)** - **Fluid architecture for adaptive AI testing** - PARL + IDA-MoE, AQUA uncertainty-aware routing, bridges agent swarms and Mixture of Experts
 - **[QA Agentic Workflows Guide](./docs/QA_AGENTIC_WORKFLOWS_GUIDE.html)** - **Build your own specialized AI agents for daily QA work** - Free solutions, Monday-Friday workflows, chat agents
 - **[AI Advancements Q4 2025](./docs/AI_ADVANCEMENTS_Q4_2025.html)** - **Major AI breakthroughs and their impact on quality engineering** - GPT-5.2, Gemini 3.0, Agentic AI, Multimodal AI analysis
 - **[QA-to-AI Transformation Roadmap](./docs/QA-AI-TRANSFORMATION-ROADMAP.md)** - 🎯 **Transform your QA team to AI-first in 6-12 months** (487% ROI teaser available, 🔒 Full roadmap - Premium)
@@ -494,6 +498,7 @@ Found this useful? Here's how you can help:
 │       ├── automated-testing-patterns.md
 │       └── automated-testing-patterns.html
 ├── docs/                         # Learning resources and guides
+│   ├── HYDRO_SWARM_MOE.html      # Hydro-Swarm MoE research paper
 │   ├── PROMPT-ENGINEERING-GUIDE.md
 │   ├── AI-WORKFLOW-INTEGRATION.md
 │   ├── AI-FIRST-MANIFESTO.md
