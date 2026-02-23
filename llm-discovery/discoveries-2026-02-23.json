@@ -1,0 +1,179 @@
+{
+  "scanDate": "2026-02-23",
+  "models": [
+    {
+      "name": "ReqMind-AI",
+      "description": "ReqMind AI is an AI-powered requirement analysis system built for the HEC Generative AI Training – Cohort 2 Hackathon (Jan–Feb 2026). It uses Large Language Models to extract functional and non-functional requirements, detect ambiguities, identify missing information, generate clarification questions, and produce structured JSON and PDF outputs.",
+      "url": "https://github.com/AsifaSiraj/ReqMind-AI",
+      "stars": 2,
+      "language": "Python",
+      "updated": "2026-02-23T15:22:09Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "AI-cyber-range",
+      "description": "⚔️ Build, break, and secure Large Language Models with our automated OWASP Top 10 cyber range for hands-on AI security training and research.",
+      "url": "https://github.com/WHAZAZA/AI-cyber-range",
+      "stars": 2,
+      "language": "Python",
+      "updated": "2026-02-23T15:13:48Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "secret-hitler-player",
+      "description": "Deception, Persuasion, and Trust: Evaluating Large Language Models in a Complex Hidden Role Game",
+      "url": "https://github.com/ItsNiklas/secret-hitler-player",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-02-23T15:33:23Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "LLMTradingAgents",
+      "description": "LLMTradingAgents is an automated trading system that orchestrates competition between different Large Language Models (LLMs). It uses a 3-agent architecture to analyze market data, propose trades, and validate risk.",
+      "url": "https://github.com/NatBrian/LLMTradingAgents",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-02-23T15:23:52Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "mini-sglang",
+      "description": "🚀 Harness mini-SGLang to power efficient inference for Large Language Models with a lightweight, high-performance framework that prioritizes clarity and speed.",
+      "url": "https://github.com/moham94/mini-sglang",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-02-23T15:27:55Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "AGI_HER_LLM",
+      "description": "🚀 Adapt large language models continuously with task-agnostic methods, enhancing their performance with efficient benchmarks and algorithmic approaches.",
+      "url": "https://github.com/KouseiA/AGI_HER_LLM",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-02-23T15:22:29Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "DeepRWKV-Reasoning",
+      "description": "🔍 Enhance reasoning in Large Language Models with DeepRWKV-Reasoning, using advanced Monte Carlo Tree Search for robust solutions.",
+      "url": "https://github.com/RitoCryo/DeepRWKV-Reasoning",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-02-23T15:17:04Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "LLM-Filter-Probe",
+      "description": "🕵️♂️ Analyze and reverse engineer keyword filtering in large language models to enhance compliance and operational insights.",
+      "url": "https://github.com/Ashik245-commits/LLM-Filter-Probe",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-02-23T15:20:29Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "rd-net",
+      "description": "🌊 Stabilize long-form text generation with RD-Net's simple drift mechanism for frozen large language models, reducing repetition collapse effectively.",
+      "url": "https://github.com/iswarsarma/rd-net",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-02-23T15:12:02Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Academic-Extraction-GenAI-Pipeline",
+      "description": "���� Extract structured academic metadata from research abstracts using multiple Large Language Models and assess their performance effectively.",
+      "url": "https://github.com/sagarr3108/Academic-Extraction-GenAI-Pipeline",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-02-23T15:37:15Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "dp-fusion-lib",
+      "description": "🔒 Enable secure Large Language Model inference with differential privacy for sensitive data protection using DP-Fusion-Lib.",
+      "url": "https://github.com/ofektheking123456/dp-fusion-lib",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-02-23T15:29:30Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "securifine",
+      "description": "🔒 Enhance safety in fine-tuning large language models for cybersecurity with SecuriFine's robust toolkit for measuring and preserving safety alignment.",
+      "url": "https://github.com/Subomi-K/securifine",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-02-23T15:30:20Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Fun-Audio-Chat",
+      "description": "🎤 Build seamless voice interactions with Fun-Audio-Chat, a Large Audio Language Model designed for natural, low-latency communication.",
+      "url": "https://github.com/ANISWAM/Fun-Audio-Chat",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-02-23T15:28:30Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "rankextractplus",
+      "description": "📝 Extract and structure ranked information from unstructured text using RankExtractPlus, a Python package powered by large language models.",
+      "url": "https://github.com/DanielAudu/rankextractplus",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-02-23T15:24:53Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "moderatefocus",
+      "description": "🔍 Analyze community moderation and platform policies with the ModerateFocus Python package, providing clear explanations and insights using a Large Language Model.",
+      "url": "https://github.com/djador13/moderatefocus",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-02-23T15:30:16Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "promptify-summary",
+      "description": "📝 Summarize text effectively with promptify-summary, a Python package that crafts concise summaries using a large language model for consistent results.",
+      "url": "https://github.com/imen276/promptify-summary",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-02-23T15:26:58Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Gym",
+      "description": "🏋️♂️ Build and scale reinforcement learning environments for large language models with NeMo Gym, designed for seamless integration and efficient training.",
+      "url": "https://github.com/Kejlemmn/Gym",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-02-23T15:25:38Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "VaxEval-code",
+      "description": "Multilingual benchmark for evaluating large language models on vaccine knowledge (VaxEval)",
+      "url": "https://github.com/perrychen1405-boop/VaxEval-code",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-02-23T15:20:57Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Eagle",
+      "description": "This is an official PyTorch implementation for \"EAGLE: Expert-Augmented Attention Guidance for Tuning-Free Industrial Anomaly Detection in Multimodal Large Language Models\"",
+      "url": "https://github.com/shengtun/Eagle",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-02-23T15:15:04Z",
+      "source": "GitHub"
+    }
+  ],
+  "papers": [],
+  "totalModels": 19,
+  "totalPapers": 0
+}
