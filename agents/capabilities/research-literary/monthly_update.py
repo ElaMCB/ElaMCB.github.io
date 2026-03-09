@@ -120,25 +120,27 @@ def build_month_section(year: int, month: int, discoveries: list[dict], source_f
     return "\n".join(lines)
 
 
-def update_doc(year: int, month: int, new_section: str) -> bool:
-    """Insert new month section after RESEARCH_AGENT_MONTHLY_START. Skip if that month already exists."""
+def update_doc(year: int, month: int, new_section: str) -> str:
+    """Insert new month section after RESEARCH_AGENT_MONTHLY_START. Skip if that month already exists.
+    Returns: 'inserted' | 'skipped' | 'error'
+    """
     if not DOC_PATH.is_file():
         print(f"ERROR: Doc not found: {DOC_PATH}", file=sys.stderr)
-        return False
+        return "error"
     content = DOC_PATH.read_text(encoding="utf-8", errors="replace")
     mid = month_id(year, month)
     if f'id="month-{mid}"' in content:
         print(f"Section for {month_label(year, month)} already exists; skipping insert.")
-        return False
+        return "skipped"
     if MONTHLY_START not in content or MONTHLY_END not in content:
         print("ERROR: RESEARCH_AGENT_MONTHLY_START/END markers not found.", file=sys.stderr)
-        return False
+        return "error"
     # Insert new section right after START (so newest first). Do not duplicate the marker.
     insert = f"\n{new_section}\n            "
     content = content.replace(MONTHLY_START, MONTHLY_START + insert, 1)
     DOC_PATH.write_text(content, encoding="utf-8")
     print(f"Inserted section for {month_label(year, month)}.")
-    return True
+    return "inserted"
 
 
 def main() -> int:
@@ -151,7 +153,9 @@ def main() -> int:
     else:
         print("No llm-discovery/*.md file found; section will have placeholder text.")
     new_section = build_month_section(year, month, discoveries, discoveries_path)
-    if update_doc(year, month, new_section):
+    result = update_doc(year, month, new_section)
+    # Success: inserted or skipped (section already exists, nothing to do)
+    if result in ("inserted", "skipped"):
         return 0
     return 1
 
