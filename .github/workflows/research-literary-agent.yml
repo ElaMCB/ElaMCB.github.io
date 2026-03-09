@@ -1,0 +1,57 @@
+# Research & Literary Agent – Monthly research digest and publish
+# Runs on the 1st of each month (UTC) and on manual trigger.
+# Updates docs/STATE_OF_AI_TESTING.html with a new month section from llm-discovery.
+
+name: Research & Literary Agent
+
+on:
+  schedule:
+    # 1st of every month at 09:00 UTC
+    - cron: '0 9 1 * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Only run update, do not commit/push'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  research-literary:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run Research & Literary Agent
+        id: run-agent
+        run: |
+          chmod +x agents/capabilities/research-literary/research-literary.sh
+          agents/capabilities/research-literary/research-literary.sh
+          EXIT=$?
+          echo "exit_code=$EXIT" >> $GITHUB_OUTPUT
+          exit $EXIT
+
+      - name: Commit and push updates
+        if: steps.run-agent.outputs.exit_code == '0' && (github.event_name != 'workflow_dispatch' || github.event.inputs.dry_run != 'true')
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/STATE_OF_AI_TESTING.html
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "Research & Literary Agent: monthly update to State of AI Testing [skip ci]"
+          git push origin HEAD:${{ github.ref_name }}

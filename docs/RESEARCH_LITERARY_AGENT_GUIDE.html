@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research &amp; Literary Agent – Guide</title>
+    <meta name="description" content="How the monthly Research & Literary Agent works: research digest, State of AI Testing updates, and scheduling.">
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="canonical" href="https://elamcb.github.io/docs/RESEARCH_LITERARY_AGENT_GUIDE.html">
+    <style>
+        :root { --primary: #0a0a0f; --secondary: #00d4ff; --accent: #7c3aed; --light: #e4e4e7; --card-bg: rgba(15, 15, 23, 0.9); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #533483 100%); color: var(--light); line-height: 1.6; min-height: 100vh; padding: 2rem; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { color: var(--secondary); margin-bottom: 1rem; }
+        h2 { color: var(--secondary); font-size: 1.25rem; margin: 2rem 0 0.75rem; }
+        p, li { margin: 0.5rem 0; }
+        .card { background: var(--card-bg); border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 12px; padding: 1.5rem; margin: 1rem 0; }
+        code { background: rgba(0,0,0,0.3); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+        a { color: var(--secondary); }
+        ul { margin-left: 1.5rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Research &amp; Literary Agent</h1>
+        <p>Your automated research and publishing agent. It runs <strong>monthly</strong> to curate discoveries and update the <a href="STATE_OF_AI_TESTING.html">State of AI Testing</a> doc so you don’t have to initiate research or publish by hand.</p>
+
+        <div class="card">
+            <h2>What it does</h2>
+            <ul>
+                <li><strong>Research:</strong> Uses your latest <code>llm-discovery/</code> markdown file (e.g. <code>discoveries-YYYY-MM-DD.md</code>) as the source of LLM/Gen AI discoveries.</li>
+                <li><strong>Publish:</strong> Inserts a new month section into <code>docs/STATE_OF_AI_TESTING.html</code> with curated items (title, description, link), so the page grows automatically.</li>
+                <li><strong>Schedule:</strong> Runs on the <strong>1st of every month at 09:00 UTC</strong>. On that run it publishes the <em>previous</em> month’s section (e.g. run on 1 April → section “March 2026”).</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>How to run it</h2>
+            <ul>
+                <li><strong>Automatic:</strong> Nothing to do; the workflow runs on the 1st of each month.</li>
+                <li><strong>Manual:</strong> Go to <strong>Actions → Research &amp; Literary Agent → Run workflow</strong>. Optionally check “Only run update, do not commit/push” for a dry run.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>What it needs from you</h2>
+            <ul>
+                <li><strong>Discovery files:</strong> Add (or have another process add) <code>llm-discovery/discoveries-YYYY-MM-DD.md</code> with the usual structure: <code>### N. Title</code>, <code>- **Description**:</code>, <code>- **URL**:</code>. The agent picks the latest file by modification time.</li>
+                <li>If no discovery file exists for the period, the agent still adds a month section with a short “no discoveries” message so the doc stays up to date.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Files and workflow</h2>
+            <ul>
+                <li><strong>Updated doc:</strong> <a href="STATE_OF_AI_TESTING.html">State of AI Testing</a> – broad-titled living doc; no “Q1 2026” in the name.</li>
+                <li><strong>Workflow:</strong> <code>.github/workflows/research-literary-agent.yml</code></li>
+                <li><strong>Script:</strong> <code>agents/capabilities/research-literary/monthly_update.py</code></li>
+            </ul>
+        </div>
+
+        <p style="margin-top: 2rem;"><a href="../index.html">← Back to Portfolio</a> · <a href="STATE_OF_AI_TESTING.html">State of AI Testing</a></p>
+    </div>
+</body>
+</html>

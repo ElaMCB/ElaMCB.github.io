@@ -22,6 +22,24 @@ This document outlines the autonomous agents ecosystem planned for this portfoli
 
 ---
 
+### RLA (Research & Literary Agent)
+**Status**: ✅ Active  
+**Nickname**: RLA  
+**Purpose**: Monthly research digest and automated publish to State of AI Testing
+
+**What It Does:**
+- Runs on the **1st of every month** (09:00 UTC) and on manual trigger
+- Uses the latest `llm-discovery/discoveries-*.md` file as input
+- Parses discoveries (title, description, URL) and builds one new month section
+- Inserts the section into `docs/STATE_OF_AI_TESTING.html` (newest first)
+- Commits and pushes the update so the living doc grows without manual publishing
+
+**Location**: `.github/workflows/research-literary-agent.yml`  
+**Guide**: [Research & Literary Agent Guide](./RESEARCH_LITERARY_AGENT_GUIDE.html)  
+**Output doc**: [State of AI Testing](./STATE_OF_AI_TESTING.html)
+
+---
+
 ## Planned Agents
 
 ### 1. SEO-MA (SEO Monitor Agent)

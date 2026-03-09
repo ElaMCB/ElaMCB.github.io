@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State of AI Testing – Trends &amp; Implications for Quality Engineering</title>
+    
+    <meta name="description" content="Living overview of AI testing trends, research discoveries, and implications for quality engineering. Updated monthly by the Research &amp; Literary Agent.">
+    <meta name="keywords" content="AI testing, state of AI testing, quality engineering, LLM testing, test automation, AI research, testing trends">
+    
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="manifest" href="../images/site.webmanifest">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script data-goatcounter="https://elamcb.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+    <link rel="canonical" href="https://elamcb.github.io/docs/STATE_OF_AI_TESTING.html">
+    <style>
+        :root {
+            --primary: #0a0a0f;
+            --secondary: #00d4ff;
+            --accent: #7c3aed;
+            --neon-blue: #00f5ff;
+            --neon-purple: #bf00ff;
+            --neon-green: #39ff14;
+            --light: #e4e4e7;
+            --dark: #1a1a1f;
+            --card-bg: rgba(15, 15, 23, 0.9);
+            --glass: rgba(255, 255, 255, 0.1);
+            --success: #39ff14;
+            --warning: #ffaa00;
+            --error: #ff4444;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            background-attachment: fixed;
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(120, 58, 237, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header { text-align: center; padding: 4rem 0 2rem; border-bottom: 2px solid var(--secondary); margin-bottom: 3rem; position: relative; }
+        .header-content h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .subtitle { font-size: 1.2rem; color: var(--light); margin-bottom: 2rem; opacity: 0.9; }
+        .nav-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 2rem 0; }
+        .nav-links a {
+            color: var(--light); text-decoration: none; padding: 0.5rem 1rem;
+            border: 2px solid var(--secondary); border-radius: 25px; transition: all 0.3s ease;
+            background: var(--glass); backdrop-filter: blur(10px); font-size: 0.85rem;
+        }
+        .nav-links a:hover { background: var(--secondary); color: var(--primary); transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3); }
+        section { margin: 3rem 0; }
+        h2 { font-size: 2rem; color: var(--secondary); margin: 3rem 0 1.5rem; position: relative; display: inline-block; padding-bottom: 0.5rem; }
+        h2::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--neon-blue), transparent); }
+        h3 { font-size: 1.4rem; color: var(--neon-blue); margin: 2rem 0 1rem; }
+        h4 { font-size: 1.1rem; color: var(--neon-green); margin: 1.5rem 0 0.75rem; }
+        p { margin: 1rem 0; color: var(--light); }
+        .card {
+            background: var(--card-bg); backdrop-filter: blur(15px);
+            border: 2px solid rgba(0, 212, 255, 0.2); border-radius: 15px;
+            padding: 2rem; margin: 2rem 0; transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0, 245, 255, 0.2); border-color: var(--neon-blue); }
+        .highlight-box { background: rgba(0, 245, 255, 0.1); border-left: 4px solid var(--neon-blue); padding: 1.5rem; margin: 1.5rem 0; border-radius: 8px; }
+        .date-badge {
+            display: inline-block;
+            background: rgba(57, 255, 20, 0.2);
+            color: var(--neon-green);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .source-link { color: var(--secondary); text-decoration: none; border-bottom: 1px solid transparent; transition: all 0.3s; }
+        .source-link:hover { color: var(--neon-blue); border-bottom-color: var(--neon-blue); }
+        .discovery-item { margin: 1rem 0; padding: 1rem; background: rgba(124, 58, 237, 0.08); border-radius: 8px; border-left: 3px solid var(--accent); }
+        .discovery-item strong { color: var(--neon-blue); }
+        .agent-badge { font-size: 0.75rem; color: var(--neon-green); opacity: 0.9; margin-top: 1rem; }
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px;
+            background: var(--secondary); color: var(--primary);
+            width: 50px; height: 50px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+            transition: all 0.3s ease; z-index: 1000;
+        }
+        .back-to-top:hover { transform: translateY(-5px) scale(1.1); box-shadow: 0 10px 25px rgba(0, 212, 255, 0.6); }
+        footer { text-align: center; padding: 3rem 0; margin-top: 4rem; border-top: 2px solid var(--secondary); color: var(--light); opacity: 0.8; }
+        @media (max-width: 768px) { .container { width: 95%; padding: 15px; } .header-content h1 { font-size: 1.8rem; } }
+    </style>
+    <script>
+        try {
+            var pagePath = window.location.pathname;
+            var key = 'view_count_' + pagePath;
+            var stored = localStorage.getItem(key);
+            var count = stored ? parseInt(stored) : 0;
+            localStorage.setItem(key, (count + 1).toString());
+            window.pageViewCount = count + 1;
+        } catch (e) {}
+    </script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>State of AI Testing</h1>
+            <p class="subtitle">Trends, research, and implications for quality engineering</p>
+            <div class="nav-links">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../research/"><i class="fas fa-flask"></i> Research</a>
+                <a href="AI_ADVANCEMENTS_Q4_2025.html"><i class="fas fa-chart-line"></i> AI Advancements Q4 2025</a>
+                <a href="RESEARCH_LITERARY_AGENT_GUIDE.html"><i class="fas fa-robot"></i> Research Agent</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section>
+            <div class="card">
+                <h2>Overview</h2>
+                <p>This living document tracks the state of AI testing and quality engineering: emerging tools, research, and practices. It is updated <strong>monthly</strong> by the <strong>Research &amp; Literary Agent</strong>, which curates discoveries from the portfolio's research pipeline and publishes a new section each month.</p>
+                <div class="highlight-box">
+                    <h4>What you'll find here</h4>
+                    <p>Monthly digests of LLM and Gen AI research relevant to testing and QA: new models, tools, papers, and repos. Each section is generated automatically from the latest discovery feed, so the content stays current without manual publishing.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Monthly updates</h2>
+            <p style="margin-bottom: 1.5rem;">Newest first. Sections are added by the Research &amp; Literary Agent on the first of each month.</p>
+            <!-- RESEARCH_AGENT_MONTHLY_START -->
+            <div class="card month-section" id="month-2026-02">
+                <span class="date-badge">February 2026</span>
+                <h3>February 2026</h3>
+                <p>Curated discoveries from the LLM &amp; Gen AI research pipeline relevant to testing and quality engineering.</p>
+                <div class="discovery-item">
+                    <strong>Engram</strong>
+                    <p>Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models</p>
+                    <a href="https://github.com/deepseek-ai/Engram" target="_blank" rel="noopener" class="source-link">Link</a>
+                </div>
+                <div class="discovery-item">
+                    <strong>Spatial-SSRL</strong>
+                    <p>Official release of &quot;Spatial-SSRL: Enhancing Spatial Understanding via Self-Supervised Reinforcement Learning&quot;</p>
+                    <a href="https://github.com/InternLM/Spatial-SSRL" target="_blank" rel="noopener" class="source-link">Link</a>
+                </div>
+                <div class="discovery-item">
+                    <strong>ChatGPT_on_CTF</strong>
+                    <p>We want to see whether ChatGPT or other AI-LLM (Microsoft New_Bing or Google Bard) are able to help the user to go to some test environment to run cmds to solve the CTF problems (Whether the AI large language models can understand the challenge question and capture the question flags)</p>
+                    <a href="https://github.com/LiuYuancheng/ChatGPT_on_CTF" target="_blank" rel="noopener" class="source-link">Link</a>
+                </div>
+                <div class="discovery-item">
+                    <strong>NewAdversarialAttackPaper</strong>
+                    <p>A list of recent adversarial attack and defense papers (including those on large language models)</p>
+                    <a href="https://github.com/shenyizg/NewAdversarialAttackPaper" target="_blank" rel="noopener" class="source-link">Link</a>
+                </div>
+                <div class="discovery-item">
+                    <strong>StillMe-Learning-AI-System-RAG-Foundation</strong>
+                    <p>Self-Evolving RAG System with ChromaDB for continuous knowledge updates (6x daily), designed to overcome Large Language Model data cutoff limitations.</p>
+                    <a href="https://github.com/anhmtk/StillMe-Learning-AI-System-RAG-Foundation" target="_blank" rel="noopener" class="source-link">Link</a>
+                </div>
+                <div class="discovery-item">
+                    <strong>llm-release-action</strong>
+                    <p>GitHub Action that uses LLM to analyze commits, suggest semantic version bumps, and generate multi-audience changelogs</p>
+                    <a href="https://github.com/nosovj/llm-release-action" target="_blank" rel="noopener" class="source-link">Link</a>
+                </div>
+                <div class="discovery-item">
+                    <strong>mcp-github-pr-issue-analyser</strong>
+                    <p>A Model Context Protocol (MCP) application for automated GitHub PR analysis and issue management. Enables LLMs to fetch PR details, analyse diffs, manage issues, and handle releases through a standardised interface</p>
+                    <a href="https://github.com/saidsef/mcp-github-pr-issue-analyser" target="_blank" rel="noopener" class="source-link">Link</a>
+                </div>
+                <div class="discovery-item">
+                    <strong>LLM-Evaluation</strong>
+                    <p>Real-time LLM delay &amp; quality comparison tool built on FastAPI + SSE, tailored for Azure OpenAI. Modular architecture, unified responses/exceptions, env-based config, docs, and automation scripts ready for production release</p>
+                    <a href="https://github.com/YeLiuXiang/LLM-Evaluation" target="_blank" rel="noopener" class="source-link">Link</a>
+                </div>
+                <div class="discovery-item">
+                    <strong>SSFT</strong>
+                    <p>Set Supervised Fine-Tuning (SSFT): Training Large Language Models To Reason In Parallel With Global Forking Tokens (ICLR2026).</p>
+                    <a href="https://github.com/Sheng-J/SSFT" target="_blank" rel="noopener" class="source-link">Link</a>
+                </div>
+                <div class="discovery-item">
+                    <strong>Comfy-Bridge-release</strong>
+                    <p>A desktop tool for inspecting and modifying ComfyUI workflows using LLMs.</p>
+                    <a href="https://github.com/dhawgood/Comfy-Bridge-release" target="_blank" rel="noopener" class="source-link">Link</a>
+                </div>
+                <div class="discovery-item">
+                    <strong>ExFairS</strong>
+                    <p>This repository provides a comprehensive vLLM benchmarking framework for testing large language model performance and fairness across multiple scheduling strategies (ExFairS, VTC, FCFS, Queue-based) with built-in engine management, multi-experiment batch execution, and advanced plotting capabilities.</p>
+                    <a href="https://github.com/dadiaokua/ExFairS" target="_blank" rel="noopener" class="source-link">Link</a>
+                </div>
+                <div class="discovery-item">
+                    <strong>SEDAC-V7.0-Pre-release-Test-Version</strong>
+                    <p>SEDAC is a next-generation framework that dynamically allocates computation during LLM inference. By using entropy-based gating, it routes predictable tokens through shallow subnetworks and sends ambiguous or high-impact tokens to deeper, specialized paths.</p>
+                    <a href="https://github.com/CARBON-XXX/SEDAC-V7.0-Pre-release-Test-Version" target="_blank" rel="noopener" class="source-link">Link</a>
+                </div>
+                <div class="discovery-item">
+                    <strong>agentdeck-preview</strong>
+                    <p>AgentDeck is a research platform for studying AI behavior through game scenarios. Run controlled experiments with LLMs, collect comprehensive behavioral data, and replay matches for analysis. 🚧 Preview release - feedback welcome.</p>
+                    <a href="https://github.com/DiegoZoracKy/agentdeck-preview" target="_blank" rel="noopener" class="source-link">Link</a>
+                </div>
+                <div class="discovery-item">
+                    <strong>dltha_reasoning_v1</strong>
+                    <p>This dataset is the first release from DLTHA Labs, focused on enhancing the logical reasoning and step-by-step problem-solving capabilities of Large Language Models (LLMs).</p>
+                    <a href="https://github.com/DlthaLabs/dltha_reasoning_v1" target="_blank" rel="noopener" class="source-link">Link</a>
+                </div>
+                <div class="discovery-item">
+                    <strong>mcp-nvidia</strong>
+                    <p>MCP server to search across NVIDIA blogs and releases to empower LLMs to better answer NVIDIA specific queries</p>
+                    <a href="https://github.com/bharatr21/mcp-nvidia" target="_blank" rel="noopener" class="source-link">Link</a>
+                </div>
+                <div class="discovery-item">
+                    <strong>GenAI-CAD-CFD-Studio</strong>
+                    <p>🚀 Universal AI-Powered CAD &amp; CFD Platform | Democratizing 3D Design &amp; Simulation | Natural Language → Parametric Models | Build123d + Zoo.dev + Adam.new + OpenFOAM | Solar PV, Test Chambers, Digital Twins &amp; More</p>
+                    <a href="https://github.com/ganeshgowri-ASA/GenAI-CAD-CFD-Studio" target="_blank" rel="noopener" class="source-link">Link</a>
+                </div>
+                <div class="discovery-item">
+                    <strong>LLMfromscratch</strong>
+                    <p>Creating a large language model</p>
+                    <a href="https://github.com/Lanre9799/LLMfromscratch" target="_blank" rel="noopener" class="source-link">Link</a>
+                </div>
+                <div class="discovery-item">
+                    <strong>Academic-Extraction-GenAI-Pipeline</strong>
+                    <p>🔍 Extract structured academic metadata from research abstracts using multiple Large Language Models and assess their performance effectively.</p>
+                    <a href="https://github.com/sagarr3108/Academic-Extraction-GenAI-Pipeline" target="_blank" rel="noopener" class="source-link">Link</a>
+                </div>
+                <div class="discovery-item">
+                    <strong>Source-Code-Security-Audit-Reviewer</strong>
+                    <p>intelligent auditing tool powered by large language models, supporting GPT, . It automatically detects security vulnerabilities, performance issues</p>
+                    <a href="https://github.com/Momentique/Source-Code-Security-Audit-Reviewer" target="_blank" rel="noopener" class="source-link">Link</a>
+                </div>
+                <div class="discovery-item">
+                    <strong>dp-fusion-lib</strong>
+                    <p>🔒 Enable secure Large Language Model inference with differential privacy for sensitive data protection using DP-Fusion-Lib.</p>
+                    <a href="https://github.com/ofektheking123456/dp-fusion-lib" target="_blank" rel="noopener" class="source-link">Link</a>
+                </div>
+                <p class="agent-badge">Source: <code>discoveries-2026-01-26.md</code></p>
+                <p class="agent-badge"><i class="fas fa-robot"></i> Research &amp; Literary Agent – State of AI Testing</p>
+            </div>
+            
+            <div class="card month-section" id="month-2026-03">
+                <span class="date-badge">March 2026</span>
+                <h3>Kickoff</h3>
+                <p>This is the first monthly section. Future sections will be added automatically with curated discoveries from the <code>llm-discovery</code> pipeline. Run the agent manually from Actions or wait for the monthly schedule.</p>
+                <p class="agent-badge"><i class="fas fa-robot"></i> Research &amp; Literary Agent – State of AI Testing</p>
+            </div>
+            <!-- RESEARCH_AGENT_MONTHLY_END -->
+        </section>
+    </div>
+
+    <a href="#" class="back-to-top" title="Back to top"><i class="fas fa-arrow-up"></i></a>
+    <footer>
+        <p>Updated monthly by the <a href="RESEARCH_LITERARY_AGENT_GUIDE.html" style="color: var(--secondary);">Research &amp; Literary Agent</a>.</p>
+        <p><a href="../index.html" style="color: var(--secondary);">← Back to Portfolio</a></p>
+    </footer>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
