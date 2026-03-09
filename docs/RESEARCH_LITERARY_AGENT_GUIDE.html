@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research &amp; Literary Agent – Guide</title>
-    <meta name="description" content="How the monthly Research & Literary Agent works: research digest, State of AI Testing updates, and scheduling.">
+    <title>Research &amp; Literary Agent – Ela MCB Portfolio</title>
+    <meta name="description" content="The Research & Literary Agent is an autonomous workflow that curates AI testing discoveries and keeps the State of AI Testing document updated monthly.">
     <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
     <link rel="canonical" href="https://elamcb.github.io/docs/RESEARCH_LITERARY_AGENT_GUIDE.html">
     <style>
@@ -24,40 +24,25 @@
 <body>
     <div class="container">
         <h1>Research &amp; Literary Agent</h1>
-        <p>Your automated research and publishing agent. It runs <strong>monthly</strong> to curate discoveries and update the <a href="STATE_OF_AI_TESTING.html">State of AI Testing</a> doc so you don’t have to initiate research or publish by hand.</p>
+        <p>The Research &amp; Literary Agent is an autonomous workflow that runs on this portfolio to keep the <a href="STATE_OF_AI_TESTING.html">State of AI Testing</a> document current. It curates LLM and Gen AI research relevant to testing and quality engineering and publishes a new section each month—so the living doc reflects recent tools, papers, and trends without manual updates.</p>
+
+        <div class="card">
+            <h2>Purpose</h2>
+            <p>The agent exists to bridge research and publication: it takes a structured feed of discoveries (new models, tools, repos, and papers), turns it into readable monthly digests, and appends them to the State of AI Testing page. Visitors get an up-to-date view of the AI testing landscape; the portfolio demonstrates automated, agent-driven content maintenance.</p>
+        </div>
 
         <div class="card">
             <h2>What it does</h2>
             <ul>
-                <li><strong>Research:</strong> Uses your latest <code>llm-discovery/</code> markdown file (e.g. <code>discoveries-YYYY-MM-DD.md</code>) as the source of LLM/Gen AI discoveries.</li>
-                <li><strong>Publish:</strong> Inserts a new month section into <code>docs/STATE_OF_AI_TESTING.html</code> with curated items (title, description, link), so the page grows automatically.</li>
-                <li><strong>Schedule:</strong> Runs on the <strong>1st of every month at 09:00 UTC</strong>. On that run it publishes the <em>previous</em> month’s section (e.g. run on 1 April → section “March 2026”).</li>
+                <li><strong>Curates:</strong> Each run uses the latest discovery feed (LLM/Gen AI items with title, description, and link) and selects a set of items for the month.</li>
+                <li><strong>Publishes:</strong> It inserts a new month section into the State of AI Testing doc, with items formatted and linked, so the page grows chronologically (newest first).</li>
+                <li><strong>Runs on a schedule:</strong> The workflow runs on the <strong>1st of every month</strong>. Each run adds the <em>previous</em> calendar month’s section (e.g. a run on 1 April adds the March section).</li>
             </ul>
         </div>
 
         <div class="card">
-            <h2>How to run it</h2>
-            <ul>
-                <li><strong>Automatic:</strong> Nothing to do; the workflow runs on the 1st of each month.</li>
-                <li><strong>Manual:</strong> Go to <strong>Actions → Research &amp; Literary Agent → Run workflow</strong>. Optionally check “Only run update, do not commit/push” for a dry run.</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h2>What it needs from you</h2>
-            <ul>
-                <li><strong>Discovery files:</strong> Add (or have another process add) <code>llm-discovery/discoveries-YYYY-MM-DD.md</code> with the usual structure: <code>### N. Title</code>, <code>- **Description**:</code>, <code>- **URL**:</code>. The agent picks the latest file by modification time.</li>
-                <li>If no discovery file exists for the period, the agent still adds a month section with a short “no discoveries” message so the doc stays up to date.</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h2>Files and workflow</h2>
-            <ul>
-                <li><strong>Updated doc:</strong> <a href="STATE_OF_AI_TESTING.html">State of AI Testing</a> – broad-titled living doc; no “Q1 2026” in the name.</li>
-                <li><strong>Workflow:</strong> <code>.github/workflows/research-literary-agent.yml</code></li>
-                <li><strong>Script:</strong> <code>agents/capabilities/research-literary/monthly_update.py</code></li>
-            </ul>
+            <h2>Why it’s here</h2>
+            <p>This portfolio uses autonomous agents to maintain quality and content—from link health and security checks to CI fixes. The Research &amp; Literary Agent extends that idea to research and writing: it shows how a small, scheduled workflow can keep a long-lived “state of the field” doc fresh and useful without manual publishing.</p>
         </div>
 
         <p style="margin-top: 2rem;"><a href="../index.html">← Back to Portfolio</a> · <a href="STATE_OF_AI_TESTING.html">State of AI Testing</a></p>
