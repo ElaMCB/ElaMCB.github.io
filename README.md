@@ -73,6 +73,7 @@ graph TB
 
 | Research Paper | Type | Key Results | Primary Focus | Tech Stack |
 |----------------|------|-------------|---------------|------------|
+| [40-Prompt Production Gate](./docs/LLM_RED_TEAM_PRODUCTION_GATE_QA.html) | Practical | 40-prompt gate, ≥95% Pass target | LLM red team for QA leaders | Prompt matrix, rubric |
 | [I, QA: Workforce Transformation](./research/notebooks/llm-qa-workforce-transformation.html) | Academic | 70-85% automation by 2028 | QA profession forecasting | Bass Diffusion, Monte Carlo |
 | [Databricks Testing Framework](./research/notebooks/databricks-testing-framework.html) | Practical | 64% time ↓, $1.2M savings | Unified testing platform | Databricks, Delta Lake, MLflow |
 | [Healthcare AI Agents](./research/notebooks/ai-agents-qa-healthcare.html) | Case Study | 487% ROI, 92% coverage | Why use AI agents? | LangChain, Playwright |
@@ -317,6 +318,7 @@ Found this useful? Here's how you can help:
 ### AI-First Development Guides
 - **[Hydro-Swarm MoE](./docs/HYDRO_SWARM_MOE.html)** - **Fluid architecture for adaptive AI testing** - PARL + IDA-MoE, AQUA uncertainty-aware routing, bridges agent swarms and Mixture of Experts
 - **[QA Agentic Workflows Guide](./docs/QA_AGENTIC_WORKFLOWS_GUIDE.html)** - **Build your own specialized AI agents for daily QA work** - Free solutions, Monday-Friday workflows, chat agents
+- **[The 40-Prompt Production Gate](./docs/LLM_RED_TEAM_PRODUCTION_GATE_QA.html)** - **LLM safety & red-teaming for QA leaders** - First sprint: 40 prompts, eight families, scoring rubric, production gate (practical research)
 - **[State of AI Testing](./docs/STATE_OF_AI_TESTING.html)** - **Living overview of AI testing trends for AI builders** - Updated monthly by the [Research & Literary Agent](./docs/RESEARCH_LITERARY_AGENT_GUIDE.html)
 - **[AI Advancements Q4 2025](./docs/AI_ADVANCEMENTS_Q4_2025.html)** - **Major AI breakthroughs and their impact on testing and AI systems** - GPT-5.2, Gemini 3.0, Agentic AI, Multimodal AI analysis
 - **[QA-to-AI Transformation Roadmap](./docs/QA-AI-TRANSFORMATION-ROADMAP.md)** - 🎯 **Transform your QA team to AI-first in 6-12 months** (487% ROI teaser available, 🔒 Full roadmap - Premium)
