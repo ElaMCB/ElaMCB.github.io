@@ -41,7 +41,7 @@ Each section supports either:
 
 ## Manual publish now
 
-**Actions → Community LLM Safety publish → Run workflow → enable “Publish next queued article now”.**
+**Actions → Community LLM Safety publish → Run workflow → enable “Publish next queued article now” (the boolean “force” checkbox).**
 
 ## Files
 

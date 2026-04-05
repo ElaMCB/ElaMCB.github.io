@@ -33,8 +33,17 @@ jobs:
       - name: Publish next article (if due)
         env:
           COMMUNITY_SERIES_SUBDIR: llm-safety-red-team
-          FORCE_PUBLISH: ${{ github.event.inputs.force == 'true' && '1' || '0' }}
-        run: python3 scripts/community_llm_safety_publish.py
+        run: |
+          FORCE_PUBLISH=0
+          if [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ]; then
+            INPUT_FORCE='${{ github.event.inputs.force }}'
+            if [ "${INPUT_FORCE}" = "true" ] || [ "${INPUT_FORCE}" = "True" ]; then
+              FORCE_PUBLISH=1
+            fi
+          fi
+          export FORCE_PUBLISH
+          echo "FORCE_PUBLISH=${FORCE_PUBLISH} (event=${GITHUB_EVENT_NAME})"
+          python3 scripts/community_llm_safety_publish.py
 
       - name: Commit and push updates
         env:
@@ -48,4 +57,5 @@ jobs:
             exit 0
           fi
           git commit -m "Community: publish LLM Safety & Red-Teaming article [skip ci]"
-          git push origin HEAD:${{ github.ref_name }}
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

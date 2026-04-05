@@ -25,6 +25,8 @@ Edit `topics-queue.json` (same section format as the LLM Safety series—see tha
 
 **Actions → Community Ethical AI Frameworks publish → Run workflow → enable “force”** to ignore the 25-day wait.
 
+The workflow maps that checkbox to `FORCE_PUBLISH` correctly (GitHub passes it as a boolean, not the string `true`).
+
 ## Files
 
 | File | Role |
