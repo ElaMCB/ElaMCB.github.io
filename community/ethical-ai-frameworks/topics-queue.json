@@ -1,24 +1,3 @@
 {
-  "topics": [
-    {
-      "slug": "nist-rmf-two-pizza-backlog",
-      "title": "From NIST AI RMF to a Two-Pizza Team Backlog",
-      "dek": "Map Govern, Map, Measure, and Manage to concrete stories so a small team does not drown in abstraction.",
-      "sections": [
-        {
-          "heading": "Govern without a bureaucracy",
-          "paragraphs": [
-            "Pick one accountable owner for AI risk in the product line, one deputy, and a single escalation path. Document that in your wiki and link it from your repo README. That satisfies the spirit of Govern faster than a twelve-person council that never meets."
-          ]
-        },
-        {
-          "heading": "Map and Measure as release gates",
-          "paragraphs": [
-            "Turn Map into an inventory: data sources, model versions, downstream users, and known failure modes. Turn Measure into a short list of metrics or qualitative checks that run before major releases\u2014aligned with whatever you already track for quality and safety.",
-            "Manage is your backlog: mitigations, accepted risks with expiry dates, and incidents that feed the next Map update. Revisit the map when the model, data, or regulation changes\u2014not only at annual compliance time."
-          ]
-        }
-      ]
-    }
-  ]
+  "topics": []
 }

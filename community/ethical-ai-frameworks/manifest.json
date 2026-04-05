@@ -2,11 +2,19 @@
   "seriesTitle": "Ethical AI Frameworks",
   "seriesShortTitle": "Ethical AI Frameworks",
   "hubBackLinkText": "Ethical AI Frameworks hub",
-  "seriesLinePrefix": "Ethical AI Frameworks · Published",
-  "seriesDescription": "Short articles on ethical AI frameworks, governance, and practice—aligned with the Ethical AI Frameworks LinkedIn group.",
+  "seriesLinePrefix": "Ethical AI Frameworks \u00b7 Published",
+  "seriesDescription": "Short articles on ethical AI frameworks, governance, and practice\u2014aligned with the Ethical AI Frameworks LinkedIn group.",
   "intervalDays": 25,
   "lastPublished": "2026-04-05",
   "articles": [
+    {
+      "date": "2026-04-05",
+      "slug": "nist-rmf-two-pizza-backlog",
+      "title": "From NIST AI RMF to a Two-Pizza Team Backlog",
+      "summary": "Map Govern, Map, Measure, and Manage to concrete stories so a small team does not drown in abstraction.",
+      "href": "/community/ethical-ai-frameworks/articles/2026-04-05-nist-rmf-two-pizza-backlog.html",
+      "external": false
+    },
     {
       "date": "2026-04-05",
       "slug": "framework-vs-values-poster",
