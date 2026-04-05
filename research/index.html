@@ -54,6 +54,7 @@
         }
         
         header {
+            clear: both;
             background: rgba(15, 15, 23, 0.9);
             backdrop-filter: blur(10px);
             padding: 2rem 0;
@@ -92,6 +93,31 @@
         .back-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        .community-hub-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(124, 58, 237, 0.35);
+            border: 2px solid var(--accent);
+            color: var(--light);
+            padding: 0.8rem 1.2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .community-hub-btn:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
         }
 
         /* Search and Filter Section */
@@ -757,6 +783,20 @@
                 display: inline-block;
             }
 
+            .community-hub-btn {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin: 0 0 1rem auto;
+                display: inline-flex;
+                float: right;
+                clear: right;
+            }
+
+            .community-hub-btn span {
+                display: none;
+            }
+
             .filter-buttons,
             .difficulty-filter {
                 justify-content: center;
@@ -780,7 +820,8 @@
     <a href="../index.html" class="back-btn">
         <i class="fas fa-arrow-left"></i> Back to Portfolio
     </a>
-    
+    <a href="../community/llm-safety-red-team/" class="community-hub-btn" aria-label="LLM Safety and Red-Teaming series"><i class="fas fa-user-shield"></i> <span>LLM Safety</span></a>
+
     <header>
         <div class="container">
             <h1>AI Research</h1>

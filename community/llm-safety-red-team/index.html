@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LLM Safety &amp; Red-Teaming for QA Leaders | Community Series</title>
-    <meta name="description" content="Dedicated article series for LLM safety and red-teaming practitioners. New pieces publish on a three-week cadence—share each URL in your LinkedIn group.">
+    <meta name="description" content="Dedicated article series for LLM safety and red-teaming for QA leaders. New pieces publish on a regular cadence.">
     <link rel="icon" type="image/svg+xml" href="../../images/favicon.svg">
     <link rel="canonical" href="https://elamcb.github.io/community/llm-safety-red-team/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -27,32 +27,72 @@
             line-height: 1.7;
             min-height: 100vh;
         }
-        .container { width: 90%; max-width: 720px; margin: 0 auto; padding: 2.5rem 1rem 4rem; }
-        .back {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            color: var(--secondary); text-decoration: none; font-weight: 600; margin-bottom: 2rem;
+        .container { width: 90%; max-width: 1100px; margin: 0 auto; padding-left: 1rem; padding-right: 1rem; }
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--secondary);
+            color: #0a0a0f;
+            padding: 0.8rem 1.2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        .back:hover { text-decoration: underline; }
-        header { margin-bottom: 2.5rem; }
-        h1 {
-            font-size: 2rem;
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-            line-height: 1.2;
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
         }
-        .lede { font-size: 1.1rem; opacity: 0.95; margin-bottom: 1.25rem; }
-        .meta {
-            background: rgba(0, 212, 255, 0.1);
-            border-left: 4px solid var(--secondary);
-            padding: 1.25rem 1.5rem;
-            border-radius: 8px;
-            font-size: 0.95rem;
+        .research-nav-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(124, 58, 237, 0.35);
+            border: 2px solid var(--accent);
+            color: var(--light);
+            padding: 0.8rem 1.2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .research-nav-btn:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
+        }
+        .site-header {
+            clear: both;
+            background: rgba(15, 15, 23, 0.9);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 2px solid var(--neon-blue);
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.2);
             margin-bottom: 2rem;
         }
-        .meta strong { color: var(--neon-green); }
+        .site-header h1 {
+            font-size: 2.5rem;
+            color: var(--light);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            margin-bottom: 0.5rem;
+        }
+        .site-header .subtitle {
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+        main.container { padding-top: 1rem; padding-bottom: 4rem; }
+        .lede { font-size: 1.1rem; opacity: 0.95; margin-bottom: 2rem; line-height: 1.75; }
         #article-list { list-style: none; }
         #article-list li {
             background: var(--card-bg);
@@ -68,25 +108,51 @@
         #article-list .sum { opacity: 0.9; font-size: 0.95rem; }
         .loading { opacity: 0.7; }
         .err { color: #ff6b6b; }
+        @media (max-width: 768px) {
+            .back-btn, .research-nav-btn {
+                padding: 0.55rem 0.85rem;
+                font-size: 0.85rem;
+            }
+            .back-btn {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 1rem;
+                display: inline-block;
+            }
+            .research-nav-btn {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin: 0 0 1rem auto;
+                float: right;
+                clear: right;
+            }
+            .research-nav-btn span { display: none; }
+            .site-header h1 { font-size: 2rem; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../../index.html" class="back"><i class="fas fa-home"></i> Portfolio home</a>
-        <header>
+    <a href="../../index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+    <a href="../../research/" class="research-nav-btn"><i class="fas fa-flask"></i> <span>AI Research</span></a>
+
+    <header class="site-header">
+        <div class="container header-inner">
             <h1 id="series-title">LLM Safety &amp; Red-Teaming for QA Leaders</h1>
-            <p class="lede" id="series-desc">Loading…</p>
-            <div class="meta">
-                <p><strong>LinkedIn group workflow:</strong> This page is the canonical home for articles you share in your group. Automation adds a new article here about every <strong>21 days</strong> when the topics queue has entries. <strong>Posting inside LinkedIn</strong> still has to be manual—LinkedIn does not offer a reliable public API for group posts—so copy the new URL from here into the group when each piece goes live.</p>
-            </div>
-        </header>
+            <p class="subtitle">Dedicated series · same spirit as AI Research, focused on safety &amp; red-teaming</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <p class="lede" id="series-desc">Loading…</p>
         <h2 style="color: var(--secondary); font-size: 1.3rem; margin-bottom: 1rem;"><i class="fas fa-newspaper"></i> Articles</h2>
         <ul id="article-list" class="loading"><li>Loading article list…</li></ul>
         <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
             <a href="../../docs/LLM_RED_TEAM_PRODUCTION_GATE_QA.html" style="color: var(--secondary);">40-Prompt Production Gate</a> ·
-            <a href="../../research/" style="color: var(--secondary);">Full research index</a>
+            <a href="../../research/" style="color: var(--secondary);">Full AI research index</a>
         </p>
-    </div>
+    </main>
     <script>
         (function() {
             var list = document.getElementById('article-list');
