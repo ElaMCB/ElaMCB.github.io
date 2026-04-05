@@ -10,6 +10,7 @@ This folder is the **only** place new articles for your LinkedIn group (“LLM S
 
 - The workflow [Community LLM Safety publish](../../.github/workflows/community-llm-safety-publish.yml) is scheduled **daily** (UTC). The script publishes **at most one** article every **`intervalDays`** (default **21**, set in `manifest.json`) by comparing today to `lastPublished`.
 - If `topics-queue.json` has at least one topic and the interval has passed, it generates a new HTML file under `articles/`, updates `manifest.json`, and commits to `main`.
+- The Python script is shared with the [Ethical AI Frameworks](../ethical-ai-frameworks/) hub; CI sets `COMMUNITY_SERIES_SUBDIR=llm-safety-red-team`.
 
 ## Who writes the articles? (automation vs agent)
 

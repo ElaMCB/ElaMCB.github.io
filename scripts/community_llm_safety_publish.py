@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """
-Publish the next article for community/llm-safety-red-team/ every intervalDays (default 21).
+Publish the next article for a community series under community/<subdir>/.
+
+Set COMMUNITY_SERIES_SUBDIR (e.g. llm-safety-red-team, ethical-ai-frameworks).
+Defaults to llm-safety-red-team for backward compatibility.
+
+intervalDays and copy hooks live in that folder's manifest.json.
 Run from repository root. Set FORCE_PUBLISH=1 to ignore the date interval (manual workflow).
 """
 
@@ -9,12 +14,17 @@ from __future__ import annotations
 import html
 import json
 import os
+import re
 import sys
 from datetime import date
 from pathlib import Path
 
 REPO_ROOT = Path(os.environ.get("GITHUB_WORKSPACE", ".")).resolve()
-BASE = REPO_ROOT / "community" / "llm-safety-red-team"
+_SUB = os.environ.get("COMMUNITY_SERIES_SUBDIR", "llm-safety-red-team").strip().strip("/\\")
+if not re.match(r"^[a-zA-Z0-9][a-zA-Z0-9._-]*$", _SUB):
+    print("ERROR: COMMUNITY_SERIES_SUBDIR must be a single safe path segment", file=sys.stderr)
+    sys.exit(1)
+BASE = REPO_ROOT / "community" / _SUB
 MANIFEST_PATH = BASE / "manifest.json"
 TOPICS_PATH = BASE / "topics-queue.json"
 ARTICLES_DIR = BASE / "articles"
@@ -112,20 +122,29 @@ def article_html(
     sections: list[dict],
     slug: str,
     pub_date: str,
+    *,
+    series_subdir: str,
+    series_short_title: str,
+    hub_back_label: str,
+    series_line_prefix: str,
 ) -> str:
     safe_title = html.escape(title)
     safe_dek = html.escape(dek)
+    safe_short = html.escape(series_short_title)
+    safe_hub = html.escape(hub_back_label)
+    safe_prefix = html.escape(series_line_prefix)
     body_html = "\n".join(section_html(s) for s in sections)
+    canonical = f"https://elamcb.github.io/community/{series_subdir}/articles/{pub_date}-{slug}.html"
 
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{safe_title} | LLM Safety &amp; Red-Teaming</title>
+    <title>{safe_title} | {safe_short}</title>
     <meta name="description" content="{safe_dek}">
     <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
-    <link rel="canonical" href="https://elamcb.github.io/community/llm-safety-red-team/articles/{pub_date}-{slug}.html">
+    <link rel="canonical" href="{html.escape(canonical)}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script data-goatcounter="https://elamcb.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
     <style>{STEEL_ARTICLE_CSS}
@@ -133,9 +152,9 @@ def article_html(
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back"><i class="fas fa-arrow-left"></i> LLM Safety &amp; Red-Teaming hub</a>
+        <a href="../index.html" class="back"><i class="fas fa-arrow-left"></i> {safe_hub}</a>
         <header>
-            <p class="series"><i class="fas fa-users"></i> Series for QA leaders · Published {html.escape(pub_date)}</p>
+            <p class="series"><i class="fas fa-users"></i> {safe_prefix} {html.escape(pub_date)}</p>
             <h1>{safe_title}</h1>
             <p class="dek">{safe_dek}</p>
         </header>
@@ -159,6 +178,10 @@ def main() -> int:
     manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
     topics_data = json.loads(TOPICS_PATH.read_text(encoding="utf-8"))
     queue = topics_data.get("topics") or []
+
+    series_short_title = (manifest.get("seriesShortTitle") or manifest.get("seriesTitle") or "Community series")[:120]
+    hub_back_label = manifest.get("hubBackLinkText") or "Community hub"
+    series_line_prefix = manifest.get("seriesLinePrefix") or "Community article · Published"
 
     if not queue:
         print("No topics in queue; nothing to publish.")
@@ -188,7 +211,17 @@ def main() -> int:
         print(f"ERROR: {out_path} already exists", file=sys.stderr)
         return 1
 
-    html_out = article_html(title, dek, sections, slug, pub_date)
+    html_out = article_html(
+        title,
+        dek,
+        sections,
+        slug,
+        pub_date,
+        series_subdir=_SUB,
+        series_short_title=series_short_title,
+        hub_back_label=hub_back_label,
+        series_line_prefix=series_line_prefix,
+    )
     out_path.write_text(html_out, encoding="utf-8")
 
     summary = dek[:200] + ("…" if len(dek) > 200 else "")
@@ -199,7 +232,7 @@ def main() -> int:
             "slug": slug,
             "title": title,
             "summary": summary,
-            "href": f"/community/llm-safety-red-team/articles/{filename}",
+            "href": f"/community/{_SUB}/articles/{filename}",
             "external": False,
         },
     )
@@ -208,7 +241,7 @@ def main() -> int:
     MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     TOPICS_PATH.write_text(json.dumps({"topics": queue}, indent=2) + "\n", encoding="utf-8")
 
-    public_url = f"https://elamcb.github.io/community/llm-safety-red-team/articles/{filename}"
+    public_url = f"https://elamcb.github.io/community/{_SUB}/articles/{filename}"
     print(f"Published: {public_url}")
     return 0
 

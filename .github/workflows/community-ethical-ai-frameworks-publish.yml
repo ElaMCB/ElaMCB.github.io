@@ -1,14 +1,14 @@
-# Publishes the next article for community/llm-safety-red-team/ every intervalDays (default 21 in manifest).
+# Publishes the next article for community/ethical-ai-frameworks/ every intervalDays (default 25 in manifest).
 
-name: Community LLM Safety publish
+name: Community Ethical AI Frameworks publish
 
 on:
   schedule:
-    - cron: '0 15 * * *'
+    - cron: '30 15 * * *'
   workflow_dispatch:
     inputs:
       force:
-        description: 'Publish next queued article now (ignore 21-day interval)'
+        description: 'Publish next queued article now (ignore interval)'
         required: false
         default: false
         type: boolean
@@ -32,13 +32,13 @@ jobs:
 
       - name: Publish next article (if due)
         env:
-          COMMUNITY_SERIES_SUBDIR: llm-safety-red-team
+          COMMUNITY_SERIES_SUBDIR: ethical-ai-frameworks
           FORCE_PUBLISH: ${{ github.event.inputs.force == 'true' && '1' || '0' }}
         run: python3 scripts/community_llm_safety_publish.py
 
       - name: Commit and push updates
         env:
-          SERIES_DIR: community/llm-safety-red-team
+          SERIES_DIR: community/ethical-ai-frameworks
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -47,5 +47,5 @@ jobs:
             echo "No publish this run (interval not reached, empty queue, or already up to date)."
             exit 0
           fi
-          git commit -m "Community: publish LLM Safety & Red-Teaming article [skip ci]"
+          git commit -m "Community: publish Ethical AI Frameworks article [skip ci]"
           git push origin HEAD:${{ github.ref_name }}

@@ -1,5 +1,8 @@
 {
   "seriesTitle": "LLM Safety & Red-Teaming for QA Leaders",
+  "seriesShortTitle": "LLM Safety & Red-Teaming",
+  "hubBackLinkText": "LLM Safety & Red-Teaming hub",
+  "seriesLinePrefix": "LLM Safety & Red-Teaming for QA leaders · Published",
   "seriesDescription": "Practical articles on a regular cadence for QA leaders building LLM safety and red-teaming practice.",
   "intervalDays": 21,
   "lastPublished": "2026-04-05",

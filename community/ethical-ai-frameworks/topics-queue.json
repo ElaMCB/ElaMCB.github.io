@@ -1,0 +1,44 @@
+{
+  "topics": [
+    {
+      "slug": "framework-vs-values-poster",
+      "title": "A Framework Is Not a Values Poster: What Teams Should Document",
+      "dek": "If it does not change a ticket, a test, or a sign-off, it is wallpaper. Here is the minimum structure that counts as a framework for shipping AI.",
+      "sections": [
+        {
+          "heading": "Three artifacts that make it real",
+          "paragraphs": [
+            "A useful ethical AI framework ties abstract principles to decisions someone actually makes: who approves a new model or feature, what evidence they need, and what happens when a check fails. Without those hooks, \"be fair\" and \"respect privacy\" are slogans, not engineering constraints.",
+            "Start with a one-page decision map: intake (idea or model change), owners (named roles, not \"the org\"), required reviews (bias, privacy, safety, human oversight), and exit criteria for production. That map is your framework in practice; the glossy diagram is optional."
+          ]
+        },
+        {
+          "heading": "Why posters still appear",
+          "paragraphs": [
+            "Leadership often asks for visible ethics commitments before process exists. That is fine as long as you file the poster next to a living checklist in Jira or your release tool. The LinkedIn audience for ethical AI frameworks usually wants both: language they can rally around and mechanics they can audit."
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "nist-rmf-two-pizza-backlog",
+      "title": "From NIST AI RMF to a Two-Pizza Team Backlog",
+      "dek": "Map Govern, Map, Measure, and Manage to concrete stories so a small team does not drown in abstraction.",
+      "sections": [
+        {
+          "heading": "Govern without a bureaucracy",
+          "paragraphs": [
+            "Pick one accountable owner for AI risk in the product line, one deputy, and a single escalation path. Document that in your wiki and link it from your repo README. That satisfies the spirit of Govern faster than a twelve-person council that never meets."
+          ]
+        },
+        {
+          "heading": "Map and Measure as release gates",
+          "paragraphs": [
+            "Turn Map into an inventory: data sources, model versions, downstream users, and known failure modes. Turn Measure into a short list of metrics or qualitative checks that run before major releases—aligned with whatever you already track for quality and safety.",
+            "Manage is your backlog: mitigations, accepted risks with expiry dates, and incidents that feed the next Map update. Revisit the map when the model, data, or regulation changes—not only at annual compliance time."
+          ]
+        }
+      ]
+    }
+  ]
+}

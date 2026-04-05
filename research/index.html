@@ -95,10 +95,22 @@
             box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
         }
 
-        .community-hub-btn {
+        .top-community-links {
             position: fixed;
             top: 20px;
             right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .top-community-links .community-hub-btn {
+            position: static;
+        }
+
+        .community-hub-btn {
             background: rgba(124, 58, 237, 0.35);
             border: 2px solid var(--accent);
             color: var(--light);
@@ -107,7 +119,6 @@
             text-decoration: none;
             font-weight: bold;
             transition: all 0.3s ease;
-            z-index: 1000;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
@@ -783,14 +794,16 @@
                 display: inline-block;
             }
 
-            .community-hub-btn {
+            .top-community-links {
                 position: relative;
-                top: 0;
-                right: 0;
-                margin: 0 0 1rem auto;
-                display: inline-flex;
                 float: right;
                 clear: right;
+                margin: 0 0 1rem auto;
+                align-items: flex-end;
+            }
+
+            .top-community-links .community-hub-btn {
+                position: relative;
             }
 
             .community-hub-btn span {
@@ -820,7 +833,10 @@
     <a href="../index.html" class="back-btn">
         <i class="fas fa-arrow-left"></i> Back to Portfolio
     </a>
-    <a href="../community/llm-safety-red-team/" class="community-hub-btn" aria-label="LLM Safety and Red-Teaming series"><i class="fas fa-user-shield"></i> <span>LLM Safety</span></a>
+    <div class="top-community-links">
+        <a href="../community/llm-safety-red-team/" class="community-hub-btn" aria-label="LLM Safety and Red-Teaming series"><i class="fas fa-user-shield"></i> <span>LLM Safety</span></a>
+        <a href="../community/ethical-ai-frameworks/" class="community-hub-btn" aria-label="Ethical AI Frameworks community series"><i class="fas fa-balance-scale"></i> <span>Ethical AI</span></a>
+    </div>
 
     <header>
         <div class="container">
