@@ -188,7 +188,13 @@ def main() -> int:
         return 0
 
     interval = int(manifest.get("intervalDays") or 21)
-    last = manifest.get("lastPublished") or "1970-01-01"
+    published_list = manifest.get("articles") or []
+    # No articles yet for this series: ignore lastPublished so the first post is not blocked
+    # by a placeholder date copied from another hub or set at bootstrap.
+    if not published_list:
+        last = "1970-01-01"
+    else:
+        last = manifest.get("lastPublished") or "1970-01-01"
 
     if not FORCE and days_since(last) < interval:
         print(
