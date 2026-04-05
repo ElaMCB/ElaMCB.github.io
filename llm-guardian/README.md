@@ -274,7 +274,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## 👤 Author
 
-**Ela MCB** - AI-First Quality Engineer
+**Ela MCB** — AI-first AI engineer
 - Portfolio: [https://elamcb.github.io](https://elamcb.github.io)
 - LinkedIn: [https://linkedin.com/in/elenamereanu](https://linkedin.com/in/elenamereanu)
 - GitHub: [https://github.com/ElaMCB](https://github.com/ElaMCB)

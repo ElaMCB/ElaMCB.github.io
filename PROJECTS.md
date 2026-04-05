@@ -1,6 +1,6 @@
 # All Projects - Elena Mereanu
 
-Complete overview of all projects and frameworks developed as part of the AI-First Quality Engineering portfolio.
+Complete overview of all projects and frameworks developed as part of this AI-first AI engineering portfolio.
 
 ## Production Frameworks
 

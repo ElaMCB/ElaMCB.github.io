@@ -1,10 +1,10 @@
-# [Elena Mereanu - AI-First Quality Engineer](https://elamcb.github.io)
+# [Elena Mereanu — AI-first AI Engineer](https://elamcb.github.io)
 
 <!-- UAA manual trigger - Last test: 2025-12-26 21:00 -->
 
 ![Playwright Tests](https://github.com/ElaMCB/ElaMCB.github.io/actions/workflows/playwright-tests.yml/badge.svg?branch=main&t=1)
 
-> Building reliable AI systems through rigorous testing and automation
+> Building intelligent systems with LLMs, MCP, and agents—rigorous, production-minded, AI-first
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-Live-green?style=for-the-badge&logo=github-pages)](https://elamcb.github.io)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/elenamereanu)
@@ -317,8 +317,8 @@ Found this useful? Here's how you can help:
 ### AI-First Development Guides
 - **[Hydro-Swarm MoE](./docs/HYDRO_SWARM_MOE.html)** - **Fluid architecture for adaptive AI testing** - PARL + IDA-MoE, AQUA uncertainty-aware routing, bridges agent swarms and Mixture of Experts
 - **[QA Agentic Workflows Guide](./docs/QA_AGENTIC_WORKFLOWS_GUIDE.html)** - **Build your own specialized AI agents for daily QA work** - Free solutions, Monday-Friday workflows, chat agents
-- **[State of AI Testing](./docs/STATE_OF_AI_TESTING.html)** - **Living overview of AI testing trends and implications for quality engineering** - Updated monthly by the [Research & Literary Agent](./docs/RESEARCH_LITERARY_AGENT_GUIDE.html)
-- **[AI Advancements Q4 2025](./docs/AI_ADVANCEMENTS_Q4_2025.html)** - **Major AI breakthroughs and their impact on quality engineering** - GPT-5.2, Gemini 3.0, Agentic AI, Multimodal AI analysis
+- **[State of AI Testing](./docs/STATE_OF_AI_TESTING.html)** - **Living overview of AI testing trends for AI builders** - Updated monthly by the [Research & Literary Agent](./docs/RESEARCH_LITERARY_AGENT_GUIDE.html)
+- **[AI Advancements Q4 2025](./docs/AI_ADVANCEMENTS_Q4_2025.html)** - **Major AI breakthroughs and their impact on testing and AI systems** - GPT-5.2, Gemini 3.0, Agentic AI, Multimodal AI analysis
 - **[QA-to-AI Transformation Roadmap](./docs/QA-AI-TRANSFORMATION-ROADMAP.md)** - 🎯 **Transform your QA team to AI-first in 6-12 months** (487% ROI teaser available, 🔒 Full roadmap - Premium)
 - **[Prompt Engineering Guide](./docs/PROMPT-ENGINEERING-GUIDE.md)** - Master effective AI prompting techniques
 - **[AI Workflow Integration](./docs/AI-WORKFLOW-INTEGRATION.md)** - Integrate AI into daily development workflows  
@@ -604,7 +604,7 @@ Every technique in our guides was used to build this portfolio:
 - **Advanced AI frameworks** (RAG, MCP, LLM testing) implemented with AI assistance
 - **Production-ready CI/CD** pipeline configured with AI guidance
 
-**Perfect for**: Developers wanting to 10x their productivity, QA engineers transitioning to AI-first practices, and teams adopting AI-assisted development workflows.
+**Perfect for**: Developers and AI engineers who want to ship faster with AI-first workflows, and teams adopting LLM- and agent-based tooling.
 
 ## Repository Activity
 [![GitHub Activity](https://github-readme-activity-graph.vercel.app/graph?username=ElaMCB&repo=ElaMCB.github.io&theme=react-dark)](https://github.com/ElaMCB/ElaMCB.github.io/graphs/commit-activity)
@@ -617,7 +617,7 @@ MIT License - feel free to use this template for your own portfolio!
 @portfolio{elamcb2025,
     address = {USA},
     author = {Elena Mereanu},
-    title = {{AI-First Quality Engineering Portfolio}},
+    title = {{AI-First AI Engineering Portfolio}},
     url = {https://elamcb.github.io},
     linkedin = {https://linkedin.com/in/elenamereanu},
     github = {https://github.com/ElaMCB},

@@ -1,4 +1,4 @@
-# Contributing to AI-First Quality Engineering Portfolio
+# Contributing to AI-First AI Engineering Portfolio
 
 Thank you for your interest in contributing! This project demonstrates AI-First development practices and welcomes contributions from the community.
 

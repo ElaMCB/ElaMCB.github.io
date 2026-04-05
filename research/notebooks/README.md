@@ -185,7 +185,7 @@ Comprehensive Jupyter notebooks exploring AI applications in software testing, q
 
 ## 📬 Connect
 
-**Author:** Ela MCB - AI-First Quality Engineer  
+**Author:** Ela MCB — AI-first AI engineer  
 **Portfolio:** [elamcb.github.io](https://elamcb.github.io)  
 **GitHub:** [@ElaMCB](https://github.com/ElaMCB)  
 **LinkedIn:** [linkedin.com/in/elenamereanu](https://linkedin.com/in/elenamereanu)

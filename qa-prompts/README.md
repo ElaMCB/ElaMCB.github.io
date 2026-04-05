@@ -73,7 +73,7 @@ Found a useful prompt? Have an improvement? Please contribute!
 
 ## Contact
 
-Created by [Ela MCB](https://github.com/ElaMCB) - QA Lead specializing in AI-augmented test automation
+Created by [Ela MCB](https://github.com/ElaMCB) — AI-first AI engineer focused on intelligent automation
 
 - **Portfolio**: [https://elamcb.github.io](https://elamcb.github.io)
 - **LinkedIn**: [https://linkedin.com/in/elenamereanu](https://linkedin.com/in/elenamereanu)
