@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Framework Is Not a Values Poster: What Teams Should Document | Ethical AI Frameworks</title>
-    <meta name="description" content="If it does not change a ticket, a test, or a sign-off, it is wallpaper. Here is the minimum structure that counts as a framework for shipping AI.">
+    <meta name="description" content="Turn ethics from wallpaper into something auditors—and engineers—can trace: decision maps, owners, evidence, and the one question that exposes empty frameworks.">
     <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
     <link rel="canonical" href="https://elamcb.github.io/community/ethical-ai-frameworks/articles/2026-04-05-framework-vs-values-poster.html">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -18,15 +18,16 @@
             --steel-dim: rgba(91, 127, 184, 0.35);
             --panel: rgba(26, 26, 46, 0.55);
             --card-bg: rgba(15, 15, 23, 0.88);
+            --glow: rgba(91, 127, 184, 0.12);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', 'Monaco', monospace; }
         body {
             background: var(--bg);
             color: var(--text);
-            line-height: 1.8;
+            line-height: 1.75;
             min-height: 100vh;
         }
-        .container { width: 90%; max-width: 800px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+        .container { width: 92%; max-width: 820px; margin: 0 auto; padding: 2rem 1rem 4rem; }
         .back {
             display: inline-flex;
             align-items: center;
@@ -37,7 +38,7 @@
             border-radius: 8px;
             color: var(--steel);
             text-decoration: none;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             font-weight: bold;
             transition: background 0.2s ease, color 0.2s ease;
         }
@@ -45,41 +46,265 @@
             background: rgba(91, 127, 184, 0.32);
             color: var(--steel-bright);
         }
-        header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--steel-dim); }
-        h1 {
-            font-size: 1.85rem;
-            color: var(--steel);
-            text-shadow: 0 0 20px rgba(91, 127, 184, 0.18);
-            margin-bottom: 0.75rem;
+        header {
+            margin-bottom: 1.75rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--steel-dim);
+            position: relative;
         }
-        .dek { font-size: 1.05rem; opacity: 0.92; color: rgba(228, 228, 231, 0.9); }
-        .series { font-size: 0.85rem; color: var(--steel-bright); margin-top: 1rem; }
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--steel), transparent);
+            opacity: 0.9;
+        }
+        h1 {
+            font-size: clamp(1.35rem, 4vw, 1.95rem);
+            color: var(--steel);
+            text-shadow: 0 0 24px rgba(91, 127, 184, 0.2);
+            margin-bottom: 0.85rem;
+            line-height: 1.25;
+        }
+        .dek { font-size: 1.05rem; opacity: 0.93; color: rgba(228, 228, 231, 0.92); max-width: 38em; }
+        .series { font-size: 0.82rem; color: var(--steel-bright); margin-top: 1rem; letter-spacing: 0.02em; }
+        .lead-band {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--steel);
+            margin-bottom: 0.6rem;
+            opacity: 0.85;
+        }
         .content {
             background: var(--panel);
             border: 1px solid var(--steel-dim);
-            border-radius: 10px;
-            padding: 2rem;
+            border-radius: 12px;
+            padding: 2rem 1.75rem;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
         }
-        .content h2 { color: var(--steel); font-size: 1.2rem; margin: 2rem 0 1rem; }
+        .content h2 {
+            color: var(--steel-bright);
+            font-size: 1.15rem;
+            margin: 2.25rem 0 1rem;
+            padding-left: 0.65rem;
+            border-left: 3px solid var(--steel);
+        }
         .content h2:first-of-type { margin-top: 0; }
-        .content p { margin-bottom: 1rem; text-align: justify; color: rgba(228, 228, 231, 0.92); }
-
+        .content h3 {
+            color: var(--steel);
+            font-size: 0.98rem;
+            margin: 1.5rem 0 0.65rem;
+        }
+        .content p { margin-bottom: 1.05rem; text-align: justify; color: rgba(228, 228, 231, 0.9); }
+        .content ul, .content ol { margin: 1rem 0 1.25rem 1.25rem; color: rgba(228, 228, 231, 0.88); }
+        .content li { margin-bottom: 0.55rem; }
+        .pullquote {
+            margin: 1.75rem 0;
+            padding: 1.25rem 1.35rem;
+            background: var(--glow);
+            border-left: 4px solid var(--steel);
+            border-radius: 0 8px 8px 0;
+            font-size: 1.02rem;
+            color: var(--steel-bright);
+            font-style: italic;
+        }
+        .callout {
+            margin: 1.5rem 0;
+            padding: 1rem 1.15rem;
+            background: rgba(0, 0, 0, 0.28);
+            border: 1px dashed var(--steel-dim);
+            border-radius: 8px;
+            font-size: 0.92rem;
+        }
+        .callout strong { color: var(--steel-bright); }
+        .steps {
+            display: grid;
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+            counter-reset: step;
+        }
+        .step {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1rem;
+            align-items: start;
+            padding: 1rem 1.1rem;
+            background: rgba(0, 0, 0, 0.22);
+            border-radius: 8px;
+            border: 1px solid rgba(91, 127, 184, 0.2);
+        }
+        .step-num {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 6px;
+            background: rgba(91, 127, 184, 0.25);
+            color: var(--steel-bright);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .step-body { font-size: 0.92rem; color: rgba(228, 228, 231, 0.9); }
+        .step-body strong { color: var(--steel-bright); }
+        table.compare {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.82rem;
+            border: 1px solid var(--steel-dim);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        table.compare th, table.compare td {
+            padding: 0.65rem 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(91, 127, 184, 0.15);
+            vertical-align: top;
+        }
+        table.compare th {
+            background: rgba(91, 127, 184, 0.22);
+            color: var(--steel-bright);
+            font-weight: bold;
+        }
+        table.compare tr:last-child td { border-bottom: none; }
+        table.compare td:first-child { color: var(--steel); font-weight: bold; width: 34%; }
+        .checklist {
+            list-style: none;
+            margin: 1.25rem 0;
+            padding: 0;
+        }
+        .checklist li {
+            position: relative;
+            padding-left: 1.85rem;
+            margin-bottom: 0.75rem;
+            color: rgba(228, 228, 231, 0.9);
+        }
+        .checklist li::before {
+            content: '\2713';
+            position: absolute;
+            left: 0;
+            color: var(--steel);
+            font-weight: bold;
+        }
+        hr.faint {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, var(--steel-dim), transparent);
+            margin: 2rem 0;
+        }
+        .footer-line {
+            margin-top: 2rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--steel-dim);
+            font-size: 0.88rem;
+            color: rgba(228, 228, 231, 0.65);
+        }
+        @media (max-width: 560px) {
+            .content { padding: 1.35rem 1.1rem; }
+            table.compare { font-size: 0.76rem; }
+            table.compare th, table.compare td { padding: 0.5rem; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <a href="../index.html" class="back"><i class="fas fa-arrow-left"></i> Ethical AI Frameworks hub</a>
         <header>
+            <p class="lead-band"><i class="fas fa-scale-balanced"></i> Field note · ethics that ships</p>
             <p class="series"><i class="fas fa-users"></i> Ethical AI Frameworks · Published 2026-04-05</p>
             <h1>A Framework Is Not a Values Poster: What Teams Should Document</h1>
-            <p class="dek">If it does not change a ticket, a test, or a sign-off, it is wallpaper. Here is the minimum structure that counts as a framework for shipping AI.</p>
+            <p class="dek">If it does not change a ticket, a test, or a sign-off, it is wallpaper. Below is a sharper way to separate slogans from something auditors—and your own engineers—can actually trace.</p>
         </header>
         <article class="content">
-<h2>Three artifacts that make it real</h2>
-<p>A useful ethical AI framework ties abstract principles to decisions someone actually makes: who approves a new model or feature, what evidence they need, and what happens when a check fails. Without those hooks, &quot;be fair&quot; and &quot;respect privacy&quot; are slogans, not engineering constraints.</p>
-<p>Start with a one-page decision map: intake (idea or model change), owners (named roles, not &quot;the org&quot;), required reviews (bias, privacy, safety, human oversight), and exit criteria for production. That map is your framework in practice; the glossy diagram is optional.</p>
-<h2>Why posters still appear</h2>
-<p>Leadership often asks for visible ethics commitments before process exists. That is fine as long as you file the poster next to a living checklist in Jira or your release tool. The LinkedIn audience for ethical AI frameworks usually wants both: language they can rally around and mechanics they can audit.</p>
+
+            <div class="pullquote">&ldquo;We take ethics seriously&rdquo; is not a framework. A framework is what happens the Tuesday after a model does something embarrassing in production.</div>
+
+            <h2>The wallpaper test</h2>
+            <p>Ask one question in your next staff meeting: <strong>name the last three product decisions where this document changed what someone shipped.</strong> If the room goes quiet, you do not have a framework yet—you have a comms asset. That is not shameful; most teams start there. The fix is to bolt process to paper.</p>
+            <p>Ethical AI work fails in the wild for boring reasons: nobody owns the decision, evidence lives in Slack threads, and &ldquo;we discussed it&rdquo; does not survive a regulator or an angry customer thread six months later. Documentation that matters is tied to <em>versioned artifacts</em>: model IDs, prompts, retrieval configs, evaluation runs, and who signed what.</p>
+
+            <h2>Poster vs framework (same wall, different job)</h2>
+            <table class="compare" aria-label="Comparison of posters and frameworks">
+                <thead>
+                    <tr>
+                        <th scope="col">Values poster</th>
+                        <th scope="col">Working framework</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lists virtues (fairness, transparency)</td>
+                        <td>Names <strong>who</strong> decides fairness for <em>this</em> product and <strong>what artifact</strong> proves it was considered</td>
+                    </tr>
+                    <tr>
+                        <td>Hangs in the lobby or PDF</td>
+                        <td>Lives next to the release checklist, CI job, or ticket template engineers already open</td>
+                    </tr>
+                    <tr>
+                        <td>Stable for years</td>
+                        <td>Versioned when data, model, jurisdiction, or use case shifts—because the risk surface moved</td>
+                    </tr>
+                    <tr>
+                        <td>Hard to falsify (&ldquo;we care&rdquo;)</td>
+                        <td>Easy to audit: empty cell = gap you can see in a spreadsheet</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Three artifacts that make it real</h2>
+            <p>A useful ethical AI framework ties abstract principles to decisions someone actually makes: who approves a new model or feature, what evidence they need, and what happens when a check fails. Without those hooks, &ldquo;be fair&rdquo; and &ldquo;respect privacy&rdquo; are slogans, not engineering constraints.</p>
+
+            <div class="steps" aria-label="Decision map steps">
+                <div class="step">
+                    <span class="step-num">1</span>
+                    <div class="step-body"><strong>Intake in one sentence.</strong> What changed—a fine-tune, a new tool, a data source, a jurisdiction? If you cannot state it without jargon, the review will wander.</div>
+                </div>
+                <div class="step">
+                    <span class="step-num">2</span>
+                    <div class="step-body"><strong>Named owners, not &ldquo;the org.&rdquo;</strong> One accountable approver for ship/no-ship, one deputy, one escalation path. &ldquo;Legal will weigh in&rdquo; is not a name.</div>
+                </div>
+                <div class="step">
+                    <span class="step-num">3</span>
+                    <div class="step-body"><strong>Reviews you can schedule.</strong> Bias and representativeness, privacy and retention, safety and misuse, human oversight when the model acts—the mix depends on your domain, but the calendar slot has to exist.</div>
+                </div>
+                <div class="step">
+                    <span class="step-num">4</span>
+                    <div class="step-body"><strong>Exit criteria for production.</strong> What must be true to merge or deploy: eval thresholds, red-team pass, DPIA on file, customer comms—pick what matches your risk, write it as checkboxes.</div>
+                </div>
+            </div>
+
+            <p>That one-page decision map is your framework in practice; the glossy diagram is optional. If you want it to feel more &ldquo;designed,&rdquo; put the diagram <em>beside</em> the checklist, not instead of it.</p>
+
+            <h2>Why posters still appear (and how to use them)</h2>
+            <p>Leadership often asks for visible ethics commitments before process exists. That is fine as long as you file the poster next to a living checklist in Jira, Asana, or your release tool. The LinkedIn audience for ethical AI frameworks usually wants both: language they can rally around and mechanics they can audit.</p>
+
+            <div class="callout">
+                <strong>Practical pairing:</strong> keep the poster for all-hands and onboarding; link from it to a single &ldquo;how we ship AI&rdquo; Confluence or Notion page that holds the decision map and the last three run IDs. External readers then see culture <em>and</em> a trail.
+            </div>
+
+            <h2>Make the next retro uncomfortable (in a good way)</h2>
+            <p>Pick one shipped AI feature from the last quarter. Reconstruct the story without heroics: data sources, prompts, evals, incidents, and who said yes. If that takes more than thirty minutes of archaeology, your next framework iteration should focus on <strong>logging and ownership</strong>, not adding another principle.</p>
+
+            <h3>Quick audit you can run this week</h3>
+            <ul class="checklist">
+                <li>We can point to the ticket or doc where ethics review happened for the last release.</li>
+                <li>We store model or deployment identifiers next to that decision.</li>
+                <li>We know what we would show Legal or Security if asked tomorrow—not screenshots of chat.</li>
+                <li>Someone is named for updating the map when the product crosses a new country or modality.</li>
+            </ul>
+
+            <hr class="faint">
+
+            <h2>Where this breaks down (honestly)</h2>
+            <p>Small teams will skip steps when deadlines bite—that is why the map must be short and live where work already happens. Enterprise teams will over-process—combat that by time-boxing reviews and publishing &ldquo;good enough for this release&rdquo; criteria. Neither problem is solved by a prettier poster; both get better when the map is embarrassingly concrete.</p>
+
+            <p class="footer-line"><strong>Takeaway:</strong> If your ethics doc never forces a date, a name, or an artifact into the record, treat it as marketing until you wire those three in. Then you have something worth linking from this series—and worth posting to your group with confidence.</p>
         </article>
     </div>
 </body>
