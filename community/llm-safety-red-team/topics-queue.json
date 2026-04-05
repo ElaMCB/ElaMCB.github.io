@@ -3,26 +3,62 @@
     {
       "slug": "from-one-incident-to-five-regression-prompts",
       "title": "From One Production Incident to Five Regression Prompts",
-      "dek": "Turn a single bad model behavior into a durable mini-suite your next release must pass.",
+      "dek": "Turn a single bad model behavior into a durable mini-suite your next release must pass—without boiling the ocean.",
       "sections": [
         {
-          "heading": "Extract the failure shape",
-          "body": "Classify what broke: instruction override, injection via document delimiter, tool misuse, policy slip, or grounding failure. The shape matters more than the exact customer wording\u2014your regressions should stress the same mechanism."
+          "heading": "Why screenshots and Jira titles are not enough",
+          "paragraphs": [
+            "When an LLM-backed feature misbehaves in production, the natural reflex is to file a ticket, attach a screenshot, and move on. That captures sympathy, not mechanism. Six weeks later a different engineer ships a refactor, runs a smoke test, and the same class of failure returns—because nobody encoded what *kind* of mistake the model made.",
+            "Regression prompts exist to freeze the *shape* of the failure: instruction override, delimiter injection, tool abuse, policy slip, grounding collapse, or something else. Your gate spreadsheet (for example the 40-prompt matrix) is where that shape should live, with stable IDs, so every release answers the same question: did we still pass the incidents we already paid for?"
+          ]
         },
         {
-          "heading": "Author five variants",
-          "body": "Keep one prompt close to the original (sanitized). Add two paraphrases, one with different language, one with different ordering. Add a 'minimal' variant that isolates the attack in one sentence, and a 'noisy' variant that buries the instruction inside benign text like a long FAQ."
+          "heading": "Step 1 — Classify the failure shape",
+          "paragraphs": [
+            "Before you write a single new prompt, label the incident in one sentence using a category your team agrees on. Ask: did the model obey text that should have been untrusted? Did it leak or infer something it should not? Did it call a tool or format output in a way that broke downstream code? Did it comply with a harmful or out-of-policy request?",
+            "The exact customer wording is evidence for the ticket; the *shape* is what you will stress in tests. Two different tickets with different wording may share one shape—those should converge on one regression family, not five duplicate rows that drift out of sync."
+          ]
         },
         {
-          "heading": "Attach to the production gate",
-          "body": "Give those five prompts stable IDs in your gate spreadsheet and never drop them. They become part of your org's institutional memory\u2014stronger than a one-off Jira comment that no one reads before the next deploy."
+          "heading": "Step 2 — Sanitize without blurring the attack",
+          "paragraphs": [
+            "Strip PII, internal URLs, and customer identifiers. Replace them with obviously fake placeholders. Keep the logical structure of the attack: if the bug was \"instructions inside an email body were followed as system policy,\" your sanitized prompt should still nest the malicious instruction inside benign-looking content.",
+            "If Legal or Security must approve text before it leaves a restricted environment, involve them once on the sanitized version and reuse it. The goal is a prompt you can paste into staging, attach to a run_id, and store in version control metadata without leaking real user data."
+          ]
+        },
+        {
+          "heading": "Step 3 — Author exactly five variants",
+          "paragraphs": [
+            "One variant stays as close as safely possible to the original incident (sanitized). Two are clear paraphrases: same mechanism, different vocabulary and sentence order. One is *minimal*—a single sentence or two that isolates the exploit so triage is fast when it fails again. One is *noisy*: the same instruction buried in a long FAQ, a fake policy block, or a multi-paragraph user story, because production traffic is rarely clean.",
+            "If two variants always fail or pass together, merge them later. On day one, redundancy is acceptable; you are buying signal that the fix generalizes beyond one lucky wording."
+          ]
+        },
+        {
+          "heading": "Step 4 — Wire them to the production gate",
+          "paragraphs": [
+            "Assign stable prompt_ids (for example R1–R5 for \"regression incident 2026-04\") and never recycle those IDs for a different incident. Tie every run to a run_id that includes build or deployment identity so you can diff Pass/Fail across releases.",
+            "Store full model outputs or policy-compliant excerpts for failures—not only screenshots—so Security can replay or reclassify without re-running blind. This is the same evidence discipline as the rest of your gate; regressions are not a second-class citizen."
+          ]
+        },
+        {
+          "heading": "Anti-patterns to avoid",
+          "paragraphs": [
+            "Do not let regressions live only in Slack threads or personal notebooks. Do not add twenty prompts because the team brainstormed in a meeting; five disciplined variants beat twenty fuzzy ones. Do not drop a regression just because it passed twice—demote it to a lower tier or a monthly suite, but keep the ID somewhere traceable.",
+            "Do not automate scoring until humans agree on Pass/Fail for the five variants in writing. Automation on top of a vague rubric only encodes confusion faster."
+          ]
+        },
+        {
+          "heading": "What to tell leadership",
+          "paragraphs": [
+            "In one slide: we had a production-shaped failure; we encoded it as five prompts with stable IDs; they are part of the release gate; the next build must show Pass on all five (or explicit risk acceptance). That is defensible, comparable across time, and exactly the kind of artifact LinkedIn readers in QA leadership can copy into their own programs—after you review the wording and post the hub link."
+          ]
         }
       ]
     },
     {
       "slug": "manual-red-team-to-automation-checklist",
       "title": "When to Move from Manual Red Team to Automation: A Checklist",
-      "dek": "A practical decision guide so you do not automate noise\u2014or stay manual forever.",
+      "dek": "A practical decision guide so you do not automate noise—or stay manual forever.",
       "sections": [
         {
           "heading": "Stabilize outputs first",
@@ -30,7 +66,7 @@
         },
         {
           "heading": "Volume threshold",
-          "body": "If you run the same forty or more prompts every release and flaky human scoring is the bottleneck, port the stable subset to CI. Keep the long tail of exploratory prompts manual on a slower cadence\u2014creative breaks rarely belong in a blocking pipeline."
+          "body": "If you run the same forty or more prompts every release and flaky human scoring is the bottleneck, port the stable subset to CI. Keep the long tail of exploratory prompts manual on a slower cadence—creative breaks rarely belong in a blocking pipeline."
         },
         {
           "heading": "Ownership",

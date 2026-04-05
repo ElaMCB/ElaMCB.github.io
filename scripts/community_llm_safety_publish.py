@@ -10,7 +10,7 @@ import html
 import json
 import os
 import sys
-from datetime import date, datetime
+from datetime import date
 from pathlib import Path
 
 REPO_ROOT = Path(os.environ.get("GITHUB_WORKSPACE", ".")).resolve()
@@ -29,6 +29,83 @@ def days_since(iso_d: str) -> int:
     return (date.today() - last).days
 
 
+STEEL_ARTICLE_CSS = """
+        :root {
+            --bg: #0a0a0f;
+            --text: #e4e4e7;
+            --steel: #5b7fb8;
+            --steel-bright: #7aa3d8;
+            --steel-dim: rgba(91, 127, 184, 0.35);
+            --panel: rgba(26, 26, 46, 0.55);
+            --card-bg: rgba(15, 15, 23, 0.88);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', 'Monaco', monospace; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        .container { width: 90%; max-width: 800px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+        .back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 10px 20px;
+            background: rgba(91, 127, 184, 0.2);
+            border: 1px solid var(--steel-dim);
+            border-radius: 8px;
+            color: var(--steel);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: bold;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .back:hover {
+            background: rgba(91, 127, 184, 0.32);
+            color: var(--steel-bright);
+        }
+        header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--steel-dim); }
+        h1 {
+            font-size: 1.85rem;
+            color: var(--steel);
+            text-shadow: 0 0 20px rgba(91, 127, 184, 0.18);
+            margin-bottom: 0.75rem;
+        }
+        .dek { font-size: 1.05rem; opacity: 0.92; color: rgba(228, 228, 231, 0.9); }
+        .series { font-size: 0.85rem; color: var(--steel-bright); margin-top: 1rem; }
+        .content {
+            background: var(--panel);
+            border: 1px solid var(--steel-dim);
+            border-radius: 10px;
+            padding: 2rem;
+        }
+        .content h2 { color: var(--steel); font-size: 1.2rem; margin: 2rem 0 1rem; }
+        .content h2:first-of-type { margin-top: 0; }
+        .content p { margin-bottom: 1rem; text-align: justify; color: rgba(228, 228, 231, 0.92); }
+"""
+
+
+def section_html(sec: dict) -> str:
+    """Render one section: optional paragraphs[] or body (single string); body may use blank lines for multiple <p>."""
+    h = html.escape(sec.get("heading", ""))
+    paras = sec.get("paragraphs")
+    if isinstance(paras, list) and paras:
+        chunks: list[str] = []
+        for p in paras:
+            t = str(p).strip()
+            if t:
+                chunks.append(f"<p>{html.escape(t)}</p>")
+        inner = "\n".join(chunks)
+        return f"<h2>{h}</h2>\n{inner}" if inner else f"<h2>{h}</h2>"
+    raw = sec.get("body", "")
+    if isinstance(raw, str) and "\n\n" in raw.strip():
+        parts = [p.strip() for p in raw.split("\n\n") if p.strip()]
+        inner = "\n".join(f"<p>{html.escape(p)}</p>" for p in parts)
+        return f"<h2>{h}</h2>\n{inner}"
+    return f"<h2>{h}</h2>\n<p>{html.escape(str(raw))}</p>"
+
+
 def article_html(
     title: str,
     dek: str,
@@ -38,13 +115,7 @@ def article_html(
 ) -> str:
     safe_title = html.escape(title)
     safe_dek = html.escape(dek)
-    safe_slug = html.escape(slug)
-    body_parts = []
-    for sec in sections:
-        h = html.escape(sec.get("heading", ""))
-        b = html.escape(sec.get("body", ""))
-        body_parts.append(f"<h2>{h}</h2>\n<p>{b}</p>")
-    body_html = "\n".join(body_parts)
+    body_html = "\n".join(section_html(s) for s in sections)
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -57,41 +128,7 @@ def article_html(
     <link rel="canonical" href="https://elamcb.github.io/community/llm-safety-red-team/articles/{pub_date}-{slug}.html">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script data-goatcounter="https://elamcb.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-    <style>
-        :root {{
-            --secondary: #00d4ff;
-            --accent: #7c3aed;
-            --neon-blue: #00f5ff;
-            --neon-purple: #bf00ff;
-            --light: #e4e4e7;
-            --card-bg: rgba(15, 15, 23, 0.9);
-        }}
-        * {{ margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }}
-        body {{
-            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #533483 100%);
-            background-attachment: fixed;
-            color: var(--light);
-            line-height: 1.8;
-            min-height: 100vh;
-        }}
-        .container {{ width: 90%; max-width: 800px; margin: 0 auto; padding: 2rem 1rem 4rem; }}
-        .back {{ display: inline-flex; align-items: center; gap: 0.5rem; color: var(--secondary); text-decoration: none; margin-bottom: 2rem; font-weight: 600; }}
-        .back:hover {{ text-decoration: underline; }}
-        header {{ margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--secondary); }}
-        h1 {{
-            font-size: 1.85rem;
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.75rem;
-        }}
-        .dek {{ font-size: 1.1rem; opacity: 0.95; }}
-        .series {{ font-size: 0.85rem; color: var(--secondary); margin-top: 1rem; }}
-        .content {{ background: var(--card-bg); border: 1px solid rgba(0, 212, 255, 0.25); border-radius: 12px; padding: 2rem; }}
-        .content h2 {{ color: var(--secondary); font-size: 1.25rem; margin: 2rem 0 1rem; }}
-        .content h2:first-of-type {{ margin-top: 0; }}
-        .content p {{ margin-bottom: 1rem; text-align: justify; }}
+    <style>{STEEL_ARTICLE_CSS}
     </style>
 </head>
 <body>
