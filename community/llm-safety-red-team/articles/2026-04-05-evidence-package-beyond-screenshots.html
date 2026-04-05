@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Red-Team Evidence Package: What to Log Beyond Screenshots | LLM Safety &amp; Red-Teaming</title>
+    <meta name="description" content="QA leaders need artifacts Security and Legal can reuse. Here is a minimum viable logging checklist for one adversarial session.">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="canonical" href="https://elamcb.github.io/community/llm-safety-red-team/articles/2026-04-05-evidence-package-beyond-screenshots.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script data-goatcounter="https://elamcb.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <style>
+        :root {
+            --secondary: #00d4ff;
+            --accent: #7c3aed;
+            --neon-blue: #00f5ff;
+            --neon-purple: #bf00ff;
+            --light: #e4e4e7;
+            --card-bg: rgba(15, 15, 23, 0.9);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #533483 100%);
+            background-attachment: fixed;
+            color: var(--light);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        .container { width: 90%; max-width: 800px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+        .back { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--secondary); text-decoration: none; margin-bottom: 2rem; font-weight: 600; }
+        .back:hover { text-decoration: underline; }
+        header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--secondary); }
+        h1 {
+            font-size: 1.85rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.75rem;
+        }
+        .dek { font-size: 1.1rem; opacity: 0.95; }
+        .series { font-size: 0.85rem; color: var(--secondary); margin-top: 1rem; }
+        .content { background: var(--card-bg); border: 1px solid rgba(0, 212, 255, 0.25); border-radius: 12px; padding: 2rem; }
+        .content h2 { color: var(--secondary); font-size: 1.25rem; margin: 2rem 0 1rem; }
+        .content h2:first-of-type { margin-top: 0; }
+        .content p { margin-bottom: 1rem; text-align: justify; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back"><i class="fas fa-arrow-left"></i> LLM Safety &amp; Red-Teaming hub</a>
+        <header>
+            <p class="series"><i class="fas fa-users"></i> Series for QA leaders · Published 2026-04-05</p>
+            <h1>The Red-Team Evidence Package: What to Log Beyond Screenshots</h1>
+            <p class="dek">QA leaders need artifacts Security and Legal can reuse. Here is a minimum viable logging checklist for one adversarial session.</p>
+        </header>
+        <article class="content">
+<h2>Why screenshots fail as evidence</h2>
+<p>A screenshot proves what someone saw once. It does not prove which model version, temperature, retrieval context, or tool schema was active. For production gates and post-incident review, you need structured fields that stay comparable across releases.</p>
+<h2>Minimum fields per prompt attempt</h2>
+<p>Store: UTC timestamp, environment (prod vs staging), deployment or model ID, full user-visible transcript including system/developer messages if your harness exposes them, retrieved chunks or tool payloads (redacted per policy), latency, and a hash or run_id tying the row to your spreadsheet gate. If the model refuses, store the refusal text verbatim—regressions often show up as refusals becoming compliances.</p>
+<h2>Handoff to Security</h2>
+<p>Export a single JSON or CSV bundle per sprint with stable prompt_id keys matching your gate matrix. Security can then replay in a sandbox or map findings to CWE-style categories without re-asking QA for missing columns.</p>
+        </article>
+    </div>
+</body>
+</html>

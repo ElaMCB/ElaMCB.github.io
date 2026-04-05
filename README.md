@@ -318,6 +318,7 @@ Found this useful? Here's how you can help:
 ### AI-First Development Guides
 - **[Hydro-Swarm MoE](./docs/HYDRO_SWARM_MOE.html)** - **Fluid architecture for adaptive AI testing** - PARL + IDA-MoE, AQUA uncertainty-aware routing, bridges agent swarms and Mixture of Experts
 - **[QA Agentic Workflows Guide](./docs/QA_AGENTIC_WORKFLOWS_GUIDE.html)** - **Build your own specialized AI agents for daily QA work** - Free solutions, Monday-Friday workflows, chat agents
+- **[LLM Safety & Red-Teaming — community hub](./community/llm-safety-red-team/)** - **Dedicated series for your LinkedIn group** - New article ~every 21 days via [workflow](.github/workflows/community-llm-safety-publish.yml); [maintainer notes](./community/llm-safety-red-team/README.md)
 - **[The 40-Prompt Production Gate](./docs/LLM_RED_TEAM_PRODUCTION_GATE_QA.html)** - **LLM safety & red-teaming for QA leaders** - First sprint: 40 prompts, eight families, scoring rubric, production gate (practical research)
 - **[State of AI Testing](./docs/STATE_OF_AI_TESTING.html)** - **Living overview of AI testing trends for AI builders** - Updated monthly by the [Research & Literary Agent](./docs/RESEARCH_LITERARY_AGENT_GUIDE.html)
 - **[AI Advancements Q4 2025](./docs/AI_ADVANCEMENTS_Q4_2025.html)** - **Major AI breakthroughs and their impact on testing and AI systems** - GPT-5.2, Gemini 3.0, Agentic AI, Multimodal AI analysis

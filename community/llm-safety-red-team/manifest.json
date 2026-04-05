@@ -1,0 +1,24 @@
+{
+  "seriesTitle": "LLM Safety & Red-Teaming for QA Leaders",
+  "seriesDescription": "Articles published on a regular cadence for practitioners leading LLM safety and adversarial testing. This hub feeds the LinkedIn community of the same focus\u2014share each new piece in the group when it goes live.",
+  "intervalDays": 21,
+  "lastPublished": "2026-04-05",
+  "articles": [
+    {
+      "date": "2026-04-05",
+      "slug": "evidence-package-beyond-screenshots",
+      "title": "The Red-Team Evidence Package: What to Log Beyond Screenshots",
+      "summary": "QA leaders need artifacts Security and Legal can reuse. Here is a minimum viable logging checklist for one adversarial session.",
+      "href": "/community/llm-safety-red-team/articles/2026-04-05-evidence-package-beyond-screenshots.html",
+      "external": false
+    },
+    {
+      "date": "2026-04-05",
+      "slug": "forty-prompt-production-gate",
+      "title": "The 40-Prompt Production Gate",
+      "summary": "First sprint: eight adversarial families, forty prompts, scoring rubric, and production gate thresholds.",
+      "href": "/docs/LLM_RED_TEAM_PRODUCTION_GATE_QA.html",
+      "external": true
+    }
+  ]
+}

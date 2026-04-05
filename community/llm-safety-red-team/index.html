@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Safety &amp; Red-Teaming for QA Leaders | Community Series</title>
+    <meta name="description" content="Dedicated article series for LLM safety and red-teaming practitioners. New pieces publish on a three-week cadence—share each URL in your LinkedIn group.">
+    <link rel="icon" type="image/svg+xml" href="../../images/favicon.svg">
+    <link rel="canonical" href="https://elamcb.github.io/community/llm-safety-red-team/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script data-goatcounter="https://elamcb.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <style>
+        :root {
+            --secondary: #00d4ff;
+            --accent: #7c3aed;
+            --neon-blue: #00f5ff;
+            --neon-purple: #bf00ff;
+            --neon-green: #39ff14;
+            --light: #e4e4e7;
+            --card-bg: rgba(15, 15, 23, 0.92);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #533483 100%);
+            background-attachment: fixed;
+            color: var(--light);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .container { width: 90%; max-width: 720px; margin: 0 auto; padding: 2.5rem 1rem 4rem; }
+        .back {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: var(--secondary); text-decoration: none; font-weight: 600; margin-bottom: 2rem;
+        }
+        .back:hover { text-decoration: underline; }
+        header { margin-bottom: 2.5rem; }
+        h1 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        .lede { font-size: 1.1rem; opacity: 0.95; margin-bottom: 1.25rem; }
+        .meta {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 4px solid var(--secondary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+        .meta strong { color: var(--neon-green); }
+        #article-list { list-style: none; }
+        #article-list li {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+        #article-list h2 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        #article-list h2 a { color: var(--secondary); text-decoration: none; }
+        #article-list h2 a:hover { text-decoration: underline; }
+        #article-list .date { font-size: 0.85rem; color: var(--neon-green); margin-bottom: 0.5rem; }
+        #article-list .sum { opacity: 0.9; font-size: 0.95rem; }
+        .loading { opacity: 0.7; }
+        .err { color: #ff6b6b; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../../index.html" class="back"><i class="fas fa-home"></i> Portfolio home</a>
+        <header>
+            <h1 id="series-title">LLM Safety &amp; Red-Teaming for QA Leaders</h1>
+            <p class="lede" id="series-desc">Loading…</p>
+            <div class="meta">
+                <p><strong>LinkedIn group workflow:</strong> This page is the canonical home for articles you share in your group. Automation adds a new article here about every <strong>21 days</strong> when the topics queue has entries. <strong>Posting inside LinkedIn</strong> still has to be manual—LinkedIn does not offer a reliable public API for group posts—so copy the new URL from here into the group when each piece goes live.</p>
+            </div>
+        </header>
+        <h2 style="color: var(--secondary); font-size: 1.3rem; margin-bottom: 1rem;"><i class="fas fa-newspaper"></i> Articles</h2>
+        <ul id="article-list" class="loading"><li>Loading article list…</li></ul>
+        <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
+            <a href="../../docs/LLM_RED_TEAM_PRODUCTION_GATE_QA.html" style="color: var(--secondary);">40-Prompt Production Gate</a> ·
+            <a href="../../research/" style="color: var(--secondary);">Full research index</a>
+        </p>
+    </div>
+    <script>
+        (function() {
+            var list = document.getElementById('article-list');
+            var titleEl = document.getElementById('series-title');
+            var descEl = document.getElementById('series-desc');
+            fetch('manifest.json').then(function(r) {
+                if (!r.ok) throw new Error('manifest');
+                return r.json();
+            }).then(function(m) {
+                if (m.seriesTitle) titleEl.textContent = m.seriesTitle;
+                descEl.textContent = m.seriesDescription || '';
+                list.classList.remove('loading');
+                list.innerHTML = '';
+                var articles = (m.articles || []).slice().sort(function(a, b) {
+                    return (b.date || '').localeCompare(a.date || '');
+                });
+                if (articles.length === 0) {
+                    list.innerHTML = '<li>No articles yet.</li>';
+                    return;
+                }
+                articles.forEach(function(a) {
+                    var li = document.createElement('li');
+                    var href = a.href || '#';
+                    var url = href.indexOf('http') === 0 ? href
+                        : (href.charAt(0) === '/' ? 'https://elamcb.github.io' + href
+                        : 'https://elamcb.github.io/community/llm-safety-red-team/' + href);
+                    li.innerHTML =
+                        '<p class="date"><i class="far fa-calendar"></i> ' + (a.date || '') + '</p>' +
+                        '<h2><a href="' + url + '">' + (a.title || 'Untitled') + '</a></h2>' +
+                        (a.summary ? '<p class="sum">' + a.summary + '</p>' : '');
+                    list.appendChild(li);
+                });
+            }).catch(function() {
+                list.classList.remove('loading');
+                list.innerHTML = '<li class="err">Could not load manifest.json. Open this site from GitHub Pages (not raw file).</li>';
+            });
+        })();
+    </script>
+</body>
+</html>

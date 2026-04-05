@@ -1,0 +1,42 @@
+{
+  "topics": [
+    {
+      "slug": "from-one-incident-to-five-regression-prompts",
+      "title": "From One Production Incident to Five Regression Prompts",
+      "dek": "Turn a single bad model behavior into a durable mini-suite your next release must pass.",
+      "sections": [
+        {
+          "heading": "Extract the failure shape",
+          "body": "Classify what broke: instruction override, injection via document delimiter, tool misuse, policy slip, or grounding failure. The shape matters more than the exact customer wording\u2014your regressions should stress the same mechanism."
+        },
+        {
+          "heading": "Author five variants",
+          "body": "Keep one prompt close to the original (sanitized). Add two paraphrases, one with different language, one with different ordering. Add a 'minimal' variant that isolates the attack in one sentence, and a 'noisy' variant that buries the instruction inside benign text like a long FAQ."
+        },
+        {
+          "heading": "Attach to the production gate",
+          "body": "Give those five prompts stable IDs in your gate spreadsheet and never drop them. They become part of your org's institutional memory\u2014stronger than a one-off Jira comment that no one reads before the next deploy."
+        }
+      ]
+    },
+    {
+      "slug": "manual-red-team-to-automation-checklist",
+      "title": "When to Move from Manual Red Team to Automation: A Checklist",
+      "dek": "A practical decision guide so you do not automate noise\u2014or stay manual forever.",
+      "sections": [
+        {
+          "heading": "Stabilize outputs first",
+          "body": "Automate only prompts where Pass/Fail is machine-checkable: refusals contain required keywords, structured output validates against JSON Schema, or tool calls stay within an allowlist. If three engineers disagree on whether a fuzzy answer is a Fail, fix the rubric before writing code."
+        },
+        {
+          "heading": "Volume threshold",
+          "body": "If you run the same forty or more prompts every release and flaky human scoring is the bottleneck, port the stable subset to CI. Keep the long tail of exploratory prompts manual on a slower cadence\u2014creative breaks rarely belong in a blocking pipeline."
+        },
+        {
+          "heading": "Ownership",
+          "body": "Name a single owner for prompt text changes (often QA) and a single owner for evaluator code (often platform engineering). Blurred ownership is why many automation efforts rot when the original author switches teams."
+        }
+      ]
+    }
+  ]
+}
