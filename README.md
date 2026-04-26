@@ -335,7 +335,7 @@ Can you spot the difference between code written by AI and code written by human
 |-----------|--------|----------|---------|
 | **UAA Workflow** | 🟢 Success | 2026-04-26 21:39:45 UTC | [View Runs](https://github.com/ElaMCB/ElaMCB.github.io/actions/workflows/unified-autonomous-agent.yml) |
 | **CI-Fix Capability** | ⚪ Unknown | N/A | [View Status](./docs/uaa-status.json) |
-| **Link-Health Capability** | ⚪ Unknown | N/A | [View Status](./docs/uaa-status.json) |
+| **Link-Health Capability** | 🟢 Success | 2026-04-26 21:28:38 UTC | [View Status](./docs/uaa-status.json) |
 | **Security Capability** | 🟢 Success | 2026-04-20 10:47:11 UTC | [View Status](./docs/uaa-status.json) |
 
 ### Recent Activity

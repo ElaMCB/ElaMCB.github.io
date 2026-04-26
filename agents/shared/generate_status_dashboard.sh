@@ -36,7 +36,8 @@ get_capability_status() {
     local status_file="docs/uaa-status.json"
     
     if [ -f "$status_file" ]; then
-        jq -r ".capabilities.$capability.status // \"unknown\"" "$status_file" 2>/dev/null || echo "unknown"
+        # Hyphenated keys (ci-fix, link-health) must use bracket form; .link-health is parsed as subtraction in jq.
+        jq -r --arg cap "$capability" '.capabilities[$cap].status // "unknown"' "$status_file" 2>/dev/null || echo "unknown"
     else
         echo "unknown"
     fi
@@ -133,7 +134,7 @@ get_last_run_time() {
     
     if [ -f "$status_file" ]; then
         # Get last_run, but handle empty strings by returning N/A
-        local last_run=$(jq -r ".capabilities.$capability.last_run // \"N/A\"" "$status_file" 2>/dev/null || echo "N/A")
+        local last_run=$(jq -r --arg cap "$capability" '.capabilities[$cap].last_run // "N/A"' "$status_file" 2>/dev/null || echo "N/A")
         # If the value is empty string, return N/A
         if [ -z "$last_run" ] || [ "$last_run" = "" ]; then
             echo "N/A"
