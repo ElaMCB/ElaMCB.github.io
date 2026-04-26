@@ -21,14 +21,14 @@
     <style>
         :root {
             --primary: #0a0a0f;
-            --secondary: #00d4ff;
-            --accent: #7c3aed;
-            --neon-blue: #00f5ff;
-            --neon-purple: #bf00ff;
-            --neon-green: #39ff14;
+            --secondary: #5b7fb8;
+            --accent: #7aa3d8;
+            --neon-blue: #7aa3d8;
+            --neon-purple: #5b7fb8;
+            --neon-green: #9ab8e3;
             --light: #e4e4e7;
             --dark: #09090b;
-            --card-bg: rgba(15, 15, 23, 0.9);
+            --card-bg: rgba(15, 15, 23, 0.88);
         }
         
         * {
@@ -39,7 +39,7 @@
         }
         
         body {
-            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            background: #0a0a0f;
             background-attachment: fixed;
             color: var(--light);
             line-height: 1.6;
@@ -60,14 +60,14 @@
             padding: 2rem 0;
             text-align: center;
             border-bottom: 2px solid var(--neon-blue);
-            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.2);
+            box-shadow: 0 6px 20px rgba(91, 127, 184, 0.18);
             margin-bottom: 2rem;
         }
         
         h1 {
             font-size: 2.5rem;
             color: var(--light);
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.65);
             margin-bottom: 0.5rem;
         }
         
@@ -244,6 +244,71 @@
         .difficulty-btn.advanced.active {
             background: #ff4444;
             color: white;
+        }
+
+        /* Calmer visual pass: keep identity, reduce visual noise */
+        .featured-section {
+            background: rgba(91, 127, 184, 0.10);
+            border: 1px solid rgba(91, 127, 184, 0.35);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.24);
+        }
+        .featured-section::before {
+            animation: none;
+            opacity: 0.35;
+        }
+        .featured-header i,
+        .featured-badge {
+            animation: none;
+        }
+        .featured-card {
+            border: 1px solid rgba(91, 127, 184, 0.28);
+        }
+        .featured-card:hover {
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.26);
+            border-color: rgba(122, 163, 216, 0.6);
+        }
+        .featured-card-title h3 {
+            background: none;
+            -webkit-text-fill-color: initial;
+            color: var(--light);
+        }
+        .featured-badge {
+            background: rgba(122, 163, 216, 0.22);
+            color: var(--light);
+            box-shadow: none;
+        }
+        .category-header {
+            background: rgba(91, 127, 184, 0.14);
+            border: 1px solid rgba(91, 127, 184, 0.32);
+        }
+        .category-header:hover {
+            transform: none;
+            border-color: rgba(122, 163, 216, 0.65);
+        }
+        .research-card {
+            border: 1px solid rgba(91, 127, 184, 0.28);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.24);
+        }
+        .research-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
+            border-color: rgba(122, 163, 216, 0.6);
+        }
+        .research-header,
+        .demo-header {
+            background: rgba(26, 26, 46, 0.85);
+        }
+        .controls-section {
+            border: 1px solid rgba(91, 127, 184, 0.30);
+        }
+        .filter-btn,
+        .difficulty-btn {
+            box-shadow: none;
+        }
+        .filter-btn:hover,
+        .filter-btn.active {
+            transform: none;
+            box-shadow: 0 3px 10px rgba(91, 127, 184, 0.25);
         }
 
         .results-count {
