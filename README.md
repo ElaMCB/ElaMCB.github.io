@@ -300,19 +300,6 @@ Can you spot the difference between code written by AI and code written by human
 ## Star History
 [![Star History Chart](https://api.star-history.com/svg?repos=ElaMCB/ElaMCB.github.io&type=Date&t=20251102)](https://star-history.com/#ElaMCB/ElaMCB.github.io&Date)
 
-## Contributing
-
-Found this useful? Here's how you can help:
-- **Star the repo** to show support
-- **Report issues** you encounter  
-- **Suggest improvements** via [issues](https://github.com/ElaMCB/ElaMCB.github.io/issues)
-- **Share** with your network
-
-### Community Engagement
-- **[Issues](https://github.com/ElaMCB/ElaMCB.github.io/issues)**: Join the conversation about AI-First development
-- **[Feature requests](https://github.com/ElaMCB/ElaMCB.github.io/issues)**: Propose improvements or new content
-- **[Contributors](https://github.com/ElaMCB/ElaMCB.github.io/graphs/contributors)**: See who's helping build this project
-
 ## Learning Resources
 
 ### AI-First Development Guides
