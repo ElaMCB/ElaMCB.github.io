@@ -19,14 +19,14 @@
             --panel: rgba(26, 26, 46, 0.55);
             --card-bg: rgba(15, 15, 23, 0.88);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', 'Monaco', monospace; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body {
             background: var(--bg);
             color: var(--text);
-            line-height: 1.8;
+            line-height: 1.75;
             min-height: 100vh;
         }
-        .container { width: 90%; max-width: 800px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+        .container { width: 92%; max-width: 860px; margin: 0 auto; padding: 2rem 1rem 4rem; }
         .back {
             display: inline-flex;
             align-items: center;
@@ -51,6 +51,7 @@
             color: var(--steel);
             text-shadow: 0 0 20px rgba(91, 127, 184, 0.18);
             margin-bottom: 0.75rem;
+            line-height: 1.3;
         }
         .dek { font-size: 1.05rem; opacity: 0.92; color: rgba(228, 228, 231, 0.9); }
         .series { font-size: 0.85rem; color: var(--steel-bright); margin-top: 1rem; }
@@ -62,7 +63,7 @@
         }
         .content h2 { color: var(--steel); font-size: 1.2rem; margin: 2rem 0 1rem; }
         .content h2:first-of-type { margin-top: 0; }
-        .content p { margin-bottom: 1rem; text-align: justify; color: rgba(228, 228, 231, 0.92); }
+        .content p { margin-bottom: 1rem; text-align: left; color: rgba(228, 228, 231, 0.92); font-size: 1.03rem; line-height: 1.78; }
 
     </style>
 </head>
@@ -75,11 +76,26 @@
             <p class="dek">Map Govern, Map, Measure, and Manage to concrete stories so a small team does not drown in abstraction.</p>
         </header>
         <article class="content">
-<h2>Govern without a bureaucracy</h2>
-<p>Pick one accountable owner for AI risk in the product line, one deputy, and a single escalation path. Document that in your wiki and link it from your repo README. That satisfies the spirit of Govern faster than a twelve-person council that never meets.</p>
-<h2>Map and Measure as release gates</h2>
-<p>Turn Map into an inventory: data sources, model versions, downstream users, and known failure modes. Turn Measure into a short list of metrics or qualitative checks that run before major releases—aligned with whatever you already track for quality and safety.</p>
-<p>Manage is your backlog: mitigations, accepted risks with expiry dates, and incidents that feed the next Map update. Revisit the map when the model, data, or regulation changes—not only at annual compliance time.</p>
+<h2>Why most teams stall on RMF</h2>
+<p>NIST AI RMF is useful, but many teams treat it as policy language instead of delivery language. The result is predictable: a polished framework deck, no operational owner, and no pull requests that prove behavior changed. If you run a small product team, the practical test is simple: can Govern, Map, Measure, and Manage show up in your sprint board with real evidence attached?</p>
+<p>You do not need a heavyweight governance office to start. You need a thin operating model that turns RMF categories into repeatable engineering routines and release decisions.</p>
+<h2>Govern: one owner, one deputy, one escalation path</h2>
+<p>Start by assigning a single accountable owner for AI risk decisions in the product line, plus a deputy who can act when that owner is unavailable. Define one escalation path for unresolved risk and publish it where engineers already work (repo, runbook, or team wiki).</p>
+<p>Good governance at two-pizza scale is about decision latency. If risk decisions require three committees, the framework is not protecting users; it is slowing learning while risk accumulates in production.</p>
+<h2>Map: create an inventory that survives handoffs</h2>
+<p>Map is your shared system memory. Track model/version, critical prompts or policies, tool integrations, sensitive data touchpoints, affected user journeys, and known failure shapes. Keep this inventory versioned with the code so incident responders and new engineers can understand blast radius quickly.</p>
+<p>A practical litmus test: if a new engineer joins mid-incident, they should identify what changed in under 15 minutes by reading your map and recent release notes.</p>
+<h2>Measure: convert principles into release checks</h2>
+<p>Measure should not become a giant dashboard nobody consults at ship time. Choose a small set of checks that directly gate release: regression prompts for known failure classes, red-team probes for policy abuse, and outcome metrics tied to user harm scenarios.</p>
+<p>Define pass/fail before running tests. Ambiguous scoring creates false confidence and makes every postmortem harder because teams debate interpretation instead of fixing the model-system behavior.</p>
+<h2>Manage: turn risk into backlog mechanics</h2>
+<p>Manage is where the framework becomes execution. Each identified risk gets an owner, mitigation task, due date, and explicit status: mitigated, accepted (with expiry), or escalated. Incidents should auto-create backlog items and update your Map artifacts so learning compounds across releases.</p>
+<p>Without this loop, teams rediscover the same failure mode quarter after quarter under different wording. With it, every incident increases institutional memory and improves release confidence.</p>
+<h2>A 30-day two-pizza rollout plan</h2>
+<p>Week 1: name owner/deputy, publish escalation path, and baseline current model-system inventory. Week 2: add top five risk scenarios and connect each to one measurable pre-release check. Week 3: instrument evidence capture for failures (run IDs, outputs, decision logs). Week 4: run a governance review on one real release and close the resulting backlog actions.</p>
+<p>This cadence is intentionally lightweight. The goal is to make RMF visible in day-to-day engineering, not to build a compliance theater that teams bypass under deadline pressure.</p>
+<h2>What to share with leadership</h2>
+<p>Report progress in operational terms: decision ownership is defined, system map is current, release checks are enforced, and open risks have accountable owners and target dates. That narrative is auditable, repeatable, and more credible than broad statements about “responsible AI” with no execution evidence.</p>
         </article>
     </div>
 </body>
