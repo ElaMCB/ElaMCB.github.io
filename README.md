@@ -24,10 +24,10 @@
 
 ### Research Map
 
-**15 Research Notebooks Organized in 3 Categories:**
+**17 Research entries organized in 3 categories:**
 
 🟢 **Practical Applications** - Databricks Testing, AutoTriage Assessment, Healthcare AI Agents, CI/CD Optimization, RAG Testing, MCP Testing  
-🔵 **Academic Research** - Hydro-Swarm MoE, I QA Workforce Transformation, AutoTriage Research, Multi-Agent Orchestration, Monte Carlo Testing, Model Evaluation, LLM Testing  
+🔵 **Academic Research** - Hydro-Swarm MoE, I, QA Workforce Transformation, AutoTriage Research, Multi-Agent Orchestration, Monte Carlo Testing, Model Evaluation, LLM Testing  
 🟡 **Frameworks & Tools** - Agentic Testing, Automated Patterns, AI Safety
 
 ```mermaid
@@ -310,7 +310,7 @@ Found this useful? Here's how you can help:
 
 ### Community Engagement
 - **[Issues](https://github.com/ElaMCB/ElaMCB.github.io/issues)**: Join the conversation about AI-First development
-- **[Issues](https://github.com/ElaMCB/ElaMCB.github.io/issues)**: Report bugs or request features
+- **[Feature requests](https://github.com/ElaMCB/ElaMCB.github.io/issues)**: Propose improvements or new content
 - **[Contributors](https://github.com/ElaMCB/ElaMCB.github.io/graphs/contributors)**: See who's helping build this project
 
 ## Learning Resources
