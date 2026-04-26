@@ -1089,7 +1089,7 @@
                 </div>
 
                 <!-- Agentic Release Gate (tool-using systems) -->
-                <div class="research-card" data-type="practical" data-difficulty="intermediate" data-date="2026-04" data-search="agentic AI release gate QA tool use MCP authorization human in the loop evidence production readiness multi-step agents" data-reading-time="12">
+                <div class="research-card" data-type="practical" data-difficulty="intermediate" data-date="2026-04-27" data-search="agentic AI release gate QA tool use MCP authorization human in the loop evidence production readiness multi-step agents" data-reading-time="12">
                     <div class="research-type-tag practical">Practical</div>
                     <div class="research-header">
                         <i class="fas fa-network-wired"></i>
@@ -1781,22 +1781,30 @@
             filterCards();
         });
 
-        // Find the most recent research card
+        // Comparable sort key: YYYY-MM-DD, or YYYY-MM treated as first of month (ties: later DOM order wins)
+        function parseResearchCardDateKey(dateStr) {
+            if (!dateStr || typeof dateStr !== 'string') return 0;
+            const parts = dateStr.trim().split('-').map(Number);
+            if (parts.length >= 3 && parts.every(n => !Number.isNaN(n))) {
+                return parts[0] * 10000 + parts[1] * 100 + parts[2];
+            }
+            if (parts.length >= 2 && parts.every(n => !Number.isNaN(n))) {
+                return parts[0] * 10000 + parts[1] * 100 + 1;
+            }
+            return 0;
+        }
+
+        // Find the most recent research card (by data-date; supports YYYY-MM and YYYY-MM-DD)
         function findLatestResearch() {
-            let latestDate = null;
+            let latestKey = -1;
             let latestCard = null;
             
             researchCards.forEach(card => {
                 const date = card.getAttribute('data-date');
-                if (date) {
-                    // Parse date (format: YYYY-MM)
-                    const [year, month] = date.split('-').map(Number);
-                    const dateValue = year * 100 + month; // Convert to comparable number
-                    
-                    if (!latestDate || dateValue > latestDate) {
-                        latestDate = dateValue;
-                        latestCard = card;
-                    }
+                const key = parseResearchCardDateKey(date);
+                if (key > latestKey) {
+                    latestKey = key;
+                    latestCard = card;
                 }
             });
             
@@ -1838,12 +1846,18 @@
             const href = link?.getAttribute('href') || '#';
             const linkText = link?.textContent.trim() || 'View Research';
             
-            // Format date
+            // Format date (YYYY-MM or YYYY-MM-DD)
             let formattedDate = '';
             if (date) {
-                const [year, month] = date.split('-');
+                const bits = date.split('-');
+                const year = bits[0];
+                const month = bits[1];
                 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                formattedDate = `${monthNames[parseInt(month) - 1]} ${year}`;
+                if (bits.length >= 3 && bits[2]) {
+                    formattedDate = `${monthNames[parseInt(month, 10) - 1]} ${parseInt(bits[2], 10)}, ${year}`;
+                } else {
+                    formattedDate = `${monthNames[parseInt(month, 10) - 1]} ${year}`;
+                }
             }
             
             // Get type tag
