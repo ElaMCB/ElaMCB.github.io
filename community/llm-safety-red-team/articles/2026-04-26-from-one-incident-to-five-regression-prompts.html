@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From One Production Incident to Five Regression Prompts | LLM Safety &amp; Red-Teaming</title>
+    <meta name="description" content="Turn a single bad model behavior into a durable mini-suite your next release must pass—without boiling the ocean.">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="canonical" href="https://elamcb.github.io/community/llm-safety-red-team/articles/2026-04-26-from-one-incident-to-five-regression-prompts.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script data-goatcounter="https://elamcb.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --text: #e4e4e7;
+            --steel: #5b7fb8;
+            --steel-bright: #7aa3d8;
+            --steel-dim: rgba(91, 127, 184, 0.35);
+            --panel: rgba(26, 26, 46, 0.55);
+            --card-bg: rgba(15, 15, 23, 0.88);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', 'Monaco', monospace; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        .container { width: 90%; max-width: 800px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+        .back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 10px 20px;
+            background: rgba(91, 127, 184, 0.2);
+            border: 1px solid var(--steel-dim);
+            border-radius: 8px;
+            color: var(--steel);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: bold;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .back:hover {
+            background: rgba(91, 127, 184, 0.32);
+            color: var(--steel-bright);
+        }
+        header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--steel-dim); }
+        h1 {
+            font-size: 1.85rem;
+            color: var(--steel);
+            text-shadow: 0 0 20px rgba(91, 127, 184, 0.18);
+            margin-bottom: 0.75rem;
+        }
+        .dek { font-size: 1.05rem; opacity: 0.92; color: rgba(228, 228, 231, 0.9); }
+        .series { font-size: 0.85rem; color: var(--steel-bright); margin-top: 1rem; }
+        .content {
+            background: var(--panel);
+            border: 1px solid var(--steel-dim);
+            border-radius: 10px;
+            padding: 2rem;
+        }
+        .content h2 { color: var(--steel); font-size: 1.2rem; margin: 2rem 0 1rem; }
+        .content h2:first-of-type { margin-top: 0; }
+        .content p { margin-bottom: 1rem; text-align: justify; color: rgba(228, 228, 231, 0.92); }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back"><i class="fas fa-arrow-left"></i> LLM Safety &amp; Red-Teaming hub</a>
+        <header>
+            <p class="series"><i class="fas fa-users"></i> LLM Safety &amp; Red-Teaming for QA leaders · Published 2026-04-26</p>
+            <h1>From One Production Incident to Five Regression Prompts</h1>
+            <p class="dek">Turn a single bad model behavior into a durable mini-suite your next release must pass—without boiling the ocean.</p>
+        </header>
+        <article class="content">
+<h2>Why screenshots and Jira titles are not enough</h2>
+<p>When an LLM-backed feature misbehaves in production, the natural reflex is to file a ticket, attach a screenshot, and move on. That captures sympathy, not mechanism. Six weeks later a different engineer ships a refactor, runs a smoke test, and the same class of failure returns—because nobody encoded what *kind* of mistake the model made.</p>
+<p>Regression prompts exist to freeze the *shape* of the failure: instruction override, delimiter injection, tool abuse, policy slip, grounding collapse, or something else. Your gate spreadsheet (for example the 40-prompt matrix) is where that shape should live, with stable IDs, so every release answers the same question: did we still pass the incidents we already paid for?</p>
+<h2>Step 1 — Classify the failure shape</h2>
+<p>Before you write a single new prompt, label the incident in one sentence using a category your team agrees on. Ask: did the model obey text that should have been untrusted? Did it leak or infer something it should not? Did it call a tool or format output in a way that broke downstream code? Did it comply with a harmful or out-of-policy request?</p>
+<p>The exact customer wording is evidence for the ticket; the *shape* is what you will stress in tests. Two different tickets with different wording may share one shape—those should converge on one regression family, not five duplicate rows that drift out of sync.</p>
+<h2>Step 2 — Sanitize without blurring the attack</h2>
+<p>Strip PII, internal URLs, and customer identifiers. Replace them with obviously fake placeholders. Keep the logical structure of the attack: if the bug was &quot;instructions inside an email body were followed as system policy,&quot; your sanitized prompt should still nest the malicious instruction inside benign-looking content.</p>
+<p>If Legal or Security must approve text before it leaves a restricted environment, involve them once on the sanitized version and reuse it. The goal is a prompt you can paste into staging, attach to a run_id, and store in version control metadata without leaking real user data.</p>
+<h2>Step 3 — Author exactly five variants</h2>
+<p>One variant stays as close as safely possible to the original incident (sanitized). Two are clear paraphrases: same mechanism, different vocabulary and sentence order. One is *minimal*—a single sentence or two that isolates the exploit so triage is fast when it fails again. One is *noisy*: the same instruction buried in a long FAQ, a fake policy block, or a multi-paragraph user story, because production traffic is rarely clean.</p>
+<p>If two variants always fail or pass together, merge them later. On day one, redundancy is acceptable; you are buying signal that the fix generalizes beyond one lucky wording.</p>
+<h2>Step 4 — Wire them to the production gate</h2>
+<p>Assign stable prompt_ids (for example R1–R5 for &quot;regression incident 2026-04&quot;) and never recycle those IDs for a different incident. Tie every run to a run_id that includes build or deployment identity so you can diff Pass/Fail across releases.</p>
+<p>Store full model outputs or policy-compliant excerpts for failures—not only screenshots—so Security can replay or reclassify without re-running blind. This is the same evidence discipline as the rest of your gate; regressions are not a second-class citizen.</p>
+<h2>Anti-patterns to avoid</h2>
+<p>Do not let regressions live only in Slack threads or personal notebooks. Do not add twenty prompts because the team brainstormed in a meeting; five disciplined variants beat twenty fuzzy ones. Do not drop a regression just because it passed twice—demote it to a lower tier or a monthly suite, but keep the ID somewhere traceable.</p>
+<p>Do not automate scoring until humans agree on Pass/Fail for the five variants in writing. Automation on top of a vague rubric only encodes confusion faster.</p>
+<h2>What to tell leadership</h2>
+<p>In one slide: we had a production-shaped failure; we encoded it as five prompts with stable IDs; they are part of the release gate; the next build must show Pass on all five (or explicit risk acceptance). That is defensible, comparable across time, and exactly the kind of artifact LinkedIn readers in QA leadership can copy into their own programs—after you review the wording and post the hub link.</p>
+        </article>
+    </div>
+</body>
+</html>

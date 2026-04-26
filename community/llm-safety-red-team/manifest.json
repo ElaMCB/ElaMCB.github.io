@@ -2,11 +2,19 @@
   "seriesTitle": "LLM Safety & Red-Teaming for QA Leaders",
   "seriesShortTitle": "LLM Safety & Red-Teaming",
   "hubBackLinkText": "LLM Safety & Red-Teaming hub",
-  "seriesLinePrefix": "LLM Safety & Red-Teaming for QA leaders · Published",
+  "seriesLinePrefix": "LLM Safety & Red-Teaming for QA leaders \u00b7 Published",
   "seriesDescription": "Practical articles on a regular cadence for QA leaders building LLM safety and red-teaming practice.",
   "intervalDays": 21,
-  "lastPublished": "2026-04-05",
+  "lastPublished": "2026-04-26",
   "articles": [
+    {
+      "date": "2026-04-26",
+      "slug": "from-one-incident-to-five-regression-prompts",
+      "title": "From One Production Incident to Five Regression Prompts",
+      "summary": "Turn a single bad model behavior into a durable mini-suite your next release must pass\u2014without boiling the ocean.",
+      "href": "/community/llm-safety-red-team/articles/2026-04-26-from-one-incident-to-five-regression-prompts.html",
+      "external": false
+    },
     {
       "date": "2026-04-05",
       "slug": "evidence-package-beyond-screenshots",
