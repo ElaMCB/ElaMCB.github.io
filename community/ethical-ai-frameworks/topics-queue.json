@@ -1,3 +1,88 @@
 {
-  "topics": []
+  "topics": [
+    {
+      "slug": "minimum-ethical-ai-release-checklist",
+      "title": "The Minimum Ethical AI Release Checklist (That Teams Actually Use)",
+      "dek": "A concise pre-release checklist for AI features: ownership, evidence, user impact, and rollback readiness.",
+      "sections": [
+        {
+          "heading": "Keep it release-shaped, not policy-shaped",
+          "paragraphs": [
+            "Most ethics checklists fail because they are too abstract for release day. Start with what your team already does before shipping: go/no-go owner, test evidence, incident path, and customer communication notes.",
+            "If an item cannot be answered with a link to a ticket, run log, or decision record, rewrite it. The best checklist feels boring and operational."
+          ]
+        },
+        {
+          "heading": "Six checks to require every time",
+          "paragraphs": [
+            "1) Named accountable owner. 2) Model/deployment version recorded. 3) Known high-risk failure modes reviewed. 4) Safety and misuse tests run. 5) Escalation and rollback owner assigned. 6) User-facing limitations documented.",
+            "These are intentionally small. They create a baseline that can be audited and repeated across releases."
+          ]
+        },
+        {
+          "heading": "How to avoid checklist theater",
+          "paragraphs": [
+            "Treat every 'No' as a tracked risk decision, not a silent exception. Require an expiry date and owner for accepted risk.",
+            "If a checklist item gets auto-approved three releases in a row, either automate evidence collection or remove the item."
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "ethical-ai-risk-register-template",
+      "title": "An Ethical AI Risk Register Template You Can Maintain in 15 Minutes",
+      "dek": "A lightweight register design for teams that need traceability without adding heavy governance overhead.",
+      "sections": [
+        {
+          "heading": "What to track (and what to ignore)",
+          "paragraphs": [
+            "Track risks that can change a release decision: harmful outputs, unfair outcomes, privacy leakage, unsafe tool actions, and misuse patterns. Ignore broad philosophical notes that cannot be actioned in sprint planning.",
+            "For each risk, record: trigger, impact, current controls, residual risk, owner, and next review date."
+          ]
+        },
+        {
+          "heading": "Cadence that does not collapse",
+          "paragraphs": [
+            "Update the register in three moments only: before release, after incidents, and when model/data context changes. This keeps it alive without creating a weekly ceremony people skip.",
+            "Pin one KPI to the register health: percent of risks with an owner and next review date."
+          ]
+        },
+        {
+          "heading": "Use incidents as input, not blame",
+          "paragraphs": [
+            "When something goes wrong, add a new row and one control update. Do not rewrite the whole framework.",
+            "This creates an institutional memory that survives team turnover and helps future approvals move faster."
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "human-override-and-escalation-rules",
+      "title": "Human Override Rules for AI Systems: Who Can Stop What, and When",
+      "dek": "Define clear override authority and escalation paths before production pressure makes decisions for you.",
+      "sections": [
+        {
+          "heading": "Every AI workflow needs a brake pedal",
+          "paragraphs": [
+            "Ethical AI frameworks are incomplete without explicit override authority. If nobody knows who can disable a model behavior during an incident, your governance exists only on slides.",
+            "Write override rules in role language: Support lead can disable feature flag X, Incident commander can block tool Y, Product owner can restrict geography Z."
+          ]
+        },
+        {
+          "heading": "Design the escalation ladder",
+          "paragraphs": [
+            "Document three levels: immediate containment (minutes), temporary mitigations (hours), and long-term corrective actions (days). Assign owners and communication channels for each level.",
+            "Include customer-facing messaging ownership so public comms do not lag engineering decisions."
+          ]
+        },
+        {
+          "heading": "Practice before you need it",
+          "paragraphs": [
+            "Run one tabletop exercise per quarter on a realistic failure mode. Measure decision latency and handoff clarity, not just technical fixes.",
+            "Teams that rehearse overrides recover faster and make fewer ad-hoc policy decisions under pressure."
+          ]
+        }
+      ]
+    }
+  ]
 }
