@@ -69,77 +69,22 @@ graph TB
     style Evaluation fill:#74c0fc,stroke:#1971c2,color:#000
 ```
 
-### Quick Reference Table
+### Quick Reference
 
-| Research Paper | Type | Key Results | Primary Focus | Tech Stack |
-|----------------|------|-------------|---------------|------------|
-| [40-Prompt Production Gate](./docs/LLM_RED_TEAM_PRODUCTION_GATE_QA.html) | Practical | 40-prompt gate, ≥95% Pass target | LLM red team for QA leaders | Prompt matrix, rubric |
-| [I, QA: Workforce Transformation](./research/notebooks/llm-qa-workforce-transformation.html) | Academic | 70-85% automation by 2028 | QA profession forecasting | Bass Diffusion, Monte Carlo |
-| [Databricks Testing Framework](./research/notebooks/databricks-testing-framework.html) | Practical | 64% time ↓, $1.2M savings | Unified testing platform | Databricks, Delta Lake, MLflow |
-| [Healthcare AI Agents](./research/notebooks/ai-agents-qa-healthcare.html) | Case Study | 487% ROI, 92% coverage | Why use AI agents? | LangChain, Playwright |
-| [AutoTriage Research Paper](./research/notebooks/autotriage-research-paper.html) | Academic | 85% accuracy, 3.2x ROI | Test automation triage | Ensemble AI Framework |
-| [AutoTriage Assessment Tool](./research/notebooks/autotriage-manual-test-assessment.html) | Tool | 4-tier prioritization | Manual test assessment | Business Value Analysis |
-| [CI/CD Test Optimization](./research/notebooks/ci-test-optimization-monte-carlo.html) | Tool | 40% time reduction | Optimize pipeline | Monte Carlo, Python |
-| [Multi-Agent Orchestration](./research/notebooks/multi-agent-orchestration-framework.html) | Academic | 80.2% detection, 31% cost ↓ | Optimal architecture | ATAO Framework |
-| [Monte Carlo Testing](./research/notebooks/monte-carlo-testing-framework.html) | Research | POFOD estimation | Statistical testing | Monte Carlo, scipy |
-| [Model Evaluation](./research/notebooks/model-evaluation-software-testing.html) | Framework | GPT-4 vs Claude vs Gemini | Which AI model? | Python, pandas |
-| [Agentic Testing](./research/notebooks/agentic-testing-integration.html) | Integration | Multi-agent systems | Implementation guide | AutoGPT, LangChain |
-| [MCP Testing](./research/notebooks/mcp-software-testing.html) | Framework | Context-aware testing | Dynamic adaptation | MCP Protocol |
-| [RAG Testing](./research/notebooks/rag-testing-applications.html) | Applications | Test generation from docs | Knowledge retrieval | RAG, Vector DBs |
-| [LLM Methodologies](./research/notebooks/llm-testing-analysis.html) | Analysis | Hallucination detection | Testing LLMs | Safety frameworks |
-| [AI Safety Metrics](./research/notebooks/ai-safety-metrics.html) | Metrics | Prompt injection detection | Security validation | Safety evaluators |
-| [Testing Patterns](./research/notebooks/automated-testing-patterns.html) | Patterns | AI-augmented automation | Best practices | Pytest, CI/CD |
-| [Hydro-Swarm MoE](./docs/HYDRO_SWARM_MOE.html) | Academic | 35% compute ↓, 22% coverage ↑ | Adaptive AI testing (PARL + IDA-MoE) | MoE, AQUA, LILIA |
+- **[40-Prompt Production Gate](./docs/LLM_RED_TEAM_PRODUCTION_GATE_QA.html)** — Practical LLM safety release gate for QA leaders.
+- **[Hydro-Swarm MoE](./docs/HYDRO_SWARM_MOE.html)** — Adaptive AI testing architecture (PARL + IDA-MoE).
+- **[I, QA: Workforce Transformation](./research/notebooks/llm-qa-workforce-transformation.html)** — QA role and automation forecast (2025-2028).
+- **[Databricks Testing Framework](./research/notebooks/databricks-testing-framework.html)** — Unified testing platform with measurable efficiency gains.
+- **[Healthcare AI Agents](./research/notebooks/ai-agents-qa-healthcare.html)** — Practical case study with ROI and coverage outcomes.
+- **[CI/CD Test Optimization](./research/notebooks/ci-test-optimization-monte-carlo.html)** — Monte Carlo approach to faster, risk-aware test selection.
 
 ### Featured Research
 
-<details>
-<summary><b>CI/CD Test Optimization Tool</b> (Production-Ready)</summary>
+- **[Multi-Agent Orchestration Framework](./research/notebooks/multi-agent-orchestration-framework.html)** — architecture trade-offs and statistical validation.
+- **[Monte Carlo Testing Framework](./research/notebooks/monte-carlo-testing-framework.html)** — reliability estimation for risk-based testing.
+- **[AI Model Evaluation Framework](./research/notebooks/model-evaluation-software-testing.html)** — GPT/Claude/Gemini comparative evaluation.
 
-**Impact:** 40% time reduction • 80% risk coverage  
-**Focus:** Ingests test history, runs 10,000 Monte Carlo simulations, outputs optimized suite  
-**Exports:** JSON, pytest, GitHub Actions  
-`CI-CD` `monte-carlo` `test-optimization` `DevOps`  
-**[View](./research/notebooks/ci-test-optimization-monte-carlo.html)** | **[Download](./research/notebooks/ci-test-optimization-monte-carlo.ipynb)**
-</details>
-
-<details>
-<summary><b>Healthcare AI Agents Case Study</b> (Practical)</summary>
-
-**Impact:** 487% ROI • 92% coverage • 88% faster tests  
-**Focus:** Why QA pros use AI agents - 7 agent types with HIPAA compliance  
-`AI-agents` `healthcare-QA` `HIPAA-compliance` `autonomous-testing`  
-**[View](./research/notebooks/ai-agents-qa-healthcare.html)** | **[Download](./research/notebooks/ai-agents-qa-healthcare.ipynb)**
-</details>
-
-<details>
-<summary><b>Multi-Agent Orchestration Framework</b> (Academic)</summary>
-
-**Impact:** 80.2% detection • 31% cost reduction • ANOVA validated  
-**Focus:** 4 architectures, 50 trials, statistical validation  
-`multi-agent-systems` `test-orchestration` `manager-worker`  
-**[View](./research/notebooks/multi-agent-orchestration-framework.html)** | **[Download](./research/notebooks/multi-agent-orchestration-framework.ipynb)**
-</details>
-
-<details>
-<summary><b>Monte Carlo Testing Framework</b> (Research)</summary>
-
-**Impact:** POFOD estimation • Statistical reliability assessment  
-**Focus:** Risk-based testing, fuzzing, chaos engineering  
-`monte-carlo` `statistical-testing` `POFOD`  
-**[View](./research/notebooks/monte-carlo-testing-framework.html)** | **[Download](./research/notebooks/monte-carlo-testing-framework.ipynb)**
-</details>
-
-<details>
-<summary><b>AI Model Evaluation Framework</b> (Comparative)</summary>
-
-**Impact:** Comprehensive model comparison  
-**Focus:** GPT-4 • Claude 3.5 • Gemini Pro • CodeLlama  
-`AI-model-evaluation` `LLM-benchmarking` `GPT-4`  
-**[View](./research/notebooks/model-evaluation-software-testing.html)** | **[Download](./research/notebooks/model-evaluation-software-testing.ipynb)**
-</details>
-
-**[View All Research →](./research/)** | **[Complete Research Index](./research/notebooks/README.md)**
+**[View All Research →](./research/)** | **[Complete Research Index](./research/notebooks/README.md)** | **[Notebook Downloads](./research/notebooks/)**
 
 ---
 
