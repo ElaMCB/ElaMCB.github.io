@@ -631,7 +631,7 @@ Every technique in our guides was used to build this portfolio:
 **Perfect for**: Developers and AI engineers who want to ship faster with AI-first workflows, and teams adopting LLM- and agent-based tooling.
 
 ## Repository Activity
-[![GitHub Activity](https://github-readme-activity-graph.vercel.app/graph?username=ElaMCB&repo=ElaMCB.github.io&theme=react-dark)](https://github.com/ElaMCB/ElaMCB.github.io/graphs/commit-activity)
+[![GitHub Activity](https://github-readme-activity-graph.vercel.app/graph?username=ElaMCB&repo=ElaMCB.github.io&theme=react-dark&t=20260426)](https://github.com/ElaMCB/ElaMCB.github.io/graphs/commit-activity)
 
 ## License
 
