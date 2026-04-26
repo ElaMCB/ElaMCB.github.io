@@ -1389,9 +1389,55 @@ Data is stored locally and not shared with any third parties.
             text-shadow: 0 0 15px var(--neon-blue);
             transform: scale(1.2);
         }
+
+        .mode-switch {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            justify-content: center;
+        }
+
+        .mode-switch a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.45rem 0.85rem;
+            border-radius: 999px;
+            border: 1px solid rgba(91, 127, 184, 0.5);
+            color: var(--light);
+            text-decoration: none;
+            font-size: 0.82rem;
+            background: rgba(91, 127, 184, 0.16);
+            transition: all 0.25s ease;
+        }
+
+        .mode-switch a:hover {
+            background: rgba(122, 163, 216, 0.3);
+            border-color: var(--accent);
+            transform: translateY(-1px);
+        }
         
         section {
             padding: 3rem 0;
+        }
+
+        .section-nav-note {
+            margin: -0.75rem auto 1.5rem;
+            max-width: 900px;
+            font-size: 0.95rem;
+            color: rgba(228, 228, 231, 0.88);
+            text-align: center;
+        }
+
+        .section-nav-note a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .section-nav-note a:hover {
+            color: var(--neon-blue);
+            text-decoration: underline;
         }
         
         h2 {
@@ -1947,6 +1993,32 @@ Data is stored locally and not shared with any third parties.
                 2px 2px 8px rgba(0, 0, 0, 0.8),
                 0 0 15px rgba(0, 245, 255, 0.5);
         }
+
+        .is-collapsed > .disclosure-item[data-hidden-by-disclosure="1"] {
+            display: none;
+        }
+
+        .disclosure-actions {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .disclosure-btn {
+            padding: 0.65rem 1.25rem;
+            border-radius: 999px;
+            border: 1px solid rgba(91, 127, 184, 0.5);
+            background: rgba(91, 127, 184, 0.16);
+            color: var(--light);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+
+        .disclosure-btn:hover {
+            background: rgba(122, 163, 216, 0.3);
+            border-color: var(--accent);
+            transform: translateY(-1px);
+        }
         
         .project-content {
             padding: 1.5rem;
@@ -2146,6 +2218,11 @@ Data is stored locally and not shared with any third parties.
         
         
         @media (max-width: 768px) {
+            .mode-switch a {
+                font-size: 0.78rem;
+                padding: 0.4rem 0.7rem;
+            }
+
             .profile h1 {
                 font-size: 2rem;
             }
@@ -2255,6 +2332,11 @@ Data is stored locally and not shared with any third parties.
                 <h1>Ela MCB</h1>
                 <h2 class="subtitle">AI-first AI Engineer</h2>
                 <p class="tagline">LLMs, MCP, agents &amp; intelligent systems—from prototype to production</p>
+                <div class="mode-switch" aria-label="Audience mode shortcuts">
+                    <a href="#projects"><i class="fas fa-briefcase"></i> For Recruiters</a>
+                    <a href="#research"><i class="fas fa-flask"></i> For Engineers</a>
+                    <a href="#community-focus"><i class="fas fa-users"></i> For Community</a>
+                </div>
                 <div class="social-links">
                     <a href="https://github.com/ElaMCB" target="_blank" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
                     <a href="https://linkedin.com/in/elenamereanu" target="_blank" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
@@ -2349,7 +2431,8 @@ Data is stored locally and not shared with any third parties.
     <section id="demos">
         <div class="container">
                     <h2 data-text="AI Projects"> AI Projects</h2>
-            <div class="demo-grid">
+                    <p class="section-nav-note">Canonical project list lives in <a href="./PROJECTS.md">PROJECTS.md</a>. This homepage shows a curated subset first.</p>
+            <div class="demo-grid" id="demos-grid" data-disclosure-grid data-initial-visible="3">
                 <div class="demo-card">
                     <div class="demo-header">
                         <i class="fas fa-graduation-cap"></i>
@@ -2503,13 +2586,17 @@ Data is stored locally and not shared with any third parties.
                     </div>
                 </div>
             </div>
+            <div class="disclosure-actions">
+                <button type="button" class="disclosure-btn" data-disclosure-toggle="demos-grid">Show more AI projects</button>
+            </div>
         </div>
     </section>
 
     <section id="research">
         <div class="container">
                     <h2 data-text="AI Research">AI Research</h2>
-            <div class="demo-grid">
+                    <p class="section-nav-note">This is a curated stream. Browse the full index at <a href="./research/">All Research</a>.</p>
+            <div class="demo-grid" id="research-grid" data-disclosure-grid data-initial-visible="4">
                 <div class="demo-card">
                     <div class="demo-header">
                         <i class="fas fa-water"></i>
@@ -2740,7 +2827,7 @@ Data is stored locally and not shared with any third parties.
                     </div>
                 </div>
 
-                <div class="demo-card">
+                <div class="demo-card" id="community-focus">
                     <div class="demo-header">
                         <i class="fas fa-users"></i>
                         <h3>LLM Safety &amp; Red-Teaming — Community Series</h3>
@@ -2832,13 +2919,17 @@ Data is stored locally and not shared with any third parties.
                     </div>
                 </div>
             </div>
+            <div class="disclosure-actions">
+                <button type="button" class="disclosure-btn" data-disclosure-toggle="research-grid">Show more research & community items</button>
+            </div>
         </div>
     </section>
 
     <section id="projects">
         <div class="container">
                     <h2 data-text="Featured Projects">Featured Projects</h2>
-            <div class="projects-grid">
+                    <p class="section-nav-note">Looking for everything? Use <a href="./PROJECTS.md">PROJECTS.md</a> for the full project catalog and references.</p>
+            <div class="projects-grid" id="projects-grid" data-disclosure-grid data-initial-visible="3">
                 <div class="project-card">
                     <div class="project-img">
                         <i class="fas fa-users-cog"></i>
@@ -3145,6 +3236,9 @@ Data is stored locally and not shared with any third parties.
                     </div>
                 </div>
             </div>
+            <div class="disclosure-actions">
+                <button type="button" class="disclosure-btn" data-disclosure-toggle="projects-grid">Show more featured projects</button>
+            </div>
         </div>
     </section>
 
@@ -3245,8 +3339,36 @@ Data is stored locally and not shared with any third parties.
     </footer>
 
     <script>
+        function initializeProgressiveDisclosure() {
+            const grids = document.querySelectorAll('[data-disclosure-grid]');
+            grids.forEach((grid) => {
+                const initialVisible = parseInt(grid.getAttribute('data-initial-visible') || '3', 10);
+                const children = Array.from(grid.children).filter((el) => el.matches('.demo-card, .project-card'));
+                if (children.length <= initialVisible) {
+                    const btn = document.querySelector(`[data-disclosure-toggle="${grid.id}"]`);
+                    if (btn && btn.parentElement) btn.parentElement.style.display = 'none';
+                    return;
+                }
+                children.forEach((child, idx) => {
+                    child.classList.add('disclosure-item');
+                    if (idx >= initialVisible) child.dataset.hiddenByDisclosure = '1';
+                });
+                grid.classList.add('is-collapsed');
+                const btn = document.querySelector(`[data-disclosure-toggle="${grid.id}"]`);
+                if (!btn) return;
+                btn.addEventListener('click', () => {
+                    const isCollapsed = grid.classList.toggle('is-collapsed');
+                    btn.textContent = isCollapsed ? 'Show more' : 'Show fewer';
+                    if (grid.id === 'demos-grid') btn.textContent = isCollapsed ? 'Show more AI projects' : 'Show fewer AI projects';
+                    if (grid.id === 'research-grid') btn.textContent = isCollapsed ? 'Show more research & community items' : 'Show fewer research & community items';
+                    if (grid.id === 'projects-grid') btn.textContent = isCollapsed ? 'Show more featured projects' : 'Show fewer featured projects';
+                });
+            });
+        }
+
         // Simple animation for elements when they come into view
         document.addEventListener('DOMContentLoaded', function() {
+            initializeProgressiveDisclosure();
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
