@@ -1,0 +1,170 @@
+{
+  "scanDate": "2026-04-27",
+  "models": [
+    {
+      "name": "Auto-Pentest-LLM",
+      "description": "🔍 Automate penetration testing with an intelligent agent that organizes security assessments, leveraging local LLMs and Kali Linux for effective exploitation.",
+      "url": "https://github.com/gfranrp/Auto-Pentest-LLM",
+      "stars": 4,
+      "language": "Python",
+      "updated": "2026-04-27T13:58:20Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ai-sub",
+      "description": "ai-sub is a lightweight content subscription project focused on LLM and AI Coding. It aggregates, curates, and pushes high-signal news updates and blog posts about model releases, tooling, prompting/workflows, and real-world engineering practices—so you can follow the fast-moving AI ecosystem in one place.",
+      "url": "https://github.com/xiangyangkan/ai-sub",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-04-27T15:56:06Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "OpenHawk",
+      "description": "OmniHawk AI is a global AI intelligence OS that tracks papers, frontier releases, market signals, policy/safety updates, and OSS trends with dedupe, LLM summaries, and multi-channel push.",
+      "url": "https://github.com/sunhj050623/OpenHawk",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-04-27T13:51:25Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ai-agent-pulse",
+      "description": "Daily automated tracking of 19 AI agent frameworks. Pulse Score ranks momentum via star velocity, release freshness, commit activity, and community health.",
+      "url": "https://github.com/PurpleHaze2320/ai-agent-pulse",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-04-27T08:35:16Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "agents-shipgate",
+      "description": "Agents Shipgate — static release-readiness scanner for AI agent tool surfaces (MCP, OpenAPI, OpenAI Agents SDK, Google ADK). CLI + GitHub Action.",
+      "url": "https://github.com/ThreeMoonsLab/agents-shipgate",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-04-27T05:50:10Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "supply-chain-monitor",
+      "description": "Monitor PyPI and npm releases for supply chain threats, diff package changes, and alert on malicious updates with LLM-based analysis",
+      "url": "https://github.com/harriottdirty774/supply-chain-monitor",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-04-27T16:09:40Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "llmtest-perf",
+      "description": "Validate LLM inference performance and catch latency, throughput, and TTFT regressions before release",
+      "url": "https://github.com/eslammoha8625/llmtest-perf",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-04-27T16:03:04Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "auto-crawl-tiktok-post-fb",
+      "description": "Automate TikTok to Facebook posting, schedule Reels, and manage AI replies, inbox, campaigns, and workers in one dashboard",
+      "url": "https://github.com/GoruMahalakshmi/auto-crawl-tiktok-post-fb",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-04-27T15:58:08Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "auto-hf-papers",
+      "description": "Automate Hugging Face Daily Papers filtering and email a daily Markdown digest of the most relevant AI papers by upvotes and GitHub stars",
+      "url": "https://github.com/fratert691/auto-hf-papers",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-04-27T15:50:28Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "llm-seclint",
+      "description": "Scan Python code for LLM security flaws before release.",
+      "url": "https://github.com/Solanummelanocerasumvillage727/llm-seclint",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-04-27T15:48:19Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "vgt-auto-punisher",
+      "description": "Detect and block network threats in Linux kernels using hybrid L4 and L7 behavioral analysis for effective intrusion prevention and response.",
+      "url": "https://github.com/harel08/vgt-auto-punisher",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-04-27T15:26:46Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "OnePersonCompany",
+      "description": "Transform daily progress into structured reports, release notes, and shareable content to simplify solo or small team project management.",
+      "url": "https://github.com/Failurecounterfactuality324/OnePersonCompany",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-04-27T15:19:31Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "HowHungryisAIRepo",
+      "description": "This repository powers the “How Hungry is AI?” dashboard and provides the code + data release accompanying our paper on inference-phase (operational) environmental footprints of LLMs.",
+      "url": "https://github.com/Nidhal-Jegham/HowHungryisAIRepo",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-04-27T11:42:54Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "VM_CopyBookConverter_Rel_Ver2",
+      "description": "ValueMomentum Copybook Converter Release Version 2 (No LLM version and EBCDIC Single Input Version Added)",
+      "url": "https://github.com/AI-Emerging-Tech/VM_CopyBookConverter_Rel_Ver2",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-04-27T09:13:39Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "llm-releases",
+      "description": null,
+      "url": "https://github.com/dannyburke1/llm-releases",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-04-27T08:59:30Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "daily-brief",
+      "description": "An automated personal daily briefing agent that crawls tech news sources, summarizes the top stories using a free LLM, generates an audio MP3, commits a Markdown brief to a GitHub repo, uploads the MP3 as a GitHub Release asset, and deploys a GitHub Pages web archive",
+      "url": "https://github.com/WayneYe/daily-brief",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-04-27T08:05:57Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "interlocutor-effect2",
+      "description": "Anonymous code release for the NeurIPS 2026 submission 'The Interlocutor Effect: Framing-Dependent Privacy Behaviour in Instruction-Tuned LLMs' (under double-blind review)",
+      "url": "https://github.com/yagobski/interlocutor-effect2",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-04-27T03:46:22Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "maa-protocol",
+      "description": "Maa Protocol: Production-grade multi-agent orchestrator with RBAC, tenant isolation, canary releases, circuit breakers, cost controls & self-healing.",
+      "url": "https://github.com/SnehaPlayground/maa-protocol",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-04-26T17:33:06Z",
+      "source": "GitHub"
+    }
+  ],
+  "papers": [],
+  "totalModels": 18,
+  "totalPapers": 0
+}
