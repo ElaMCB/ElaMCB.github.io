@@ -5,8 +5,16 @@
   "seriesLinePrefix": "Ethical AI Frameworks \u00b7 Published",
   "seriesDescription": "Short articles on ethical AI frameworks, governance, and practice\u2014aligned with the Ethical AI Frameworks LinkedIn group.",
   "intervalDays": 25,
-  "lastPublished": "2026-04-05",
+  "lastPublished": "2026-04-30",
   "articles": [
+    {
+      "date": "2026-04-30",
+      "slug": "minimum-ethical-ai-release-checklist",
+      "title": "The Minimum Ethical AI Release Checklist (That Teams Actually Use)",
+      "summary": "A concise pre-release checklist for AI features: ownership, evidence, user impact, and rollback readiness.",
+      "href": "/community/ethical-ai-frameworks/articles/2026-04-30-minimum-ethical-ai-release-checklist.html",
+      "external": false
+    },
     {
       "date": "2026-04-05",
       "slug": "nist-rmf-two-pizza-backlog",
@@ -19,7 +27,7 @@
       "date": "2026-04-05",
       "slug": "framework-vs-values-poster",
       "title": "A Framework Is Not a Values Poster: What Teams Should Document",
-      "summary": "Wallpaper test, poster vs framework table, four-step decision map, audit checklist—so ethics ties to owners, tickets, and evidence, not slogans.",
+      "summary": "Wallpaper test, poster vs framework table, four-step decision map, audit checklist\u2014so ethics ties to owners, tickets, and evidence, not slogans.",
       "href": "/community/ethical-ai-frameworks/articles/2026-04-05-framework-vs-values-poster.html",
       "external": false
     }

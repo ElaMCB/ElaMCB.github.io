@@ -1,34 +1,6 @@
 {
   "topics": [
     {
-      "slug": "minimum-ethical-ai-release-checklist",
-      "title": "The Minimum Ethical AI Release Checklist (That Teams Actually Use)",
-      "dek": "A concise pre-release checklist for AI features: ownership, evidence, user impact, and rollback readiness.",
-      "sections": [
-        {
-          "heading": "Keep it release-shaped, not policy-shaped",
-          "paragraphs": [
-            "Most ethics checklists fail because they are too abstract for release day. Start with what your team already does before shipping: go/no-go owner, test evidence, incident path, and customer communication notes.",
-            "If an item cannot be answered with a link to a ticket, run log, or decision record, rewrite it. The best checklist feels boring and operational."
-          ]
-        },
-        {
-          "heading": "Six checks to require every time",
-          "paragraphs": [
-            "1) Named accountable owner. 2) Model/deployment version recorded. 3) Known high-risk failure modes reviewed. 4) Safety and misuse tests run. 5) Escalation and rollback owner assigned. 6) User-facing limitations documented.",
-            "These are intentionally small. They create a baseline that can be audited and repeated across releases."
-          ]
-        },
-        {
-          "heading": "How to avoid checklist theater",
-          "paragraphs": [
-            "Treat every 'No' as a tracked risk decision, not a silent exception. Require an expiry date and owner for accepted risk.",
-            "If a checklist item gets auto-approved three releases in a row, either automate evidence collection or remove the item."
-          ]
-        }
-      ]
-    },
-    {
       "slug": "ethical-ai-risk-register-template",
       "title": "An Ethical AI Risk Register Template You Can Maintain in 15 Minutes",
       "dek": "A lightweight register design for teams that need traceability without adding heavy governance overhead.",

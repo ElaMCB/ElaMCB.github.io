@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Minimum Ethical AI Release Checklist (That Teams Actually Use) | Ethical AI Frameworks</title>
+    <meta name="description" content="A concise pre-release checklist for AI features: ownership, evidence, user impact, and rollback readiness.">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="canonical" href="https://elamcb.github.io/community/ethical-ai-frameworks/articles/2026-04-30-minimum-ethical-ai-release-checklist.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script data-goatcounter="https://elamcb.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --text: #e4e4e7;
+            --steel: #5b7fb8;
+            --steel-bright: #7aa3d8;
+            --steel-dim: rgba(91, 127, 184, 0.35);
+            --panel: rgba(26, 26, 46, 0.55);
+            --card-bg: rgba(15, 15, 23, 0.88);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.75;
+            min-height: 100vh;
+        }
+        .container { width: 92%; max-width: 860px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+        .back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 10px 20px;
+            background: rgba(91, 127, 184, 0.2);
+            border: 1px solid var(--steel-dim);
+            border-radius: 8px;
+            color: var(--steel);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: bold;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .back:hover {
+            background: rgba(91, 127, 184, 0.32);
+            color: var(--steel-bright);
+        }
+        header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--steel-dim); }
+        h1 {
+            font-size: 1.85rem;
+            color: var(--steel);
+            text-shadow: 0 0 20px rgba(91, 127, 184, 0.18);
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+        .dek { font-size: 1.05rem; opacity: 0.92; color: rgba(228, 228, 231, 0.9); }
+        .series { font-size: 0.85rem; color: var(--steel-bright); margin-top: 1rem; }
+        .content {
+            background: var(--panel);
+            border: 1px solid var(--steel-dim);
+            border-radius: 10px;
+            padding: 2rem;
+        }
+        .content h2 { color: var(--steel); font-size: 1.2rem; margin: 2rem 0 1rem; }
+        .content h2:first-of-type { margin-top: 0; }
+        .content p { margin-bottom: 1rem; text-align: left; color: rgba(228, 228, 231, 0.92); font-size: 1.03rem; line-height: 1.78; }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back"><i class="fas fa-arrow-left"></i> Ethical AI Frameworks hub</a>
+        <header>
+            <p class="series"><i class="fas fa-users"></i> Ethical AI Frameworks · Published 2026-04-30</p>
+            <h1>The Minimum Ethical AI Release Checklist (That Teams Actually Use)</h1>
+            <p class="dek">A concise pre-release checklist for AI features: ownership, evidence, user impact, and rollback readiness.</p>
+        </header>
+        <article class="content">
+<h2>Keep it release-shaped, not policy-shaped</h2>
+<p>Most ethics checklists fail because they are too abstract for release day. Start with what your team already does before shipping: go/no-go owner, test evidence, incident path, and customer communication notes.</p>
+<p>If an item cannot be answered with a link to a ticket, run log, or decision record, rewrite it. The best checklist feels boring and operational.</p>
+<h2>Six checks to require every time</h2>
+<p>1) Named accountable owner. 2) Model/deployment version recorded. 3) Known high-risk failure modes reviewed. 4) Safety and misuse tests run. 5) Escalation and rollback owner assigned. 6) User-facing limitations documented.</p>
+<p>These are intentionally small. They create a baseline that can be audited and repeated across releases.</p>
+<h2>How to avoid checklist theater</h2>
+<p>Treat every &#x27;No&#x27; as a tracked risk decision, not a silent exception. Require an expiry date and owner for accepted risk.</p>
+<p>If a checklist item gets auto-approved three releases in a row, either automate evidence collection or remove the item.</p>
+        </article>
+    </div>
+</body>
+</html>
