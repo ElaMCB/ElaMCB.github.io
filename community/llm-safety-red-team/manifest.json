@@ -5,8 +5,16 @@
   "seriesLinePrefix": "LLM Safety & Red-Teaming for QA leaders \u00b7 Published",
   "seriesDescription": "Practical articles on a regular cadence for QA leaders building LLM safety and red-teaming practice.",
   "intervalDays": 21,
-  "lastPublished": "2026-04-26",
+  "lastPublished": "2026-05-17",
   "articles": [
+    {
+      "date": "2026-05-17",
+      "slug": "manual-red-team-to-automation-checklist",
+      "title": "When to Move from Manual Red Team to Automation: A Checklist",
+      "summary": "A practical decision guide so you do not automate noise\u2014or stay manual forever.",
+      "href": "/community/llm-safety-red-team/articles/2026-05-17-manual-red-team-to-automation-checklist.html",
+      "external": false
+    },
     {
       "date": "2026-04-26",
       "slug": "from-one-incident-to-five-regression-prompts",
