@@ -1,34 +1,6 @@
 {
   "topics": [
     {
-      "slug": "ethical-ai-risk-register-template",
-      "title": "An Ethical AI Risk Register Template You Can Maintain in 15 Minutes",
-      "dek": "A lightweight register design for teams that need traceability without adding heavy governance overhead.",
-      "sections": [
-        {
-          "heading": "What to track (and what to ignore)",
-          "paragraphs": [
-            "Track risks that can change a release decision: harmful outputs, unfair outcomes, privacy leakage, unsafe tool actions, and misuse patterns. Ignore broad philosophical notes that cannot be actioned in sprint planning.",
-            "For each risk, record: trigger, impact, current controls, residual risk, owner, and next review date."
-          ]
-        },
-        {
-          "heading": "Cadence that does not collapse",
-          "paragraphs": [
-            "Update the register in three moments only: before release, after incidents, and when model/data context changes. This keeps it alive without creating a weekly ceremony people skip.",
-            "Pin one KPI to the register health: percent of risks with an owner and next review date."
-          ]
-        },
-        {
-          "heading": "Use incidents as input, not blame",
-          "paragraphs": [
-            "When something goes wrong, add a new row and one control update. Do not rewrite the whole framework.",
-            "This creates an institutional memory that survives team turnover and helps future approvals move faster."
-          ]
-        }
-      ]
-    },
-    {
       "slug": "human-override-and-escalation-rules",
       "title": "Human Override Rules for AI Systems: Who Can Stop What, and When",
       "dek": "Define clear override authority and escalation paths before production pressure makes decisions for you.",
