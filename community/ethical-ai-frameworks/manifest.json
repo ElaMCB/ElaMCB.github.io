@@ -5,8 +5,16 @@
   "seriesLinePrefix": "Ethical AI Frameworks \u00b7 Published",
   "seriesDescription": "Short articles on ethical AI frameworks, governance, and practice\u2014aligned with the Ethical AI Frameworks LinkedIn group.",
   "intervalDays": 25,
-  "lastPublished": "2026-05-25",
+  "lastPublished": "2026-06-19",
   "articles": [
+    {
+      "date": "2026-06-19",
+      "slug": "human-override-and-escalation-rules",
+      "title": "Human Override Rules for AI Systems: Who Can Stop What, and When",
+      "summary": "Define clear override authority and escalation paths before production pressure makes decisions for you.",
+      "href": "/community/ethical-ai-frameworks/articles/2026-06-19-human-override-and-escalation-rules.html",
+      "external": false
+    },
     {
       "date": "2026-05-25",
       "slug": "ethical-ai-risk-register-template",

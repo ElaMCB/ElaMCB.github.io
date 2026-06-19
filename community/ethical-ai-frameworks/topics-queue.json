@@ -1,32 +1,3 @@
 {
-  "topics": [
-    {
-      "slug": "human-override-and-escalation-rules",
-      "title": "Human Override Rules for AI Systems: Who Can Stop What, and When",
-      "dek": "Define clear override authority and escalation paths before production pressure makes decisions for you.",
-      "sections": [
-        {
-          "heading": "Every AI workflow needs a brake pedal",
-          "paragraphs": [
-            "Ethical AI frameworks are incomplete without explicit override authority. If nobody knows who can disable a model behavior during an incident, your governance exists only on slides.",
-            "Write override rules in role language: Support lead can disable feature flag X, Incident commander can block tool Y, Product owner can restrict geography Z."
-          ]
-        },
-        {
-          "heading": "Design the escalation ladder",
-          "paragraphs": [
-            "Document three levels: immediate containment (minutes), temporary mitigations (hours), and long-term corrective actions (days). Assign owners and communication channels for each level.",
-            "Include customer-facing messaging ownership so public comms do not lag engineering decisions."
-          ]
-        },
-        {
-          "heading": "Practice before you need it",
-          "paragraphs": [
-            "Run one tabletop exercise per quarter on a realistic failure mode. Measure decision latency and handoff clarity, not just technical fixes.",
-            "Teams that rehearse overrides recover faster and make fewer ad-hoc policy decisions under pressure."
-          ]
-        }
-      ]
-    }
-  ]
+  "topics": []
 }
