@@ -1,0 +1,440 @@
+{
+  "scanDate": "2026-07-20",
+  "models": [
+    {
+      "name": "sglang",
+      "description": "SGLang is a high-performance serving framework for large language models and multimodal models.",
+      "url": "https://github.com/sgl-project/sglang",
+      "stars": 30546,
+      "language": "Python",
+      "updated": "2026-07-20T16:07:34Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Speech",
+      "description": "A scalable generative AI framework built for researchers and developers working on Large Language Models, Multimodal, and Speech AI (Automatic Speech Recognition and Text-to-Speech)",
+      "url": "https://github.com/NVIDIA-NeMo/Speech",
+      "stars": 17795,
+      "language": "Python",
+      "updated": "2026-07-20T16:13:46Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "bitsandbytes",
+      "description": "Accessible large language models via k-bit quantization for PyTorch.",
+      "url": "https://github.com/bitsandbytes-foundation/bitsandbytes",
+      "stars": 8333,
+      "language": "Python",
+      "updated": "2026-07-20T15:09:34Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "inspect_ai",
+      "description": "Inspect: A framework for large language model evaluations",
+      "url": "https://github.com/UKGovernmentBEIS/inspect_ai",
+      "stars": 2381,
+      "language": "Python",
+      "updated": "2026-07-20T15:25:30Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "KiraAI",
+      "description": "KiraAI, a modular, multi-platform AI digital life that connects Large Language Models (LLMs) and various chat adapters (QQ,  Telegram...)",
+      "url": "https://github.com/xxynet/KiraAI",
+      "stars": 65,
+      "language": "Python",
+      "updated": "2026-07-20T14:55:50Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "eval-framework",
+      "description": "Comprehensive LLM evaluation at scale: A production-ready framework for evaluating large language models across multiple benchmarks.",
+      "url": "https://github.com/Aleph-Alpha-Research/eval-framework",
+      "stars": 42,
+      "language": "Python",
+      "updated": "2026-07-20T14:50:19Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "md-bridge",
+      "description": "Self-hosted document converter built on hand-written heuristics, not language models. Ships PDF ↔ Markdown; the architecture welcomes new format pairs as contributions land. Deterministic by design: same input, same output, every run. FastAPI + React, multi-arch Docker, MIT.",
+      "url": "https://github.com/vinicq/md-bridge",
+      "stars": 6,
+      "language": "Python",
+      "updated": "2026-07-17T18:43:28Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "AI-ML-ENGINEERING-JOURNEY",
+      "description": "A structured end-to-end AI/ML engineering journey covering mathematics, machine learning, deep learning, large language models, MLOps, and production-grade projects. Built with a strong focus on fundamentals, implementation, and real-world systems.",
+      "url": "https://github.com/ipartzix/AI-ML-ENGINEERING-JOURNEY",
+      "stars": 4,
+      "language": "Python",
+      "updated": "2026-07-20T14:48:30Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "MyMoMo-Academic",
+      "description": "Autonomous Agent-Based Modeling（ABM） for research: describe a model in plain language and get a working simulation you can trust — reproduce published studies or build new ones, across any domain, on a purpose-built engine.",
+      "url": "https://github.com/Yco-0314/MyMoMo-Academic",
+      "stars": 3,
+      "language": "Python",
+      "updated": "2026-07-14T08:46:15Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ai-agent-pulse",
+      "description": "Daily automated tracking of 19 AI agent frameworks. Pulse Score ranks momentum via star velocity, release freshness, commit activity, and community health.",
+      "url": "https://github.com/PurpleHaze2320/ai-agent-pulse",
+      "stars": 2,
+      "language": "Python",
+      "updated": "2026-07-20T09:24:44Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Designing-and-Evolving-New-Reinforcement-Learning-Algorithms-using-Large-Language-models",
+      "description": null,
+      "url": "https://github.com/sygkounas/Designing-and-Evolving-New-Reinforcement-Learning-Algorithms-using-Large-Language-models",
+      "stars": 2,
+      "language": "Python",
+      "updated": "2026-07-16T18:44:43Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "astrollm",
+      "description": "A domain-specialized Large Language Model for Astronomy & Astrophysics",
+      "url": "https://github.com/astrollm/astrollm",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-07-20T15:53:33Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Call-Me-Maybe",
+      "description": "This project introduces function calling in Large Language Models by building a system that translates natural language prompts into structured function calls with typed arguments. You'll implement constrained decoding to guarantee valid JSON output, achieving near-perfect reliability with a small 0.5B parameter model",
+      "url": "https://github.com/ayoub-idbrm/Call-Me-Maybe",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-07-20T13:59:22Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "semeai-gate-basic",
+      "description": "Release-control gate for AI answers: SHOW / REVIEW / BLOCK before user release",
+      "url": "https://github.com/SemeAIPletinnya/semeai-gate-basic",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-07-20T12:35:28Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "daily-brief",
+      "description": "An automated personal daily briefing agent that crawls tech news sources, summarizes the top stories using a free LLM, generates an audio MP3, commits a Markdown brief to a GitHub repo, uploads the MP3 as a GitHub Release asset, and deploys a GitHub Pages web archive",
+      "url": "https://github.com/WayneYe/daily-brief",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-07-19T08:28:28Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "MIRROR-CITY",
+      "description": "MIRROR CITY is an AI-powered Digital Twin platform that lets governments and planners simulate the future of a city before making real-world investments. By combining GIS, machine learning, graph neural networks, reinforcement learning, and large language models, it predicts the impact of new infrastructure on traffic, pollution, healthcare access,",
+      "url": "https://github.com/yuva-1237/MIRROR-CITY",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-07-19T13:02:44Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Lgram",
+      "description": "Linguistics Gram - New approach to probabilistic language models",
+      "url": "https://github.com/iatagun/Lgram",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-07-14T16:49:28Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "feedback-insight-api",
+      "description": "An AI powered api server that takes single or batch like input of likert scale and open-ended questions that gets analyze by LLM (Large Language Model) and provide sentiment analysis using structured response.",
+      "url": "https://github.com/asshleygozar/feedback-insight-api",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-20T16:15:13Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "JIRA-Confluence-Automation-",
+      "description": "AI-powered backlog generation platform capable of converting business requirement documents into Jira-ready Agile work items. Analyze requirement documents using a Large Language Model (LLM), identify business capabilities, generate Epics, User Stories, Tasks, and Sub-Tasks, validate output quality.",
+      "url": "https://github.com/lavanyasharmals1312-a11y/JIRA-Confluence-Automation-",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-20T16:10:42Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Adversarial_Attacks_on_Code_Large_Language_Models_Using_Reinforcement_Learning",
+      "description": "MsC on Software Engineering Thesis",
+      "url": "https://github.com/PedroLandolt/Adversarial_Attacks_on_Code_Large_Language_Models_Using_Reinforcement_Learning",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-20T15:13:28Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "DriveIQ",
+      "description": "DriveIQ is an AI-powered driving analysis, safety scoring, and real-time coaching system. The project integrates computer vision (CV), machine learning prediction models, and Large Language Models (LLMs) to evaluate driving quality and provide actionable safety feedback.",
+      "url": "https://github.com/jiyanarwani/DriveIQ",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-20T15:09:56Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "LLM-Guard",
+      "description": "AI-powered security firewall for Large Language Models (LLMs) with prompt injection detection, jailbreak prevention, and Data Loss Prevention (DLP).",
+      "url": "https://github.com/harshal561/LLM-Guard",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-20T14:28:57Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "AI-Response-Quality-Evaluator",
+      "description": "An AI-powered system for evaluating Large Language Model (LLM) responses using RAG, hallucination detection, multi-agent evaluation, and quality scoring.",
+      "url": "https://github.com/devilgosht/AI-Response-Quality-Evaluator",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-20T14:18:33Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "llm-youtube-landscape-tracker",
+      "description": "Python + Next.js pipeline for collecting YouTube transcripts, extracting LLM topics, and publishing a live, transcript-grounded dashboard that maps how channels cover LLMs, AI agents, coding assistants, model releases, benchmarks, and related developer workflows.",
+      "url": "https://github.com/Gaz-Myaz/llm-youtube-landscape-tracker",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-20T13:08:45Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "doc-eval",
+      "description": "Field-level evaluation and release gate for LLM document extraction: exact golden set, per-field precision/recall, CI gate that blocks regressions",
+      "url": "https://github.com/vinimabreu/doc-eval",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-20T13:03:13Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "release-guardian-ai",
+      "description": "Release Guardian AI — AI-powered CI/CD safety layer for LLM applications built with FastAPI, Next.js, and OpenAI.",
+      "url": "https://github.com/VinayakSomase/release-guardian-ai",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-20T11:18:34Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ai-radar",
+      "description": "Daily self-updating radar of new AI research (arXiv) and model releases (Hugging Face). Pure-Python, zero deps, regenerated every day by a scheduled GitHub Action.",
+      "url": "https://github.com/agentdynarq/ai-radar",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-20T09:33:02Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "llm-releases",
+      "description": null,
+      "url": "https://github.com/dannyburke1/llm-releases",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-20T09:10:08Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ai-claim-verification-agent",
+      "description": "Bounded claim-verification agent — read-only by harness enforcement, eval-gated before release",
+      "url": "https://github.com/kobescak-kristian/ai-claim-verification-agent",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-20T05:42:06Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "llmwiki-research-codex-plugin",
+      "description": "Installable Windows Codex Plugin marketplace for the self-contained LLM Wiki Research R3-minus-C-07 release.",
+      "url": "https://github.com/juedouwang/llmwiki-research-codex-plugin",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-20T03:29:29Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "groundball",
+      "description": "Eval-gated local-first baseball analytics assistant using DuckDB, provenance, stat-claim verification, and deterministic AI release gates.",
+      "url": "https://github.com/DiscoStew6082/groundball",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-20T00:56:09Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "drift",
+      "description": "Evidence-grounded release intelligence for GPU and AI infrastructure: cited changes, confidence, severity, and bounded engineering checks.",
+      "url": "https://github.com/iarjunganesh/drift",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-19T19:12:03Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "vstack",
+      "description": "vstack is a VS Code–native AI engineering workflow system. It provides structured skills — executable by GitHub Copilot in Agent Mode — for planning, reviewing, verifying, and releasing software.",
+      "url": "https://github.com/eschaar/vstack",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-19T19:06:17Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "dev-pulse",
+      "description": "DevPulse — release notes intelligence assistant (LLM Zoomcamp capstone)",
+      "url": "https://github.com/rinilkunhiraman/dev-pulse",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-19T15:59:55Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "agent-portal",
+      "description": "Agent Portal is a desktop-native operating environment for AI agents.  Instead of limiting an LLM to code generation, Agent Portal gives it a controlled visual workspace where it can understand, navigate, test, and interact with real user interfaces, local applications, browser sessions, development environments, and project ecosystems.",
+      "url": "https://github.com/magnexis/agent-portal",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-19T12:37:08Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "cycles-client-python",
+      "description": "Python SDK for Cycles — reserve, commit, release budget and risk for AI agents",
+      "url": "https://github.com/runcycles/cycles-client-python",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-19T10:06:58Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "DBD-AutoGrind-Trainer-2026",
+      "description": "Automate Dead by Daylight bloodpoint farming and unlock game content with this undetected external trainer.",
+      "url": "https://github.com/predicative-eugeneoneill309/DBD-AutoGrind-Trainer-2026",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-19T07:10:15Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "fake-news-IBM",
+      "description": "A Machine Learning-based Fake News Detection web application that uses Natural Language Processing (NLP), TF-IDF Vectorization, and a trained classification model to identify whether a news article is Real or Fake. Built using Python, Flask, and Scikit-learn.",
+      "url": "https://github.com/Aarnaupta/fake-news-IBM",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-19T17:42:04Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "mcp-scaffolder",
+      "description": "An MCP (Model Context Protocol) server built with FastMCP that scaffolds new project directories from built-in templates for Python, Node.js, and Go. It exposes two tools — scaffold_project to generate a project skeleton (source files, README, .gitignore, and language-specific subdirectories) under a configurable PROJECTS_DIR, and list_templates.",
+      "url": "https://github.com/Rikita22/mcp-scaffolder",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-19T05:34:49Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "BioMiniGPT",
+      "description": "A small GPT-type language model generating new sentences by learning biological texts",
+      "url": "https://github.com/Kunwoo03/BioMiniGPT",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-19T03:25:47Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "linebreak-uncertainty",
+      "description": "BreakState: tests whether small language models encode line position when deciding if text wraps to a new line.",
+      "url": "https://github.com/stannum13/linebreak-uncertainty",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-17T12:48:38Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "genai-news-assistant",
+      "description": "An Intelligent News Summarization and Sentiment Analysis System using NLP and Large Language Models",
+      "url": "https://github.com/prerna3101sharma/genai-news-assistant",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-16T18:27:38Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "news-summarizer",
+      "description": "Development of an Intelligent News Summarization and Sentiment Analysis System using NLP and Large Language Models.",
+      "url": "https://github.com/Pratyushh007/news-summarizer",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-15T16:44:02Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "S-OP_Dashboard",
+      "description": "An enterprise-grade Omnichannel Sales & Operations Planning (S&OP) Dashboard built with Microsoft Power BI. This repository leverages the new Power BI Project (.pbip) format and Tabular Model Definition Language (TMDL) for standard git-based version control, enabling team collaboration, code reviews, and structured releases.",
+      "url": "https://github.com/Sohila-Khaled-Abbas/S-OP_Dashboard",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-12T18:46:20Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Fake-News-Detection",
+      "description": "A machine learning web application built with Python and Streamlit that uses a Natural Language Processing (NLP) model to predict whether a given news article headline is real or fake.",
+      "url": "https://github.com/aartimanocha97/Fake-News-Detection",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-11T17:12:34Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "auml",
+      "description": "AUML - Agentic Unified Modeling Language: a new architecture language for AI agent era",
+      "url": "https://github.com/xiaopengs/auml",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-11T10:46:07Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "QSTRBench",
+      "description": "Companion to: A. G. Cohn and R. E. Blackwell, 2026. QSTRBench : a New Benchmark to Evaluate the Ability of Language Models to Reason with Qualitative Spatial and Temporal Calculi",
+      "url": "https://github.com/RobBlackwell/QSTRBench",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-10T08:20:24Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "finite-knowledge-theory",
+      "description": "Finite Knowledge Theory (FKT) is an open research project exploring whether all human knowledge can be represented through a finite hierarchy of foundational primitives. Its long-term goal is to establish a new mathematical foundation for knowledge representation, enabling the next generation of domain-specific and general-purpose language models.",
+      "url": "https://github.com/Blandskron/finite-knowledge-theory",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-07-10T02:47:25Z",
+      "source": "GitHub"
+    }
+  ],
+  "papers": [],
+  "totalModels": 48,
+  "totalPapers": 0
+}
