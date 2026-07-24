@@ -499,14 +499,14 @@ Every technique in our guides was used to build this portfolio:
 MIT License - feel free to use this template for your own portfolio!
 
 ```bibtex
-@portfolio{elamcb2025,
+@portfolio{elamcb2026,
     address = {USA},
     author = {Elena Mereanu},
     title = {{AI-First AI Engineering Portfolio}},
     url = {https://elamcb.github.io},
     linkedin = {https://linkedin.com/in/elenamereanu},
     github = {https://github.com/ElaMCB},
-    year = {2025}
+    year = {2026}
 }
 ```
 
