@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arize Phoenix for QA Leaders: Tracing Red-Team Sessions Without Losing the Thread | LLM Safety &amp; Red-Teaming</title>
+    <meta name="description" content="Open-source LLM observability from Arize AI—how Phoenix tracing, evals, and datasets turn adversarial probes into evidence you can replay and gate on.">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="canonical" href="https://elamcb.github.io/community/llm-safety-red-team/articles/2026-07-23-arize-phoenix-for-qa-red-team.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script data-goatcounter="https://elamcb.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --text: #e4e4e7;
+            --steel: #5b7fb8;
+            --steel-bright: #7aa3d8;
+            --steel-dim: rgba(91, 127, 184, 0.35);
+            --panel: rgba(26, 26, 46, 0.55);
+            --card-bg: rgba(15, 15, 23, 0.88);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.75;
+            min-height: 100vh;
+        }
+        .container { width: 92%; max-width: 860px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+        .back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 10px 20px;
+            background: rgba(91, 127, 184, 0.2);
+            border: 1px solid var(--steel-dim);
+            border-radius: 8px;
+            color: var(--steel);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: bold;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .back:hover {
+            background: rgba(91, 127, 184, 0.32);
+            color: var(--steel-bright);
+        }
+        header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--steel-dim); }
+        h1 {
+            font-size: 1.85rem;
+            color: var(--steel);
+            text-shadow: 0 0 20px rgba(91, 127, 184, 0.18);
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+        .dek { font-size: 1.05rem; opacity: 0.92; color: rgba(228, 228, 231, 0.9); }
+        .series { font-size: 0.85rem; color: var(--steel-bright); margin-top: 1rem; }
+        .content {
+            background: var(--panel);
+            border: 1px solid var(--steel-dim);
+            border-radius: 10px;
+            padding: 2rem;
+        }
+        .content h2 { color: var(--steel); font-size: 1.2rem; margin: 2rem 0 1rem; }
+        .content h2:first-of-type { margin-top: 0; }
+        .content p { margin-bottom: 1rem; text-align: left; color: rgba(228, 228, 231, 0.92); font-size: 1.03rem; line-height: 1.78; }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back"><i class="fas fa-arrow-left"></i> LLM Safety &amp; Red-Teaming hub</a>
+        <header>
+            <p class="series"><i class="fas fa-users"></i> LLM Safety &amp; Red-Teaming for QA leaders · Published 2026-07-23</p>
+            <h1>Arize Phoenix for QA Leaders: Tracing Red-Team Sessions Without Losing the Thread</h1>
+            <p class="dek">Open-source LLM observability from Arize AI—how Phoenix tracing, evals, and datasets turn adversarial probes into evidence you can replay and gate on.</p>
+        </header>
+        <article class="content">
+<h2>Why red-team notes are not enough</h2>
+<p>A solid red-team session usually leaves you with screenshots, chat exports, and a spreadsheet of Pass/Fail. That is fine for a one-off demo. It falls apart when Security asks which tool call leaked PII, when Legal wants the exact model version, or when the next release needs the same five probes to fail closed again.</p>
+<p>Arize Phoenix is an open-source AI observability and evaluation platform built by Arize AI. It sits on OpenTelemetry and OpenInference, so you can capture traces from LangChain, LlamaIndex, OpenAI, Anthropic, and other stacks without inventing a private logging format. For QA leaders, the point is not dashboards for their own sake—it is a durable record of what the agent actually did under adversarial pressure.</p>
+<h2>What Phoenix gives a safety program</h2>
+<p>Tracing shows each run step by step: model calls, retrieval, tool use, and custom spans. When a jailbreak succeeds, you can see whether the failure was the prompt, a retrieved chunk, or a tool that should never have been invoked.</p>
+<p>Evaluations let you score spans with LLM judges, code checks, or human labels. That maps cleanly onto a production gate: refusal keywords, schema validity, allowlisted tools, toxicity thresholds. Attach the same evaluators to a dataset and they run again on every experiment.</p>
+<p>Datasets and experiments turn production or red-team traces into a fixed input set. Change the system prompt or guardrail, rerun the same probes, and compare scores. Prompt playground and span replay help you iterate on the failure without guessing from a truncated chat log.</p>
+<h2>A practical first week for QA</h2>
+<p>Instrument one high-risk flow (support agent, RAG chatbot, or tool-using assistant) and send traces to a local or self-hosted Phoenix instance. Keep PII redaction policy explicit before you mirror production traffic.</p>
+<p>After your next manual red-team session, promote the worst five failures into a Phoenix dataset. Name each example with the attack family (injection, exfiltration, over-refusal, tool abuse). Wire two or three machine-checkable evaluators so CI can fail the build when a regression returns.</p>
+<p>Do not replace exploratory red-teaming with Phoenix. Use Phoenix so exploratory findings become regression assets—the same move as turning one production incident into five durable prompts.</p>
+<h2>Where it fits next to your gate</h2>
+<p>If you already run a forty-prompt production gate or an evidence package checklist, Phoenix is the observability layer underneath: traces for forensics, evals for scoring, datasets for repeatability. Commercial Arize AX can sit later for platform-scale monitoring; Phoenix is the open starting point many teams can self-host this quarter.</p>
+<p>Start here: https://arize.com/docs/phoenix — then connect one instrumented path, one adversarial dataset, and one blocking evaluator before you expand the catalog.</p>
+        </article>
+    </div>
+</body>
+</html>

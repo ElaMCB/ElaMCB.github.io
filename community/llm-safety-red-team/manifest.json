@@ -5,8 +5,16 @@
   "seriesLinePrefix": "LLM Safety & Red-Teaming for QA leaders \u00b7 Published",
   "seriesDescription": "Practical articles on a regular cadence for QA leaders building LLM safety and red-teaming practice.",
   "intervalDays": 21,
-  "lastPublished": "2026-05-17",
+  "lastPublished": "2026-07-23",
   "articles": [
+    {
+      "date": "2026-07-23",
+      "slug": "arize-phoenix-for-qa-red-team",
+      "title": "Arize Phoenix for QA Leaders: Tracing Red-Team Sessions Without Losing the Thread",
+      "summary": "Open-source LLM observability from Arize AI\u2014how Phoenix tracing, evals, and datasets turn adversarial probes into evidence you can replay and gate on.",
+      "href": "/community/llm-safety-red-team/articles/2026-07-23-arize-phoenix-for-qa-red-team.html",
+      "external": false
+    },
     {
       "date": "2026-05-17",
       "slug": "manual-red-team-to-automation-checklist",
