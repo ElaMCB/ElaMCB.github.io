@@ -10,8 +10,8 @@
     {
       "date": "2026-07-23",
       "slug": "arize-phoenix-for-qa-red-team",
-      "title": "Arize Phoenix for QA Leaders: Tracing Red-Team Sessions Without Losing the Thread",
-      "summary": "Open-source LLM observability from Arize AI\u2014how Phoenix tracing, evals, and datasets turn adversarial probes into evidence you can replay and gate on.",
+      "title": "Arize Phoenix for QA Leaders: Red-Team Sessions That Don't Evaporate",
+      "summary": "How I used Arize Phoenix to turn perishable red-team screenshots into traces, evaluators, and a dataset that fails the build when the same leak returns.",
       "href": "/community/llm-safety-red-team/articles/2026-07-23-arize-phoenix-for-qa-red-team.html",
       "external": false
     },
