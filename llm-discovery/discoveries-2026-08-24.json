@@ -1,0 +1,449 @@
+{
+  "scanDate": "2026-08-24",
+  "models": [
+    {
+      "name": "sglang",
+      "description": "SGLang is a high-performance serving framework for large language models and multimodal models.",
+      "url": "https://github.com/sgl-project/sglang",
+      "stars": 32360,
+      "language": "Python",
+      "updated": "2026-08-24T15:25:55Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Speech",
+      "description": "A scalable generative AI framework built for researchers and developers working on Large Language Models, Multimodal, and Speech AI (Automatic Speech Recognition and Text-to-Speech)",
+      "url": "https://github.com/NVIDIA-NeMo/Speech",
+      "stars": 18301,
+      "language": "Python",
+      "updated": "2026-08-24T14:50:58Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "godmode",
+      "description": "Production-grade Agent Skills for AI coding agents—composable workflows for planning, TDD, debugging, review, UI/UX, releases, incidents, and evals.",
+      "url": "https://github.com/thiientv/godmode",
+      "stars": 89,
+      "language": "Python",
+      "updated": "2026-08-24T13:28:42Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ras-commander",
+      "description": "The RAS-Commander library provides a python API and agentic features for automating HEC-RAS 6.x and accessing HDF data using Python, built with and driven by large language models.",
+      "url": "https://github.com/gpt-cmdr/ras-commander",
+      "stars": 75,
+      "language": "Python",
+      "updated": "2026-08-24T15:29:13Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ChatGPT_on_CTF",
+      "description": "We want to see whether ChatGPT or other AI-LLM (Microsoft New_Bing or Google Bard) are able to help the user to go to some test environment to run cmds to solve the CTF problems (Whether the AI large language models can understand the challenge question and capture the question flags)",
+      "url": "https://github.com/LiuYuancheng/ChatGPT_on_CTF",
+      "stars": 53,
+      "language": "Python",
+      "updated": "2026-08-18T06:45:37Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "NewAdversarialAttackPaper",
+      "description": "A list of recent adversarial attack and defense papers (including those on large language models)",
+      "url": "https://github.com/shenyizg/NewAdversarialAttackPaper",
+      "stars": 44,
+      "language": "Python",
+      "updated": "2026-08-24T07:57:20Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "open-chat-studio",
+      "description": "A web based platform for building Chatbots backed by Large Language Models",
+      "url": "https://github.com/dimagi/open-chat-studio",
+      "stars": 43,
+      "language": "Python",
+      "updated": "2026-08-24T13:34:40Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "eval-framework",
+      "description": "Comprehensive LLM evaluation at scale: A production-ready framework for evaluating large language models across multiple benchmarks.",
+      "url": "https://github.com/Aleph-Alpha-Research/eval-framework",
+      "stars": 41,
+      "language": "Python",
+      "updated": "2026-08-24T14:44:38Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "DeepSparkInference",
+      "description": "DeepSparkInference has selected 216 inference models of both small and large sizes. The small models cover fields such as computer vision, natural language processing, and speech recognition; the LLMs involve various frameworks including vLLM, TGI and LMDeploy. This repository is the mirror of Gitee.",
+      "url": "https://github.com/Deep-Spark/DeepSparkInference",
+      "stars": 36,
+      "language": "Python",
+      "updated": "2026-08-24T13:47:39Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "llm-foundry",
+      "description": "🏭 Production-ready codebase for  training and evaluating large language models.",
+      "url": "https://github.com/Polygl0t/llm-foundry",
+      "stars": 25,
+      "language": "Python",
+      "updated": "2026-08-24T14:00:25Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Fake-news-detection",
+      "description": "This project is a machine learning model that detects whether a news article is real or fake based on its content. It uses Natural Language Processing (NLP) techniques to process the text and classify the news using a Logistic Regression classifier.",
+      "url": "https://github.com/hepsigladisht/Fake-news-detection",
+      "stars": 23,
+      "language": "Python",
+      "updated": "2026-08-09T15:06:57Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Differential-KV",
+      "description": "Differential-KV (DKV) is a sparse KV-cache inference runtime designed for high-efficiency, memory-bounded long-context Large Language Model (LLM) inference across Apple Silicon (MLX) and CUDA GPUs.",
+      "url": "https://github.com/Omc12/Differential-KV",
+      "stars": 19,
+      "language": "Python",
+      "updated": "2026-08-24T13:50:05Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "md-bridge",
+      "description": "Self-hosted document converter built on hand-written heuristics, not language models. Ships PDF ↔ Markdown; the architecture welcomes new format pairs as contributions land. Deterministic by design: same input, same output, every run. FastAPI + React, multi-arch Docker, MIT.",
+      "url": "https://github.com/vinicq/md-bridge",
+      "stars": 6,
+      "language": "Python",
+      "updated": "2026-08-18T15:39:36Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "padwan-llm",
+      "description": "Minimal, provider-agnostic Python client for large language models, built on niquests.",
+      "url": "https://github.com/polarsen-io/padwan-llm",
+      "stars": 3,
+      "language": "Python",
+      "updated": "2026-08-24T15:01:11Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "requivo",
+      "description": "AI discovery engine that turns a vague client request into a structured solution model — then generates delivery-ready artifacts from the same model: discovery brief, PRD, user stories, estimate, acceptance criteria, GitHub/GitLab-importable epic, and release notes. Asks only the questions that matter.",
+      "url": "https://github.com/jbkkz/requivo",
+      "stars": 3,
+      "language": "Python",
+      "updated": "2026-08-24T13:45:49Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "AgentOS-by-RegimeLab",
+      "description": "Agent-agnostic harness for AI coding agents — local SQLite memory, ACP dispatch, skills, and release gates. Apache 2.0 by RegimeLab.",
+      "url": "https://github.com/floridaKG/AgentOS-by-RegimeLab",
+      "stars": 3,
+      "language": "Python",
+      "updated": "2026-08-24T06:09:35Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "claim-boundary-harness",
+      "description": "CBH (Claim Boundary Harness) for Codex-class LLM agents: model-facing routing, claim verification, memory continuity, and bounded behavior correction. Current release: v1.2.4. DOI: 10.5281/zenodo.21189879.",
+      "url": "https://github.com/qimen039-code/claim-boundary-harness",
+      "stars": 2,
+      "language": "Python",
+      "updated": "2026-08-24T08:18:07Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ai-agent-pulse",
+      "description": "Daily automated tracking of 19 AI agent frameworks. Pulse Score ranks momentum via star velocity, release freshness, commit activity, and community health.",
+      "url": "https://github.com/PurpleHaze2320/ai-agent-pulse",
+      "stars": 2,
+      "language": "Python",
+      "updated": "2026-08-24T07:08:51Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Texelator",
+      "description": "GPU texture-unit accelerated BC4 inference runtime for large language models.",
+      "url": "https://github.com/hp0303/Texelator",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-08-24T13:42:11Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "NeXgen-Engine",
+      "description": "One Git repo to configure every AI CLI — AGENTS.md, MCP, skills, memory rendered to each tool's native format, checked for drift and synced fail-closed. Linux & Windows released.",
+      "url": "https://github.com/matteopasseri407/NeXgen-Engine",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-08-24T13:26:07Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "llm-youtube-landscape-tracker",
+      "description": "Python + Next.js pipeline for collecting YouTube transcripts, extracting LLM topics, and publishing a live, transcript-grounded dashboard that maps how channels cover LLMs, AI agents, coding assistants, model releases, benchmarks, and related developer workflows.",
+      "url": "https://github.com/Gaz-Myaz/llm-youtube-landscape-tracker",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-08-24T12:37:26Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "auto-hf-papers",
+      "description": "Automate Hugging Face Daily Papers filtering and email a daily Markdown digest of the most relevant AI papers by upvotes and GitHub stars",
+      "url": "https://github.com/fratert691/auto-hf-papers",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-08-24T12:30:08Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "vgt-auto-punisher",
+      "description": "Detect and block network threats in Linux kernels using hybrid L4 and L7 behavioral analysis for effective intrusion prevention and response.",
+      "url": "https://github.com/harel08/vgt-auto-punisher",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-08-24T12:30:13Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "agent-foundry",
+      "description": "Always-on autonomous AI product org. Rich bench of versioned role-cards; a kickoff council staffs the minimum; a lean always-on core (product agent -> engineer -> reviewer -> isolated tester -> release gate); trigger-activated specialists; bounded re-staffing. Built and shipped its first product overnight, unattended.",
+      "url": "https://github.com/jeffma8888/agent-foundry",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-08-24T11:25:39Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "elite-reasoning-mcp",
+      "description": "90+ tool Model Context Protocol server for AI coding agents: workflow flight recorder, quality-gated memory, release doctor, eval harnesses, and reasoning safety.",
+      "url": "https://github.com/Snehgabani/elite-reasoning-mcp",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-08-24T10:08:30Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ranex",
+      "description": "Evidence-driven governance for AI software agents: deterministic verdicts, isolated workers, signed evidence, kernel-controlled merges. Pre-release, MIT.",
+      "url": "https://github.com/anthonykewl20/ranex",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-08-24T09:03:58Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "AIRCBot",
+      "description": "A Python-based IRC bot, with tkinter UI, that interacts with locally hosted large language models, like LMStudio.",
+      "url": "https://github.com/davidegat/AIRCBot",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-24T15:24:50Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "retrieval-guided-master-prompt-selection",
+      "description": "B.Sc. project for selecting the best master prompt for large language models using retrieved, pre-stored examples and systematic evaluation across retrieval, embedding, few-shot, and ordering conditions.",
+      "url": "https://github.com/AmirMohammadFakhimi/retrieval-guided-master-prompt-selection",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-23T22:01:55Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "llm-representation-research",
+      "description": "Research on task-conditioned representation transformation and relational invariants in large language models.",
+      "url": "https://github.com/Xiayoudongjv/llm-representation-research",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-24T15:25:34Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ZUCE",
+      "description": "Extract task-specific capabilities from large language models for low-memory deployment — no fine-tuning, no weight updates.",
+      "url": "https://github.com/YangNobody12/ZUCE",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-24T15:25:12Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Langbridge---LLM-based-language-learning",
+      "description": "LangBridge is an interactive language-learning application that uses **Large Language Models (LLMs)** to help users practice new languages through conversational interactions. The application simulates real-world conversations, allowing learners to practice speaking and improve their communication skills without requiring a native-speaking partner.",
+      "url": "https://github.com/Siva-2004/Langbridge---LLM-based-language-learning",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-24T15:21:45Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ML-AI",
+      "description": "Working through [The Learners Community's Artificial Intelligence Roadmap](https://github.com/The-Learners-Community/RoadMaps-and-Resources/wiki/Artificial-Intelligence) — 30 projects from beginner to master level, covering neural networks, NLP, computer vision, GANs, reinforcement learning, and large language models.",
+      "url": "https://github.com/MohOdejimi/ML-AI",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-24T14:52:54Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "CertiGATE",
+      "description": "A guard benchmark with quality certificates for large language model-based scheduling in construction and facility management",
+      "url": "https://github.com/NTUZZH/CertiGATE",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-24T14:24:45Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "CEN-4930-LLM-Environment",
+      "description": "🤖 Course environment for CEN 4930: Large Language Models — verified toolchain, secret-safe config, and an OpenAI-compatible client for the NRP model gateway. Fall 2026",
+      "url": "https://github.com/mrosadevs/CEN-4930-LLM-Environment",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-24T14:15:27Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ma-thesis-assembly",
+      "description": "code for thesis experiments \"Robotic Assembly of Structures with Unknown Objects Using Large Language Models\"",
+      "url": "https://github.com/auee028/ma-thesis-assembly",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-24T14:15:03Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "airt-llm-redteam-platform",
+      "description": "LLM application security, quality, Agent tool-safety testing and CI release gates",
+      "url": "https://github.com/Neil558719/airt-llm-redteam-platform",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-24T15:14:50Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "llm-releases",
+      "description": null,
+      "url": "https://github.com/dannyburke1/llm-releases",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-24T08:55:11Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ai-radar",
+      "description": "Daily self-updating radar of new AI research (arXiv) and model releases (Hugging Face). Pure-Python, zero deps, regenerated every day by a scheduled GitHub Action.",
+      "url": "https://github.com/agentdynarq/ai-radar",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-24T07:20:22Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "fake-news-detection",
+      "description": "Code accompanying Language Models for Disinformation Detection: To be Large or to be Small?",
+      "url": "https://github.com/clutchmakis/fake-news-detection",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-24T11:34:24Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "SpamLens",
+      "description": "SpamSentry is a machine learning project that classifies SMS messages as spam or legitimate (ham) using natural language processing and text classification techniques. The project covers text preprocessing, feature extraction using Bag-of-Words/TF-IDF, model training, evaluation, and testing on new messages.",
+      "url": "https://github.com/sudhanshu9827/SpamLens",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-23T15:32:00Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Fake-News-Detection",
+      "description": "A machine learning and natural language processing system for detecting fake news using TF-IDF, classical classifiers, transformer-based models, and ensemble learning.",
+      "url": "https://github.com/rofhiwasebeyi-ops/Fake-News-Detection",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-23T07:39:46Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "IgboAI",
+      "description": "Open research on AI for Igbo language: self-updating literature tracking, corpora, and benchmarks spanning NLP, speech, and language models for a low-resource, tonal language. Tracks new papers and models nightly, building corpora, and benchmarking across NLP, ASR/TTS, and LLMs.",
+      "url": "https://github.com/IgboNLP-Research/IgboAI",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-21T09:10:31Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "AI_fake_news_detection",
+      "description": "AI Fake News Detection is a Machine Learning and Natural Language Processing (NLP) based web application designed to classify news content as Fake or Real. The system processes and cleans the input news text, extracts meaningful textual features, and uses a trained Machine Learning classification model to identify patterns associated with fake and ",
+      "url": "https://github.com/devpatil05/AI_fake_news_detection",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-19T08:22:12Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "bayesian_ml_fake_news",
+      "description": "Bayesian analysis of attention language, misinformation, and engagement — hierarchical models + randomized Upworthy headline experiments + Streamlit demo.",
+      "url": "https://github.com/ananyasen99/bayesian_ml_fake_news",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-17T07:01:12Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "pep-graph",
+      "description": "A knowledge graph engine modeling 20 years of Python concurrency evolution (PEPs 255–703) to reason over new language proposals and generate Pre-RFC Impact Dossiers.",
+      "url": "https://github.com/kh-bikash/pep-graph",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-15T15:53:16Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Personalized-News-Aggregation-and-Digest-System-Using-Large-Language-Models",
+      "description": null,
+      "url": "https://github.com/KVSGVinayak11/Personalized-News-Aggregation-and-Digest-System-Using-Large-Language-Models",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-18T14:29:43Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ttt-knowledge-writein-readout",
+      "description": "Test-time training and the write-in / read-out of new knowledge in small language models.",
+      "url": "https://github.com/sxewc/ttt-knowledge-writein-readout",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-09T13:33:47Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "llm-advertising-ecosystem-atlas",
+      "description": "An in-depth, independent research report mapping the emerging advertising ecosystem inside Large Language Models: the roles of media agencies, AdTech (DSPs/SSPs), LLM platforms, agentic buying, new protocols (MCP/AdCP), economic models, and case studies.",
+      "url": "https://github.com/hgabrali/llm-advertising-ecosystem-atlas",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-06T11:00:37Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "new-language-model",
+      "description": "The New Language Model uses context engineering to facilitate Bible translation.  ",
+      "url": "https://github.com/eon-dev1/new-language-model",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-08-05T11:21:38Z",
+      "source": "GitHub"
+    }
+  ],
+  "papers": [],
+  "totalModels": 49,
+  "totalPapers": 0
+}
