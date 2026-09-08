@@ -5,8 +5,16 @@
   "seriesLinePrefix": "LLM Safety & Red-Teaming for QA leaders \u00b7 Published",
   "seriesDescription": "Practical articles on a regular cadence for QA leaders building LLM safety and red-teaming practice.",
   "intervalDays": 21,
-  "lastPublished": "2026-07-23",
+  "lastPublished": "2026-09-08",
   "articles": [
+    {
+      "date": "2026-09-08",
+      "slug": "tool-allowlists-as-safety-controls",
+      "title": "Treat Tool Allowlists Like Production Feature Flags",
+      "summary": "A refused answer with a still-executed tool call is not a pass. Make allowlists first-class safety controls with owners and tests.",
+      "href": "/community/llm-safety-red-team/articles/2026-09-08-tool-allowlists-as-safety-controls.html",
+      "external": false
+    },
     {
       "date": "2026-07-23",
       "slug": "arize-phoenix-for-qa-red-team",

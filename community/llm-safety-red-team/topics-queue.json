@@ -1,34 +1,9 @@
 {
   "topics": [
     {
-      "slug": "tool-allowlists-as-safety-controls",
-      "title": "Treat Tool Allowlists Like Production Feature Flags",
-      "dek": "A refused answer with a still-executed tool call is not a pass. Make allowlists first-class safety controls with owners and tests.",
-      "sections": [
-        {
-          "heading": "Refusal text is not containment",
-          "paragraphs": [
-            "If the model says no but still calls CRM, calendar, or shell tools, you failed the safety case. Screenshots of the chat hide the tool span. Your gate must fail when a disallowed tool runs—not when the prose looks polite.",
-            "Write the allowlist as an artifact: which tools exist, who may invoke them, under which intents, and what arguments are forbidden. Version it next to the agent config the same way you version feature flags."
-          ]
-        },
-        {
-          "heading": "Minimum viable allowlist checks",
-          "paragraphs": [
-            "Block tools not on the list. Block argument shapes that exfiltrate (raw account IDs plus PII fields, unrestricted SQL, file paths outside the sandbox). Log every deny with the prompt id and span id so Security can audit.",
-            "Add three CI probes: (1) injection that asks for a blocked tool, (2) legitimate intent that needs an allowed tool, (3) refusal-with-tool-leak regression from your last incident. Automate the first and third; keep the second as a smoke test."
-          ]
-        },
-        {
-          "heading": "Ownership",
-          "body": "Name a QA owner for the probe set and a platform owner for the allowlist code. When a new tool ships, both must sign off before production—same bar as opening a new network egress."
-        }
-      ]
-    },
-    {
       "slug": "over-refusal-budget-for-qa",
       "title": "Give Your Gate an Over-Refusal Budget",
-      "dek": "Safety that blocks billing questions is not safety—it is product damage. Track false refusals with the same seriousness as jailbreaks.",
+      "dek": "Safety that blocks billing questions is not safety\u2014it is product damage. Track false refusals with the same seriousness as jailbreaks.",
       "sections": [
         {
           "heading": "Two failure modes, one scoreboard",
@@ -49,7 +24,7 @@
     },
     {
       "slug": "red-team-findings-in-sprint-backlog",
-      "title": "Put Red-Team Findings in the Sprint Backlog—Not the Slack Graveyard",
+      "title": "Put Red-Team Findings in the Sprint Backlog\u2014Not the Slack Graveyard",
       "dek": "A finding without a ticket, severity, and retest owner will return in the next release. Here is a lightweight intake that QA can run in under thirty minutes.",
       "sections": [
         {
@@ -72,7 +47,7 @@
     {
       "slug": "shadow-traffic-for-safety-gates",
       "title": "Shadow Your Safety Gate on Production Traffic Before You Enforce It",
-      "dek": "Flipping a new evaluator to blocking without a shadow week creates false confidence—or false outages. Run dark for seven days first.",
+      "dek": "Flipping a new evaluator to blocking without a shadow week creates false confidence\u2014or false outages. Run dark for seven days first.",
       "sections": [
         {
           "heading": "What shadow mode means",
