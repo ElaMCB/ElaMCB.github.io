@@ -6,8 +6,8 @@
     <title>Ela MCB | AI-Native Engineer · LLMs, Agents, MCP</title>
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="AI-native engineer and AI leader: agentic systems, LLM evaluation and red-teaming, MCP, RAG QA, release gates, and leading teams through AI-native delivery.">
-    <meta name="keywords" content="AI-native engineer, AI leader, AI engineer, LLM evaluation, red teaming, MCP, Model Context Protocol, agentic AI, RAG testing, Playwright, TypeScript, Python, AI safety, guardrails, release gates, AI transformation">
+    <meta name="description" content="AI-native engineer focused on autonomous AI systems: multi-agent strategy, control planes, eval as governance, MCP, and production gates.">
+    <meta name="keywords" content="autonomous AI, AI-native engineer, multi-agent systems, AI strategy, MCP, agentic AI, release gates, LLM evaluation, red teaming">
     <meta name="author" content="Ela MCB">
     <meta name="robots" content="index, follow">
     <meta name="language" content="English">
@@ -1568,6 +1568,64 @@ Data is stored locally and not shared with any third parties.
             font-weight: 600;
         }
 
+        .vision-panel {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 1.75rem 1.5rem;
+            background: rgba(15, 15, 23, 0.72);
+            border: 1px solid rgba(91, 127, 184, 0.35);
+            border-radius: 12px;
+        }
+
+        .vision-panel .vision-lead {
+            font-size: 1.15rem;
+            line-height: 1.75;
+            margin-bottom: 1.25rem;
+            color: rgba(228, 228, 231, 0.95);
+            text-align: left;
+        }
+
+        .vision-panel .vision-points {
+            list-style: none;
+            margin: 0 0 1.5rem;
+            padding: 0;
+            display: grid;
+            gap: 0.85rem;
+        }
+
+        .vision-panel .vision-points li {
+            padding: 0.85rem 1rem;
+            border-left: 3px solid var(--neon-blue);
+            background: rgba(91, 127, 184, 0.1);
+            border-radius: 0 8px 8px 0;
+            text-align: left;
+            color: rgba(228, 228, 231, 0.92);
+            font-size: 1.02rem;
+            line-height: 1.6;
+        }
+
+        .vision-panel .vision-points strong {
+            color: var(--neon-blue);
+        }
+
+        .vision-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: rgba(91, 127, 184, 0.25);
+            border: 1px solid rgba(91, 127, 184, 0.45);
+            border-radius: 8px;
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-weight: 700;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .vision-cta:hover {
+            background: rgba(91, 127, 184, 0.4);
+            color: #fff;
+        }
 
         .skills-container {
             display: flex;
@@ -2270,7 +2328,7 @@ Data is stored locally and not shared with any third parties.
                 <h2 class="subtitle">AI-Native Engineer</h2>
                 <p class="tagline">Agents, MCP &amp; production gates—from prototype to production systems</p>
                 <div class="mode-switch" aria-label="Audience mode shortcuts">
-                    <a href="#projects"><i class="fas fa-briefcase"></i> For Recruiters</a>
+                    <a href="#vision"><i class="fas fa-compass"></i> For Strategy</a>
                     <a href="#research"><i class="fas fa-flask"></i> For Engineers</a>
                     <a href="#community-focus"><i class="fas fa-users"></i> For Community</a>
                 </div>
@@ -2291,24 +2349,39 @@ Data is stored locally and not shared with any third parties.
                     <h2>About Me</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>I am an <strong>AI-native engineer and AI leader</strong>: I design, ship, and govern systems around LLMs, agents, and modern tooling—and I help teams adopt the same operating model. Evaluation, safety, and automation are built in from day one, not bolted on at the end.</p>
+                    <p>I am an <strong>AI-native engineer</strong>. My north star is <strong>AI as infrastructure</strong>: systems you operate—agents, tools, gates, evidence—not a parade of models. Strategy and foresight first; implementation as proof.</p>
 
                     <div class="expertise-areas">
-                        <h3>Core Expertise</h3>
+                        <h3>Focus Areas</h3>
                         <div class="expertise-tags">
-                            <a href="./docs/LLM_RED_TEAM_PRODUCTION_GATE_QA.html" class="expertise-tag">LLM Safety &amp; Red-Teaming</a>
-                            <a href="./docs/AGENTIC_RELEASE_GATE.html" class="expertise-tag">Agentic Systems &amp; Release Gates</a>
-                            <a href="research/notebooks/mcp-software-testing.html" class="expertise-tag">Model Context Protocol (MCP)</a>
-                            <a href="research/notebooks/ai-safety-metrics.html" class="expertise-tag">Evaluation &amp; Guardrails</a>
-                            <a href="research/notebooks/rag-testing-applications.html" class="expertise-tag">RAG &amp; Retrieval QA</a>
-                            <a href="community/llm-safety-red-team/" class="expertise-tag">AI Safety Leadership</a>
+                            <a href="./docs/AUTONOMOUS_AI_SYSTEMS.html" class="expertise-tag">AI as Infrastructure</a>
+                            <a href="./docs/HYDRO_SWARM_MOE.html" class="expertise-tag">Multi-Agent Architectures</a>
+                            <a href="./docs/AGENTIC_RELEASE_GATE.html" class="expertise-tag">Agent Control &amp; Release Gates</a>
+                            <a href="research/notebooks/mcp-software-testing.html" class="expertise-tag">MCP &amp; Tool Ecosystems</a>
+                            <a href="./docs/LLM_RED_TEAM_PRODUCTION_GATE_QA.html" class="expertise-tag">Eval as Governance</a>
+                            <a href="community/llm-safety-red-team/" class="expertise-tag">Safety Leadership</a>
                             <span class="expertise-tag">AI-Native Delivery</span>
-                            <span class="expertise-tag">Playwright / TypeScript · Python</span>
                         </div>
                     </div>
 
-                    <p>Over the last year I moved from AI-augmented testing into owning the full loop: agent architectures, production gates, community practice for QA leaders, and the habits that make AI-native teams ship faster without losing trust.</p>
+                    <p>Technical craft still matters—traces, gates, MCP, red-teaming—but it serves that bet: if AI is infrastructure, you build it to be run, not demoed.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="vision">
+        <div class="container">
+            <h2>AI as Infrastructure</h2>
+            <p class="section-nav-note">Strategy and foresight—not model theater.</p>
+            <div class="vision-panel">
+                <p class="vision-lead">My vision is <strong>AI as infrastructure</strong>: always on, owned, observable, and governed—the way we treat cloud, CI, and data platforms. Models and agents are components. The product is the system you can run.</p>
+                <ul class="vision-points">
+                    <li><strong>Foresight:</strong> If AI is only a feature, it stays optional. As infrastructure, it becomes how work moves.</li>
+                    <li><strong>Bet:</strong> Invest in the control plane—identity, tools, eval, override—before you scale autonomy.</li>
+                    <li><strong>Standard:</strong> Same bar as production systems: owners, SLOs, evidence, and a kill switch.</li>
+                </ul>
+                <a class="vision-cta" href="./docs/AUTONOMOUS_AI_SYSTEMS.html"><i class="fas fa-compass"></i> Read the full thesis</a>
             </div>
         </div>
     </section>
@@ -2316,7 +2389,7 @@ Data is stored locally and not shared with any third parties.
     <section id="skills">
         <div class="container">
                     <h2>Technical Skills</h2>
-                    <p class="section-nav-note">Stack and practice for an AI-native engineer who also leads adoption—not just tooling lists.</p>
+                    <p class="section-nav-note">Supporting craft for autonomous systems—stack under the strategy, not instead of it.</p>
             <div class="skills-container">
                 <div class="skill-category">
                     <h3>AI Systems &amp; Agents</h3>
@@ -2355,45 +2428,137 @@ Data is stored locally and not shared with any third parties.
     <section id="demos">
         <div class="container">
                     <h2>Selected Work</h2>
-                    <p class="section-nav-note">AI-native systems and leadership artifacts first. Full catalog in <a href="./PROJECTS.md">PROJECTS.md</a>.</p>
+                    <p class="section-nav-note">Autonomous systems, control planes, and strategy artifacts first. Full catalog in <a href="./PROJECTS.md">PROJECTS.md</a>.</p>
             <div class="demo-grid" id="demos-grid" data-disclosure-grid data-initial-visible="4">
                 <div class="demo-card">
                     <div class="demo-header">
-                        <i class="fas fa-graduation-cap"></i>
-                        <h3>Learn AI-First Development</h3>
+                        <i class="fas fa-compass"></i>
+                        <h3>AI as Infrastructure Thesis</h3>
                     </div>
                     <div class="demo-content">
-                        <p><strong>Master AI-Assisted Development:</strong> Comprehensive guides showing exactly how this portfolio was built</p>
+                        <p><strong>Strategy &amp; foresight:</strong> AI as always-on infrastructure—owned, observable, governed—not a better model debate or a demo that mostly works.</p>
                         <div class="demo-example">
-                            <h4>What You'll Learn:</h4>
+                            <h4>Core bets:</h4>
                             <ul>
-                                <li><strong>Prompt Engineering:</strong> Real prompts for 10x faster development</li>
-                                <li><strong>Workflow Integration:</strong> Daily development routines with AI</li>
-                                <li><strong>Advanced Techniques:</strong> Chain-of-thought and role-based prompting</li>
-                                <li><strong>Real Examples:</strong> Every technique demonstrated in this portfolio</li>
+                                <li><strong>Infrastructure bar:</strong> Owners, SLOs, evidence, kill switch</li>
+                                <li><strong>Control plane first:</strong> Identity, tools, eval, override</li>
+                                <li><strong>Autonomy earned:</strong> Expand only when the last loop proved itself</li>
+                                <li><strong>Operate, don’t dabble:</strong> Platforms beat one-off assistants</li>
                             </ul>
                         </div>
                         <div class="project-links">
-                            <a href="./learn/" aria-label="Learn AI-First Development">Learning Hub</a>
-                            <a href="./docs/PROMPT-ENGINEERING-GUIDE.html" aria-label="Prompt Engineering Guide">Guide</a>
+                            <a href="./docs/AUTONOMOUS_AI_SYSTEMS.html" aria-label="Read AI as Infrastructure thesis"><i class="fas fa-book"></i> Read Thesis</a>
+                            <a href="#vision" aria-label="Vision section"><i class="fas fa-eye"></i> On Homepage</a>
                         </div>
                     </div>
                 </div>
+
+                <div class="demo-card">
+                    <div class="demo-header">
+                        <i class="fas fa-water"></i>
+                        <h3>Hydro-Swarm MoE Architecture</h3>
+                    </div>
+                    <div class="demo-content">
+                        <p><strong>Autonomous architecture:</strong> Adaptive agent swarms + mixture-of-experts routing for intelligent quality systems—foresight on how fleets should specialize under uncertainty.</p>
+                        <div class="demo-example">
+                            <h4>Key ideas:</h4>
+                            <ul>
+                                <li><strong>Fluid orchestration:</strong> Agent swarms that adapt to code “currents”</li>
+                                <li><strong>Uncertainty-aware routing:</strong> Confidence-driven expert selection</li>
+                                <li><strong>Production validation:</strong> Drift monitoring in distributed testing</li>
+                                <li><strong>IDA-MoE:</strong> Complexity metrics drive experts, not token similarity alone</li>
+                            </ul>
+                        </div>
+                        <div class="project-links">
+                            <a href="./docs/HYDRO_SWARM_MOE.html" aria-label="View Hydro-Swarm MoE"><i class="fas fa-book"></i> View Paper</a>
+                            <a href="research/" aria-label="All Research"><i class="fas fa-flask"></i> Research</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-header">
+                        <i class="fas fa-door-closed"></i>
+                        <h3>Agentic Release Gate</h3>
+                    </div>
+                    <div class="demo-content">
+                        <p><strong>Control plane:</strong> Practical release checklist for tool-using AI—boundaries, authorization, human checkpoints, and evidence before autonomy ships.</p>
+                        <div class="demo-example">
+                            <h4>What it covers:</h4>
+                            <ul>
+                                <li>Tool allowlists and argument constraints</li>
+                                <li>Plan control and authorization paths</li>
+                                <li>Human-in-the-loop checkpoints</li>
+                                <li>Evidence bundles for Security and Legal</li>
+                            </ul>
+                        </div>
+                        <div class="project-links">
+                            <a href="./docs/AGENTIC_RELEASE_GATE.html" aria-label="Agentic Release Gate"><i class="fas fa-clipboard-check"></i> Open Gate</a>
+                            <a href="./docs/LLM_RED_TEAM_PRODUCTION_GATE_QA.html" aria-label="40-Prompt Gate"><i class="fas fa-shield-alt"></i> Prompt Gate</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-header">
+                        <i class="fas fa-project-diagram"></i>
+                        <h3>Multi-Agent Orchestration</h3>
+                    </div>
+                    <div class="demo-content">
+                        <p><strong>Coordination layer:</strong> Manager–worker, swarm, and pipeline patterns for autonomous QA—how agents divide work without losing accountability.</p>
+                        <div class="demo-example">
+                            <h4>Patterns:</h4>
+                            <ul>
+                                <li>Specialized explorer / executor / analyzer agents</li>
+                                <li>Orchestrator ownership of handoffs</li>
+                                <li>Cost and bug-detection tradeoffs across shapes</li>
+                                <li>Path from demo agents to production loops</li>
+                            </ul>
+                        </div>
+                        <div class="project-links">
+                            <a href="research/notebooks/multi-agent-orchestration-framework.html" aria-label="Multi-Agent Orchestration"><i class="fas fa-book"></i> Framework</a>
+                            <a href="research/notebooks/agentic-testing-integration.html" aria-label="Agentic Testing"><i class="fas fa-robot"></i> Agentic Testing</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-header">
+                        <i class="fas fa-cogs"></i>
+                        <h3>Unified Autonomous Agent (UAA)</h3>
+                    </div>
+                    <div class="demo-content">
+                        <p><strong>Operating practice:</strong> Modular autonomous agents running on this portfolio—CI fix, link health, security—bounded autonomy with measurable outcomes.</p>
+                        <div class="demo-example">
+                            <h4>In production here:</h4>
+                            <ul>
+                                <li>Scheduled agent capabilities via GitHub Actions</li>
+                                <li>Shared router and status dashboard</li>
+                                <li>Evidence of weekly autonomous maintenance</li>
+                                <li>Architecture docs for extending the fleet</li>
+                            </ul>
+                        </div>
+                        <div class="project-links">
+                            <a href="./docs/UNIFIED_AGENT_ARCHITECTURE.html" aria-label="UAA Architecture"><i class="fas fa-sitemap"></i> Architecture</a>
+                            <a href="./docs/UAA_DASHBOARD.html" aria-label="UAA Dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="demo-card">
                     <div class="demo-header">
                         <i class="fas fa-shield-alt"></i>
                         <h3>LLMGuardian Testing Framework</h3>
                     </div>
                     <div class="demo-content">
-                        <p><strong>Production Framework:</strong> Systematic LLM validation, safety testing, and performance monitoring</p>
+                        <p><strong>Eval layer:</strong> Systematic LLM validation, safety testing, and monitoring—governance instrumentation for models in the loop.</p>
                         <div class="demo-example">
-                            <h4>Real Capabilities:</h4>
+                            <h4>Capabilities:</h4>
                             <ul>
-                                <li>Tests 100+ prompt/response pairs across LLM providers</li>
-                                <li>Measures accuracy, toxicity, and bias automatically</li>
-                                <li>Detects hallucinations and factual errors</li>
-                                <li>Prevents prompt injection attacks</li>
-                                <li>CI/CD pipeline integration for continuous testing</li>
+                                <li>Accuracy, toxicity, and bias measurement</li>
+                                <li>Hallucination and injection checks</li>
+                                <li>CI integration for continuous validation</li>
+                                <li>Provider-agnostic prompt suites</li>
                             </ul>
                             <h4>Recent Results:</h4>
                             <code>Math Accuracy: 94% | Safety Score: 87% | Overall: 91%</code>
@@ -2401,6 +2566,52 @@ Data is stored locally and not shared with any third parties.
                         <div class="project-links">
                             <a href="./llm-guardian/" target="_blank"><i class="fab fa-github"></i> View Code</a>
                             <a href="./llm-guardian/demo.html" target="_blank"><i class="fas fa-play"></i> Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-header">
+                        <i class="fas fa-brain"></i>
+                        <h3>LLM &amp; Gen AI Research Discovery</h3>
+                    </div>
+                    <div class="demo-content">
+                        <p><strong>Autonomous research loop:</strong> Weekly scans for new LLMs and papers—an always-on foresight feed for strategy, not a one-off search.</p>
+                        <div class="demo-example">
+                            <h4>Sources:</h4>
+                            <ul>
+                                <li>GitHub, ArXiv, Hugging Face</li>
+                                <li>Automated weekly cadence</li>
+                                <li>Accumulated discovery archive</li>
+                                <li>Public discovery dashboard</li>
+                            </ul>
+                        </div>
+                        <div class="project-links">
+                            <a href="./llm-discovery/" aria-label="View LLM Discovery"><i class="fas fa-search"></i> Discoveries</a>
+                            <a href="https://github.com/ElaMCB/ElaMCB.github.io/tree/main/llm-discovery" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-header">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Learn AI-First Development</h3>
+                    </div>
+                    <div class="demo-content">
+                        <p><strong>Teaching layer:</strong> How this portfolio was built with AI-native workflows—supporting material behind the systems work.</p>
+                        <div class="demo-example">
+                            <h4>Included:</h4>
+                            <ul>
+                                <li>Prompt engineering patterns</li>
+                                <li>Daily AI workflow integration</li>
+                                <li>Advanced prompting techniques</li>
+                                <li>Portfolio-as-proof examples</li>
+                            </ul>
+                        </div>
+                        <div class="project-links">
+                            <a href="./learn/" aria-label="Learn AI-First Development">Learning Hub</a>
+                            <a href="./docs/PROMPT-ENGINEERING-GUIDE.html" aria-label="Prompt Engineering Guide">Guide</a>
                         </div>
                     </div>
                 </div>
@@ -2456,56 +2667,17 @@ Data is stored locally and not shared with any third parties.
                         <h3>QA to Prompt Engineer Journey</h3>
                     </div>
                     <div class="demo-content">
-                        <p><strong>Career Transition Project:</strong> 4-week structured plan to move into prompt engineering and AI-first development</p>
+                        <p><strong>Career path artifact:</strong> Structured transition plan—kept as supporting history, not the lead story.</p>
                         <div class="demo-example">
                             <h4>What's Included:</h4>
                             <ul>
-                                <li><strong>Week 1:</strong> Core prompting &amp; mental models</li>
-                                <li><strong>Week 2:</strong> Evaluation, data &amp; iteration</li>
-                                <li><strong>Week 3:</strong> Domain transfer &amp; advanced patterns</li>
-                                <li><strong>Week 4:</strong> Portfolio, interview prep &amp; outreach</li>
-                            </ul>
-                            <h4>Key Deliverables:</h4>
-                            <ul>
-                                <li>Prompt A/B CLI tool</li>
-                                <li>Evaluation frameworks &amp; metrics</li>
-                                <li>Case studies with measurable results</li>
-                                <li>Portfolio site &amp; interview stories</li>
+                                <li>Four-week prompting and evaluation plan</li>
+                                <li>Portfolio and interview story craft</li>
+                                <li>Measurable case-study habits</li>
                             </ul>
                         </div>
                         <div class="project-links">
                             <a href="./qa-to-prompt-engineer-journey/" aria-label="View Journey Project"><i class="fas fa-book"></i> View Project</a>
-                            <a href="https://github.com/ElaMCB/ElaMCB.github.io/tree/main/qa-to-prompt-engineer-journey" target="_blank" aria-label="View on GitHub"><i class="fab fa-github"></i> GitHub</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="demo-card">
-                    <div class="demo-header">
-                        <i class="fas fa-brain"></i>
-                        <h3>LLM &amp; Gen AI Research Discovery</h3>
-                    </div>
-                    <div class="demo-content">
-                        <p><strong>Automated Discovery System:</strong> Weekly scans for new LLMs and groundbreaking Gen AI research papers</p>
-                        <div class="demo-example">
-                            <h4>Sources Monitored:</h4>
-                            <ul>
-                                <li><strong>GitHub:</strong> New LLM repositories</li>
-                                <li><strong>ArXiv:</strong> Latest research papers</li>
-                                <li><strong>Hugging Face:</strong> New model releases</li>
-                                <li><strong>Papers with Code:</strong> SOTA updates</li>
-                            </ul>
-                            <h4>Features:</h4>
-                            <ul>
-                                <li>Automated weekly scans</li>
-                                <li>Smart filtering for significant releases</li>
-                                <li>Accumulated discoveries for review</li>
-                                <li>Centralized discovery dashboard</li>
-                            </ul>
-                        </div>
-                        <div class="project-links">
-                            <a href="./llm-discovery/" aria-label="View LLM Discovery"><i class="fas fa-search"></i> View Discoveries</a>
-                            <a href="https://github.com/ElaMCB/ElaMCB.github.io/tree/main/llm-discovery" target="_blank" aria-label="View on GitHub"><i class="fab fa-github"></i> GitHub</a>
                         </div>
                     </div>
                 </div>
