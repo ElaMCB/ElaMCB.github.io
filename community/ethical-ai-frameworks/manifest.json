@@ -5,8 +5,16 @@
   "seriesLinePrefix": "Ethical AI Frameworks \u00b7 Published",
   "seriesDescription": "Short articles on ethical AI frameworks, governance, and practice\u2014aligned with the Ethical AI Frameworks LinkedIn group.",
   "intervalDays": 25,
-  "lastPublished": "2026-06-19",
+  "lastPublished": "2026-09-08",
   "articles": [
+    {
+      "date": "2026-09-08",
+      "slug": "vendor-model-change-ethics-checklist",
+      "title": "When the Vendor Swaps the Model: An Ethics Checklist for QA",
+      "summary": "Provider silent upgrades change behavior without a PR. Treat model swaps like dependency upgrades with ethical side effects.",
+      "href": "/community/ethical-ai-frameworks/articles/2026-09-08-vendor-model-change-ethics-checklist.html",
+      "external": false
+    },
     {
       "date": "2026-06-19",
       "slug": "human-override-and-escalation-rules",

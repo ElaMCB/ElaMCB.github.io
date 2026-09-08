@@ -1,34 +1,9 @@
 {
   "topics": [
     {
-      "slug": "vendor-model-change-ethics-checklist",
-      "title": "When the Vendor Swaps the Model: An Ethics Checklist for QA",
-      "dek": "Provider silent upgrades change behavior without a PR. Treat model swaps like dependency upgrades with ethical side effects.",
-      "sections": [
-        {
-          "heading": "You did not ship the change—but you own the impact",
-          "paragraphs": [
-            "If your app calls a floating alias (latest, gpt-x), the vendor can move the target. Tone, refusal boundaries, and tool-calling habits shift overnight. Users still blame your product.",
-            "Pin versions in production. Allow aliases only in non-prod. When you must move, run the same ethical release checklist you use for your own prompt changes."
-          ]
-        },
-        {
-          "heading": "Checklist before accepting a new model id",
-          "paragraphs": [
-            "Diff safety and over-refusal scores on your fixed suites. Re-run bias and PII probes. Confirm logging still captures model id and version. Update the risk register entry with the swap date and owner.",
-            "If any blocker fails, keep the pin and open a vendor ticket—do not paper over it with a hotter temperature."
-          ]
-        },
-        {
-          "heading": "Communicate",
-          "body": "Tell Support and Trust & Safety what changed and how to escalate weird refusals or new failure modes for two weeks after the cutover."
-        }
-      ]
-    },
-    {
       "slug": "consent-for-eval-data",
       "title": "Using Real User Traces in Evals: Consent and Minimization Rules",
-      "dek": "Production traces make the best eval sets—and the fastest path to a privacy incident. Here is a minimum bar before you copy chats into a dataset.",
+      "dek": "Production traces make the best eval sets\u2014and the fastest path to a privacy incident. Here is a minimum bar before you copy chats into a dataset.",
       "sections": [
         {
           "heading": "Default deny on raw production text",

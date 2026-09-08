@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When the Vendor Swaps the Model: An Ethics Checklist for QA | Ethical AI Frameworks</title>
+    <meta name="description" content="Provider silent upgrades change behavior without a PR. Treat model swaps like dependency upgrades with ethical side effects.">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="canonical" href="https://elamcb.github.io/community/ethical-ai-frameworks/articles/2026-09-08-vendor-model-change-ethics-checklist.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script data-goatcounter="https://elamcb.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --text: #e4e4e7;
+            --steel: #5b7fb8;
+            --steel-bright: #7aa3d8;
+            --steel-dim: rgba(91, 127, 184, 0.35);
+            --panel: rgba(26, 26, 46, 0.55);
+            --card-bg: rgba(15, 15, 23, 0.88);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.75;
+            min-height: 100vh;
+        }
+        .container { width: 92%; max-width: 860px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+        .back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 10px 20px;
+            background: rgba(91, 127, 184, 0.2);
+            border: 1px solid var(--steel-dim);
+            border-radius: 8px;
+            color: var(--steel);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: bold;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .back:hover {
+            background: rgba(91, 127, 184, 0.32);
+            color: var(--steel-bright);
+        }
+        header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--steel-dim); }
+        h1 {
+            font-size: 1.85rem;
+            color: var(--steel);
+            text-shadow: 0 0 20px rgba(91, 127, 184, 0.18);
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+        .dek { font-size: 1.05rem; opacity: 0.92; color: rgba(228, 228, 231, 0.9); }
+        .series { font-size: 0.85rem; color: var(--steel-bright); margin-top: 1rem; }
+        .content {
+            background: var(--panel);
+            border: 1px solid var(--steel-dim);
+            border-radius: 10px;
+            padding: 2rem;
+        }
+        .content h2 { color: var(--steel); font-size: 1.2rem; margin: 2rem 0 1rem; }
+        .content h2:first-of-type { margin-top: 0; }
+        .content p { margin-bottom: 1rem; text-align: left; color: rgba(228, 228, 231, 0.92); font-size: 1.03rem; line-height: 1.78; }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back"><i class="fas fa-arrow-left"></i> Ethical AI Frameworks hub</a>
+        <header>
+            <p class="series"><i class="fas fa-users"></i> Ethical AI Frameworks · Published 2026-09-08</p>
+            <h1>When the Vendor Swaps the Model: An Ethics Checklist for QA</h1>
+            <p class="dek">Provider silent upgrades change behavior without a PR. Treat model swaps like dependency upgrades with ethical side effects.</p>
+        </header>
+        <article class="content">
+<h2>You did not ship the change—but you own the impact</h2>
+<p>If your app calls a floating alias (latest, gpt-x), the vendor can move the target. Tone, refusal boundaries, and tool-calling habits shift overnight. Users still blame your product.</p>
+<p>Pin versions in production. Allow aliases only in non-prod. When you must move, run the same ethical release checklist you use for your own prompt changes.</p>
+<h2>Checklist before accepting a new model id</h2>
+<p>Diff safety and over-refusal scores on your fixed suites. Re-run bias and PII probes. Confirm logging still captures model id and version. Update the risk register entry with the swap date and owner.</p>
+<p>If any blocker fails, keep the pin and open a vendor ticket—do not paper over it with a hotter temperature.</p>
+<h2>Communicate</h2>
+<p>Tell Support and Trust &amp; Safety what changed and how to escalate weird refusals or new failure modes for two weeks after the cutover.</p>
+        </article>
+    </div>
+</body>
+</html>
