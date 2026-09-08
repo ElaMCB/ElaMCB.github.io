@@ -1,3 +1,95 @@
 {
-  "topics": []
+  "topics": [
+    {
+      "slug": "vendor-model-change-ethics-checklist",
+      "title": "When the Vendor Swaps the Model: An Ethics Checklist for QA",
+      "dek": "Provider silent upgrades change behavior without a PR. Treat model swaps like dependency upgrades with ethical side effects.",
+      "sections": [
+        {
+          "heading": "You did not ship the change—but you own the impact",
+          "paragraphs": [
+            "If your app calls a floating alias (latest, gpt-x), the vendor can move the target. Tone, refusal boundaries, and tool-calling habits shift overnight. Users still blame your product.",
+            "Pin versions in production. Allow aliases only in non-prod. When you must move, run the same ethical release checklist you use for your own prompt changes."
+          ]
+        },
+        {
+          "heading": "Checklist before accepting a new model id",
+          "paragraphs": [
+            "Diff safety and over-refusal scores on your fixed suites. Re-run bias and PII probes. Confirm logging still captures model id and version. Update the risk register entry with the swap date and owner.",
+            "If any blocker fails, keep the pin and open a vendor ticket—do not paper over it with a hotter temperature."
+          ]
+        },
+        {
+          "heading": "Communicate",
+          "body": "Tell Support and Trust & Safety what changed and how to escalate weird refusals or new failure modes for two weeks after the cutover."
+        }
+      ]
+    },
+    {
+      "slug": "consent-for-eval-data",
+      "title": "Using Real User Traces in Evals: Consent and Minimization Rules",
+      "dek": "Production traces make the best eval sets—and the fastest path to a privacy incident. Here is a minimum bar before you copy chats into a dataset.",
+      "sections": [
+        {
+          "heading": "Default deny on raw production text",
+          "body": "Do not paste live customer content into shared eval stores, GitHub, or vendor playgrounds. Start from synthetic or redacted fixtures. Promote real traces only through an approved pipeline."
+        },
+        {
+          "heading": "Minimum bar when you need production signal",
+          "paragraphs": [
+            "Document lawful basis or contract terms, strip direct identifiers, hash account ids, drop payloads outside the fields under test, and set a retention clock (for example thirty days) with an owner who deletes on time.",
+            "Separate access: engineers who debug can see more than the shared CI dataset. Never commit raw traces to the portfolio or public repos."
+          ]
+        },
+        {
+          "heading": "QA checkpoint",
+          "body": "Before a new eval dataset merges, QA confirms redaction sample review (ten random rows), retention label present, and no secrets in metadata. Block the merge if any row fails."
+        }
+      ]
+    },
+    {
+      "slug": "accessibility-as-ethical-requirement",
+      "title": "Accessibility Is an Ethical AI Requirement, Not a Polish Pass",
+      "dek": "If your AI UI fails basic accessibility, you are excluding users while claiming responsible AI. Bake a11y checks into the ethical release gate.",
+      "sections": [
+        {
+          "heading": "Why this belongs in the ethics lane",
+          "body": "Fairness is not only demographic parity in model scores. An assistant that cannot be operated by keyboard or screen reader fails equal access. Treat that as a release blocker alongside safety probes."
+        },
+        {
+          "heading": "Minimum AI-UI a11y gate",
+          "paragraphs": [
+            "Keyboard path for primary ask-and-answer flow, visible focus, labels on inputs, status messages announced to assistive tech, and contrast that meets your policy. Automate axe or equivalent in CI; keep one manual screen-reader pass per release.",
+            "For generated content, ensure the UI does not rely on color alone to show risk or refusal state."
+          ]
+        },
+        {
+          "heading": "Owners",
+          "body": "Product owns the standard; QA owns the gate evidence; design owns component fixes. Put the a11y evidence link in the same release packet as your ethical checklist."
+        }
+      ]
+    },
+    {
+      "slug": "third-party-eval-vendor-diligence",
+      "title": "Due Diligence Questions Before You Buy an Eval or Guardrail Vendor",
+      "dek": "A glossy safety dashboard is not diligence. Ask where data goes, who trains on it, and how you export evidence for auditors.",
+      "sections": [
+        {
+          "heading": "Data path questions",
+          "paragraphs": [
+            "Where are prompts and outputs stored, in which region, for how long? Are they used to train vendor models? Can you delete by customer id? Is BYOK or private networking available for your tier?",
+            "If answers are vague, keep sensitive traffic on your own stack and use the vendor only on synthetic suites."
+          ]
+        },
+        {
+          "heading": "Evidence and exit",
+          "body": "Require exportable logs that map to your risk register and release checklist. Ask for a thirty-day exit plan: how you take your datasets and policies with you. No export path means lock-in dressed as governance."
+        },
+        {
+          "heading": "QA's role",
+          "body": "Run a pilot on non-production data, compare vendor scores to your internal gate on the same forty prompts, and write a one-page go/no-go with residual risks. Do not skip the pilot because procurement is in a hurry."
+        }
+      ]
+    }
+  ]
 }

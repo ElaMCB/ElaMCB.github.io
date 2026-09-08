@@ -476,6 +476,7 @@ Key paths
 - **Automation:** `.github/workflows/`, `agents/`, `scripts/`
 - **Quality:** `tests/`, `TEST_PLAN.md`, `PLAYWRIGHT_SETUP_GUIDE.md`
 - **Project modules:** `llm-guardian/`, `legacy-ai-bridge/`, `job-search-automation/`, `ai-ide-comparison/`, `algorithmic-trading/`, `qa-prompts/`
+- **Dormant / archived:** `archive/` (see `archive/README.md`), `wip/`, shelved `analytics/`
 
 ### Development Approach
 

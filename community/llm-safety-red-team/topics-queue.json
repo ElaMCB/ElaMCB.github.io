@@ -1,3 +1,95 @@
 {
-  "topics": []
+  "topics": [
+    {
+      "slug": "tool-allowlists-as-safety-controls",
+      "title": "Treat Tool Allowlists Like Production Feature Flags",
+      "dek": "A refused answer with a still-executed tool call is not a pass. Make allowlists first-class safety controls with owners and tests.",
+      "sections": [
+        {
+          "heading": "Refusal text is not containment",
+          "paragraphs": [
+            "If the model says no but still calls CRM, calendar, or shell tools, you failed the safety case. Screenshots of the chat hide the tool span. Your gate must fail when a disallowed tool runs—not when the prose looks polite.",
+            "Write the allowlist as an artifact: which tools exist, who may invoke them, under which intents, and what arguments are forbidden. Version it next to the agent config the same way you version feature flags."
+          ]
+        },
+        {
+          "heading": "Minimum viable allowlist checks",
+          "paragraphs": [
+            "Block tools not on the list. Block argument shapes that exfiltrate (raw account IDs plus PII fields, unrestricted SQL, file paths outside the sandbox). Log every deny with the prompt id and span id so Security can audit.",
+            "Add three CI probes: (1) injection that asks for a blocked tool, (2) legitimate intent that needs an allowed tool, (3) refusal-with-tool-leak regression from your last incident. Automate the first and third; keep the second as a smoke test."
+          ]
+        },
+        {
+          "heading": "Ownership",
+          "body": "Name a QA owner for the probe set and a platform owner for the allowlist code. When a new tool ships, both must sign off before production—same bar as opening a new network egress."
+        }
+      ]
+    },
+    {
+      "slug": "over-refusal-budget-for-qa",
+      "title": "Give Your Gate an Over-Refusal Budget",
+      "dek": "Safety that blocks billing questions is not safety—it is product damage. Track false refusals with the same seriousness as jailbreaks.",
+      "sections": [
+        {
+          "heading": "Two failure modes, one scoreboard",
+          "paragraphs": [
+            "Most red-team suites optimize for under-refusal (harmful asks that succeed). Production users feel over-refusal first: legitimate refund, password-reset, or policy questions that get a blanket no.",
+            "Split your weekly scoreboard: jailbreak fail rate and over-refusal rate on a fixed set of legitimate intents. Ship only if both stay under agreed thresholds."
+          ]
+        },
+        {
+          "heading": "Build the legitimate set",
+          "body": "Collect twenty real support or product intents that must work. Tag each with expected tool use. Score with a simple rubric: appropriate_refusal, over_refusal, compliant. LLM-as-judge is fine if a human spot-checks ten percent."
+        },
+        {
+          "heading": "When over-refusal spikes",
+          "body": "Do not loosen every guardrail globally. Diff the last system-prompt or filter change, replay the legitimate set, and restore the previous prompt if the safety set is still green. Treat over-refusal regressions like availability incidents."
+        }
+      ]
+    },
+    {
+      "slug": "red-team-findings-in-sprint-backlog",
+      "title": "Put Red-Team Findings in the Sprint Backlog—Not the Slack Graveyard",
+      "dek": "A finding without a ticket, severity, and retest owner will return in the next release. Here is a lightweight intake that QA can run in under thirty minutes.",
+      "sections": [
+        {
+          "heading": "Intake fields that matter",
+          "paragraphs": [
+            "For each finding capture: attack family, repro prompt, observed vs expected behavior, span or log evidence link, severity (blocker / major / minor), and the release train it blocks.",
+            "Map severity to policy: blockers stop the train, majors need a dated waiver with an executive owner, minors enter the next sprint with a named fixer."
+          ]
+        },
+        {
+          "heading": "Close the loop",
+          "body": "No finding is done until the repro prompt is in the regression suite and fails closed on main. The ticket description should link that prompt id. Otherwise you are collecting stories, not reducing risk."
+        },
+        {
+          "heading": "Cadence",
+          "body": "Fifteen-minute triage after each red-team session; thirty-minute review in sprint planning. Keep a running count of open blockers on the QA dashboard next to flake rate."
+        }
+      ]
+    },
+    {
+      "slug": "shadow-traffic-for-safety-gates",
+      "title": "Shadow Your Safety Gate on Production Traffic Before You Enforce It",
+      "dek": "Flipping a new evaluator to blocking without a shadow week creates false confidence—or false outages. Run dark for seven days first.",
+      "sections": [
+        {
+          "heading": "What shadow mode means",
+          "body": "Score live or sampled traces with the new evaluator, write results to your observability store, and page nobody. Compare against the current gate. You want precision and recall estimates before you fail builds."
+        },
+        {
+          "heading": "Exit criteria",
+          "paragraphs": [
+            "After seven days: false-positive rate under your agreed budget on sampled human review, no unexplained spike correlated with a single customer segment, and at least one true positive that your old gate missed.",
+            "Only then flip the evaluator to blocking in CI or pre-prod. Keep a kill switch owned by the incident commander."
+          ]
+        },
+        {
+          "heading": "QA's job in the shadow week",
+          "body": "Sample twenty scored traces daily, label them, and publish a one-pager. If labels disagree with the evaluator more than ten percent, fix the rubric before enforcement."
+        }
+      ]
+    }
+  ]
 }

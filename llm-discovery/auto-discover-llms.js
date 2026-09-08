@@ -11,6 +11,7 @@
  */
 
 import https from 'https';
+import http from 'http';
 import fs from 'fs';
 
 // Search keywords for LLMs
@@ -53,11 +54,18 @@ const EXISTING_MODELS = [
 ];
 
 /**
- * Fetch data from a URL
+ * Fetch data from a URL (follows one redirect; supports http and https)
  */
 function fetchData(url, headers = {}) {
     return new Promise((resolve, reject) => {
-        https.get(url, { headers }, (res) => {
+        const lib = url.startsWith('http://') ? http : https;
+        lib.get(url, { headers }, (res) => {
+            // ArXiv and some APIs redirect http → https
+            if (res.statusCode && res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+                fetchData(res.headers.location, headers).then(resolve, reject);
+                res.resume();
+                return;
+            }
             let data = '';
             res.on('data', chunk => data += chunk);
             res.on('end', () => {
@@ -118,29 +126,37 @@ async function searchGitHub(keyword) {
  */
 async function searchArXiv(category, maxResults = 50) {
     try {
-        const url = `http://export.arxiv.org/api/query?search_query=cat:${category}&sortBy=submittedDate&sortOrder=descending&max_results=${maxResults}`;
-        const data = await fetchData(url);
-        
+        const url = `https://export.arxiv.org/api/query?search_query=cat:${category}&sortBy=submittedDate&sortOrder=descending&max_results=${maxResults}`;
+        const data = await fetchData(url, {
+            'User-Agent': 'LLM-Discovery-Bot'
+        });
+
+        if (typeof data !== 'string') {
+            console.error(`ArXiv returned non-XML for "${category}"`);
+            return [];
+        }
+
         // Parse XML (simplified - in production use proper XML parser)
         const entries = [];
         const entryMatches = data.match(/<entry>[\s\S]*?<\/entry>/g) || [];
-        
+
         entryMatches.forEach(entry => {
-            const titleMatch = entry.match(/<title>(.*?)<\/title>/);
-            const summaryMatch = entry.match(/<summary>(.*?)<\/summary>/);
-            const idMatch = entry.match(/<id>(.*?)<\/id>/);
-            const publishedMatch = entry.match(/<published>(.*?)<\/published>/);
-            
+            // Titles/summaries often span lines — use [\s\S], not .*
+            const titleMatch = entry.match(/<title>([\s\S]*?)<\/title>/);
+            const summaryMatch = entry.match(/<summary>([\s\S]*?)<\/summary>/);
+            const idMatch = entry.match(/<id>([\s\S]*?)<\/id>/);
+            const publishedMatch = entry.match(/<published>([\s\S]*?)<\/published>/);
+
             if (titleMatch && idMatch) {
                 const title = titleMatch[1].replace(/\n/g, ' ').trim();
                 const summary = summaryMatch ? summaryMatch[1].replace(/\n/g, ' ').trim() : '';
-                const paperId = idMatch[1].split('/').pop();
-                const published = publishedMatch ? publishedMatch[1] : '';
-                
-                // Filter for significant papers (recent, relevant keywords)
-                const isRecent = published && new Date(published) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-                const hasRelevantKeywords = /(llm|language model|foundation model|multimodal|instruction|fine.?tun)/i.test(title + ' ' + summary);
-                
+                const paperId = idMatch[1].split('/').pop().trim();
+                const published = publishedMatch ? publishedMatch[1].trim() : '';
+
+                // Last 14 days — weekly job should not miss late-week submissions
+                const isRecent = published && new Date(published) > new Date(Date.now() - 14 * 24 * 60 * 60 * 1000);
+                const hasRelevantKeywords = /(llm|large language model|language model|foundation model|multimodal|instruction|fine.?tun|generative ai|rag\b|retrieval.?augmented|agentic|ai agent|alignment|jailbreak|red.?team)/i.test(title + ' ' + summary);
+
                 if (isRecent && hasRelevantKeywords) {
                     entries.push({
                         name: title,
@@ -154,7 +170,7 @@ async function searchArXiv(category, maxResults = 50) {
                 }
             }
         });
-        
+
         return entries;
     } catch (error) {
         console.error(`ArXiv search error for "${category}":`, error.message);
