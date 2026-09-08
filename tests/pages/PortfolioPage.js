@@ -16,8 +16,9 @@ export class PortfolioPage {
     };
     
     this.headings = {
-      aiProjects: page.getByRole('heading', { name: 'AI Projects' }),
+      selectedWork: page.getByRole('heading', { name: 'Selected Work' }),
       research: page.locator('#research h2').filter({ hasText: 'AI Research' }),
+      vision: page.locator('#vision h2').filter({ hasText: 'AI as Infrastructure' }),
     };
     
     this.socialLinks = {
@@ -53,7 +54,8 @@ export class PortfolioPage {
    */
   async verifyCriticalContent() {
     await expect(this.page).toHaveTitle(/Ela MCB/);
-    await expect(this.headings.aiProjects).toBeVisible();
+    await expect(this.headings.vision).toBeVisible();
+    await expect(this.headings.selectedWork).toBeVisible();
     await expect(this.headings.research).toBeVisible();
   }
 
