@@ -460,10 +460,7 @@ Runs on the **1st of each month** (and manually). Curates `llm-discovery/*.md`, 
 **Learn to build your own**: **[QA Agentic Workflows Guide](./docs/QA_AGENTIC_WORKFLOWS_GUIDE.html)** | **[Full Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md)**
 
 ## Repository Activity
-
-[![ElaMCB GitHub contributions](https://ghchart.rshah.org/40916c/ElaMCB)](https://github.com/ElaMCB)
-
-[Commit activity](https://github.com/ElaMCB/ElaMCB.github.io/graphs/commit-activity) · [Contributors](https://github.com/ElaMCB/ElaMCB.github.io/graphs/contributors)
+[![GitHub Activity](https://raw.githubusercontent.com/ElaMCB/ElaMCB.github.io/output/activity-graph.svg)](https://github.com/ElaMCB/ElaMCB.github.io/graphs/commit-activity)
 
 ## License
 
