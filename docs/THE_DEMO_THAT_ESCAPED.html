@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Demo That Escaped: Anti-Patterns for Autonomous AI | Ela MCB</title>
+    <meta name="description" content="Anti-patterns for autonomous AI treated as infrastructure: demos that escape into production, floating model aliases, missing owners and kill switches, unbounded tools, and vibe-scored evals.">
+    <meta name="keywords" content="AI anti-patterns, autonomous AI, AI infrastructure, agent governance, release gates, LLM eval, kill switch, MCP">
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script data-goatcounter="https://elamcb.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <link rel="canonical" href="https://elamcb.github.io/docs/THE_DEMO_THAT_ESCAPED.html">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --text: #e4e4e7;
+            --steel: #5b7fb8;
+            --steel-bright: #7aa3d8;
+            --steel-dim: rgba(91, 127, 184, 0.35);
+            --panel: rgba(26, 26, 46, 0.55);
+            --warn: #d4a574;
+            --warn-bg: rgba(212, 165, 116, 0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.75;
+            min-height: 100vh;
+        }
+        .container { width: 92%; max-width: 860px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+        .back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 10px 20px;
+            background: rgba(91, 127, 184, 0.2);
+            border: 1px solid var(--steel-dim);
+            border-radius: 8px;
+            color: var(--steel);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+        .back:hover { background: rgba(91, 127, 184, 0.32); color: var(--steel-bright); }
+        header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--steel-dim); }
+        .eyebrow {
+            font-size: 0.85rem;
+            color: var(--steel-bright);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+        h1 {
+            font-size: 1.85rem;
+            color: var(--steel);
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        .dek { font-size: 1.08rem; color: rgba(228, 228, 231, 0.9); }
+        .content {
+            background: var(--panel);
+            border: 1px solid var(--steel-dim);
+            border-radius: 10px;
+            padding: 2rem;
+        }
+        .content h2 { color: var(--steel); font-size: 1.2rem; margin: 2rem 0 0.75rem; }
+        .content h2:first-of-type { margin-top: 0; }
+        .content h3 {
+            color: var(--warn);
+            font-size: 1.05rem;
+            margin: 1.5rem 0 0.5rem;
+        }
+        .content p { margin-bottom: 1rem; color: rgba(228, 228, 231, 0.92); font-size: 1.03rem; }
+        .content ul { margin: 0 0 1.25rem 1.25rem; color: rgba(228, 228, 231, 0.92); }
+        .content li { margin-bottom: 0.45rem; }
+        .content a { color: var(--steel-bright); }
+        .thesis-box {
+            border-left: 3px solid var(--steel);
+            padding: 0.85rem 1rem;
+            margin: 0 0 1.5rem;
+            background: rgba(91, 127, 184, 0.1);
+            border-radius: 0 8px 8px 0;
+        }
+        .pattern {
+            border: 1px solid var(--steel-dim);
+            border-radius: 8px;
+            padding: 1rem 1.1rem;
+            margin: 1rem 0 1.25rem;
+            background: rgba(15, 15, 23, 0.45);
+        }
+        .pattern .label {
+            display: inline-block;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--warn);
+            margin-bottom: 0.35rem;
+        }
+        .pattern p:last-child { margin-bottom: 0; }
+        .instead {
+            border-left: 3px solid var(--steel);
+            padding: 0.65rem 0.9rem;
+            margin: 0.75rem 0 0;
+            background: rgba(91, 127, 184, 0.08);
+            border-radius: 0 6px 6px 0;
+            font-size: 0.98rem;
+        }
+        .receipts {
+            display: grid;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .receipts a {
+            display: block;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--steel-dim);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text);
+            background: rgba(15, 15, 23, 0.55);
+        }
+        .receipts a:hover { border-color: var(--steel); color: var(--steel-bright); }
+        .receipts strong { color: var(--steel-bright); display: block; margin-bottom: 0.2rem; }
+        .receipts span { font-size: 0.92rem; opacity: 0.88; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="back" href="../index.html#demos"><i class="fas fa-arrow-left"></i> Back to portfolio</a>
+        <header>
+            <p class="eyebrow">Thesis companion · Anti-patterns</p>
+            <h1>The Demo That Escaped</h1>
+            <p class="dek">Anti-patterns for autonomous AI—how teams fake production readiness when agents can change the world, not just chat.</p>
+        </header>
+        <article class="content">
+            <div class="thesis-box">
+                <p><strong>Premise:</strong> Most “autonomous” failures are not model failures. They are infrastructure failures: a Friday demo that kept running on Monday, with no owner, no pin, no gate, and no way to stop it. This is the flip side of <a href="./AUTONOMOUS_AI_SYSTEMS.html">AI as Infrastructure</a>.</p>
+            </div>
+
+            <h2>Why anti-patterns matter more than hype lists</h2>
+            <p>Strategy decks love capability. Operations care about blast radius. When an agent has tools, a bad run is an incident—not a weird chat. The patterns below show up in real programs: they look like progress until someone asks who owns the alias, what the kill switch is, or where the eval evidence lives.</p>
+
+            <h2>Seven anti-patterns</h2>
+
+            <h3>1. The demo that escaped</h3>
+            <div class="pattern">
+                <span class="label">Looks like</span>
+                <p>A prototype agent “mostly works” in a stakeholder review. Someone leaves it pointed at a shared mailbox, a staging API that is secretly shared with prod data, or a cron that nobody turns off. Hardening is scheduled for “after we get signal.”</p>
+                <div class="instead"><strong>Instead:</strong> Treat every always-on loop as a deploy. Shadow mode, explicit promotion criteria, and a retirement date for anything that has not earned production.</div>
+            </div>
+
+            <h3>2. Floating model aliases</h3>
+            <div class="pattern">
+                <span class="label">Looks like</span>
+                <p><code>gpt-latest</code>, <code>claude-sonnet</code>, or a vendor “recommended” alias in the hot path. Behavior drifts when the provider swaps weights. Your eval suite passes against last month’s model and nobody notices until tickets spike.</p>
+                <div class="instead"><strong>Instead:</strong> Pin versions (or dated snapshots). Change models through the same change-control path you use for infrastructure—with regression evidence, not vibes.</div>
+            </div>
+
+            <h3>3. No owner, only a channel</h3>
+            <div class="pattern">
+                <span class="label">Looks like</span>
+                <p>The agent “belongs to the AI initiative.” On-call is unclear. When it misbehaves, three teams argue about prompts, platforms, and product. Autonomy without a named owner is theater.</p>
+                <div class="instead"><strong>Instead:</strong> One accountable owner per loop (product + platform pair is fine). Document who can pause it, who can expand tools, and who signs the release gate.</div>
+            </div>
+
+            <h3>4. No kill switch</h3>
+            <div class="pattern">
+                <span class="label">Looks like</span>
+                <p>Stopping the agent means redeploying, revoking a shared API key that also powers five other services, or asking someone to “just turn off the Zap.” There is no practiced drill.</p>
+                <div class="instead"><strong>Instead:</strong> A one-action pause that cuts tool execution (not only chat). Test it in a drill the way you test failover. Human override is a product feature.</div>
+            </div>
+
+            <h3>5. Unbounded tools (and MCP with the kitchen sink)</h3>
+            <div class="pattern">
+                <span class="label">Looks like</span>
+                <p>The agent can browse, write tickets, touch production configs, and send email—“so it can be helpful.” Refusal text is treated as containment. A clever plan still reaches the dangerous tool.</p>
+                <div class="instead"><strong>Instead:</strong> Allowlists, argument constraints, and separate identities per capability. Refusal ≠ containment. See the <a href="./AGENTIC_RELEASE_GATE.html">Agentic Release Gate</a>.</div>
+            </div>
+
+            <h3>6. Ship the agent, invent the eval later</h3>
+            <div class="pattern">
+                <span class="label">Looks like</span>
+                <p>Success is a screenshot, a stakeholder thumbs-up, or “it felt better this week.” Red-team notes live in a slide deck. Prod chats get pasted into GitHub “for examples.” The only gate measures jailbreaks—or nothing.</p>
+                <div class="instead"><strong>Instead:</strong> A small, versioned eval set before always-on. Traces you can replay. Regression that fails the build when the same leak returns. Start with the <a href="./LLM_RED_TEAM_PRODUCTION_GATE_QA.html">40-Prompt Production Gate</a> mindset: evidence packages, not folklore.</div>
+            </div>
+
+            <h3>7. Swarm without orchestrator ownership</h3>
+            <div class="pattern">
+                <span class="label">Looks like</span>
+                <p>Multiple agents hand work to each other with no single plan of record, no shared budget, and no one who can explain the last decision path. “Multi-agent” becomes distributed irresponsibility.</p>
+                <div class="instead"><strong>Instead:</strong> An orchestrator with explicit handoffs, budgets, and a story you can audit. Specialists are fine; unowned swarms are not. Architecture foresight belongs with papers like <a href="./HYDRO_SWARM_MOE.html">Hydro-Swarm MoE</a>—not with improvised Slack bots.</div>
+            </div>
+
+            <h2>The pattern underneath the patterns</h2>
+            <p>Every anti-pattern above is a missing infrastructure expectation: pin, owner, boundary, evidence, stop. Teams do not fail because they skipped a clever prompt. They fail because they treated autonomy like a feature demo and hoped operations would appear later.</p>
+            <p>If you only fix one thing this quarter: <strong>name the owner, pin the model, add a kill switch, and refuse to promote any loop that has no eval you can re-run.</strong></p>
+
+            <h2>Where to go next</h2>
+            <div class="receipts">
+                <a href="./AUTONOMOUS_AI_SYSTEMS.html">
+                    <strong>AI as Infrastructure</strong>
+                    <span>The positive thesis these anti-patterns invert.</span>
+                </a>
+                <a href="./AGENTIC_RELEASE_GATE.html">
+                    <strong>Agentic Release Gate</strong>
+                    <span>Control-plane checklist before tool-using AI ships.</span>
+                </a>
+                <a href="./LLM_RED_TEAM_PRODUCTION_GATE_QA.html">
+                    <strong>40-Prompt Production Gate</strong>
+                    <span>Turning adversarial probes into release evidence.</span>
+                </a>
+                <a href="../community/llm-safety-red-team/">
+                    <strong>LLM Safety &amp; Red-Teaming series</strong>
+                    <span>Community-facing practice for QA and safety leaders.</span>
+                </a>
+            </div>
+
+            <p style="margin-top: 1.5rem;"><a href="../index.html#contact">Get in touch</a> if you want to pressure-test which of these is already living in your stack.</p>
+        </article>
+    </div>
+</body>
+</html>
