@@ -2,7 +2,7 @@
 
 <!-- UAA manual trigger - Last test: 2025-12-26 21:00 -->
 
-![Playwright Tests](https://github.com/ElaMCB/ElaMCB.github.io/actions/workflows/playwright-tests.yml/badge.svg?branch=main&t=1)
+![Playwright Tests](https://github.com/ElaMCB/ElaMCB.github.io/actions/workflows/playwright-tests.yml/badge.svg?branch=main&t=20260920)
 
 > Building intelligent systems with LLMs, MCP, and agents—rigorous, production-minded, AI-first
 
@@ -458,59 +458,11 @@ Runs on the **1st of each month** (and manually). Curates `llm-discovery/*.md`, 
 
 **Learn to build your own**: **[QA Agentic Workflows Guide](./docs/QA_AGENTIC_WORKFLOWS_GUIDE.html)** | **[Full Roadmap](./docs/PORTFOLIO_AGENTS_ROADMAP.md)**
 
-## Architecture
-
-### Repository Structure
-```text
-Key paths
-├── index.html / analytics.html         # Main portfolio UI
-├── research/                           # Research hub + notebooks
-├── docs/                               # Guides, papers, architecture docs
-├── community/                          # Community series hubs + generated articles
-├── llm-discovery/                      # Weekly discovery data and pages
-├── agents/ + scripts/                  # Automation logic and helpers
-├── .github/workflows/                  # CI/CD and publishing pipelines
-├── tests/ + playwright.config.js       # E2E and performance tests
-├── images/ + screenshots/              # Static assets
-└── README.md / PROJECTS.md / CONTRIBUTING.md
-```
-
-### Key folders at a glance
-- **Core experience:** `index.html`, `research/`, `community/`, `analytics.html`
-- **Content & knowledge:** `docs/`, `research/notebooks/`, `llm-discovery/`
-- **Automation:** `.github/workflows/`, `agents/`, `scripts/`
-- **Quality:** `tests/`, `TEST_PLAN.md`, `PLAYWRIGHT_SETUP_GUIDE.md`
-- **Project modules:** `llm-guardian/`, `legacy-ai-bridge/`, `job-search-automation/`, `ai-ide-comparison/`, `algorithmic-trading/`, `qa-prompts/`
-- **Dormant / archived:** `archive/` (see `archive/README.md`), `wip/`, shelved `analytics/`
-
-### Development Approach
-
-This portfolio demonstrates **AI-First development practices** using advanced AI systems:
-
-- **Rapid Prototyping**: Complete portfolio architecture designed and implemented in 1-2 days instead of 2-3 weeks
-- **AI-Assisted Development**: Leveraged multiple AI systems for code generation, optimization, and rapid iteration
-- **Human-AI Collaboration**: Strategic decisions, domain expertise, and quality control maintained by human developer
-- **Efficiency Gains**: ~10x faster development cycle through intelligent automation and AI pair programming
-- **Technical Partnership**: Advanced AI systems as development accelerators and code generation partners
-
-### AI Contributors
-This project was built using AI-First development practices with:
-- **[Cursor AI Agentic Mode](https://cursor.sh)** - Advanced code generation and pair programming
-- **[Void IDE](https://voideditor.com)** - AI-powered development environment and workflow automation
-- **[Claude 4 Sonnet](https://claude.ai)** - Architecture planning, documentation, and complex reasoning
-- **[DeepSeek AI](https://deepseek.com)** - Rapid iteration and optimization support
-- **[DeepSeek Coder](https://deepseek.com)** - Specialized code generation and technical implementation
-
-### Real-World Examples
-Every technique in our guides was used to build this portfolio:
-- **Complete HTML/CSS generation** with AI assistance for rapid iteration
-- **Advanced AI frameworks** (RAG, MCP, LLM testing) implemented with AI assistance
-- **Production-ready CI/CD** pipeline configured with AI guidance
-
-**Perfect for**: Developers and AI engineers who want to ship faster with AI-first workflows, and teams adopting LLM- and agent-based tooling.
-
 ## Repository Activity
-[![GitHub Activity](https://github-readme-activity-graph.vercel.app/graph?username=ElaMCB&repo=ElaMCB.github.io&theme=react-dark&t=20260426)](https://github.com/ElaMCB/ElaMCB.github.io/graphs/commit-activity)
+
+[![ElaMCB GitHub contributions](https://ghchart.rshah.org/40916c/ElaMCB)](https://github.com/ElaMCB)
+
+[Commit activity](https://github.com/ElaMCB/ElaMCB.github.io/graphs/commit-activity) · [Contributors](https://github.com/ElaMCB/ElaMCB.github.io/graphs/contributors)
 
 ## License
 
