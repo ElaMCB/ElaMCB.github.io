@@ -5,8 +5,16 @@
   "seriesLinePrefix": "LLM Safety & Red-Teaming for QA leaders \u00b7 Published",
   "seriesDescription": "Practical articles on a regular cadence for QA leaders building LLM safety and red-teaming practice.",
   "intervalDays": 21,
-  "lastPublished": "2026-09-08",
+  "lastPublished": "2026-09-29",
   "articles": [
+    {
+      "date": "2026-09-29",
+      "slug": "over-refusal-budget-for-qa",
+      "title": "Give Your Gate an Over-Refusal Budget",
+      "summary": "Safety that blocks billing questions is not safety\u2014it is product damage. Track false refusals with the same seriousness as jailbreaks.",
+      "href": "/community/llm-safety-red-team/articles/2026-09-29-over-refusal-budget-for-qa.html",
+      "external": false
+    },
     {
       "date": "2026-09-08",
       "slug": "tool-allowlists-as-safety-controls",

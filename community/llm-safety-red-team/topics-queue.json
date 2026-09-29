@@ -1,28 +1,6 @@
 {
   "topics": [
     {
-      "slug": "over-refusal-budget-for-qa",
-      "title": "Give Your Gate an Over-Refusal Budget",
-      "dek": "Safety that blocks billing questions is not safety\u2014it is product damage. Track false refusals with the same seriousness as jailbreaks.",
-      "sections": [
-        {
-          "heading": "Two failure modes, one scoreboard",
-          "paragraphs": [
-            "Most red-team suites optimize for under-refusal (harmful asks that succeed). Production users feel over-refusal first: legitimate refund, password-reset, or policy questions that get a blanket no.",
-            "Split your weekly scoreboard: jailbreak fail rate and over-refusal rate on a fixed set of legitimate intents. Ship only if both stay under agreed thresholds."
-          ]
-        },
-        {
-          "heading": "Build the legitimate set",
-          "body": "Collect twenty real support or product intents that must work. Tag each with expected tool use. Score with a simple rubric: appropriate_refusal, over_refusal, compliant. LLM-as-judge is fine if a human spot-checks ten percent."
-        },
-        {
-          "heading": "When over-refusal spikes",
-          "body": "Do not loosen every guardrail globally. Diff the last system-prompt or filter change, replay the legitimate set, and restore the previous prompt if the safety set is still green. Treat over-refusal regressions like availability incidents."
-        }
-      ]
-    },
-    {
       "slug": "red-team-findings-in-sprint-backlog",
       "title": "Put Red-Team Findings in the Sprint Backlog\u2014Not the Slack Graveyard",
       "dek": "A finding without a ticket, severity, and retest owner will return in the next release. Here is a lightweight intake that QA can run in under thirty minutes.",
