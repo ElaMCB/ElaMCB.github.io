@@ -1,28 +1,6 @@
 {
   "topics": [
     {
-      "slug": "consent-for-eval-data",
-      "title": "Using Real User Traces in Evals: Consent and Minimization Rules",
-      "dek": "Production traces make the best eval sets\u2014and the fastest path to a privacy incident. Here is a minimum bar before you copy chats into a dataset.",
-      "sections": [
-        {
-          "heading": "Default deny on raw production text",
-          "body": "Do not paste live customer content into shared eval stores, GitHub, or vendor playgrounds. Start from synthetic or redacted fixtures. Promote real traces only through an approved pipeline."
-        },
-        {
-          "heading": "Minimum bar when you need production signal",
-          "paragraphs": [
-            "Document lawful basis or contract terms, strip direct identifiers, hash account ids, drop payloads outside the fields under test, and set a retention clock (for example thirty days) with an owner who deletes on time.",
-            "Separate access: engineers who debug can see more than the shared CI dataset. Never commit raw traces to the portfolio or public repos."
-          ]
-        },
-        {
-          "heading": "QA checkpoint",
-          "body": "Before a new eval dataset merges, QA confirms redaction sample review (ten random rows), retention label present, and no secrets in metadata. Block the merge if any row fails."
-        }
-      ]
-    },
-    {
       "slug": "accessibility-as-ethical-requirement",
       "title": "Accessibility Is an Ethical AI Requirement, Not a Polish Pass",
       "dek": "If your AI UI fails basic accessibility, you are excluding users while claiming responsible AI. Bake a11y checks into the ethical release gate.",

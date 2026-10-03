@@ -5,8 +5,16 @@
   "seriesLinePrefix": "Ethical AI Frameworks \u00b7 Published",
   "seriesDescription": "Short articles on ethical AI frameworks, governance, and practice\u2014aligned with the Ethical AI Frameworks LinkedIn group.",
   "intervalDays": 25,
-  "lastPublished": "2026-09-08",
+  "lastPublished": "2026-10-03",
   "articles": [
+    {
+      "date": "2026-10-03",
+      "slug": "consent-for-eval-data",
+      "title": "Using Real User Traces in Evals: Consent and Minimization Rules",
+      "summary": "Production traces make the best eval sets\u2014and the fastest path to a privacy incident. Here is a minimum bar before you copy chats into a dataset.",
+      "href": "/community/ethical-ai-frameworks/articles/2026-10-03-consent-for-eval-data.html",
+      "external": false
+    },
     {
       "date": "2026-09-08",
       "slug": "vendor-model-change-ethics-checklist",
