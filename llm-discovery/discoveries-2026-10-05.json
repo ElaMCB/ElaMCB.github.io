@@ -1,0 +1,738 @@
+{
+  "scanDate": "2026-10-05",
+  "models": [
+    {
+      "name": "sglang",
+      "description": "SGLang is a high-performance serving framework for large language models and multimodal models.",
+      "url": "https://github.com/sgl-project/sglang",
+      "stars": 36799,
+      "language": "Python",
+      "updated": "2026-10-05T21:29:45Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ODS",
+      "description": "ODS V3 Pre-Release: Public testing and refinement ahead of the official V3 launch. Turn your PC, Mac, or Linux box into a private AI server.",
+      "url": "https://github.com/Osmantic/ODS",
+      "stars": 7035,
+      "language": "Python",
+      "updated": "2026-10-05T21:35:43Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "open-jobs",
+      "description": "~3M live jobs from 36 ATS, enriched with LLM-extracted fields + embeddings, released CC0. Includes agent tooling to search them (hull -> learn -> rank).",
+      "url": "https://github.com/elliottdehn/open-jobs",
+      "stars": 369,
+      "language": "Python",
+      "updated": "2026-10-05T18:36:01Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "kicad-mcp-pro",
+      "description": "MCP server for KiCad, connecting AI agents to schematic and PCB workflows, ERC/DRC validation, DFM checks, BOM analysis, and manufacturing preparation—with controlled edits and human-gated release workflows.",
+      "url": "https://github.com/oaslananka/kicad-mcp-pro",
+      "stars": 117,
+      "language": "Python",
+      "updated": "2026-10-05T20:45:28Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "md-bridge",
+      "description": "Self-hosted document converter built on hand-written heuristics, not language models. Ships PDF ↔ Markdown; the architecture welcomes new format pairs as contributions land. Deterministic by design: same input, same output, every run. FastAPI + React, multi-arch Docker, MIT.",
+      "url": "https://github.com/vinicq/md-bridge",
+      "stars": 6,
+      "language": "Python",
+      "updated": "2026-09-30T23:34:41Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Char_Transformer_Language_Model",
+      "description": "this code is an implementation of a character-level language model using a transformer architecture in PyTorch. The model is trained on a dataset of text and generates new text by predicting the next character given a sequence of previous characters. The code is implemented in such a way that it can be trained on any dataset of text.",
+      "url": "https://github.com/Lior-Baruch/Char_Transformer_Language_Model",
+      "stars": 5,
+      "language": "Python",
+      "updated": "2026-10-01T13:36:52Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "AI-cyber-range",
+      "description": "⚔️ Build, break, and secure Large Language Models with our automated OWASP Top 10 cyber range for hands-on AI security training and research.",
+      "url": "https://github.com/WHAZAZA/AI-cyber-range",
+      "stars": 4,
+      "language": "Python",
+      "updated": "2026-10-05T21:42:37Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Construct3-RAG",
+      "description": "Construct 3 reference data for AI: plugins, behaviors, ACEs, effects and scripting APIs as JSON, updated every release",
+      "url": "https://github.com/XHXIAIEIN/Construct3-RAG",
+      "stars": 4,
+      "language": "Python",
+      "updated": "2026-10-05T16:19:30Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "AI-Voice-Agent",
+      "description": "🗣️ Build an interactive voice agent that leverages Speech-to-Text, a Large Language Model, and Text-to-Speech for real-time voice interactions.",
+      "url": "https://github.com/BR8TEAM/AI-Voice-Agent",
+      "stars": 3,
+      "language": "Python",
+      "updated": "2026-10-05T21:31:12Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "UniFER",
+      "description": "🎭 Enhance facial expression recognition using multimodal large language models to improve emotion analysis in various applications.",
+      "url": "https://github.com/asiasasd/UniFER",
+      "stars": 2,
+      "language": "Python",
+      "updated": "2026-10-05T21:38:17Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ai-agent-pulse",
+      "description": "Daily automated tracking of 19 AI agent frameworks. Pulse Score ranks momentum via star velocity, release freshness, commit activity, and community health.",
+      "url": "https://github.com/PurpleHaze2320/ai-agent-pulse",
+      "stars": 2,
+      "language": "Python",
+      "updated": "2026-10-05T14:08:27Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "slmkit",
+      "description": "Build small language models from scratch on a single consumer GPU — the full lifecycle, documented for people new to ML.",
+      "url": "https://github.com/m87techlabs/slmkit",
+      "stars": 2,
+      "language": "Python",
+      "updated": "2026-10-05T18:47:20Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "mcp-code-mode",
+      "description": "🤖 Enable AI code generation using the Code Execution MCP Server, integrating large language models with the Model Context Protocol for seamless tool use.",
+      "url": "https://github.com/Jame0077/mcp-code-mode",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-10-05T21:40:38Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "llm-from-scratch",
+      "description": "A running project where I attempt to build and train my own large language model from scratch, aimed to teach my self basics of machine learning and mordern ml Architectures entire project is hand coded, no vibecoding allowed",
+      "url": "https://github.com/abhiyudaym18/llm-from-scratch",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-10-05T21:01:08Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "DMJ-Dataset-Builder",
+      "description": "Automate the preparation, validation, and merging of high-quality instruction-tuning datasets for Large Language Models.",
+      "url": "https://github.com/Algernonlxi795/DMJ-Dataset-Builder",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-10-05T20:22:14Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "tessera",
+      "description": "Distill large language models into small, efficient students using a custom stack featuring GPU kernels, sharded training, and high-performance inference.",
+      "url": "https://github.com/cyracomfortteam-del/tessera",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-10-05T20:18:30Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "auto-hf-papers",
+      "description": "Automate Hugging Face Daily Papers filtering and email a daily Markdown digest of the most relevant AI papers by upvotes and GitHub stars",
+      "url": "https://github.com/fratert691/auto-hf-papers",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-10-05T20:11:58Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "llm-youtube-landscape-tracker",
+      "description": "Python + Next.js pipeline for collecting YouTube transcripts, extracting LLM topics, and publishing a live, transcript-grounded dashboard that maps how channels cover LLMs, AI agents, coding assistants, model releases, benchmarks, and related developer workflows.",
+      "url": "https://github.com/Gaz-Myaz/llm-youtube-landscape-tracker",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-10-05T12:50:24Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "serial-policy-editor",
+      "description": "A terminal editor for steering local language models at the token-level. Select tokens, query the full vocabulary, insert text, or let the model continue. Rewind, fork, and replay your editing decisions in new contexts to see how the results change.",
+      "url": "https://github.com/finitestates/serial-policy-editor",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-10-03T13:09:37Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "open-loopify",
+      "description": "Loop pretrained language model layers for deeper reasoning without new parameters. Open training, evaluation, and export to standard Transformers and vLLM checkpoints.",
+      "url": "https://github.com/tongyao-zhu/open-loopify",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-09-30T14:39:45Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "corellm",
+      "description": "🌟 Integrate local large language models easily with corellm, featuring a simple API and instant web GUI with Gradio for chat and prompt interactions.",
+      "url": "https://github.com/AbdoooAli/corellm",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-05T21:41:46Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "llm-eval",
+      "description": "Evaluate specific Large Language Models (LLMs) on specific hardware configurations and operating systems.",
+      "url": "https://github.com/asanderson/llm-eval",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-05T21:40:03Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ResumeForce-AI",
+      "description": "An AI-powered resume analysis tool designed to extract, evaluate, and improve resumes using Large Language Models (LLMs). ResumeForce AI transforms unstructured resumes into structured JSON data, providing insights into skills, experience, strengths, and areas for improvement.",
+      "url": "https://github.com/leeutkarsh/ResumeForce-AI",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-05T21:39:28Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "MultiModelOrchestration",
+      "description": "Code and experiment traces for Efficient Multi-Model Orchestration for Self-Hosted Large Language Models (DAI Workshop at AAAI 2026)",
+      "url": "https://github.com/bhanuprakashvangala/MultiModelOrchestration",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-05T20:57:35Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "llm-engineering",
+      "description": "Learning Large Language Models engineering by building and verifying: transformers from scratch, inference serving, benchmarking, and agent infrastructure.",
+      "url": "https://github.com/pedrosilva-a11y/llm-engineering",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-05T20:39:36Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "LLM-sandbox",
+      "description": "A hands-on Python playground for exploring large language models.",
+      "url": "https://github.com/andrejbk/LLM-sandbox",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-05T20:22:46Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "LGS",
+      "description": "Improve medical image analysis in large vision-language models by adding localization signals to standard fine-tuning targets for better spatial alignment.",
+      "url": "https://github.com/teressaanatropous770/LGS",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-05T20:19:41Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ivi-release-health",
+      "description": "Automated weekly release-health reporting for Automotive Grade Linux (IVI) from its public Jira: JQL ingestion, RAG/escalation rules, grounded LLM drafts.",
+      "url": "https://github.com/asingh911/ivi-release-health",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-05T21:25:44Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "vgt-auto-punisher",
+      "description": "Detect and block network threats in Linux kernels using hybrid L4 and L7 behavioral analysis for effective intrusion prevention and response.",
+      "url": "https://github.com/harel08/vgt-auto-punisher",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-05T20:09:40Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ml-platform-infrastructure",
+      "description": "Self-hosted ML platform for training, model serving, LLM inference with vLLM, and serverless functions on Kubernetes. Built with KServe, Knative, Argo Workflows and MLflow, with a React UI, API gateway and gated canary releases.",
+      "url": "https://github.com/negativexq/ml-platform-infrastructure",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-05T17:37:14Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "gmsh",
+      "description": "Apache-2.0 source for the three-package Knowlytix GMSH agentic-AI testing stack: knowlytix-doc, knowlytix-bench, knowlytix-harness. Release-time mirror of knowlytix/GMS.",
+      "url": "https://github.com/knowlytix/gmsh",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-05T17:14:45Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "llm-releases",
+      "description": null,
+      "url": "https://github.com/dannyburke1/llm-releases",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-05T16:57:31Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ZTS",
+      "description": "Reconstructed deterministic LLM-output filtration pipeline: seven gates (G1–G7) in ascending-cost fail-fast order strip first-person voice/hedging/flattery and detect instruction-override attempts, holding output for external release authorization (G7 capstone). Rebuilt from conversation archives; 98 tests, no dependencies.",
+      "url": "https://github.com/wking53214/ZTS",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-05T16:01:28Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ai-radar",
+      "description": "Daily self-updating radar of new AI research (arXiv) and model releases (Hugging Face). Pure-Python, zero deps, regenerated every day by a scheduled GitHub Action.",
+      "url": "https://github.com/agentdynarq/ai-radar",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-05T14:33:03Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "flipgate",
+      "description": "Release gate for quantised/re-served LLMs — counts per-item answer flips against a measured noise floor",
+      "url": "https://github.com/raihan-js/flipgate",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-05T14:31:30Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "evalforge",
+      "description": "Production-oriented evaluation and release gates for LLM and AI-agent systems.",
+      "url": "https://github.com/navaneeth9908/evalforge",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-05T14:11:28Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ai-news-hub",
+      "description": "⚡ Neural Pulse — Autonomous AI & frontier tech journal. Hourly dispatches, trending open-source models, and multi-language briefings.",
+      "url": "https://github.com/Emirfs/ai-news-hub",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-05T18:32:23Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Fake-News-Detection-System.",
+      "description": "deep learning model to classify news articles as Real or Fake using Natural Language Processing (NLP).",
+      "url": "https://github.com/shivanisky34/Fake-News-Detection-System.",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-05T14:33:29Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "build-it-break-it-become-it",
+      "description": "Build a language model end to end. Break it the way a real adversary would. Then become something new with what you've learned. 18 posts, 18 runnable labs.",
+      "url": "https://github.com/santosh3743/build-it-break-it-become-it",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-05T06:54:25Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Genrative-AI-with-LSTM",
+      "description": "LSTM-based text generation project using Python and TensorFlow/Keras. Trains an LSTM model on text data to learn language patterns and generate new text sequences.",
+      "url": "https://github.com/riyapanchal123/Genrative-AI-with-LSTM",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-04T16:56:34Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "IgboAI",
+      "description": "Open research on AI for Igbo language: self-updating literature tracking, corpora, and benchmarks spanning NLP, speech, and language models for a low-resource, tonal language. Tracks new papers and models nightly, building corpora, and benchmarking across NLP, ASR/TTS, and LLMs.",
+      "url": "https://github.com/IgboNLP-Research/IgboAI",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-04T10:32:17Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "NExtword",
+      "description": "uses SML( small language model) to predict new words",
+      "url": "https://github.com/BlueKeys-dev/NExtword",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-04T09:49:17Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Markov-NLP-Playground",
+      "description": "This project explores Natural Language Processing (NLP) using Markov Chains to model and generate text based on patterns learned from existing text data. The project demonstrates how probabilistic language models can learn the likelihood of one word or state following another and use these probabilities to generate new sequences.",
+      "url": "https://github.com/Sohail3051/Markov-NLP-Playground",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-04T12:27:28Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "DistilGPT2-News-Topic-Classification-Fine-Tuning",
+      "description": "An enterprise-grade, production-ready system for fine-tuning causal autoregressive language models (DistilGPT2) on sequence classification tasks (AG News).",
+      "url": "https://github.com/Sumit-Prasad01/DistilGPT2-News-Topic-Classification-Fine-Tuning",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-09-29T12:19:29Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Newton-VLM-PostTraining",
+      "description": "Newton-guided LoRA post-training for vision-language models with z-space Gauss-Newton hyperparameter control.",
+      "url": "https://github.com/vlm-grounding/Newton-VLM-PostTraining",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-09-26T00:45:55Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "logiqate-new-model-evaluations",
+      "description": "Reproducible LogiQAte robustness evaluations for new language models under logical obfuscation",
+      "url": "https://github.com/ZekRock18/logiqate-new-model-evaluations",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-09-25T20:36:15Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "pratyaya",
+      "description": "Explainable, fairness-audited credit risk assessment for thin-file and new-to-credit borrowers. A deterministic model decides; the language model only explains it. Live demo → pratyaya-beta.vercel.app",
+      "url": "https://github.com/Nishantttt-ui/pratyaya",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-09-24T15:34:18Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "transformer-from-scratch",
+      "description": "Building A character-level language model. I feed it text, it learns the patterns, it generates new text in the same style.",
+      "url": "https://github.com/Sunnah25/transformer-from-scratch",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-09-24T00:11:00Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Bias-Detection-in-News-articles-tool",
+      "description": "my project is a Python NLP project that analyses individual news articles for political bias. It scrapes and cleans article text, converts language into TF-IDF vectors, applies a trained regression model, and returns a 0–100 left–right bias score through a GUI. Includes model evaluation using MAE, RMSE and R².",
+      "url": "https://github.com/lgarrish2008/Bias-Detection-in-News-articles-tool",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-09-30T22:00:17Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "drone_vlm_project",
+      "description": "An in-progress research and engineering project focused on real-time drone detection for zone-intrusion monitoring. The core contribution is a modified YOLOv12n object detection architecture — augmented with Efficient Channel Attention (ECA) blocks and a new high-resolution P2 detection head, paired with a lightweight vision-language model (VLM) ",
+      "url": "https://github.com/khadijaiftikhar7/drone_vlm_project",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-09-21T09:34:44Z",
+      "source": "GitHub"
+    }
+  ],
+  "papers": [
+    {
+      "name": "What Should World Models Forget? Stratified Retention for Continual Adaptation",
+      "description": "Continual learning treats degradation on previously seen data as evidence of failure, a convention inherited from settings with a stationary prediction target, where a correct label remains correct indefinitely. World models do not satisfy this condition. Their prediction target is the environment, ...",
+      "url": "https://arxiv.org/abs/2610.03713v1",
+      "paperId": "2610.03713v1",
+      "published": "2026-10-02T17:58:14Z",
+      "source": "ArXiv",
+      "category": "cs.CV"
+    },
+    {
+      "name": "RNADyn: A Benchmark for Generating and Understanding RNA Dynamics",
+      "description": "Ribonucleic acid (RNA) functions through conformational changes that are not fully captured by static structures. However, large-scale standardized RNA dynamics data remain limited, and existing approaches typically treat trajectory generation and dynamics understanding as separate objectives. Here,...",
+      "url": "https://arxiv.org/abs/2610.03712v1",
+      "paperId": "2610.03712v1",
+      "published": "2026-10-02T17:58:08Z",
+      "source": "ArXiv",
+      "category": "cs.LG"
+    },
+    {
+      "name": "LESSER: Post-Training Data Selection with Output-Layer Gradients",
+      "description": "The choice of post-training data for large language models substantially affects downstream performance. Gradient-based data selection is a popular approach that ranks training data by how well their gradients align with those of a small validation set. However, ranking with full-parameter gradients...",
+      "url": "https://arxiv.org/abs/2610.03702v1",
+      "paperId": "2610.03702v1",
+      "published": "2026-10-02T17:55:42Z",
+      "source": "ArXiv",
+      "category": "cs.LG"
+    },
+    {
+      "name": "Language Models that Play Chess and Explain Their Moves",
+      "description": "Modern chess engines are silent experts: they play at a superhuman level, but do not offer explanations for their play. On the other hand, language models (LMs) can generate plausible-sounding explanations, but their weak playing strength limits the utility of their explanations. We introduce Queen,...",
+      "url": "https://arxiv.org/abs/2610.03695v1",
+      "paperId": "2610.03695v1",
+      "published": "2026-10-02T17:54:22Z",
+      "source": "ArXiv",
+      "category": "cs.CL"
+    },
+    {
+      "name": "FrugalEvo: Towards Cost-Aware LLM-Guided Program Evolution",
+      "description": "LLM-guided evolutionary methods, such as AlphaEvolve, have emerged as powerful approaches for challenging computational optimization problems, such as circle packing. However, prior work typically optimizes performance gain over a fixed number of iterations. We argue that practical optimization shou...",
+      "url": "https://arxiv.org/abs/2610.03675v1",
+      "paperId": "2610.03675v1",
+      "published": "2026-10-02T17:44:05Z",
+      "source": "ArXiv",
+      "category": "cs.AI"
+    },
+    {
+      "name": "Planning to Learn",
+      "description": "Policy-gradient methods are central to modern reinforcement learning, including LLM post-training. When they struggle, the usual suspects are exploration, credit assignment and action-sampling noise. Classification has none of them. A classifier is a policy whose expected reward, its \\emph{expected ...",
+      "url": "https://arxiv.org/abs/2610.03667v1",
+      "paperId": "2610.03667v1",
+      "published": "2026-10-02T17:38:28Z",
+      "source": "ArXiv",
+      "category": "cs.LG"
+    },
+    {
+      "name": "Pivot-SD: Efficient Self-Distillation for Masked Diffusion Language Models",
+      "description": "Masked diffusion language models (dLMs) offer a promising parallel alternative to autoregressive models for complex reasoning. However, they face a distinct credit-assignment challenge, since a few commitments during denoising sharply reduce the uncertainty over the remaining masked positions and sh...",
+      "url": "https://arxiv.org/abs/2610.03665v1",
+      "paperId": "2610.03665v1",
+      "published": "2026-10-02T17:37:51Z",
+      "source": "ArXiv",
+      "category": "cs.LG"
+    },
+    {
+      "name": "ProAR: Learning Prospective Reasoning with Autoregressive Video Models",
+      "description": "Autoregressive (AR) video models excel at causal generation, but their reliance on next-chunk prediction confines them to a short-sighted, reactive paradigm. This limitation is particularly consequential for reasoning-oriented generation, where achieving a target outcome through valid intermediate s...",
+      "url": "https://arxiv.org/abs/2610.03664v1",
+      "paperId": "2610.03664v1",
+      "published": "2026-10-02T17:37:47Z",
+      "source": "ArXiv",
+      "category": "cs.CV"
+    },
+    {
+      "name": "IDRF: Inverse-Distilled Reward Fine-tuning of Masked Discrete Diffusion Models",
+      "description": "Masked discrete diffusion models offer a promising alternative to autoregressive generation, but iterative sampling can be costly, and intractable sequence likelihoods complicate reward fine-tuning. We introduce IDRF, a framework for reward fine-tuning of few-step masked discrete diffusion generator...",
+      "url": "https://arxiv.org/abs/2610.03641v1",
+      "paperId": "2610.03641v1",
+      "published": "2026-10-02T17:29:22Z",
+      "source": "ArXiv",
+      "category": "cs.LG"
+    },
+    {
+      "name": "Do Large Language Models Know Colombian Law? A Reliability Benchmark for the Colombian Legal System",
+      "description": "Large language models (LLMs) are increasingly used to support legal practice, education, and research, yet their reliability in national legal systems outside the United States remains largely undocumented. We introduce an expert-validated benchmark for evaluating LLM reliability on the Colombian le...",
+      "url": "https://arxiv.org/abs/2610.03639v1",
+      "paperId": "2610.03639v1",
+      "published": "2026-10-02T17:27:41Z",
+      "source": "ArXiv",
+      "category": "cs.AI"
+    },
+    {
+      "name": "World Embedding Benchmark",
+      "description": "Physical fidelity has received increasing attention in world models and video generation, yet how video representations encode physical information remains less understood. We introduce the World Embedding Benchmark, comprising 8,000 controlled simulation cases from 80 families spanning fluid mechan...",
+      "url": "https://arxiv.org/abs/2610.03632v1",
+      "paperId": "2610.03632v1",
+      "published": "2026-10-02T17:24:25Z",
+      "source": "ArXiv",
+      "category": "cs.CV"
+    },
+    {
+      "name": "NeutronGym: Physics-Graded Neutron Instrument Design for LLM Agents",
+      "description": "Designing a scientific instrument tests whether language-model agents can do physics rather than recall it, provided the grading cannot be argued with. We introduce NeutronGym, to our knowledge the first executable environment for neutron instrument design: agents build instruments through validatin...",
+      "url": "https://arxiv.org/abs/2610.03631v1",
+      "paperId": "2610.03631v1",
+      "published": "2026-10-02T17:23:52Z",
+      "source": "ArXiv",
+      "category": "cs.AI"
+    },
+    {
+      "name": "FALCON: A Model and Dataset Agnostic Framework for Synthetic Data Generation for NL2SQL Pairs",
+      "description": "Relational databases are among the most widely deployed forms of structured knowledge, and natural language access to them requires grounding language onto schema entities and relations while handling the ambiguity inherent in how people phrase requests. Existing synthetic NL-to-SQL data generation ...",
+      "url": "https://arxiv.org/abs/2610.03625v1",
+      "paperId": "2610.03625v1",
+      "published": "2026-10-02T17:19:50Z",
+      "source": "ArXiv",
+      "category": "cs.LG"
+    },
+    {
+      "name": "DEPICT: Scoring Text-to-Image Alignment by Answer Agreement",
+      "description": "Image-text alignment is a core problem in computer vision with applications in caption evaluation, hallucination detection, data curation, and the benchmarking of text-to-image (T2I) generators. As T2I models improve, benchmarking has become demanding, requiring metrics capable of finding a series o...",
+      "url": "https://arxiv.org/abs/2610.03617v1",
+      "paperId": "2610.03617v1",
+      "published": "2026-10-02T17:13:49Z",
+      "source": "ArXiv",
+      "category": "cs.CV"
+    },
+    {
+      "name": "ManifoldSplat: Language-Guided Semantic Shape Editing of 3D Gaussian Head Avatars",
+      "description": "High-fidelity 3D head avatars have reached near-photorealistic quality. While recent methods enable text-driven manipulation, they struggle to provide fine-grained localized control, often entangling features or lacking geometric consistency. Modifying geometry through natural language currently req...",
+      "url": "https://arxiv.org/abs/2610.03599v1",
+      "paperId": "2610.03599v1",
+      "published": "2026-10-02T17:04:22Z",
+      "source": "ArXiv",
+      "category": "cs.CV"
+    },
+    {
+      "name": "HazardWeaver: Scientific Route Selection for Hazard Analysis Agents",
+      "description": "Understanding and assessing natural hazards is essential for disaster preparedness and risk reduction. Recent advances in large language models have spurred growing interest in AI agents for hazard analysis, particularly their ability to integrate scientific data, models, and tools into automated wo...",
+      "url": "https://arxiv.org/abs/2610.03591v1",
+      "paperId": "2610.03591v1",
+      "published": "2026-10-02T16:59:19Z",
+      "source": "ArXiv",
+      "category": "cs.AI"
+    },
+    {
+      "name": "Threat-Preserving Representation Sensitivity in Agent-Security Benchmarks",
+      "description": "Security benchmarks for LLM-based agents often report the attack success rate (ASR) as a measure of model robustness and use these scores to compare different models and defense mechanisms, assuming that they describe the security of the agent. In this paper, we explore whether it also influences th...",
+      "url": "https://arxiv.org/abs/2610.03585v1",
+      "paperId": "2610.03585v1",
+      "published": "2026-10-02T16:55:50Z",
+      "source": "ArXiv",
+      "category": "cs.AI"
+    },
+    {
+      "name": "HyperBrowseComp: A Multilingual and Multimodal Stress Test for Web-Browsing Agents",
+      "description": "We introduce HyperBrowseComp, a multilingual and multimodal browsing benchmark comprising 423 manually authored and human-validated questions across 13 languages, written by native or highly proficient speakers. Questions are designed to be extremely challenging. Each question targets a concise, pub...",
+      "url": "https://arxiv.org/abs/2610.03574v1",
+      "paperId": "2610.03574v1",
+      "published": "2026-10-02T16:48:49Z",
+      "source": "ArXiv",
+      "category": "cs.AI"
+    },
+    {
+      "name": "Writerslogic at the CLEF 2026 SimpleText Track: Multi-Candidate LLM Simplification and Stacked Complexity Spotting",
+      "description": "We describe the Writerslogic team's participation in the CLEF 2026 SimpleText shared task, addressing Task 1 (text simplification) and Task 2 (complexity spotting). For Task 1, we develop a multi-candidate generation pipeline using GPT-4o-mini that produces five simplification candidates per sentenc...",
+      "url": "https://arxiv.org/abs/2610.03567v1",
+      "paperId": "2610.03567v1",
+      "published": "2026-10-02T16:44:53Z",
+      "source": "ArXiv",
+      "category": "cs.CL"
+    },
+    {
+      "name": "Writerslogic at PAN 2026: Process over Content for Robust Detection under Domain Shift",
+      "description": "We describe the Writerslogic systems for three PAN at CLEF 2026 shared tasks (Reasoning Trajectory Detection, Voight-Kampff Generative AI Detection, and Multi-Author Writing Style Analysis), unified by a shared analytical framework: feature robustness under distribution shift is governed by support ...",
+      "url": "https://arxiv.org/abs/2610.03565v1",
+      "paperId": "2610.03565v1",
+      "published": "2026-10-02T16:44:14Z",
+      "source": "ArXiv",
+      "category": "cs.CL"
+    },
+    {
+      "name": "DuoMatching: Joint-Marginal Distribution Matching for Few-Step Video Generation",
+      "description": "Streaming video generation has benefited from distribution matching distillation (DMD), which matches the joint distribution of video frames to a video teacher's approximation of the real video distribution. Although this joint matching mitigates drift during autoregressive rollouts, limitations rem...",
+      "url": "https://arxiv.org/abs/2610.03543v1",
+      "paperId": "2610.03543v1",
+      "published": "2026-10-02T16:27:44Z",
+      "source": "ArXiv",
+      "category": "cs.CV"
+    },
+    {
+      "name": "Author Representation Strategies for Zero-Shot Authorship Attribution: A Comparative Study of LLM-Based and Embedding-Based Approaches",
+      "description": "Authorship Attribution (AA) requires capturing fine-grained stylistic characteristics, making it particularly challenging in zero-shot (ZS) settings where no task-specific supervision is available. In this work, we investigate the effect of author representations on ZS AA by evaluating a label-only ...",
+      "url": "https://arxiv.org/abs/2610.03531v1",
+      "paperId": "2610.03531v1",
+      "published": "2026-10-02T16:16:47Z",
+      "source": "ArXiv",
+      "category": "cs.CL"
+    },
+    {
+      "name": "Divergence controls entropy in distillation",
+      "description": "Distillation has become a core primitive of large language model training, but its properties are not yet well understood. We take an entropic perspective, studying how the entropy of the student depends on the data and the divergence that define the distillation objective. We prove that forward KL ...",
+      "url": "https://arxiv.org/abs/2610.03529v1",
+      "paperId": "2610.03529v1",
+      "published": "2026-10-02T16:15:53Z",
+      "source": "ArXiv",
+      "category": "cs.CL"
+    },
+    {
+      "name": "Structured Composition of Verifiable Atomic Insights for Table-to-Report Generation",
+      "description": "Table-to-report generation refers to the task of automatically generating article-level analyt- ical reports from relational tables and is an essential capability for automated data science and decision support. Its central challenge lies in systematically discovering verifiable com- posite insights...",
+      "url": "https://arxiv.org/abs/2610.03525v1",
+      "paperId": "2610.03525v1",
+      "published": "2026-10-02T16:14:18Z",
+      "source": "ArXiv",
+      "category": "cs.CL"
+    },
+    {
+      "name": "Weave Forcing: Compositional Memory Routing for Interactive Long Video Generation",
+      "description": "Recent advances in autoregressive video generation have improved temporal consistency over extended durations, yet interactive storytelling requires more than continuous scene extension: a new shot may combine characters and backgrounds from different historical shots. Whole prompt retrieval can ove...",
+      "url": "https://arxiv.org/abs/2610.03510v1",
+      "paperId": "2610.03510v1",
+      "published": "2026-10-02T16:04:26Z",
+      "source": "ArXiv",
+      "category": "cs.CV"
+    },
+    {
+      "name": "Single-Pass Uncertainty Heads for Claim-Level Hallucination Detection in Persian Medical Language Models",
+      "description": "Hallucination detection is particularly important for medical language models, but repeated-sampling approaches are expensive and existing uncertainty-head resources do not directly transfer to a new backbone and language. We adapt the LLM Uncertainty Head (LUH) framework to Aya-Expanse-8B-based Per...",
+      "url": "https://arxiv.org/abs/2610.03482v1",
+      "paperId": "2610.03482v1",
+      "published": "2026-10-02T15:50:46Z",
+      "source": "ArXiv",
+      "category": "cs.CL"
+    },
+    {
+      "name": "Passing the Test You Trained On: Re-evaluating Prompt-Injection Detectors for LLM Agents",
+      "description": "LLM agents increasingly screen tool outputs with small prompt-injection detectors, and teams choose among detectors by their scores on public benchmarks. We ask whether those scores predict how a detector behaves inside an agent. We replay the ground-truth tool calls of two agent benchmarks, AgentDo...",
+      "url": "https://arxiv.org/abs/2610.03448v1",
+      "paperId": "2610.03448v1",
+      "published": "2026-10-02T15:30:11Z",
+      "source": "ArXiv",
+      "category": "cs.CL"
+    },
+    {
+      "name": "CLIMB: Confidence-Guided Complementary Evidence for Multimodal Retrieval-Augmented Generation",
+      "description": "Multimodal large language models (MLLMs) have shown strong visual reasoning abilities, but knowledge-intensive visual question answering often requires external textual evidence beyond the image and the model's parametric knowledge. Existing multimodal RAG systems commonly rely on Top-$K$ retrieval ...",
+      "url": "https://arxiv.org/abs/2610.03421v1",
+      "paperId": "2610.03421v1",
+      "published": "2026-10-02T15:09:06Z",
+      "source": "ArXiv",
+      "category": "cs.CL"
+    },
+    {
+      "name": "SyntaxBench: A Statistical Diagnostic Framework for Character-Level Reasoning in Large Language Models",
+      "description": "Large language models are increasingly used where small syntactic errors matter, yet character-level reasoning is still evaluated mostly through isolated probes and aggregate accuracy. We introduce SyntaxBench, a diagnostic benchmark and statistical evaluation framework for character-level reasoning...",
+      "url": "https://arxiv.org/abs/2610.03329v1",
+      "paperId": "2610.03329v1",
+      "published": "2026-10-02T14:02:56Z",
+      "source": "ArXiv",
+      "category": "cs.CL"
+    },
+    {
+      "name": "To Jev or Not? Evaluating the Accuracy and Efficiency of Structured Decision Models for Hate-Speech Moderation",
+      "description": "The scale of online content makes hate-speech moderation challenging, while Large Language Models (LLMs) enable harmful material to be produced and adapted more easily. Moderation therefore requires efficient classifiers that can accommodate different definitions of hate speech. Recent structured de...",
+      "url": "https://arxiv.org/abs/2610.03324v1",
+      "paperId": "2610.03324v1",
+      "published": "2026-10-02T13:59:21Z",
+      "source": "ArXiv",
+      "category": "cs.CL"
+    },
+    {
+      "name": "Shrome at Touché: Soft-Vote Ensembling and Counter-Causal Augmentation for Causality Extraction",
+      "description": "Touché 2026 extends causality extraction to counter-causal claims: news sentences whose surface form appears causal but whose meaning denies the causation, as in \"It is falsely believed that X caused Y.\" A system that relies on surface cues such as \"caused\" or \"led to\" will accept such a sentence as...",
+      "url": "https://arxiv.org/abs/2610.03268v1",
+      "paperId": "2610.03268v1",
+      "published": "2026-10-02T13:11:27Z",
+      "source": "ArXiv",
+      "category": "cs.CL"
+    }
+  ],
+  "totalModels": 50,
+  "totalPapers": 31
+}
