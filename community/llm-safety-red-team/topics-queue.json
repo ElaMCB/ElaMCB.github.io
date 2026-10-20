@@ -1,28 +1,6 @@
 {
   "topics": [
     {
-      "slug": "red-team-findings-in-sprint-backlog",
-      "title": "Put Red-Team Findings in the Sprint Backlog\u2014Not the Slack Graveyard",
-      "dek": "A finding without a ticket, severity, and retest owner will return in the next release. Here is a lightweight intake that QA can run in under thirty minutes.",
-      "sections": [
-        {
-          "heading": "Intake fields that matter",
-          "paragraphs": [
-            "For each finding capture: attack family, repro prompt, observed vs expected behavior, span or log evidence link, severity (blocker / major / minor), and the release train it blocks.",
-            "Map severity to policy: blockers stop the train, majors need a dated waiver with an executive owner, minors enter the next sprint with a named fixer."
-          ]
-        },
-        {
-          "heading": "Close the loop",
-          "body": "No finding is done until the repro prompt is in the regression suite and fails closed on main. The ticket description should link that prompt id. Otherwise you are collecting stories, not reducing risk."
-        },
-        {
-          "heading": "Cadence",
-          "body": "Fifteen-minute triage after each red-team session; thirty-minute review in sprint planning. Keep a running count of open blockers on the QA dashboard next to flake rate."
-        }
-      ]
-    },
-    {
       "slug": "shadow-traffic-for-safety-gates",
       "title": "Shadow Your Safety Gate on Production Traffic Before You Enforce It",
       "dek": "Flipping a new evaluator to blocking without a shadow week creates false confidence\u2014or false outages. Run dark for seven days first.",

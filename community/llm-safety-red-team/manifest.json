@@ -5,8 +5,16 @@
   "seriesLinePrefix": "LLM Safety & Red-Teaming for QA leaders \u00b7 Published",
   "seriesDescription": "Practical articles on a regular cadence for QA leaders building LLM safety and red-teaming practice.",
   "intervalDays": 21,
-  "lastPublished": "2026-09-29",
+  "lastPublished": "2026-10-20",
   "articles": [
+    {
+      "date": "2026-10-20",
+      "slug": "red-team-findings-in-sprint-backlog",
+      "title": "Put Red-Team Findings in the Sprint Backlog\u2014Not the Slack Graveyard",
+      "summary": "A finding without a ticket, severity, and retest owner will return in the next release. Here is a lightweight intake that QA can run in under thirty minutes.",
+      "href": "/community/llm-safety-red-team/articles/2026-10-20-red-team-findings-in-sprint-backlog.html",
+      "external": false
+    },
     {
       "date": "2026-09-29",
       "slug": "over-refusal-budget-for-qa",
