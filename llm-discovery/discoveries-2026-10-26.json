@@ -1,0 +1,810 @@
+{
+  "scanDate": "2026-10-26",
+  "models": [
+    {
+      "name": "sglang",
+      "description": "SGLang is a high-performance serving framework for large language models and multimodal models.",
+      "url": "https://github.com/sgl-project/sglang",
+      "stars": 38212,
+      "language": "Python",
+      "updated": "2026-10-26T19:37:09Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Speech",
+      "description": "A scalable generative AI framework built for researchers and developers working on Large Language Models, Multimodal, and Speech AI (Automatic Speech Recognition and Text-to-Speech)",
+      "url": "https://github.com/NVIDIA-NeMo/Speech",
+      "stars": 18619,
+      "language": "Python",
+      "updated": "2026-10-26T17:28:41Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ODS",
+      "description": "ODS V3 Pre-Release: Public testing and refinement ahead of the official V3 launch. Turn your PC, Mac, or Linux box into a private AI server.",
+      "url": "https://github.com/Osmantic/ODS",
+      "stars": 7698,
+      "language": "Python",
+      "updated": "2026-10-26T19:15:09Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "inspect_ai",
+      "description": "Inspect: A framework for large language model evaluations",
+      "url": "https://github.com/UKGovernmentBEIS/inspect_ai",
+      "stars": 3103,
+      "language": "Python",
+      "updated": "2026-10-26T19:38:45Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "kicad-mcp-pro",
+      "description": "MCP server for KiCad, connecting AI agents to schematic and PCB workflows, ERC/DRC validation, DFM checks, BOM analysis, and manufacturing preparation—with controlled edits and human-gated release workflows.",
+      "url": "https://github.com/oaslananka/kicad-mcp-pro",
+      "stars": 155,
+      "language": "Python",
+      "updated": "2026-10-26T19:45:29Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ras-commander",
+      "description": "The RAS-Commander library provides a python API and agentic features for automating HEC-RAS 6.x and accessing HDF data using Python, built with and driven by large language models.",
+      "url": "https://github.com/gpt-cmdr/ras-commander",
+      "stars": 88,
+      "language": "Python",
+      "updated": "2026-10-26T20:07:52Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "NewAdversarialAttackPaper",
+      "description": "A list of recent adversarial attack and defense papers (including those on large language models)",
+      "url": "https://github.com/shenyizg/NewAdversarialAttackPaper",
+      "stars": 45,
+      "language": "Python",
+      "updated": "2026-10-16T17:45:30Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ESPHome-MCP",
+      "description": "A MCP server for ESPHome that supports the new Device Builder functionality released in build 2026.6",
+      "url": "https://github.com/loryanstrant/ESPHome-MCP",
+      "stars": 34,
+      "language": "Python",
+      "updated": "2026-10-26T16:43:59Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "q-evaluation-harness",
+      "description": "An open-source framework by KX for evaluating Large Language Models on Q/kdb+ code generation tasks.",
+      "url": "https://github.com/KxSystems/q-evaluation-harness",
+      "stars": 10,
+      "language": "Python",
+      "updated": "2026-10-26T17:36:05Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "llm-redact",
+      "description": "Large Language Model (LLM) information redactor that prevents private information from being sent to LLMs from agentic tools by substituting placeholders for private information on outgoing requests and then replaces the placeholders on the incoming responses seamlessly for the agentic tool users.",
+      "url": "https://github.com/asanderson/llm-redact",
+      "stars": 7,
+      "language": "Python",
+      "updated": "2026-10-26T17:31:28Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "padwan-ai",
+      "description": "Minimal, provider-agnostic Python client for large language models, built on niquests.",
+      "url": "https://github.com/polarsen-io/padwan-ai",
+      "stars": 6,
+      "language": "Python",
+      "updated": "2026-10-26T20:01:13Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ai-evo",
+      "description": "Self-hosted Agent quality engineering platform — evaluation as a release gate. 8 eval types with AI judges, datasets, pre-eval scripts, analytics & A/B testing. Gate loop (API keys, CI CLI, webhooks) lands with M1. FastAPI + Vue 3 + Celery.",
+      "url": "https://github.com/mahingbun-dev/ai-evo",
+      "stars": 4,
+      "language": "Python",
+      "updated": "2026-10-26T18:43:59Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "DK4HD_Fix_Skill",
+      "description": "A standalone behavioral specification/skill for an LLM to implement a DK4HD runtime compatibility module from scratch — fixing frame-pacing jitter, one-core CPU spin, dropped short clicks, and lost button releases without touching the game itself.",
+      "url": "https://github.com/ryans233/DK4HD_Fix_Skill",
+      "stars": 4,
+      "language": "Python",
+      "updated": "2026-10-26T18:54:16Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "md-bridge",
+      "description": "Self-hosted document converter built on hand-written heuristics, not language models. Ships PDF ↔ Markdown; the architecture welcomes new format pairs as contributions land. Deterministic by design: same input, same output, every run. FastAPI + React, multi-arch Docker, MIT.",
+      "url": "https://github.com/vinicq/md-bridge",
+      "stars": 4,
+      "language": "Python",
+      "updated": "2026-10-26T04:54:17Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "PCEI",
+      "description": "PCEI or Physically Constrained Emergent Intelligence is a new machine learning and large language model architecture that is memory efficient and bio-similar",
+      "url": "https://github.com/MtnMCG/PCEI",
+      "stars": 2,
+      "language": "Python",
+      "updated": "2026-10-25T19:35:27Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "slmkit",
+      "description": "Build small language models from scratch on a single consumer GPU — the full lifecycle, documented for people new to ML.",
+      "url": "https://github.com/m87techlabs/slmkit",
+      "stars": 2,
+      "language": "Python",
+      "updated": "2026-10-21T17:13:23Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "F5-TTS-Expansion",
+      "description": "This project fine-tunes the F5-TTS model to add a new language, using a pre-trained base to enhance multilingual capabilities.",
+      "url": "https://github.com/jdgermosen/F5-TTS-Expansion",
+      "stars": 2,
+      "language": "Python",
+      "updated": "2026-10-15T12:37:30Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "NoMoreClutter",
+      "description": "An AI desktop app that organizes your files with large language models: it analyzes, categorizes and renames them with descriptive names, and works with local LLMs. Free personal use under AL-1.1; commercial use under ACL-1.0.",
+      "url": "https://github.com/AegeanWorks/NoMoreClutter",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-10-26T19:24:56Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "gMART",
+      "description": "gMART is a tiny geospatial Multi-Agent Restrictions Test repository created in order to test Large Language Models capabilities to extract geospatial construction restrictions from user prompt within pre-defined geospatial tools.",
+      "url": "https://github.com/IDUclub/gMART",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-10-26T18:30:23Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "sigmaforge",
+      "description": "AI-assisted detection engineering platform with a research track measuring whether LLM-generated Sigma rules can be adversarially sabotaged. FastAPI + React + Postgres, RS256 JWT auth, RBAC, full CI/CD. E0 (auth + foundations) complete and release-audited; detection engineering + research subsystem in progress.",
+      "url": "https://github.com/koushikchowdary6/sigmaforge",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-10-26T20:06:51Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "EvoWriter",
+      "description": "Self-evolving multi-agent writing platform — trace-driven evolution loop with human-gated releases",
+      "url": "https://github.com/gaoshoupaper-code/EvoWriter",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-10-26T18:50:38Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "QSTRBench",
+      "description": "Companion to: A. G. Cohn and R. E. Blackwell, 2026. QSTRBench : a New Benchmark to Evaluate the Ability of Language Models to Reason with Qualitative Spatial and Temporal Calculi",
+      "url": "https://github.com/RobBlackwell/QSTRBench",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-10-26T16:16:00Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "RayCodes_WeVisOne-VL-2B",
+      "description": "Tencent's New 2B AI Replaces 6 Vision Models Of Apple, Qwen & Meta! (WeVisOne-VL Review) - Local unified vision-language model pipeline",
+      "url": "https://github.com/47thtechcorner/RayCodes_WeVisOne-VL-2B",
+      "stars": 1,
+      "language": "Python",
+      "updated": "2026-10-26T02:01:36Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "Website-Summerizer",
+      "description": "AI-powered website summarizer built with Python, Groq, and Gradio. The app fetches a webpage, extracts readable content, and uses a large language model to generate a concise summary. It’s designed as a simple, beginner-friendly demo of how LLMs can be integrated into real-world tools",
+      "url": "https://github.com/ambuj-1999/Website-Summerizer",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-26T20:13:10Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "AI-Gateway-API",
+      "description": "A lightweight, async AI gateway built with FastAPI. It sits between your applications and large language model providers, exposing one stable, unified API no matter which model is behind it.",
+      "url": "https://github.com/IsraelChidera/AI-Gateway-API",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-26T20:03:46Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "FableAI",
+      "description": "Generative AI application that uses large language models to create structured fictional news and announcements based on natural language instructions and reference content.",
+      "url": "https://github.com/Arvence/FableAI",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-26T19:27:35Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "attention-atlas",
+      "description": "This repository hosts the code, experiments, and prototype developed for my Master’s thesis: Interpretable Large Language Models through Attention Mechanism Visualization. It provides tools for exploring attention patterns, assessing bias, and validating interpretability in LLMs.",
+      "url": "https://github.com/pinthoz/attention-atlas",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-26T19:04:03Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "42_CallMeMaybe",
+      "description": "42 School Core project that used large language model (LLM) to perform function calls (the functions are recognized from input data (prompts)). The output is stored to a JSON file and each call is represented as structured JSON-record (including prompt, function name and its input parameters). The whole project is written in Python and custom LLM.",
+      "url": "https://github.com/rockskill/42_CallMeMaybe",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-26T18:47:46Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "OpenJarvis-Local-AI-Assistant-Autonomous-AI-Agents-Intelligent-Task-Automation-Platform",
+      "description": "Developed OpenJarvis, an AI-powered personal assistant and intelligent automation platform designed to perform diverse tasks through natural language interactions, local large language models (LLMs), and an integrated AI workspace.",
+      "url": "https://github.com/Avinash-118/OpenJarvis-Local-AI-Assistant-Autonomous-AI-Agents-Intelligent-Task-Automation-Platform",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-26T18:24:18Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "RESEARCH",
+      "description": "This research investigates whether post-training quantisation (GPTQ) and magnitude-based pruning disproportionately degrade multilingual translation quality for low-resource African language pairs compared to high-resource language pairs in large language models.",
+      "url": "https://github.com/DevQuestKhuselo/RESEARCH",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-26T18:23:55Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "LLM-Memory",
+      "description": "Large language models only “know” what is in their training data or current prompt — everything else is forgotten. We study LLM memory as a database engineering problem: storage, indexing, retrieval, update and deletion, across three layers (external/non-parametric, internal/model-level, cognitive/agentic) with evaluation as a cross-cutting concern",
+      "url": "https://github.com/anjaligundawar/LLM-Memory",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-26T18:00:07Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "creator-release-failover-python",
+      "description": "A typed Python release-note workflow that retries an OpenAI-compatible model route.",
+      "url": "https://github.com/ConstantineHayes8524/creator-release-failover-python",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-26T20:13:34Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "InEx-Agent",
+      "description": "A conversational LLM agent for empirical software engineering research. Given a natural-language question about npm package bugs (\"how have intrinsic vs. extrinsic bug ratios evolved across major releases?\"), the agent autonomously plans, calls tools, queries data, and synthesizes results - reducing manual research triage time by 95%. ",
+      "url": "https://github.com/TWright-28/InEx-Agent",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-26T20:11:43Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "auto-deal-researcher",
+      "description": "Beta release of Auto Deal Searcher with LLM integration and browser automation.",
+      "url": "https://github.com/DracieVajko/auto-deal-researcher",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-26T20:09:34Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ivi-release-health",
+      "description": "Automated weekly release-health reporting for Automotive Grade Linux (IVI) from its public Jira: JQL ingestion, RAG/escalation rules, grounded LLM drafts.",
+      "url": "https://github.com/asingh911/ivi-release-health",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-26T19:48:17Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "stir-l4",
+      "description": "STIR-L4: prompt, quiz, model and helper kit for planning systematic reviews with LLMs (release 1.0)",
+      "url": "https://github.com/druday/stir-l4",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-26T19:42:05Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "context-pill",
+      "description": "Daily AI releases, tools and techniques for coding agents, each labeled with how it was checked, with public source trust scores.",
+      "url": "https://github.com/agnostify/context-pill",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-26T19:07:59Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "llm-redteam-evidence",
+      "description": "Turn LLM red-team results (garak, promptfoo) into audit evidence: per-control pass/fail with risk tolerance and confidence bounds, hashed evidence, OSCAL, and a model release gate. OWASP LLM Top 10 · MITRE ATLAS · NIST AI 600-1",
+      "url": "https://github.com/Mihirajmera/llm-redteam-evidence",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-26T18:46:14Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "open-weight-radar",
+      "description": "Open-weight LLM releases, usage momentum, and rumor watch — refreshed twice daily.",
+      "url": "https://github.com/crwvrosenblum/open-weight-radar",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-26T18:23:40Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "veizik-cuda",
+      "description": "Local AI inference for NVIDIA GPUs on Linux. One native engine runs Qwen3.5/3.6 language (image and video input on 35B-A3B), Wan2.1/2.2 video, FLUX.1-dev and SD3.5 image models from the checkpoints you download. Sealed, checksummed packages in Releases.",
+      "url": "https://github.com/veizikhq/veizik-cuda",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-26T17:44:32Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "kg-ssot",
+      "description": "KG-SSOT: verifiable knowledge graphs in plain text. A formal contract for .kg.yaml and .kg.json (JSON Schema) with a conformance suite, reference readers (Python, JavaScript), CI gate, store, query, diff and MCP server. Release mirror, Apache-2.0.",
+      "url": "https://github.com/marciocar/kg-ssot",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-26T16:41:57Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "anime-text-dataset",
+      "description": "Text-only anime dataset for LLM fine-tuning, RAG, QA and entity linking: 35,766 works, field-level provenance, gated full release plus a public CC0 subset.",
+      "url": "https://github.com/muqeet-1138/anime-text-dataset",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-26T16:33:16Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "ai-news-hub",
+      "description": "⚡ Neural Pulse — Autonomous AI & frontier tech journal. Hourly dispatches, trending open-source models, and multi-language briefings.",
+      "url": "https://github.com/Emirfs/ai-news-hub",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-26T17:39:46Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "makemore-bigram-mlp",
+      "description": "Character-level language models in PyTorch: a bigram model and an MLP that learn from a list of names and generate new ones.",
+      "url": "https://github.com/naikgaurav077-ui/makemore-bigram-mlp",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-25T13:28:06Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "IgboAI",
+      "description": "Open research on AI for Igbo language: self-updating literature tracking, corpora, and benchmarks spanning NLP, speech, and language models for a low-resource, tonal language. Tracks new papers and models nightly, building corpora, and benchmarking across NLP, ASR/TTS, and LLMs.",
+      "url": "https://github.com/IgboNLP-Research/IgboAI",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-25T09:06:23Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "FakeNewsDetector",
+      "description": "A robust Natural Language Processing project for fake news detection, utilizing Scikit-Learn, TensorFlow, and advanced sequential modeling (LSTMs)",
+      "url": "https://github.com/gaurang-developer-tech/FakeNewsDetector",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-24T09:16:23Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "AI-NEWS",
+      "description": "InfoSaver: a Telegram bot that saves links. A language model summarizes each page and the row lands in Google Sheets under a topic. FastAPI on Vercel, pytest in CI.",
+      "url": "https://github.com/ItsNLVu/AI-NEWS",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-23T03:27:31Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "genie-benchmark",
+      "description": "GENIE: a benchmark to test whether an edited language model uses a new fact or just recalls it",
+      "url": "https://github.com/benji-benji/genie-benchmark",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-21T15:21:35Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "multimodal-fake-news-detection",
+      "description": "An explainable multimodal fake news detection system using vision-language models.",
+      "url": "https://github.com/Svayum-dev/multimodal-fake-news-detection",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-20T07:12:45Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "continual-pretraining-from-scratch-teach-a-tiny-lm-a-new-domain-without-forgetting-the-old",
+      "description": "A pretrained language model is never finished: it has to absorb new domains, new languages and newer data without losing what it already knows. This project rebuilds that problem at a scale you can run on a CPU. You pretrain a small character-level GPT on children's stories, then continue pretraining it on Shakespeare and measure exactly what…",
+      "url": "https://github.com/avikds/continual-pretraining-from-scratch-teach-a-tiny-lm-a-new-domain-without-forgetting-the-old",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-16T16:27:57Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "CivicLens",
+      "description": "Municipal statistics for every New Jersey municipality, drawn from federal survey APIs and normalised into comparable series, with a question-answering layer built so that a language model can never produce a number.",
+      "url": "https://github.com/dpat0103/CivicLens",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-15T01:27:18Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "indian-news-fake-news-detection",
+      "description": "A machine learning project that detects fake and real news in Indian languages using Natural Language Processing (NLP) and classification algorithms such as Logistic Regression, Naive Bayes, and Linear SVM. It evaluates model performance using accuracy, precision, recall, and F1-score to support news credibility analysis.",
+      "url": "https://github.com/Vedant1427/indian-news-fake-news-detection",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-13T10:55:57Z",
+      "source": "GitHub"
+    },
+    {
+      "name": "AI-Based-Fake-News-Detection",
+      "description": "An AI-based research project focused on detecting potentially fake or misleading news using Natural Language Processing (NLP) and machine learning. The project explores text classification, model comparison, and evaluation to investigate the effectiveness and limitations of automated misinformation detection.",
+      "url": "https://github.com/Hridaya00/AI-Based-Fake-News-Detection",
+      "stars": 0,
+      "language": "Python",
+      "updated": "2026-10-13T10:50:49Z",
+      "source": "GitHub"
+    }
+  ],
+  "papers": [
+    {
+      "name": "The Language of Instruction: Genre and Generative AI",
+      "description": "This article argues that instruction-fine-tuned language models should be understood as implementing a genre, what is proposed as the instructional-conversational genre. This genre is an amalgamation of discursive language from prior conversations between generative models and humans recursively run...",
+      "url": "https://arxiv.org/abs/2610.32982v1",
+      "paperId": "2610.32982v1",
+      "published": "2026-10-23T17:59:56Z",
+      "source": "ArXiv",
+      "category": "cs.CL"
+    },
+    {
+      "name": "SceneBloom: Agentic Indoor Environment Generation with Realistic and Diverse Layouts for Embodied Learning",
+      "description": "Training generalizable embodied agents requires realistic, varied, and simulation-ready indoor environments. Language-guided methods support semantic planning and object-level reasoning, but precise spatial grounding remains difficult. Visual generative models offer rich priors over plausible arrang...",
+      "url": "https://arxiv.org/abs/2610.32978v1",
+      "paperId": "2610.32978v1",
+      "published": "2026-10-23T17:59:21Z",
+      "source": "ArXiv",
+      "category": "cs.CV"
+    },
+    {
+      "name": "MiD-VLM: Detecting and Grounding Global Semantic Misinformation in Image-Caption Pairs",
+      "description": "Semantic misinformation can arise when an authentic image is paired with a caption that changes or distorts its narrative. Because the image itself may contain no visible signs of manipulation, methods designed to detect pixel-level artifacts can miss these misleading image-caption pairs. We study t...",
+      "url": "https://arxiv.org/abs/2610.32967v1",
+      "paperId": "2610.32967v1",
+      "published": "2026-10-23T17:55:02Z",
+      "source": "ArXiv",
+      "category": "cs.CV"
+    },
+    {
+      "name": "Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox",
+      "description": "Personal email agents decide, for every message, what it is, whether it is urgent, whether to draft a reply, create a task, or ignore it. Their error rate is rarely measured: the stored labels were written by the system itself. We present Foyer, a self-hosted personal inbox agent in daily use, and a...",
+      "url": "https://arxiv.org/abs/2610.32955v1",
+      "paperId": "2610.32955v1",
+      "published": "2026-10-23T17:49:43Z",
+      "source": "ArXiv",
+      "category": "cs.LG"
+    },
+    {
+      "name": "Where Rounding Happens Matters: Rounding-Location Alignment Stabilizes LLM Reinforcement Learning",
+      "description": "Reinforcement learning for large language models often uses separate systems for inference and training. Even with identical weights and BF16 tensors, implementation differences can make an intended on-policy update off-policy and destabilize training. Existing remedies align the entire inference an...",
+      "url": "https://arxiv.org/abs/2610.32951v1",
+      "paperId": "2610.32951v1",
+      "published": "2026-10-23T17:45:03Z",
+      "source": "ArXiv",
+      "category": "cs.LG"
+    },
+    {
+      "name": "Beyond Discrete Tokens: Preserving Numerical Continuity in Medical Vision-Language Models",
+      "description": "Objective: To develop a unified vision-language model for prompt-conditioned quantitative ultrasound measurement that addresses the mismatch between continuous measurement targets and discrete token-based numerical prediction. Methods: This article presents HAD-VLM, a hybrid autoregressive-diffusion...",
+      "url": "https://arxiv.org/abs/2610.32948v1",
+      "paperId": "2610.32948v1",
+      "published": "2026-10-23T17:40:58Z",
+      "source": "ArXiv",
+      "category": "cs.CV"
+    },
+    {
+      "name": "Monetizing Intelligence: Advertising and Subscription Design on LLM Platforms",
+      "description": "Large language model (LLM) platforms introducing advertising must decide how much capability ad revenue should fund and what consumers should pay to avoid ads. We study a monopolistic platform that jointly chooses costly response quality, advertising intensity, and subscription prices when advertisi...",
+      "url": "https://arxiv.org/abs/2610.32945v1",
+      "paperId": "2610.32945v1",
+      "published": "2026-10-23T17:39:42Z",
+      "source": "ArXiv",
+      "category": "cs.AI"
+    },
+    {
+      "name": "Yalda-Embedding: Open Development of a Competitive Persian Retrieval Model",
+      "description": "Despite advances in multilingual text representations, effective dense retrieval for Persian remains constrained by the limited availability of language-specific training resources and compact embedding models. We present Yalda Embedding, a 595.8-million-parameter Persian retrieval model adapted fro...",
+      "url": "https://arxiv.org/abs/2610.32933v1",
+      "paperId": "2610.32933v1",
+      "published": "2026-10-23T17:30:40Z",
+      "source": "ArXiv",
+      "category": "cs.AI"
+    },
+    {
+      "name": "Adaptive Frequency Threshold Byte Pair Encoding for Mixed Natural Language and Structured Symbolic Corpora",
+      "description": "Modern language models rely on subwording tokenization to define the discrete units of input processing, typically using methods like Byte Pair Encoding (BPE) that treat whitespace as a fixed semantic boundary. This design is inherently limited, as many meaningful concepts---including multiword expr...",
+      "url": "https://arxiv.org/abs/2610.32921v1",
+      "paperId": "2610.32921v1",
+      "published": "2026-10-23T17:21:18Z",
+      "source": "ArXiv",
+      "category": "cs.LG"
+    },
+    {
+      "name": "SemantEq: Faithful Bidirectional Equivalence of Formal Statements",
+      "description": "Statement autoformalization translates mathematics from natural language into a proof assistant such as Lean 4, and models now do it at scale. As provers get stronger, the burden of correctness shifts from the proof to the statement, that is, to whether the formal statement faithfully translates its...",
+      "url": "https://arxiv.org/abs/2610.32919v1",
+      "paperId": "2610.32919v1",
+      "published": "2026-10-23T17:20:12Z",
+      "source": "ArXiv",
+      "category": "cs.LG"
+    },
+    {
+      "name": "LoCA: Enabling Multi-Modality in Geospatial Location Encoders",
+      "description": "Location encoders map geographic coordinates to high-dimensional descriptors through contrastive alignment with paired Earth Observation imagery. We prove that this construction is structurally limited: any Lipschitz location encoder produces an output of intrinsic dimension at most 2, regardless of...",
+      "url": "https://arxiv.org/abs/2610.32894v1",
+      "paperId": "2610.32894v1",
+      "published": "2026-10-23T17:01:04Z",
+      "source": "ArXiv",
+      "category": "cs.CV"
+    },
+    {
+      "name": "Green Code or Costly Code? Evaluating the Energy Costs of Iterative LLM-Based Code Optimizations",
+      "description": "Large Language Models (LLMs) are increasingly used to optimize code for performance. This practice often assumes that improvements in execution speed naturally translate into overall lower energy consumption. We challenge this assumption empirically by measuring whether performance-optimized code pr...",
+      "url": "https://arxiv.org/abs/2610.32891v1",
+      "paperId": "2610.32891v1",
+      "published": "2026-10-23T16:58:01Z",
+      "source": "ArXiv",
+      "category": "cs.AI"
+    },
+    {
+      "name": "Closing the Modality Gap via Simplex-Constrained Representations",
+      "description": "While multimodal contrastive models like CLIP and CLAP successfully learn shared representations, their embeddings typically exhibit a persistent \\emph{modality gap}. We propose addressing this separation through a purely geometric approach: changing the embedding domain from the unit sphere, $S^{d-...",
+      "url": "https://arxiv.org/abs/2610.32890v1",
+      "paperId": "2610.32890v1",
+      "published": "2026-10-23T16:57:48Z",
+      "source": "ArXiv",
+      "category": "cs.CV"
+    },
+    {
+      "name": "When Human Corrections Travel: Safety in Federated VLA Adaptation",
+      "description": "Vision-language-action (VLA) policies can adapt to local human intervention, while federated learning can combine distributed robot experience without pooling raw records. We examine their prospective intersection: sharing adaptations derived from diverse human corrections across tasks, environments...",
+      "url": "https://arxiv.org/abs/2610.32888v1",
+      "paperId": "2610.32888v1",
+      "published": "2026-10-23T16:56:03Z",
+      "source": "ArXiv",
+      "category": "cs.LG"
+    },
+    {
+      "name": "Reinforcement Learning with Multi-Step Transition Predictions: A Bellman Theory",
+      "description": "Multi-step predictions of future transition realizations can improve reinforcement learning, but their value remains difficult to quantify. Directly including these predictions in the state can lead to exponential state-space growth, making direct dynamic programming computationally expensive. We st...",
+      "url": "https://arxiv.org/abs/2610.32887v1",
+      "paperId": "2610.32887v1",
+      "published": "2026-10-23T16:55:37Z",
+      "source": "ArXiv",
+      "category": "cs.LG"
+    },
+    {
+      "name": "NgramRL: Accelerating RL Post-Training for Structured Generation via Rollout-Aware N-gram Speculative Decoding",
+      "description": "Reinforcement learning (RL) post-training improves the reasoning capabilities of large language models, but its cost is dominated by autoregressive rollout generation, which can exceed 70% of training time. Existing speculative-decoding methods are poorly suited to this setting: model-based drafters...",
+      "url": "https://arxiv.org/abs/2610.32881v1",
+      "paperId": "2610.32881v1",
+      "published": "2026-10-23T16:47:29Z",
+      "source": "ArXiv",
+      "category": "cs.AI"
+    },
+    {
+      "name": "Multimodal Generative AI Assists Comprehensive Echocardiographic Interpretation",
+      "description": "Echocardiography is the cornerstone of cardiovascular diagnostics, yet its global utility is constrained by a critical shortage of experienced interpreters. Current artificial intelligence (AI) solutions remain limited, typically operating as opaque \"black boxes\" or focusing on narrow tasks that fai...",
+      "url": "https://arxiv.org/abs/2610.32880v1",
+      "paperId": "2610.32880v1",
+      "published": "2026-10-23T16:47:01Z",
+      "source": "ArXiv",
+      "category": "cs.CV"
+    },
+    {
+      "name": "Advancing SVD-based LLM Compression via Layer-Wise Error Model Search",
+      "description": "Low-rank SVD-based compression offers a powerful strategy to reduce the computational costs of LLMs. However, existing methods face two key limitations: (i) global rank allocation, where uncalibrated error proxies fail to capture complex error propagation, and (ii) decomposition quality, where Fishe...",
+      "url": "https://arxiv.org/abs/2610.32878v1",
+      "paperId": "2610.32878v1",
+      "published": "2026-10-23T16:46:00Z",
+      "source": "ArXiv",
+      "category": "cs.AI"
+    },
+    {
+      "name": "Trusting the Tool: Asymmetric Deference of LLM Vulnerability Auditors to Static-Analysis Evidence",
+      "description": "Pipelines that combine large language models (LLMs) with static analysis let the model consume the analyser's output as evidence, but whether the model distinguishes true from false evidence, and whether its scrutiny depends on what the evidence claims, has not been measured. We built an intraproced...",
+      "url": "https://arxiv.org/abs/2610.32876v1",
+      "paperId": "2610.32876v1",
+      "published": "2026-10-23T16:45:10Z",
+      "source": "ArXiv",
+      "category": "cs.LG"
+    },
+    {
+      "name": "Do \"True\" and \"False\" Add Up to One? Complement Consistency in LLM-Agent Opinion Simulations",
+      "description": "In LLM-agent opinion simulations, each agent reports the probability that a claim is true after seeing its own previous probability and the probabilities reported by its neighbors, and that number becomes its state in the next round. If the number describes the agent's position rather than the sente...",
+      "url": "https://arxiv.org/abs/2610.32874v1",
+      "paperId": "2610.32874v1",
+      "published": "2026-10-23T16:44:20Z",
+      "source": "ArXiv",
+      "category": "cs.AI"
+    },
+    {
+      "name": "J-Comm: Jacobian-Guided Latent Communication between LLM Agents",
+      "description": "Latent communication requires both an effective continuous reasoning process and an interface through which an external model can leverage its intermediate computation. We present J-Comm, a framework comprising two core components. First, a training-free Geometric Agreement for Latent Reasoning (GEA...",
+      "url": "https://arxiv.org/abs/2610.32871v1",
+      "paperId": "2610.32871v1",
+      "published": "2026-10-23T16:42:38Z",
+      "source": "ArXiv",
+      "category": "cs.CL"
+    },
+    {
+      "name": "From Deliberately Constructed Systemic Representations of the World of Activity to Dialogue: A Five-Level Communication Architecture for Strong Language-Based ASI",
+      "description": "This paper proposes a five-level organization of message formation and understanding within thinking and activity in which ASI participates. Its central thesis is that a language model's context is fundamentally incapable of presenting the foundations of utterance formation for examination and verif...",
+      "url": "https://arxiv.org/abs/2610.32869v1",
+      "paperId": "2610.32869v1",
+      "published": "2026-10-23T16:41:54Z",
+      "source": "ArXiv",
+      "category": "cs.AI"
+    },
+    {
+      "name": "Interpretable sparse fine-tuning with TopKLoRA enables faithful circuit discovery",
+      "description": "Fine-tuning on datasets of unknown origin can create a backdoor in the trained model when the data includes poisoned examples. Difficult to localise and remove, backdoors can persist through safety training. While parameter-efficient fine-tuning methods capture the full parameter changes introduced ...",
+      "url": "https://arxiv.org/abs/2610.32866v1",
+      "paperId": "2610.32866v1",
+      "published": "2026-10-23T16:37:29Z",
+      "source": "ArXiv",
+      "category": "cs.LG"
+    },
+    {
+      "name": "A Foundation Model for Policy In-Context Longitudinal Causal Effect Estimation",
+      "description": "Longitudinal causal effect estimation is complicated by time-varying confounding and treatment-confounder feedback loops. Existing methods generally require data-specific nuisance-model fitting, and many are tailored to prespecified treatment sequences or prediction horizons, leading to time-consumi...",
+      "url": "https://arxiv.org/abs/2610.32863v1",
+      "paperId": "2610.32863v1",
+      "published": "2026-10-23T16:34:49Z",
+      "source": "ArXiv",
+      "category": "cs.AI"
+    },
+    {
+      "name": "Sustainability of TSFM Deployment and Pretraining: From Carbon Footprint Analysis to Mitigation via Pruning",
+      "description": "Time Series Foundation Models (TSFMs) offer strong zero-shot forecasting capabilities, but their high pretraining cost raises a practical sustainability question: does this upfront investment pay off over a full deployment lifecycle, compared to supervised standalone models that must be periodically...",
+      "url": "https://arxiv.org/abs/2610.32859v1",
+      "paperId": "2610.32859v1",
+      "published": "2026-10-23T16:32:29Z",
+      "source": "ArXiv",
+      "category": "cs.LG"
+    },
+    {
+      "name": "Reimagining Enterprise RAG for Multi-Agent Systems: A Knowledge Layer That Organizes Before It Retrieves",
+      "description": "Enterprises are deploying agentic AI across the software development lifecycle, and they need the behavioral logic of the systems they act on, not stakeholder documentation. A seven-agent reverse-engineering pipeline recovered this logic, processing 241 repositories across 18 services into thousands...",
+      "url": "https://arxiv.org/abs/2610.32851v1",
+      "paperId": "2610.32851v1",
+      "published": "2026-10-23T16:21:56Z",
+      "source": "ArXiv",
+      "category": "cs.AI"
+    },
+    {
+      "name": "SPOOK: Sparse Pixel Optimization for Off-Manifold Knowledge in Vision Encoders",
+      "description": "Modern vision encoders are widely used as semantic representations, but the relationship between embedding similarity and human-visible semantics can become unclear far from the natural-image manifold. We probe this regime in a black-box setting by applying sparse pixel edits to blank canvases with ...",
+      "url": "https://arxiv.org/abs/2610.32835v1",
+      "paperId": "2610.32835v1",
+      "published": "2026-10-23T16:09:57Z",
+      "source": "ArXiv",
+      "category": "cs.CV"
+    },
+    {
+      "name": "Consommé: Conditioned Token Merging for Split Inference",
+      "description": "Split inference partitions a Vision Transformer between a resource-constrained edge device and a server. However, transmitting intermediate tokens across the communication channel is costly. Deploying fine-tuned backbones to every endpoint becomes expensive as well. We study token reduction for spli...",
+      "url": "https://arxiv.org/abs/2610.32794v1",
+      "paperId": "2610.32794v1",
+      "published": "2026-10-23T15:37:45Z",
+      "source": "ArXiv",
+      "category": "cs.CV"
+    },
+    {
+      "name": "SREdit: Scene Response Guided Appearance Editing for Projection Mapping",
+      "description": "Projection-based appearance editing changes selected visual attributes of a physical object through projection mapping (PM). To display a desired appearance, PM typically uses projector compensation, which computes a projector input that counteracts the geometric and photometric distortions of the s...",
+      "url": "https://arxiv.org/abs/2610.32792v1",
+      "paperId": "2610.32792v1",
+      "published": "2026-10-23T15:37:12Z",
+      "source": "ArXiv",
+      "category": "cs.CV"
+    },
+    {
+      "name": "Video-MemComp: Taylor-Guided Sensitivity-Aware Memory Management for Streaming Video Understanding",
+      "description": "The rapid growth of video data has created an urgent need for efficient video understanding systems that can handle long and continuous visual inputs, posing significant challenges for Multimodal Large Language Models (MLLMs) due to severe memory bottlenecks. Moreover, existing compression methods o...",
+      "url": "https://arxiv.org/abs/2610.32784v1",
+      "paperId": "2610.32784v1",
+      "published": "2026-10-23T15:32:41Z",
+      "source": "ArXiv",
+      "category": "cs.CV"
+    },
+    {
+      "name": "On-Policy Self-Training: Data-Free Self-Improvement in Large Language Models",
+      "description": "On-policy self-distillation enables post-training foundation models without relying on stronger external teachers. However, existing approaches rely on ground-truth question-answer pairs, human-curated problem sets, or other supervised signals. In this work, we reformulate on-policy self-distillatio...",
+      "url": "https://arxiv.org/abs/2610.32770v1",
+      "paperId": "2610.32770v1",
+      "published": "2026-10-23T15:12:03Z",
+      "source": "ArXiv",
+      "category": "cs.CL"
+    },
+    {
+      "name": "ActionRAG: Evidence-Refining Graph Diffusion for Long-Term Memory in LLM Agents",
+      "description": "LLM agents need long-term memory that can recover precise and mutually consistent evidence from growing interaction histories, particularly when answers depend on relations among facts rather than isolated semantic matches. Current memory pipelines remain vulnerable at two stages: indexing errors ca...",
+      "url": "https://arxiv.org/abs/2610.32752v1",
+      "paperId": "2610.32752v1",
+      "published": "2026-10-23T14:59:37Z",
+      "source": "ArXiv",
+      "category": "cs.CL"
+    },
+    {
+      "name": "The Butterfly Defects: Tracing Cooperation in LLM Agent Networks",
+      "description": "As large language models (LLMs) increasingly operate as interconnected agents, a fundamental question emerges: does individual cooperation translate into collective cooperation? We investigate this question through the Iterated Prisoner's Dilemma (IPD), moving from dyadic interactions to homogeneous...",
+      "url": "https://arxiv.org/abs/2610.32726v1",
+      "paperId": "2610.32726v1",
+      "published": "2026-10-23T14:46:57Z",
+      "source": "ArXiv",
+      "category": "cs.CL"
+    },
+    {
+      "name": "Ontology-Guided Knowledge Graph Construction from Structured Metadata and Climate Science Publications",
+      "description": "The rapid expansion of scientific literature far outpaces the speed of manual curation, creating a fundamental bottleneck in extracting structured knowledge from scientific texts. To address this, we introduce an agentic, ontology-guided framework for knowledge graph (KG) construction. Our framework...",
+      "url": "https://arxiv.org/abs/2610.32725v1",
+      "paperId": "2610.32725v1",
+      "published": "2026-10-23T14:46:13Z",
+      "source": "ArXiv",
+      "category": "cs.CL"
+    },
+    {
+      "name": "CounselPlex: A Stressor-Aware Full-Duplex Counseling Model",
+      "description": "Full-duplex speech models can listen and speak at the same time, enabling natural, low-latency interaction. In counseling, however, these models often focus on the latest utterance and lose track of the seeker's underlying problem. We call this failure Stressor Blindness. We propose CounselPlex, a s...",
+      "url": "https://arxiv.org/abs/2610.32702v1",
+      "paperId": "2610.32702v1",
+      "published": "2026-10-23T14:26:22Z",
+      "source": "ArXiv",
+      "category": "cs.CL"
+    },
+    {
+      "name": "Natural Language Autoencoders Identify Without Explaining",
+      "description": "Natural Language Autoencoders (NLAs) express a model's internal activations in the form of readable text. The verbalizer turns an activation into an English explanation; the reconstructor then converts that explanation back into an activation, and the explanation is considered successful if the roun...",
+      "url": "https://arxiv.org/abs/2610.32691v1",
+      "paperId": "2610.32691v1",
+      "published": "2026-10-23T14:20:29Z",
+      "source": "ArXiv",
+      "category": "cs.CL"
+    }
+  ],
+  "totalModels": 53,
+  "totalPapers": 36
+}
