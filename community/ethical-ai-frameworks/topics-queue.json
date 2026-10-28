@@ -1,28 +1,6 @@
 {
   "topics": [
     {
-      "slug": "accessibility-as-ethical-requirement",
-      "title": "Accessibility Is an Ethical AI Requirement, Not a Polish Pass",
-      "dek": "If your AI UI fails basic accessibility, you are excluding users while claiming responsible AI. Bake a11y checks into the ethical release gate.",
-      "sections": [
-        {
-          "heading": "Why this belongs in the ethics lane",
-          "body": "Fairness is not only demographic parity in model scores. An assistant that cannot be operated by keyboard or screen reader fails equal access. Treat that as a release blocker alongside safety probes."
-        },
-        {
-          "heading": "Minimum AI-UI a11y gate",
-          "paragraphs": [
-            "Keyboard path for primary ask-and-answer flow, visible focus, labels on inputs, status messages announced to assistive tech, and contrast that meets your policy. Automate axe or equivalent in CI; keep one manual screen-reader pass per release.",
-            "For generated content, ensure the UI does not rely on color alone to show risk or refusal state."
-          ]
-        },
-        {
-          "heading": "Owners",
-          "body": "Product owns the standard; QA owns the gate evidence; design owns component fixes. Put the a11y evidence link in the same release packet as your ethical checklist."
-        }
-      ]
-    },
-    {
       "slug": "third-party-eval-vendor-diligence",
       "title": "Due Diligence Questions Before You Buy an Eval or Guardrail Vendor",
       "dek": "A glossy safety dashboard is not diligence. Ask where data goes, who trains on it, and how you export evidence for auditors.",

@@ -5,8 +5,16 @@
   "seriesLinePrefix": "Ethical AI Frameworks \u00b7 Published",
   "seriesDescription": "Short articles on ethical AI frameworks, governance, and practice\u2014aligned with the Ethical AI Frameworks LinkedIn group.",
   "intervalDays": 25,
-  "lastPublished": "2026-10-03",
+  "lastPublished": "2026-10-28",
   "articles": [
+    {
+      "date": "2026-10-28",
+      "slug": "accessibility-as-ethical-requirement",
+      "title": "Accessibility Is an Ethical AI Requirement, Not a Polish Pass",
+      "summary": "If your AI UI fails basic accessibility, you are excluding users while claiming responsible AI. Bake a11y checks into the ethical release gate.",
+      "href": "/community/ethical-ai-frameworks/articles/2026-10-28-accessibility-as-ethical-requirement.html",
+      "external": false
+    },
     {
       "date": "2026-10-03",
       "slug": "consent-for-eval-data",
