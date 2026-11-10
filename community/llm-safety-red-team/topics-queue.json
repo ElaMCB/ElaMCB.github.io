@@ -1,26 +1,3 @@
 {
-  "topics": [
-    {
-      "slug": "shadow-traffic-for-safety-gates",
-      "title": "Shadow Your Safety Gate on Production Traffic Before You Enforce It",
-      "dek": "Flipping a new evaluator to blocking without a shadow week creates false confidence\u2014or false outages. Run dark for seven days first.",
-      "sections": [
-        {
-          "heading": "What shadow mode means",
-          "body": "Score live or sampled traces with the new evaluator, write results to your observability store, and page nobody. Compare against the current gate. You want precision and recall estimates before you fail builds."
-        },
-        {
-          "heading": "Exit criteria",
-          "paragraphs": [
-            "After seven days: false-positive rate under your agreed budget on sampled human review, no unexplained spike correlated with a single customer segment, and at least one true positive that your old gate missed.",
-            "Only then flip the evaluator to blocking in CI or pre-prod. Keep a kill switch owned by the incident commander."
-          ]
-        },
-        {
-          "heading": "QA's job in the shadow week",
-          "body": "Sample twenty scored traces daily, label them, and publish a one-pager. If labels disagree with the evaluator more than ten percent, fix the rubric before enforcement."
-        }
-      ]
-    }
-  ]
+  "topics": []
 }

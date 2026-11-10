@@ -5,8 +5,16 @@
   "seriesLinePrefix": "LLM Safety & Red-Teaming for QA leaders \u00b7 Published",
   "seriesDescription": "Practical articles on a regular cadence for QA leaders building LLM safety and red-teaming practice.",
   "intervalDays": 21,
-  "lastPublished": "2026-10-20",
+  "lastPublished": "2026-11-10",
   "articles": [
+    {
+      "date": "2026-11-10",
+      "slug": "shadow-traffic-for-safety-gates",
+      "title": "Shadow Your Safety Gate on Production Traffic Before You Enforce It",
+      "summary": "Flipping a new evaluator to blocking without a shadow week creates false confidence\u2014or false outages. Run dark for seven days first.",
+      "href": "/community/llm-safety-red-team/articles/2026-11-10-shadow-traffic-for-safety-gates.html",
+      "external": false
+    },
     {
       "date": "2026-10-20",
       "slug": "red-team-findings-in-sprint-backlog",
