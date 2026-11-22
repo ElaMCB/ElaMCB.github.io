@@ -1,26 +1,3 @@
 {
-  "topics": [
-    {
-      "slug": "third-party-eval-vendor-diligence",
-      "title": "Due Diligence Questions Before You Buy an Eval or Guardrail Vendor",
-      "dek": "A glossy safety dashboard is not diligence. Ask where data goes, who trains on it, and how you export evidence for auditors.",
-      "sections": [
-        {
-          "heading": "Data path questions",
-          "paragraphs": [
-            "Where are prompts and outputs stored, in which region, for how long? Are they used to train vendor models? Can you delete by customer id? Is BYOK or private networking available for your tier?",
-            "If answers are vague, keep sensitive traffic on your own stack and use the vendor only on synthetic suites."
-          ]
-        },
-        {
-          "heading": "Evidence and exit",
-          "body": "Require exportable logs that map to your risk register and release checklist. Ask for a thirty-day exit plan: how you take your datasets and policies with you. No export path means lock-in dressed as governance."
-        },
-        {
-          "heading": "QA's role",
-          "body": "Run a pilot on non-production data, compare vendor scores to your internal gate on the same forty prompts, and write a one-page go/no-go with residual risks. Do not skip the pilot because procurement is in a hurry."
-        }
-      ]
-    }
-  ]
+  "topics": []
 }
